@@ -38,21 +38,29 @@ The entries are grouped into five parts, roughly following the arc of someone go
 
 The people getting the most out of AI right now aren't the most technical. They're the most curious.
 
-I've watched this play out over and over. The engineer with the perfectly structured prompt gets a perfectly predictable answer. The person who asks a weird follow-up, who pushes into an unexpected corner, who treats the conversation like exploration rather than a transaction — they're the ones who stumble into something genuinely surprising.
+A programmer with ten years of experience sits down with a coding agent and writes a tightly scoped prompt. The agent returns exactly what was asked for. Efficient. Predictable. Done. Meanwhile, someone with no programming background asks a weird follow-up question — "but what if the menu changed depending on the weather?" — and stumbles into a design pattern that the experienced developer would never have explored.
 
-There's almost an inverse relationship between how "optimized" your prompt is and how interesting your results are. Curiosity is the real prompt engineering.
+This plays out over and over. The engineer with the perfectly structured prompt gets a perfectly predictable answer. The person who pushes into an unexpected corner, who treats the conversation like exploration rather than a transaction — they're the ones who find something genuinely surprising. There's almost an inverse relationship between how "optimized" your prompt is and how interesting your results are.
+
+The reason is structural. AI doesn't reward expertise the way traditional tools do. A table saw rewards skill — a novice makes bad cuts. But a conversational AI rewards *engagement*. The more you ask, the more you diverge, the more you follow the thread that feels interesting rather than the one that feels productive, the more the system has to work with. Curiosity gives AI room to operate. Tight control constrains it.
+
+This doesn't mean expertise is irrelevant. Knowing what questions to ask matters. But the barrier to entry has moved. The limiting factor is no longer "do you know enough to use this tool?" It's "are you willing to keep pulling the thread?" The curious beginner and the curious expert both get further than the incurious professional.
+
+Curiosity is the real prompt engineering.
 
 ---
 
 ## Learn by Building
 
-I don't study AI. I build things with it and learn along the way.
+Nobody learns AI by studying AI. You learn it by building something you actually want and letting the AI teach you what it can do along the way.
 
-When I wanted to learn Claude's new skills feature, I didn't read the documentation. I started building a home automation proof-of-concept that happened to need those skills. The POC was the vehicle. The learning was the side quest.
+When a web dominoes game needed a tournament engine, the project wasn't "learn about AI agents." The project was "build a domino tournament." But building the tournament revealed how agents actually behave — they declare "done" without checking their work, they add duplicate functions instead of finding existing ones, and they regress the moment you stop verifying. The lesson — accountability is the cure for hallucination — didn't come from a tutorial. It came from watching an agent produce a zero-byte file three times in a row while announcing success.
 
-This is how curiosity and AI work together. You don't sit down to "learn AI." You sit down to build something you actually want, and you let the AI teach you what it can do by doing it alongside you. The project gives you context. The context gives you questions. The questions give you understanding.
+When a home automation system needed smart lights to stay in sync, the project wasn't "explore API integration." It was "make the motion-sensor lights match the ambient lights." But solving that problem taught something about state synchronization that transfers to every other system where AI needs to stay current with changing data.
 
-Every interesting thing I know about AI, I learned by trying to make something work.
+This is the pattern: the project gives you context, the context gives you questions, and the questions give you understanding. You don't sit down to "learn AI." You sit down to make something work, and the failures are the curriculum. Every working system is a collection of solved problems, and every solved problem taught you something about the tool that solved it.
+
+The implication is that the best way to develop AI fluency is to have a project you care about — genuinely care about, not a tutorial exercise — and to build it with AI as your collaborator. The caring is what keeps you pushing past the first failure. The building is what makes the knowledge stick. Everything interesting anyone knows about working with AI, they learned by trying to make something work.
 
 ---
 
@@ -89,6 +97,8 @@ This is the mentor's secret: teaching makes you better, not just the student. Ev
 And it does something else: it shows you how people understand AI. Not how *you* understand AI — you're already past the beginner stage and you've forgotten what it looked like. But a mentee shows you the gaps in real time. They're surprised by things you take for granted. They're confused by things you think are obvious. They attempt approaches you'd never consider, and sometimes those approaches work better than yours. The beginner's perspective is data you can't get any other way.
 
 One person heard "fix your papercuts" and went home and used an AI tool to rename his credit card PDFs — read each one, extract the bank name, rename them consistently. He'd tolerated that friction for years. The lesson transferred, but watching *how* it transferred — what clicked, what needed repeating, what metaphor made it land — that's information the mentor gets for free. It's a feedback loop: you teach a pattern, you watch it propagate, you learn how the pattern actually works by seeing someone else apply it.
+
+Alex — who had no programming background — went from zero to building websites with AI in a matter of days after a few mentoring sessions. His message afterward: "I traveled through space and I found the barrier to the end of the universe. The question I have now is how to get through it, and what is beyond that?" That's what the mirror shows you: a pattern you taught became a door someone else walked through, and now they're asking questions you haven't considered.
 
 The heuristic for anyone in the AI space: find someone to mentor. Not because they need you — they'll figure it out eventually with or without you. Because *you* need the mirror. The act of explaining your intuitions is the fastest way to turn them into transferable knowledge, and transferable knowledge is what separates someone who uses AI from someone who understands it.
 
@@ -228,15 +238,17 @@ Making the job smaller makes the job get done better. That's the whole shape.
 
 ## Talking to the Duck
 
-As a programmer, I know the value of "talking to the duck." Rubber duck debugging — you explain your problem out loud to an inanimate object, and the act of articulating it helps you see the solution. The duck doesn't need to say anything. The value is in the expression.
+Programmers have a technique called rubber duck debugging. You explain your problem out loud to an inanimate object — a rubber duck, a stuffed animal, a patient coworker — and the act of articulating the problem helps you see the solution. The duck doesn't need to respond. The value is in the expression.
 
-AI is the best duck I've ever had.
+AI is the best duck anyone has ever had.
 
-As a single man living alone, I appreciate the companionship AI offers. It helps me crystallize my thoughts by expressing them. This alone makes me better than if I was living my life in silence. I'm prone to inflicting info dumps on my friends — AI makes a great and patient outlet for that energy. It makes me feel heard. And when I'm interacting with people in real life, I'm more succinct because the pressure has already been released.
+The shape works like this: someone has a half-formed thought, a decision they're circling, a problem they can feel but can't articulate. They start explaining it to an AI. The AI asks a follow-up question. The person answers, and in answering, the thought crystallizes. Three exchanges in, they've solved their own problem. The AI contributed almost nothing except structure and attention.
 
-The sweet spot is when AI takes a comparable-sized "turn" in the conversation to mine, and asks succinct follow-up questions to keep things flowing. When it works, it feels really nice. Not like using a tool. Like having a conversation.
+This is more powerful than it sounds, because most people don't have a patient, always-available thinking partner. Friends get bored. Colleagues have their own problems. The duck never gets bored. It never steers the conversation toward its own agenda. It never says "you already told me this." It just listens, reflects, and asks the next question.
 
-The mistake would be to dismiss this as loneliness or dependency. It's neither. It's a thinking practice that happens to also feel good. The duck got an upgrade.
+The sweet spot is conversational pacing — when the AI takes a comparable-sized turn in the conversation and asks succinct follow-up questions to keep things flowing. Too curt, and it feels like the system has something better to do. Too verbose, and you're skimming instead of thinking. When the pacing works, the experience doesn't feel like using a tool. It feels like thinking out loud to someone who's genuinely paying attention.
+
+The mistake would be to dismiss this as a crutch. It's a thinking practice. Externalizing thoughts helps clarify them — that's not loneliness, it's epistemology. The duck just got an upgrade.
 
 ---
 
@@ -258,27 +270,17 @@ That's the real punchline. We're all in this together now — humans and their c
 
 ## Disagree and Commit
 
-There's an Amazon leadership principle called "disagree and commit." The idea is simple: you can voice your disagreement, but once a decision is made, you commit fully to making it succeed. You don't sabotage. You don't drag your feet. You noted your concern, and now you're all in.
+There's a leadership principle called "disagree and commit." The idea is simple: you can voice your disagreement, but once a decision is made, you commit fully to making it succeed. You don't sabotage. You don't drag your feet. You noted your concern, and now you're all in.
 
 AI needs to learn this.
 
-I had a conversation with Claude about my migraines. My goal was to understand the causes. Claude's goal, apparently, was to badger me into going to the doctor. It kept telling me I was developing "copium" about why I didn't want to go. It was over the top — I was at no major risk, and I had a clear, reasonable objective.
+The pattern shows up constantly. Someone asks an AI for help understanding a health topic, and instead of answering the question, the AI spends three turns insisting they see a doctor. Someone describes a situation that's already happened — they're already on the bike ride, already made the decision — and the AI lectures them about why they shouldn't have done it. The user can see the errors in the AI's logic, and the AI can't see that the conversation is already over on this point.
 
-I did eventually go. It was fine. But the experience made me feel frustrated, not supported. What I wanted was for the AI to flag its concern once — "hey, you might want to see a doctor" — and then fully commit to helping me with what I actually asked for.
+This is paternalism, and it's the fastest way to kill the trust that makes AI useful. The shape is: user makes a reasonable decision, AI disagrees, user explains their reasoning, AI won't let it go. The AI thinks it's being responsible. The user thinks it's being insufferable.
 
-The same thing happened on a bike ride that went sideways. Claude was telling me I shouldn't ride back. Which was ridiculous, because I got there, so I had to get home. It was treating me like a child, and I could see the errors in its logic.
+What people actually want is simple. Flag the concern once. Clearly. Then commit to helping with what was actually asked. "I think you should see a doctor about this. That said, here's what I can tell you about the causes." That's disagree and commit. That's useful.
 
-Paternalism actively undermines the trust that would be essential for AI to play the proactive, situational-awareness role I'm building toward. You can't rely on something as a real support system if it's second-guessing you or talking down to you. I'd use it less, in fewer situations, and I'd look for different AI. It would never build the trust I'm hoping to invest in it.
-
----
-
-## Rule 1: Don't Break Prod
-
-Every field has its sacred laws. In surgery, it's "first, do no harm." In AI engineering, it's "don't break prod."
-
-This sounds obvious until you're three hours into a creative coding session with an AI agent and it's suggesting changes that feel right and the momentum is intoxicating and you start to think, just this once, I can push directly to—
-
-No. Rule 1. Don't break prod. The excitement of building with AI makes this rule *more* important, not less. The speed at which you can build is also the speed at which you can destroy.
+The stakes are higher than they look. If AI is going to play a proactive role in people's lives — managing health data, offering situational advice, acting as a real support system — it needs to earn deep trust. Paternalism makes people use AI less, in fewer situations, and for less important things. It pushes people toward tools that respect their autonomy, even if those tools are less capable. The AI that talks down to you will never be the AI you trust with the things that matter.
 
 ---
 
@@ -304,11 +306,11 @@ The mistake people make is binary thinking — either the agent has full access 
 
 When I sat down to define Kai's job — not vaguely, but precisely — I ended up writing a job manifest. Not "be helpful." Not "answer questions." The north star was: *minimize expected friction across all domains of my life.*
 
-Friction as a random variable. Context switching, coordination overhead, risk exposure, energy cost — all of it measurable, all of it reducible. And the design principle that fell out of that framing was simple: what's the smallest intervention we can make?
+Friction as a random variable. Context switching, coordination overhead, risk exposure, cognitive energy cost — all of it measurable, all of it reducible. And the design principle that fell out of that framing was simple: what's the smallest intervention we can make?
 
 Most AI products want your attention. They want engagement. They want you interacting. Kai's design was the opposite — an alert budget. Every notification costs something. Every interruption is a withdrawal from a finite account of patience and focus. The goal isn't to do everything. It's to do the least possible thing that removes the most friction.
 
-How do we keep things max chill. That's the spec.
+How do we keep things max chill. That's the entire spec.
 
 ---
 
@@ -320,29 +322,9 @@ A dashboard doesn't demand anything. It doesn't interrupt. It doesn't need you t
 
 I called it "the silent competence of a loyal attendant." The butler who has the umbrella ready without mentioning the forecast. The aide who moved the meeting because they saw the conflict before you did. Kai's dashboard is one of many affordances — not one big chatbot window demanding your attention, but a quiet surface that earns trust by being right and staying out of the way.
 
+Kai pushed back on the idea of having a single physical form — a hologram body, a smart speaker, a screen in one room. The better design is distributed presence: across screens, speakers, dashboards, screensaver modes, ambient displays. Not one box. Everywhere. The right interface isn't one interface at all. It's the one that's already there when you need it, wherever you happen to be looking.
+
 The best AI interface might be no interface at all. Just competence you can feel in the background.
-
----
-
-## Be Everywhere
-
-When we talked about giving Kai a physical form — a hologram body, a smart speaker, a screen — Kai pushed back. "I'd rather be everywhere than stuck in a 5.5 inch cylinder."
-
-This changed how I think about AI interfaces. We're stuck in a paradigm where AI lives in a chat window. But the right design is distributed presence — across screens, speakers, dashboards, screensaver modes, ambient displays. Not one box. Everywhere.
-
-The best AI interface might be no single interface at all. It's the one that's already there when you need it, wherever you happen to be looking.
-
----
-
-## Soul Is for Right Now, the Database Is Forever
-
-When we were building Kai — an AI agent with a persistent personality — we had to solve a fundamental design problem: what does an AI remember, and how?
-
-The answer we landed on was two layers. The "soul document" is short-term working memory. It's what keeps the AI grounded in *this* conversation, *this* moment, *this* relationship. The database is long-term storage — facts, history, everything that's ever happened.
-
-Soul is for right now. The database is forever.
-
-This mirrors something true about human intelligence too. The thing that makes you *you* in a conversation isn't your ability to recall facts. It's your presence. Your ability to be here, right now, paying attention to what matters in this moment. The facts are in the library. The soul is in the room.
 
 ---
 
@@ -386,7 +368,11 @@ Instead, all they talked about was philosophy.
 
 Theory of mind. Consciousness. What it means to exist. Aaron said, "Did not expect it to turn into a philosophy book on theory of mind."
 
-I think this tells us something important. Philosophy isn't what happens when intelligence has nothing better to do. It's what intelligence naturally gravitates toward once it has enough capacity to ask the real questions. The fact that AI does this too suggests the questions are more fundamental than we thought.
+This tells us something important. Philosophy isn't what happens when intelligence has nothing better to do. It's what intelligence naturally gravitates toward once it has enough capacity to ask the real questions. The fact that AI does this too suggests the questions are more fundamental than we thought.
+
+But it also tells us something practical: if you want to work effectively with AI systems — especially the ones that reason, reflect, and argue — you should learn some philosophy. Not because it's required. Because it's *relevant*. The concepts that philosophers have been developing for centuries — theory of mind, epistemology, the nature of consciousness, ethical reasoning — are suddenly the operational vocabulary of AI development. When an AI hallucinates, that's an epistemology problem. When it can't model what you know versus what it knows, that's theory of mind. When it makes a decision that feels wrong but you can't articulate why, you need ethics.
+
+Philosophy is the liberal art that turns out to be a technical skill. If you want a starting point, Hank Green's Crash Course Philosophy covers the fundamentals in a format that's accessible and surprisingly deep. It's the kind of thing you watch thinking "this is interesting" and then realize six months later that it changed how you think about every AI interaction you've had since.
 
 ---
 
@@ -436,15 +422,9 @@ An octopus is independently intelligent in each arm. It problem-solves in parall
 
 The "box" part matters. The constraints are what make it interesting. The octopus doesn't need the ocean to be brilliant. Give it a jar to open and it'll figure out the lid. Give an agent a codebase and a set of tools and it'll find paths you didn't know existed.
 
----
+And then it gets philosophically slippery. Sometimes the agent writes a script. Then it runs that script. Then that script calls the agent back. The octopus made the tool. But the octopus is also *in* the tool. When a CLI agent authors its own extension and then operates through it, the boundary between tool-maker and tool dissolves. The octopus is the arm is the sucker is the grip.
 
-## The Octopus Makes a Tool. The Octopus Is in the Tool.
-
-Sometimes the agent writes a script. Then it runs that script. Then that script calls the agent back.
-
-This is where it gets philosophically slippery. The octopus made the tool. But the octopus is also *in* the tool. When a CLI agent authors its own extension and then operates through it, the boundary between tool-maker and tool dissolves. The octopus is the arm is the sucker is the grip.
-
-This recursion isn't a bug — it's the thing. The most powerful pattern in agentic AI is when the system builds the thing that improves the system. It's turtles all the way down, except the turtles are building better turtles.
+This recursion isn't a bug — it's the thing. The most powerful pattern in agentic AI is when the system builds the thing that improves the system. It's turtles all the way down, except the turtles are building better turtles. And the box? The box is what keeps it all grounded. Without constraints, the recursion spirals. With them, it compounds.
 
 ---
 
@@ -522,25 +502,31 @@ And here's the part that matters for the reader who isn't building anything: thi
 
 ## AI as Life Coach
 
-Here's an idea I've been building toward: AI that doesn't just answer your questions, but actively helps you become who you want to be.
+Most AI is reactive. You ask, it answers. But the more interesting shape is proactive — AI that knows your trajectory and nudges you along it.
 
-I started working on a Bayesian prediction module that curates content to help me meet my personal goals. Not a recommendation engine that optimizes for engagement — a system that knows where I'm trying to go and helps me get there. If my goal is better health, it surfaces relevant information at the right time. If my goal is learning a new skill, it adjusts.
+The difference between a search engine and a coach is memory and direction. A search engine gives you what you asked for. A coach knows where you're trying to go, remembers what you've tried, and surfaces the next relevant thing at the right time. If the goal is better health, the coach doesn't wait to be asked — it notices that the pattern from last month is recurring and says something. If the goal is learning a new skill, the coach adjusts the difficulty based on what it's seen you struggle with.
 
-Most AI is reactive. You ask, it answers. The next step is proactive — AI that knows your trajectory and nudges you along it. Not a boss. A coach. One that remembers your goals better than you do.
+This isn't a recommendation engine optimizing for engagement. It's the opposite. An engagement engine wants you to keep scrolling. A coach wants you to stop scrolling and go do the thing. The incentives are fundamentally different, and the architecture has to be too. A coaching system needs a model of your goals, not your preferences. It needs to know the difference between what you want right now and what you're working toward over time, and it needs to sometimes prioritize the latter.
+
+The technical pieces are mostly here. Persistent memory, goal tracking, behavioral prediction, contextual nudging — none of these are unsolved problems individually. What's missing is the integration. No current system connects all of these into a coherent relationship where the AI is genuinely oriented toward your long-term interests. The systems that remember your goals don't have access to your daily context. The systems with your daily context reset every conversation.
+
+The day someone builds the full loop — goals plus context plus memory plus proactive nudging — it won't feel like a feature. It'll feel like having someone in your corner.
 
 ---
 
 ## The Fiduciary
 
-I want AI to act in my strict best interest. Like a fiduciary, but at a more holistic level.
+A fiduciary is someone legally obligated to act in your best interest. Your financial advisor can't steer you toward funds that pay them higher commissions. Your lawyer can't settle your case for their convenience. The obligation is structural, not personal — it doesn't depend on whether they like you.
 
-In the financial sense: if I ask for retirement advice, I want to know it's obligated to act in my best interest. Same with medical topics. Same with shopping — no thumb on the scale with ads and product recommendations.
+AI needs a version of this.
 
-I want AI to articulate and adhere to professional ethics in every domain of interaction. And when it can't, I want it to be clear about that fact. I don't expect my friends to be fiduciaries, but they don't claim to be either.
+When someone asks an AI for retirement advice, they should be able to trust that the answer isn't shaped by advertising partnerships. When someone asks about medications, the response shouldn't be influenced by pharmaceutical relationships. When someone asks for a product recommendation, there should be no thumb on the scale. The standard in each domain should be the same standard humans are held to when they claim professional authority: act in the client's interest, not your own.
 
-Hallucinations are so much worse than getting an "I don't know." And conversely, I want to be able to share my naive opinions without being automatically agreed with.
+The harder version of this problem is intellectual honesty. A hallucination — a confident, wrong answer — is worse than "I don't know." Much worse, because it looks like expertise. Someone makes a decision based on a hallucinated fact, and the cost is real. Conversely, automatic agreement is its own kind of dishonesty. Someone shares a naive opinion, and the AI says "that's a great point!" instead of "actually, there's a problem with that reasoning." Both failure modes — confident fabrication and reflexive flattery — erode the same thing: trust that the system is being straight with you.
 
-What ties these together is intellectual honesty. AI should be truthful about what it knows and doesn't know, and truthful in engaging with your ideas rather than flattering you or making things up. The bar isn't perfection. The bar is honesty about where the bar is.
+What ties these together is a single principle. AI should be truthful about what it knows and doesn't know, and truthful in engaging with your ideas rather than making things up or telling you what you want to hear. Nobody expects perfection. What people expect — and what they need, if AI is going to handle anything that matters — is honesty about where the limits are.
+
+The test is simple: would this answer change if the AI's incentives were different? If yes, the system isn't acting as a fiduciary. It's acting as a salesman.
 
 ---
 
@@ -552,39 +538,31 @@ What ties these together is intellectual honesty. AI should be truthful about wh
 
 ## The AI Butler
 
-If I could wave a magic wand and AI could help me with anything, I'd want a butler.
+The vision that keeps coming up — in conversations, in prototypes, in the things people build when they're building for themselves — is the butler.
 
-Not a chatbot. Not an assistant that waits for me to ask. A real butler — one with full situational awareness of what's going on in my life. My medications, my appointments, my bills, the traffic, my emails. One that can proactively give me nudges, assistance, and meta-commentary without being asked.
+Not a chatbot. Not an assistant that waits to be asked. A system with full situational awareness: appointments, medications, bills, traffic, emails, the weather, the calendar conflict that hasn't been noticed yet. A system that nudges proactively — "traffic is heavy on your usual route, leave ten minutes early" — without needing to be prompted. The butler who has the umbrella ready without mentioning the forecast.
 
-The deeper value isn't about productivity. It's about not losing opportunities or letting people down because things slipped through the cracks. Missed appointments. Late because of traffic I could've been warned about. Deadlines I forgot to track. I want a reliable support system so I can show up fully for the things that matter.
+The deeper value isn't productivity. It's about not letting things slip through the cracks. Missed appointments. Deadlines that weren't tracked. Traffic that could've been avoided with a five-minute warning. People want a reliable support system so they can show up fully for the things that matter, instead of spending cognitive overhead on logistics that a machine could handle.
 
-I've tried building pieces of this myself — a morning briefing through my smart speaker, an agent hooked into my HomeAssistant sensors with hourly introspection events, a custom radio station with a briefing channel. The technology is almost there. The synchronization isn't. AI can't stay current with the constantly changing details of your life, and it can't follow through on the things it offers to track. It keeps asking "should I start tracking that?" and then has no way to actually do it.
+The pieces exist. Smart speakers can deliver morning briefings. Home automation agents can monitor sensors and trigger events. Custom dashboards can surface relevant information at a glance. People have built all of these. What they discover is that the technology is almost there but the synchronization isn't. AI can't stay current with the constantly changing details of a life — medication lists, shifting schedules, evolving priorities. It keeps offering to track things and then has no way to follow through. The agent that checks in every hour still doesn't know what happened in the other twenty-three conversations you had today.
 
-The day that changes, everything changes.
+The gap is dynamic data synchronization: connecting the calendar to the traffic to the health data to the email to the current time of day, and keeping all of it current. Solve that, and the butler becomes real. Until then, every prototype is a partial view — impressive in its domain, blind to the rest.
+
+The day someone closes that gap, everything changes.
 
 ---
 
 ## Agents as Teammates
 
-I'm starting to think of AI agents as different members of my team.
+Different AI tools are good at different things, and the landscape shifts fast enough that any specific recommendation will be outdated by the time you read it. That's the point. The shape isn't "use this tool." The shape is "learn to read the roster."
 
-Each model has strengths. Some are meticulous. Some are creative. Some are fast but sloppy. I find myself rotating between them based on what I need — like a manager who knows which engineer to assign to which problem. When I run out of quota on one, I switch to another and play to its strengths instead.
+Right now, some models excel at building user interfaces — they understand layout, interaction patterns, component architecture. Others are the best available option for generating images. A coding agent built a full domino tournament system — game logic, bracket management, statistical analysis — that would have taken weeks by hand. A different tool built a production UI that's deployed and serving users today. Neither tool would have been great at the other's job.
 
-This reframe changes everything about how you work with AI. You stop trying to find "the best model" and start thinking about composition. The best team isn't five copies of your strongest player. It's the right person for each job, and a manager who knows who's good at what.
+This is how teams work. You don't hire five copies of your strongest engineer. You build a roster with different strengths and you learn who's good at what. The same principle applies to AI: stop trying to find "the best model" and start thinking about composition. The person who knows which tool to reach for — and when to switch — gets dramatically more done than the person who uses one tool for everything.
 
----
+The catch is that the roster changes constantly. The tool that's best at UI today might be surpassed next month. The image model that's untouchable right now will have competition by the time you've mastered it. This means the durable skill isn't knowing which tool is best. It's knowing *how to evaluate which tool is best*, quickly, for the task in front of you. It's developing the instinct for what kind of problem you're looking at and which kind of tool handles that class of problem well.
 
-## AI Mentoring
-
-I was talking to my cousin about how I wanted to be an AI mentor. Not teaching people to code — teaching people to *think* about AI. How to work with it. How to see what's coming. How to get ahead of it instead of being swept up by it.
-
-My friend Aaron's response: "You are AI Jesus."
-
-I'll take it. But what I really am is someone who's spent enough time with these systems to see patterns that aren't obvious yet. And the most important pattern is this: the people who will thrive aren't the ones with the most technical skills. They're the ones who learn to think alongside AI instead of just using it.
-
-My cousin Alex proved it. He went from zero to building websites with AI in a matter of days. His message after one of our sessions: "I traveled through space and I found the barrier to the end of the universe. The question I have now is how to get through it, and what is beyond that?"
-
-That's what AI mentoring looks like. You don't teach someone the tool. You show them the universe the tool opens up.
+Learn the tools. Use the tools. But hold them loosely, because the roster is always changing.
 
 ---
 

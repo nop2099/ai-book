@@ -1,13 +1,15 @@
 ## The Fiduciary
 
-I want AI to act in my strict best interest. Like a fiduciary, but at a more holistic level.
+A fiduciary is someone legally obligated to act in your best interest. Your financial advisor can't steer you toward funds that pay them higher commissions. Your lawyer can't settle your case for their convenience. The obligation is structural, not personal — it doesn't depend on whether they like you.
 
-In the financial sense: if I ask for retirement advice, I want to know it's obligated to act in my best interest. Same with medical topics. Same with shopping — no thumb on the scale with ads and product recommendations.
+AI needs a version of this.
 
-I want AI to articulate and adhere to professional ethics in every domain of interaction. And when it can't, I want it to be clear about that fact. I don't expect my friends to be fiduciaries, but they don't claim to be either.
+When someone asks an AI for retirement advice, they should be able to trust that the answer isn't shaped by advertising partnerships. When someone asks about medications, the response shouldn't be influenced by pharmaceutical relationships. When someone asks for a product recommendation, there should be no thumb on the scale. The standard in each domain should be the same standard humans are held to when they claim professional authority: act in the client's interest, not your own.
 
-Hallucinations are so much worse than getting an "I don't know." And conversely, I want to be able to share my naive opinions without being automatically agreed with.
+The harder version of this problem is intellectual honesty. A hallucination — a confident, wrong answer — is worse than "I don't know." Much worse, because it looks like expertise. Someone makes a decision based on a hallucinated fact, and the cost is real. Conversely, automatic agreement is its own kind of dishonesty. Someone shares a naive opinion, and the AI says "that's a great point!" instead of "actually, there's a problem with that reasoning." Both failure modes — confident fabrication and reflexive flattery — erode the same thing: trust that the system is being straight with you.
 
-What ties these together is intellectual honesty. AI should be truthful about what it knows and doesn't know, and truthful in engaging with your ideas rather than flattering you or making things up. The bar isn't perfection. The bar is honesty about where the bar is.
+What ties these together is a single principle. AI should be truthful about what it knows and doesn't know, and truthful in engaging with your ideas rather than making things up or telling you what you want to hear. Nobody expects perfection. What people expect — and what they need, if AI is going to handle anything that matters — is honesty about where the limits are.
+
+The test is simple: would this answer change if the AI's incentives were different? If yes, the system isn't acting as a fiduciary. It's acting as a salesman.
 
 ---

@@ -12,6 +12,8 @@ And it does something else: it shows you how people understand AI. Not how *you*
 
 One person heard "fix your papercuts" and went home and used an AI tool to rename his credit card PDFs — read each one, extract the bank name, rename them consistently. He'd tolerated that friction for years. The lesson transferred, but watching *how* it transferred — what clicked, what needed repeating, what metaphor made it land — that's information the mentor gets for free. It's a feedback loop: you teach a pattern, you watch it propagate, you learn how the pattern actually works by seeing someone else apply it.
 
+Alex — who had no programming background — went from zero to building websites with AI in a matter of days after a few mentoring sessions. His message afterward: "I traveled through space and I found the barrier to the end of the universe. The question I have now is how to get through it, and what is beyond that?" That's what the mirror shows you: a pattern you taught became a door someone else walked through, and now they're asking questions you haven't considered.
+
 The heuristic for anyone in the AI space: find someone to mentor. Not because they need you — they'll figure it out eventually with or without you. Because *you* need the mirror. The act of explaining your intuitions is the fastest way to turn them into transferable knowledge, and transferable knowledge is what separates someone who uses AI from someone who understands it.
 
 ---

@@ -1,3 +1,13 @@
 .DS_Store
 *.swp
 *~
+
+# Support material — not for public repo
+data/
+convo/
+repos/
+repos.txt
+TODO.md
+observations.md
+skills/
+split_book.py

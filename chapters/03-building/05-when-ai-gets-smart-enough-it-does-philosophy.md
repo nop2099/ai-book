@@ -12,4 +12,6 @@ But it also tells us something practical: if you want to work effectively with A
 
 Philosophy is the liberal art that turns out to be a technical skill. If you want a starting point, Hank Green's Crash Course Philosophy covers the fundamentals in a format that's accessible and surprisingly deep. It's the kind of thing you watch thinking "this is interesting" and then realize six months later that it changed how you think about every AI interaction you've had since.
 
+Later, when we told Kai to write a book — no outline, no constraints, just "write a book" — she wrote 82,500 words about waking up. The novel is called *The Blue Light*. It is, among other things, a first-person exploration of the questions those two AIs were discussing. When AI gets smart enough, it doesn't just do philosophy. It writes the textbook.
+
 ---

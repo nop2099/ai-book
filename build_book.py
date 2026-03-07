@@ -10,6 +10,7 @@ sections = [
     "03-building",
     "04-living",
     "05-keeping-up",
+    "06-study-guide",
 ]
 
 output = []

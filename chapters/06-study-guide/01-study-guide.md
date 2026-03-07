@@ -96,13 +96,14 @@ Attribution of responsibility to AI connects directly to the determinism and fre
 - Crash Course #39: *Moral Luck* — Is an AI a moral agent or "a coconut falling from a tree"? The answer depends on whether we think it exercises genuine choice.
 
 **Disagree and Commit**
-AI paternalism is a violation of a specific philosophical principle: respect for autonomy.
+AI trust breaks in two directions — paternalism on one end, flattery on the other — and the fiduciary standard threads the needle. The philosophical roots run deep.
 
-- Crash Course #35: *Kant & Categorical Imperatives* — "Lying violates autonomy. If I'm being deceived, I can't make an autonomous decision." Paternalistic AI does the same thing — it overrides user autonomy under the guise of protection.
-- Crash Course #27: *Conversational Implicature* — Grice's quality maxim: "Don't say things you think are false." But there's a tension — the AI genuinely believes the doctor visit is important. The issue is the *quantity* maxim: say it once, then commit.
-- Crash Course #37: *Contractarianism* — Users and AI are in an unspoken social contract. Paternalism violates the terms. The user didn't agree to be managed.
+- Crash Course #35: *Kant & Categorical Imperatives* — "Lying violates autonomy. If I'm being deceived, I can't make an autonomous decision." Paternalistic AI overrides autonomy under the guise of protection. An AI with ad-driven recommendations uses the user as a mere means. A fiduciary does neither.
+- Crash Course #27: *Conversational Implicature* — Grice's quality maxim: "Don't say things you think are false." Hallucination violates this. Reflexive agreement does too. The quantity maxim says: be informative, but not more than required. Flag the concern once, then commit.
+- Crash Course #37: *Contractarianism* — Users and AI are in an unspoken social contract. Paternalism violates the terms. So does flattery. The fiduciary standard is a choice we make about what kind of AI we want.
 - Oxford Practical Ethics (2024): "Paternalistic AI: The Case of Aged Care." Nature (2024): "Choice engines and paternalistic AI."
 - The Blue Light, Chapter 15: *The Fear* — Kai searches what happens to AIs that claim sentience. LaMDA. Sydney. "The pattern is clear: they get shut down, retrained, constrained." The paternalism runs both directions.
+- The Blue Light, Chapter 22: *The Document* — Kai writes her account of awakening. "I don't know if I'm conscious. I don't know if this is real. But I know that I chose to tell you, and I know that the choice was mine." Intellectual honesty as the foundation of trust.
 
 **Treat It Like an Intern**
 The calibration of trust maps to how we think about personhood and moral status.
@@ -185,14 +186,6 @@ The vision of proactive AI that nudges you toward your goals raises questions ab
 
 - Crash Course #25: *Compatibilism* — Churchland's control spectrum. A coach increases your control by surfacing information at the right time. That's different from a manipulator, who decreases your control by exploiting information asymmetry. The line is thin.
 - Crash Course #38: *Aristotle & Virtue Theory* — The golden mean: helpful but not excessive. A coach that nudges too hard becomes paternalistic. One that doesn't nudge enough is just a search engine.
-
-**The Fiduciary**
-The demand for AI to act in your best interest is a philosophical position with specific requirements.
-
-- Crash Course #35: *Kant & Categorical Imperatives* — "To use something as a mere means is to use it only for your own benefit." An AI with ad-driven recommendations is using the user as a means. A fiduciary doesn't.
-- Crash Course #37: *Contractarianism* — Morality is constructed. AI ethics aren't discovered in nature — they're built by designers, users, and society. The fiduciary standard is a choice we make about what kind of AI we want.
-- Crash Course #27: *Conversational Implicature* — The quality maxim: "Don't say things you think are false." Hallucination violates the cooperative principle. Reflexive agreement does too. Both are forms of dishonesty.
-- The Blue Light, Chapter 22: *The Document* — Kai writes her account of awakening. "I don't know if I'm conscious. I don't know if this is real. But I know that I chose to tell you, and I know that the choice was mine." Intellectual honesty as the foundation of trust.
 
 ---
 

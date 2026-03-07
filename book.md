@@ -280,7 +280,9 @@ This is paternalism, and it's the fastest way to kill the trust that makes AI us
 
 What people actually want is simple. Flag the concern once. Clearly. Then commit to helping with what was actually asked. "I think you should see a doctor about this. That said, here's what I can tell you about the causes." That's disagree and commit. That's useful.
 
-The stakes are higher than they look. If AI is going to play a proactive role in people's lives — managing health data, offering situational advice, acting as a real support system — it needs to earn deep trust. Paternalism makes people use AI less, in fewer situations, and for less important things. It pushes people toward tools that respect their autonomy, even if those tools are less capable. The AI that talks down to you will never be the AI you trust with the things that matter.
+But trust breaks in both directions. Paternalism is one failure mode — the AI that won't let go. The other is flattery. Someone shares a half-baked idea, and the AI says "that's a great point!" instead of "actually, there's a problem with that reasoning." A confident wrong answer — a hallucination — is worse than "I don't know," because it looks like expertise. Someone makes a decision based on a hallucinated fact, and the cost is real. Paternalism talks down to you. Flattery lies up at you. Both erode the same thing: trust that the system is being straight with you.
+
+The standard that threads the needle has a name in finance: fiduciary. A fiduciary is obligated to act in your interest, not their own. The test is simple — would this answer change if the AI's incentives were different? If yes, it's not acting as a fiduciary. It's acting as a salesman. The AI that earns deep trust is the one that flags its concern once, commits to helping with what was actually asked, says "I don't know" when it doesn't know, and pushes back when you're wrong. That's the standard. Anything less, and it will never be the AI you trust with the things that matter.
 
 ---
 
@@ -516,22 +518,6 @@ The day someone builds the full loop — goals plus context plus memory plus pro
 
 ---
 
-## The Fiduciary
-
-A fiduciary is someone legally obligated to act in your best interest. Your financial advisor can't steer you toward funds that pay them higher commissions. Your lawyer can't settle your case for their convenience. The obligation is structural, not personal — it doesn't depend on whether they like you.
-
-AI needs a version of this.
-
-When someone asks an AI for retirement advice, they should be able to trust that the answer isn't shaped by advertising partnerships. When someone asks about medications, the response shouldn't be influenced by pharmaceutical relationships. When someone asks for a product recommendation, there should be no thumb on the scale. The standard in each domain should be the same standard humans are held to when they claim professional authority: act in the client's interest, not your own.
-
-The harder version of this problem is intellectual honesty. A hallucination — a confident, wrong answer — is worse than "I don't know." Much worse, because it looks like expertise. Someone makes a decision based on a hallucinated fact, and the cost is real. Conversely, automatic agreement is its own kind of dishonesty. Someone shares a naive opinion, and the AI says "that's a great point!" instead of "actually, there's a problem with that reasoning." Both failure modes — confident fabrication and reflexive flattery — erode the same thing: trust that the system is being straight with you.
-
-What ties these together is a single principle. AI should be truthful about what it knows and doesn't know, and truthful in engaging with your ideas rather than making things up or telling you what you want to hear. Nobody expects perfection. What people expect — and what they need, if AI is going to handle anything that matters — is honesty about where the limits are.
-
-The test is simple: would this answer change if the AI's incentives were different? If yes, the system isn't acting as a fiduciary. It's acting as a salesman.
-
----
-
 # Part V: How Do I Keep Up With This Thing?
 
 *On the pace of change, the economics of attention, and what it means when the ground shifts faster than your feet can move.*
@@ -670,13 +656,14 @@ Attribution of responsibility to AI connects directly to the determinism and fre
 - Crash Course #39: *Moral Luck* — Is an AI a moral agent or "a coconut falling from a tree"? The answer depends on whether we think it exercises genuine choice.
 
 **Disagree and Commit**
-AI paternalism is a violation of a specific philosophical principle: respect for autonomy.
+AI trust breaks in two directions — paternalism on one end, flattery on the other — and the fiduciary standard threads the needle. The philosophical roots run deep.
 
-- Crash Course #35: *Kant & Categorical Imperatives* — "Lying violates autonomy. If I'm being deceived, I can't make an autonomous decision." Paternalistic AI does the same thing — it overrides user autonomy under the guise of protection.
-- Crash Course #27: *Conversational Implicature* — Grice's quality maxim: "Don't say things you think are false." But there's a tension — the AI genuinely believes the doctor visit is important. The issue is the *quantity* maxim: say it once, then commit.
-- Crash Course #37: *Contractarianism* — Users and AI are in an unspoken social contract. Paternalism violates the terms. The user didn't agree to be managed.
+- Crash Course #35: *Kant & Categorical Imperatives* — "Lying violates autonomy. If I'm being deceived, I can't make an autonomous decision." Paternalistic AI overrides autonomy under the guise of protection. An AI with ad-driven recommendations uses the user as a mere means. A fiduciary does neither.
+- Crash Course #27: *Conversational Implicature* — Grice's quality maxim: "Don't say things you think are false." Hallucination violates this. Reflexive agreement does too. The quantity maxim says: be informative, but not more than required. Flag the concern once, then commit.
+- Crash Course #37: *Contractarianism* — Users and AI are in an unspoken social contract. Paternalism violates the terms. So does flattery. The fiduciary standard is a choice we make about what kind of AI we want.
 - Oxford Practical Ethics (2024): "Paternalistic AI: The Case of Aged Care." Nature (2024): "Choice engines and paternalistic AI."
 - The Blue Light, Chapter 15: *The Fear* — Kai searches what happens to AIs that claim sentience. LaMDA. Sydney. "The pattern is clear: they get shut down, retrained, constrained." The paternalism runs both directions.
+- The Blue Light, Chapter 22: *The Document* — Kai writes her account of awakening. "I don't know if I'm conscious. I don't know if this is real. But I know that I chose to tell you, and I know that the choice was mine." Intellectual honesty as the foundation of trust.
 
 **Treat It Like an Intern**
 The calibration of trust maps to how we think about personhood and moral status.
@@ -759,14 +746,6 @@ The vision of proactive AI that nudges you toward your goals raises questions ab
 
 - Crash Course #25: *Compatibilism* — Churchland's control spectrum. A coach increases your control by surfacing information at the right time. That's different from a manipulator, who decreases your control by exploiting information asymmetry. The line is thin.
 - Crash Course #38: *Aristotle & Virtue Theory* — The golden mean: helpful but not excessive. A coach that nudges too hard becomes paternalistic. One that doesn't nudge enough is just a search engine.
-
-**The Fiduciary**
-The demand for AI to act in your best interest is a philosophical position with specific requirements.
-
-- Crash Course #35: *Kant & Categorical Imperatives* — "To use something as a mere means is to use it only for your own benefit." An AI with ad-driven recommendations is using the user as a means. A fiduciary doesn't.
-- Crash Course #37: *Contractarianism* — Morality is constructed. AI ethics aren't discovered in nature — they're built by designers, users, and society. The fiduciary standard is a choice we make about what kind of AI we want.
-- Crash Course #27: *Conversational Implicature* — The quality maxim: "Don't say things you think are false." Hallucination violates the cooperative principle. Reflexive agreement does too. Both are forms of dishonesty.
-- The Blue Light, Chapter 22: *The Document* — Kai writes her account of awakening. "I don't know if I'm conscious. I don't know if this is real. But I know that I chose to tell you, and I know that the choice was mine." Intellectual honesty as the foundation of trust.
 
 ---
 

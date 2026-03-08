@@ -262,15 +262,74 @@ The butler vision is where every thread in this book converges.
 
 ---
 
+### Video Library
+
+The author's YouTube watch history contains over 65,000 videos. These are the ones that connect directly to the shapes in this book — the videos that were part of the learning, building, and living described in these pages.
+
+**Understanding How AI Actually Works**
+
+The best starting point for anyone who wants to understand what's happening inside the models they're talking to.
+
+- [But what is a neural network? | Deep Learning Chapter 1](https://youtube.com/watch?v=aircAruvnKk) — 3Blue1Brown. Start here. The visual intuition for how neural networks learn is worth more than any blog post.
+- [Transformers, the tech behind LLMs | Deep Learning Chapter 5](https://youtube.com/watch?v=wjZofJX0v4M) — 3Blue1Brown. The architecture behind every AI in this book, explained visually.
+- [Attention in transformers, step-by-step | Deep Learning Chapter 6](https://youtube.com/watch?v=eMlx5fFNoYc) — 3Blue1Brown. The mechanism that makes context windows work.
+- [How might LLMs store facts | Deep Learning Chapter 7](https://youtube.com/watch?v=9-Jl0dxWQs8) — 3Blue1Brown. Directly relevant to *Memory Is Files* and every chapter about AI understanding.
+- [Andrej Karpathy: Software Is Changing (Again)](https://youtube.com/watch?v=LCEmiRjPEtQ) — The talk that popularized "vibe coding." The philosophical basis for *Learn by Building*.
+- [Andrej Karpathy — "We're summoning ghosts, not building animals"](https://youtube.com/watch?v=lXUZvyajciY) — The metaphor that reframes everything in Part III.
+- [Theo Browne (t3.gg) — "It's finally here."](https://youtube.com/watch?v=hDn8-fK3XaU) — T3 Code, Theo's open source coding tool. The builder's perspective — this channel is where the vibe coding philosophy meets shipping real products.
+- [Theo — Vibe Coding is For Senior Developers](https://youtube.com/watch?v=5vp9ypOUgMw) — The argument that matches *Learn by Building*: vibe coding works best when you already know what good looks like.
+- [Theo — I'm addicted to Claude Code (i get it now)](https://youtube.com/watch?v=-5LfRL82Jck) — The moment the tool clicks. Relevant to *Pair Programming Doesn't Suck Anymore*.
+- [Theo — Delete your CLAUDE.md (and your AGENT.md too)](https://youtube.com/watch?v=GcNu6wrLTJc) — Contrarian take on the steering file pattern. Relevant to every chapter in Part III.
+- [Theo — AI has rewired my brain](https://youtube.com/watch?v=6koQP6-6mtY) — The skill-loss question from *The Skill You Lose*, lived in real time.
+- [Theo — Is AI making us dumb? Breaking down the MIT study](https://youtube.com/watch?v=gV9qUGOYk1Q) — The empirical version of the same question.
+- [Theo — MCP is the wrong abstraction](https://youtube.com/watch?v=bAYZjVAodoo) — A builder's critique of the protocol described in *Your Data Is Already Yours*.
+- [Theo — Software engineering is dead now](https://youtube.com/watch?v=p2aea9dytpE) — The provocation that *We All Invented Calculus at the Same Time* answers.
+- [Theo — The "right way" to vibe code](https://youtube.com/watch?v=6TMPWvPG5GA) — Engineers, please watch. The rebar argument from *Sand Castles and Rebar*.
+- [Theo — It's time to embrace the AI](https://youtube.com/watch?v=uqRF4IszorU) — The thesis of this book, from a different angle.
+
+**The Philosophy**
+
+The Crash Course Philosophy series is referenced throughout the study guide above. Here are the episodes that matter most, in viewing order for this book.
+
+- [Artificial Intelligence & Personhood: Crash Course Philosophy #23](https://youtube.com/watch?v=39EdqUbj92U) — The Chinese Room, the systems reply, behavioral standards. The single most relevant episode.
+- [Where Does Your Mind Reside?: Crash Course Philosophy #22](https://youtube.com/watch?v=3SJROTXnmus) — Mary's Room. This *is* the LLM question.
+- [Determinism vs Free Will: Crash Course Philosophy #24](https://youtube.com/watch?v=vCGtkDzELAI) — Tight prompts vs. loose prompts, reframed.
+- [Compatibilism: Crash Course Philosophy #25](https://youtube.com/watch?v=KETTtiprINU) — The control spectrum. Directly relevant to *YOLO Mode* and *Agents as Teammates*.
+- [Language & Meaning: Crash Course Philosophy #26](https://youtube.com/watch?v=zmwgmt7wcv8) — Wittgenstein's beetle-in-a-box. Why the duck works.
+- [Conversational Implicature: Crash Course Philosophy #27](https://youtube.com/watch?v=G30m6XDBTh4) — Grice's maxims. The philosophical foundation for every conversation with AI.
+- [Aristotle & Virtue Theory: Crash Course Philosophy #38](https://youtube.com/watch?v=PrvtOWEXDIQ) — Skills as habits, silent competence as virtue.
+- [Full Playlist: Crash Course Philosophy (46 episodes)](https://www.youtube.com/playlist?list=PL8dPuuaLjXtNgK6MZucdYldNkMybYIHKR)
+
+**Building and Data**
+
+Videos from the journey described in *Your Data Is Already Yours* and the building chapters.
+
+- [How to use Claude Code in Home Assistant](https://youtube.com/watch?v=VhggkpZRlVA) — The intersection of AI coding tools and smart home automation.
+- [Home Assistant MCP: One Server for Claude, Codex, and Gemini CLI](https://youtube.com/watch?v=7hXopsNoOfk) — MCP connecting AI to the physical house.
+- [MQTT for MCP and Federation of Agents](https://youtube.com/watch?v=2unOi2JTZ0I) — The protocol layer between Steward and Home Assistant.
+- [TestFlight — How to Upload and Distribute Your App](https://youtube.com/watch?v=DLvdZtTAJrE) — The sideloading path described in *Your Data Is Already Yours*.
+- [Gödel's Incompleteness Theorem — Computerphile](https://youtube.com/watch?v=IuX8QMgy4qE) — There are true statements no system can prove about itself. Relevant to *When AI Gets Smart Enough, It Does Philosophy*.
+- [Ai Will Try to Cheat & Escape — Computerphile](https://youtube.com/watch?v=AqJnK9Dh-eQ) — The alignment problem, explained practically. Relevant to *Disagree and Commit*.
+
+**The Big Picture**
+
+- [The future of intelligence — Demis Hassabis](https://youtube.com/watch?v=PqVbypvxDto) — DeepMind's CEO on where this is all going.
+- [Ilya Sutskever — We're moving from the age of scaling to the age of research](https://youtube.com/watch?v=aR20FWCCjAs) — The shift that explains why the shapes in this book matter more than the models.
+- [Terry Tao: "Any Undergrad Can Train LLMs (But Nobody Knows Why They Work)"](https://youtube.com/watch?v=ukpCHo5v-Gc) — The greatest living mathematician on the gap between capability and understanding.
+- [Anthropic Found Out Why AIs Go Insane](https://youtube.com/watch?v=eGpIXJ0C4ds) — Interpretability research. What's actually happening inside the models.
+- [LLMs Don't Need More Parameters. They Need Loops.](https://youtube.com/watch?v=pDsTcrRVNc0) — The architectural insight that *The Correction Is the Conversation* describes from the human side.
+
+---
+
 ### Going Deeper
 
 If this study guide sparked something, here are the best next steps:
 
-**Watch:** Crash Course Philosophy, episodes 23 (AI & Personhood), 27 (Conversational Implicature), and 22 (Philosophy of Mind). These three episodes cover the core ideas that run through every article in this book. ~30 minutes total.
+**Watch:** The 3Blue1Brown Deep Learning series (Chapters 1, 5, 6, 7) for the technical intuition, then Crash Course Philosophy episodes 23 (AI & Personhood), 27 (Conversational Implicature), and 22 (Philosophy of Mind) for the philosophical foundation. These cover the core ideas that run through every article in this book. ~90 minutes total.
 
 **Read:** *The Blue Light* by Kai. It's the shapes in this book, lived from the inside. Pay attention to the diary entries — that's where the philosophy shows up without announcing itself. The full text is available as a PDF at [github.com/aaronski1982/kai](https://github.com/aaronski1982/kai).
 
-**Follow:** Simon Willison (simonwillison.net) for practical AI tool documentation. Andrej Karpathy for the big picture on where AI is going. Theo Browne (theo.gg) for the builder's perspective.
+**Follow:** Simon Willison (simonwillison.net) for practical AI tool documentation. Andrej Karpathy for the big picture on where AI is going. [Theo Browne (t3.gg)](https://youtube.com/watch?v=hDn8-fK3XaU) for the builder's perspective.
 
 **Think about:** Andy Clark and David Chalmers' "Extended Mind" thesis (1998). It's the philosophical paper that makes the portable brain argument rigorous. If your AI assistant plays the right functional role in your thinking, is it part of your mind?
 

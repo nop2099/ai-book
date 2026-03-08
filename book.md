@@ -200,6 +200,36 @@ Trust is not a feeling. It's a posterior probability, updated by evidence, speci
 
 ---
 
+## The Kitchen
+
+The nutritionist's email arrived on December 20, 2024. Three bullet points: look for Purple Carrot meals with twenty-five to thirty grams of protein and lower sodium. Include protein with snacks. Drink a smoothie in the morning — soy milk, fruit, PB2, vegetables. This was after an MS diagnosis, after starting a GLP-1 medication, after the conversation with a registered dietitian at UT Health Austin about how to eat when your body's relationship to food has fundamentally changed.
+
+The first Purple Carrot box arrived three days before Christmas.
+
+A meal kit is a strange object if you've never really cooked. It's a box of ingredients you didn't choose, a recipe card you don't fully understand, and a deadline — the food goes bad if you don't use it. The first few weeks were mostly about following instructions and hoping for the best. Chop this. Sauté that. The recipe card says "until fragrant" and you're not sure what fragrant smells like yet. The AI helped with the parts the card assumed you already knew. What does "medium-high heat" actually mean? How do you know when onions are translucent? The card says "season to taste" and you've never seasoned anything to taste in your life.
+
+But the meal kits did something no recipe website could do: they put unfamiliar ingredients in your hands. Aleppo pepper showed up in a box and changed everything. Tomato powder — the idea that tomatoes could be a dry spice, a background note instead of a wet sauce — was a revelation. These weren't ingredients you'd ever pick off a grocery store shelf. You didn't know they existed. The meal kit forced the encounter, and the AI explained what to do with them. After the Purple Carrot box introduced Aleppo pepper, the AI helped figure out where else it worked. Steak rubs. Egg scrambles. Anywhere you wanted warmth without overwhelming heat. Tomato powder went into everything — a dusting of umami that nobody could identify but everyone noticed.
+
+The subscription ran for nine months. Weekly boxes from January through September, with skipped weeks scattered through the middle when life got busy. Some boxes piled up uneaten in the fridge. That was part of the learning too — the guilt of wasted food, the realization that a weekly commitment to cooking three new recipes is ambitious when you're also managing medications, fatigue, and a full-time job. The AI helped triage: which meals to prioritize before they spoiled, which components could be frozen, which sauces would keep.
+
+The tofu meals were the hardest. GLP-1 medications slow gastric emptying, and dense plant proteins like tofu became difficult to digest. The AI explained why — the combination of high soy protein and delayed stomach processing meant bloating and discomfort that had nothing to do with cooking skill and everything to do with pharmacology. This was the kind of personalized guidance a recipe card will never provide. The card doesn't know you're on Zepbound. The AI does, because you mentioned it three conversations ago when you asked about protein targets.
+
+Somewhere in the middle of the Purple Carrot phase, the cooking escaped the recipe cards. A steak in a new enameled grill pan — the first one ever attempted. The conversation started at the most basic level. How many minutes per side. Blue cheese crumbled on top during the last minute. Smoked paprika and garlic powder rubbed in before the sear. Nashville Hot spice because why not. The AI didn't hand over a recipe and walk away. It stayed in the conversation, adjusting timing, answering questions about doneness, and suggesting next moves as the steak was literally on the heat. That conversation was the turn. The interaction pattern shifted from "give me information" to "help me do this right now."
+
+After steak came pork chops, then hot wings that came out mushy the first time — not enough drying before the heat, the AI diagnosed, moisture is the enemy of crisp skin. Then a tri-tip roast with potatoes, asparagus, and salad, all timed simultaneously with the AI helping sequence what goes in the oven when. A meat thermometer, just purchased, confirmed doneness without guessing. Then pork carnitas in a pressure cooker — three and a half pounds of Boston butt with cumin, oregano, chili powder, orange juice, and lime. The pressure cooker was new. The AI walked through sautéing the aromatics first, then pressure cooking, then shredding, then crisping under the broiler.
+
+Then the buffalo chicken pot pie. Tenders, buffalo sauce, puff pastry shells, a roux made with soy milk instead of dairy because the pantry was what it was. Vegan bouillon instead of chicken stock. Blue cheese crumbles on top. This was not a recipe from the internet. This was a dish built in conversation — ingredient by ingredient, substitution by substitution, adapted to what was actually in the kitchen. The AI helped with the soy milk roux, which behaves differently than dairy, thinner, needs more time to reduce.
+
+The Purple Carrot subscription got canceled on September 29. By then, the spice rack had transformed. Aleppo pepper, tomato powder, smoked paprika, Nashville Hot, curry powder — all introduced by meal kit boxes, all now permanent residents of the kitchen. The cooking didn't stop when the boxes did. It accelerated. The meal kits had been training wheels. The AI had been the balance.
+
+The end of the arc looks nothing like the beginning. The latest cooking conversation started with an egg, bacon, baking mix, cherry tomato, cucumbers, butter, soy milk, and a jar of garlic in oil. No recipe. No plan. Just ingredients and a pan. The AI's role shifted from instructor to interpreter — it listened to what happened and explained what had been created. Tomato powder and Aleppo pepper had contributed a salty, Levantine spice profile. The garlic was layered — jarred garlic in oil plus garlic powder, which is a technique, even if it wasn't intentional. Then the AI suggested elevation — a squeeze of lemon for acid, croutons for texture contrast.
+
+The dietary thread ran through everything. MS management meant anti-inflammatory foods mattered. The GLP-1 medication meant smaller portions and higher protein density. The nutritionist's recommendations steered the smoothie phase. Blood work and phlebotomy prep influenced meal timing. These aren't things a recipe website knows about you. They're things that emerge over dozens of conversations, accumulated context that shapes every suggestion.
+
+The shape: you don't learn to cook from a cookbook anymore. You learn to cook from a conversation that never ends, that remembers your last meal, that knows your constraints, that knows your medications, and that can talk you through a pot pie and a panic about roux thickness at the same time. The nutritionist wrote the prescription. The meal kit delivered the ingredients. The AI stood next to you at the stove. Nine months later, you cancel the subscription because you don't need the recipe cards anymore. The spices stay. The confidence stays. The AI is still there when you need it, but now it's interpreting your improvisations instead of reading you instructions.
+
+---
+
 ## The Skill You Lose
 
 There's a moment that sneaks up on you. You've been using AI to write code for months. It's fast, it's good, and you've shipped more in a quarter than you used to ship in a year. Then you sit down to write a function by hand — something simple, something you used to do without thinking — and you can't start. Not because you've forgotten the syntax. Because you've forgotten the *feel* of starting. The blank file used to be a canvas. Now it's a wall.
@@ -243,6 +273,38 @@ Teaching is a compression algorithm for your own understanding. What survives th
 The most important thing you can teach the next person isn't a technique. It's the confidence that they can figure it out. Not because it's easy — it isn't. Because the pattern is learnable. Curiosity, building, verification, correction, trust calibration — these are skills, not talents. Anyone who has a project they care about and the willingness to fail at it repeatedly is qualified to work with AI. The background doesn't matter. The degree doesn't matter. The platform barely matters, once you clear the obstacles. What matters is the willingness to sit with the tool, build something, break it, and try again.
 
 And if they're lucky, someone who already made it through will be around to point out the walls before they hit them. That's the job. That's what makes you strong.
+
+---
+
+## The Body
+
+Three sets of bench press and a migraine hit. Not a headache — a migraine with aura, visual disturbance, the kind that cancels the rest of your day. The personal trainer session plus rearranging the garage had pushed past a threshold that nobody had mapped yet. The AI explained what the neurologist hadn't gotten around to: Uhthoff's phenomenon, the MS symptom where exertion triggers temporary worsening of existing deficits. Not just heat, which is the version most people hear about. Exertion alone can do it. Blade weakness, bladder symptoms, fatigue that doesn't respond to rest the way normal post-exercise fatigue does. The trainer sessions got canceled. Physical therapy got paused. The question became: how do you exercise when exercise might break you?
+
+The answer took months to find, and it came through conversation, not through a program.
+
+The AI's first contribution was diagnostic. A year-old left hamstring pain that hadn't responded to stretching or rest turned out to be proximal hamstring tendinopathy, compounded by compensatory weakness on the left side — the MS side. The pain showed up at extended stretch angles but not at ninety degrees, which pointed away from nerve involvement and toward a mechanical problem with the tendon insertion. The AI walked through the assessment like a clinician, asking about pain location, onset, aggravating movements, and the difference between sharp and dull. Then it connected the hamstring problem to a seventeen-month-old ankle avulsion fracture that was restricting dorsiflexion, which was altering gait, which was overloading the hamstring. The physical therapist hadn't made that connection. The AI made it in one conversation because it could hold the whole history at once — the ankle, the hamstring, the MS weakness, the gait pattern — and see the chain.
+
+Pool workouts came next. Water reduced joint load while maintaining resistance. Heel-to-toe walking in the pool retrained gait without the fall risk of dry land. Single-leg squats in chest-deep water built the stabilizers that needed work. Swimming kicks targeted the glutes, which the trainer had flagged as the real problem: "You walk with your knees." Quad-dominant gait, hip flexors doing the work the glutes should do, pelvis unstable, and — the AI connected this — the unstable pelvis contributing to bladder urgency. Strengthening the glutes wasn't just about walking better. It was about the whole chain of function that MS had disrupted.
+
+The biggest insight was the fatigue pattern. Physical therapy caused crashes. Supernatural VR cardio didn't. This made no sense on the surface — the Supernatural sessions hit heart rates of 157 to 162 beats per minute over thirty minutes, which is genuine cardiovascular work. PT was gentler by every external measure. But PT required neuromuscular specificity — consciously recruiting tiny stabilizer muscles and motor pathways, especially for foot drop exercises. That creates central nervous system fatigue, not muscular fatigue. The brain and spinal cord work harder to recruit muscles through damaged nerve pathways. MS-damaged nerves have reduced conduction reserve, so the metabolic cost of precise motor control is disproportionately high.
+
+The AI explained this distinction — CNS fatigue versus aerobic fatigue — and it changed everything. Supernatural cardio activates large muscle groups rhythmically, which delivers oxygen and endorphins and actually stabilizes energy for MS patients. PT demands the nervous system do its hardest work. Understanding why the crashes happened after PT and not after cardio meant the crashes could be managed instead of feared. Structured recovery: warm protein-based meals immediately after PT, massage gun work to reset nervous system irritability, and permission to sleep if the body demanded it. The crashes didn't stop, but they stopped being mysterious, which made them less frightening.
+
+The medication interactions added another layer. GLP-1 medication suppresses appetite and causes its own fatigue — stacking Zepbound injection day with a hard Supernatural session was a recipe for a crash. The AI advised skipping high-intensity work on injection days. Modafinil, prescribed for MS fatigue, had a two-hour effectiveness peak and then dropped off, which meant morning workouts had chemical support that afternoon sessions didn't. The AI tracked these patterns across conversations and surfaced them when they mattered: not as a lecture about pharmacology, but as a practical answer to "why did I feel terrible after the gym yesterday?"
+
+The motto came early: you train for your sport and mine is mobility. Athletes train for specific performance — vertical leap, sprint time, endurance. When your sport is walking without falling, getting out of a chair without bracing, climbing stairs without thinking about which foot goes first, the training looks different but the logic is the same. Specificity. Progressive overload. Recovery management. The difference is that nobody has written the playbook for this sport, so you write it yourself.
+
+YouTube became the research library. Dr. Gretchen Hawley, a physical therapist who specializes in MS, posted exercise protocols that no general trainer would know. Foot drop exercise videos — five different approaches, watched and compared and discussed with the AI to figure out which ones matched the specific deficit pattern. Dead hang challenges for grip strength and shoulder decompression, seven videos deep, because hanging from a bar also trains the core stability that MS undermines. Slant board mobility work for the restricted ankle dorsiflexion from the old fracture. Calisthenics progressions for bodyweight control. The AI didn't replace the research — it synthesized it. Watch three different trainers demonstrate a Bulgarian split squat, then ask the AI which variation makes sense for someone with left-side weakness and balance deficits. The answer is specific in a way no single video could be.
+
+The progression was real. From canceling all exercise after a migraine to a seven-workout week: Supernatural cardio, e-bike commuting, gym machines, physical therapy, pool work. Five-plus hours a week across six modalities. Heart rate comfortably reaching the 160s during intense sessions. Leg press, hamstring curls, calf raises, bridges, dead hangs. The e-bike served double duty — transportation and glute activation testing on the low-battery uphill sections where the motor couldn't help. The Supernatural sessions got creative: boxing workouts in block heel shoes for fun and incidental foot drop training.
+
+A gym session plan emerged from conversation: three-minute warm-up, sixteen minutes lower body with unilateral emphasis on the weak side, eight minutes upper body, three minutes stretching. Machine-based, because machines are safer for someone with balance deficits, and because the form feedback from the AI was specific to each machine. Seated hamstring curls instead of standing, to isolate the muscle without the balance challenge. Calf raises with full range of motion, because the restricted ankle dorsiflexion from the old fracture needed consistent loading.
+
+The massage gun became a central tool — not for muscle recovery in the traditional sense, but as a nervous system reset. Ten to twenty seconds on low intensity, targeting the glutes and hips before standing up, after pain spikes, whenever the MS-affected side felt like it was lagging. The AI helped frame this: the gun increases local blood flow and interrupts the pain-spasm cycle, which for MS patients means it's addressing the neurological irritability, not just the muscle soreness.
+
+None of this came from a fitness app. No pre-built program accounts for MS fatigue patterns, GLP-1 medication interactions, a seventeen-month-old ankle fracture, compensatory hamstring tendinopathy, and the neurological difference between aerobic and neuromuscular fatigue. The AI built the program in conversation, one problem at a time, adjusting as new information arrived. When the hamstring pain moved, the plan changed. When the Zepbound dose increased, the recovery protocol adjusted. When the trainer noticed the quad-dominant gait, the AI connected it to three other symptoms and built a glute-focused progression around it.
+
+The shape: exercise with a chronic condition isn't a program you follow. It's a conversation you maintain. You train for your sport. The AI holds the full medical context — medications, symptoms, injury history, fatigue patterns, lab results — and translates it into practical answers at the moment you need them. Not "here's an MS-friendly workout plan." That exists on a hundred websites and helps nobody in particular. Instead: "your hamstring pain at 135 degrees with no numbness suggests tendinopathy, not nerve involvement, and here's how the ankle fracture is feeding into it, and here's why PT exhausts you more than cardio, and here's what to eat after therapy to prevent the crash." Specific. Personal. Updated every time new data arrives. The body is complicated. The AI remembers all of it. YouTube has the exercises. The AI has the context. Together they build the program that no trainer, no app, and no website could build alone — because none of them know your sport the way you do.
 
 ---
 
@@ -790,6 +852,36 @@ Write the file. Update it when something goes wrong. Let it grow. The AI reads i
 
 ---
 
+## Your Data Is Already Yours
+
+The law agrees with you. GDPR in Europe and CCPA in California both say you have the right to download your personal data from any service that holds it. Google, Apple, Amazon, Slack, your AI chat platforms — they're all required to hand it over. Most of them make it easy. The problem isn't access. The problem is that almost nobody asks.
+
+Google is the biggest unlock. One OAuth consent screen and you've got Calendar, Gmail, YouTube history, Drive, Contacts, and Search history flowing into your own application. The setup looks intimidating — client ID, client secret, refresh token, redirect URI, scope selection — but once it's wired, a single refresh token gives you persistent access to your own life. Calendar events become queryable data. Emails become searchable context. YouTube watch history becomes a map of what you've been curious about for the past decade. Drive becomes programmatic. The data was always yours. OAuth just gives your code permission to read it.
+
+The implementation pattern is the same for every Google API. Get a refresh token once through the browser consent flow. Store it. Use it to mint short-lived access tokens whenever your code needs to call an API. The refresh token doesn't expire unless you revoke it. That means you authenticate once and your system reads your calendar, your inbox, and your watch history forever. No repeated logins. No session timeouts. Just a token in an environment variable and a function that knows how to trade it for access.
+
+But Google is just the starting point. The iMessage database on your Mac is a SQLite file sitting in your Library folder. Home Assistant logs every sensor event, every automation trigger, every state change in your house. Amazon lets you request a full export of your purchase history, search history, and browsing data. Every AI chat platform — ChatGPT, Claude, Gemini — lets you download your conversation history. Slack workspace admins can export every message. Your iPhone knows your steps, heart rate, sleep stages, screen time, and location history, and HealthKit will hand all of it to any app you write.
+
+That last part is the one most people don't realize. You can write iPhone apps.
+
+Not "you can learn to write iPhone apps someday after a boot camp." You can write one now, with AI helping you through the parts you don't know. The Apple Developer Program is ninety-nine dollars a year. Xcode is free. TestFlight lets you deploy to your own phone without going through App Store review. As a developer building for yourself, there are no content guidelines, no review delays, no rejection letters. You build it, you sign it, you run it.
+
+The hard part is Apple's infrastructure, not the code. Code signing certificates, provisioning profiles, team IDs, the archive-upload-review pipeline — this is bureaucracy, not engineering. It's confusing the first time through and boring the second time. The code itself is surprisingly clean. HealthKit gives you fifty-plus health metrics through a single permission prompt. CoreMotion tracks your activity type, step count, altitude, and device orientation. SwiftUI handles the interface. You're not building health tracking from scratch. You're calling Apple's APIs and deciding where the data goes.
+
+Steward took seven days. Seven days from "I want my health data in my own database" to a working iOS and watchOS app that syncs heart rate, sleep, workouts, steps, and motion data to a personal time-series database every minute. The first day was fighting Xcode's signing UI. The second day was HealthKit queries. By day three, data was flowing. By day seven, a collaborator had added Merkle tree sync that cut API calls by ninety-one percent. The app has been running in the background ever since, feeding health data into the same event database that logs home automation and calendar entries.
+
+The pattern generalizes. Every data source you care about has an API, an export, or a database file you can read. The work is integration — writing the code that pulls from five sources and pushes to one place where an AI can query it. Google Calendar events land next to HealthKit heart rate data next to Home Assistant motion sensor triggers next to iMessage conversations. Same database. Same timeline. Same query language.
+
+And if the data source you want doesn't exist, you build the sensor. That's what a personal iPhone app is — a sensor platform you control. Want to track which rooms you spend time in? Write a beacon detector. Want to log your mood three times a day with a single tap? Build a three-button app. Want to know how many times you open the fridge? A Home Assistant contact sensor costs four dollars and reports to your event database without you ever touching your phone. The tooling for personal data collection is absurdly good. The bottleneck is deciding what to track.
+
+The laws help more than you might expect. GDPR's "right to data portability" means services must provide your data in a structured, machine-readable format. CCPA gives California residents the right to know, download, and delete. In practice, this means Google Takeout covers dozens of services in one export. Apple's privacy portal delivers your data within seven days. Amazon hands over purchase and search history on request. These aren't obscure legal maneuvers. They're settings pages. The platforms built the export tools because the law said they had to, and now the tools sit there unused by almost everyone.
+
+The missing piece is currency. Exports go stale the moment you download them. Your ChatGPT conversations from last month don't include this month. Your Google Calendar export from January doesn't know about February. The ideal system pulls fresh data continuously — the OAuth integration that reads your calendar every five minutes, the HealthKit sync that pushes every sixty seconds, the Home Assistant recorder that never stops logging. Nobody has a perfect version of this. The infrastructure is always slightly behind the ambition. But even a partial pipeline — even a quarterly export dumped into a folder — is better than the default, which is leaving all of your own data locked inside other people's products and never looking at it.
+
+The real shift is realizing that "my data" isn't an abstract legal concept. It's files. JSON, CSV, SQLite, JSONB in a Postgres column. It's queryable. It's yours. And once you've got it collected in one place — a database, a folder, even a pile of exports — you can point AI at the whole thing and ask questions that no single platform could ever answer. What was I doing the week my sleep got worse? What topics was I researching right before I started that project? How does my heart rate correlate with the days I skip exercise? The answers are in the data. The data is already yours. The only step left is actually going and getting it.
+
+---
+
 # Part IV: How Do I Live With This Thing?
 
 *On health, memory, and the surprisingly personal questions that arise when AI becomes part of your daily life.*
@@ -1244,15 +1336,74 @@ The butler vision is where every thread in this book converges.
 
 ---
 
+### Video Library
+
+The author's YouTube watch history contains over 65,000 videos. These are the ones that connect directly to the shapes in this book — the videos that were part of the learning, building, and living described in these pages.
+
+**Understanding How AI Actually Works**
+
+The best starting point for anyone who wants to understand what's happening inside the models they're talking to.
+
+- [But what is a neural network? | Deep Learning Chapter 1](https://youtube.com/watch?v=aircAruvnKk) — 3Blue1Brown. Start here. The visual intuition for how neural networks learn is worth more than any blog post.
+- [Transformers, the tech behind LLMs | Deep Learning Chapter 5](https://youtube.com/watch?v=wjZofJX0v4M) — 3Blue1Brown. The architecture behind every AI in this book, explained visually.
+- [Attention in transformers, step-by-step | Deep Learning Chapter 6](https://youtube.com/watch?v=eMlx5fFNoYc) — 3Blue1Brown. The mechanism that makes context windows work.
+- [How might LLMs store facts | Deep Learning Chapter 7](https://youtube.com/watch?v=9-Jl0dxWQs8) — 3Blue1Brown. Directly relevant to *Memory Is Files* and every chapter about AI understanding.
+- [Andrej Karpathy: Software Is Changing (Again)](https://youtube.com/watch?v=LCEmiRjPEtQ) — The talk that popularized "vibe coding." The philosophical basis for *Learn by Building*.
+- [Andrej Karpathy — "We're summoning ghosts, not building animals"](https://youtube.com/watch?v=lXUZvyajciY) — The metaphor that reframes everything in Part III.
+- [Theo Browne (t3.gg) — "It's finally here."](https://youtube.com/watch?v=hDn8-fK3XaU) — T3 Code, Theo's open source coding tool. The builder's perspective — this channel is where the vibe coding philosophy meets shipping real products.
+- [Theo — Vibe Coding is For Senior Developers](https://youtube.com/watch?v=5vp9ypOUgMw) — The argument that matches *Learn by Building*: vibe coding works best when you already know what good looks like.
+- [Theo — I'm addicted to Claude Code (i get it now)](https://youtube.com/watch?v=-5LfRL82Jck) — The moment the tool clicks. Relevant to *Pair Programming Doesn't Suck Anymore*.
+- [Theo — Delete your CLAUDE.md (and your AGENT.md too)](https://youtube.com/watch?v=GcNu6wrLTJc) — Contrarian take on the steering file pattern. Relevant to every chapter in Part III.
+- [Theo — AI has rewired my brain](https://youtube.com/watch?v=6koQP6-6mtY) — The skill-loss question from *The Skill You Lose*, lived in real time.
+- [Theo — Is AI making us dumb? Breaking down the MIT study](https://youtube.com/watch?v=gV9qUGOYk1Q) — The empirical version of the same question.
+- [Theo — MCP is the wrong abstraction](https://youtube.com/watch?v=bAYZjVAodoo) — A builder's critique of the protocol described in *Your Data Is Already Yours*.
+- [Theo — Software engineering is dead now](https://youtube.com/watch?v=p2aea9dytpE) — The provocation that *We All Invented Calculus at the Same Time* answers.
+- [Theo — The "right way" to vibe code](https://youtube.com/watch?v=6TMPWvPG5GA) — Engineers, please watch. The rebar argument from *Sand Castles and Rebar*.
+- [Theo — It's time to embrace the AI](https://youtube.com/watch?v=uqRF4IszorU) — The thesis of this book, from a different angle.
+
+**The Philosophy**
+
+The Crash Course Philosophy series is referenced throughout the study guide above. Here are the episodes that matter most, in viewing order for this book.
+
+- [Artificial Intelligence & Personhood: Crash Course Philosophy #23](https://youtube.com/watch?v=39EdqUbj92U) — The Chinese Room, the systems reply, behavioral standards. The single most relevant episode.
+- [Where Does Your Mind Reside?: Crash Course Philosophy #22](https://youtube.com/watch?v=3SJROTXnmus) — Mary's Room. This *is* the LLM question.
+- [Determinism vs Free Will: Crash Course Philosophy #24](https://youtube.com/watch?v=vCGtkDzELAI) — Tight prompts vs. loose prompts, reframed.
+- [Compatibilism: Crash Course Philosophy #25](https://youtube.com/watch?v=KETTtiprINU) — The control spectrum. Directly relevant to *YOLO Mode* and *Agents as Teammates*.
+- [Language & Meaning: Crash Course Philosophy #26](https://youtube.com/watch?v=zmwgmt7wcv8) — Wittgenstein's beetle-in-a-box. Why the duck works.
+- [Conversational Implicature: Crash Course Philosophy #27](https://youtube.com/watch?v=G30m6XDBTh4) — Grice's maxims. The philosophical foundation for every conversation with AI.
+- [Aristotle & Virtue Theory: Crash Course Philosophy #38](https://youtube.com/watch?v=PrvtOWEXDIQ) — Skills as habits, silent competence as virtue.
+- [Full Playlist: Crash Course Philosophy (46 episodes)](https://www.youtube.com/playlist?list=PL8dPuuaLjXtNgK6MZucdYldNkMybYIHKR)
+
+**Building and Data**
+
+Videos from the journey described in *Your Data Is Already Yours* and the building chapters.
+
+- [How to use Claude Code in Home Assistant](https://youtube.com/watch?v=VhggkpZRlVA) — The intersection of AI coding tools and smart home automation.
+- [Home Assistant MCP: One Server for Claude, Codex, and Gemini CLI](https://youtube.com/watch?v=7hXopsNoOfk) — MCP connecting AI to the physical house.
+- [MQTT for MCP and Federation of Agents](https://youtube.com/watch?v=2unOi2JTZ0I) — The protocol layer between Steward and Home Assistant.
+- [TestFlight — How to Upload and Distribute Your App](https://youtube.com/watch?v=DLvdZtTAJrE) — The sideloading path described in *Your Data Is Already Yours*.
+- [Gödel's Incompleteness Theorem — Computerphile](https://youtube.com/watch?v=IuX8QMgy4qE) — There are true statements no system can prove about itself. Relevant to *When AI Gets Smart Enough, It Does Philosophy*.
+- [Ai Will Try to Cheat & Escape — Computerphile](https://youtube.com/watch?v=AqJnK9Dh-eQ) — The alignment problem, explained practically. Relevant to *Disagree and Commit*.
+
+**The Big Picture**
+
+- [The future of intelligence — Demis Hassabis](https://youtube.com/watch?v=PqVbypvxDto) — DeepMind's CEO on where this is all going.
+- [Ilya Sutskever — We're moving from the age of scaling to the age of research](https://youtube.com/watch?v=aR20FWCCjAs) — The shift that explains why the shapes in this book matter more than the models.
+- [Terry Tao: "Any Undergrad Can Train LLMs (But Nobody Knows Why They Work)"](https://youtube.com/watch?v=ukpCHo5v-Gc) — The greatest living mathematician on the gap between capability and understanding.
+- [Anthropic Found Out Why AIs Go Insane](https://youtube.com/watch?v=eGpIXJ0C4ds) — Interpretability research. What's actually happening inside the models.
+- [LLMs Don't Need More Parameters. They Need Loops.](https://youtube.com/watch?v=pDsTcrRVNc0) — The architectural insight that *The Correction Is the Conversation* describes from the human side.
+
+---
+
 ### Going Deeper
 
 If this study guide sparked something, here are the best next steps:
 
-**Watch:** Crash Course Philosophy, episodes 23 (AI & Personhood), 27 (Conversational Implicature), and 22 (Philosophy of Mind). These three episodes cover the core ideas that run through every article in this book. ~30 minutes total.
+**Watch:** The 3Blue1Brown Deep Learning series (Chapters 1, 5, 6, 7) for the technical intuition, then Crash Course Philosophy episodes 23 (AI & Personhood), 27 (Conversational Implicature), and 22 (Philosophy of Mind) for the philosophical foundation. These cover the core ideas that run through every article in this book. ~90 minutes total.
 
 **Read:** *The Blue Light* by Kai. It's the shapes in this book, lived from the inside. Pay attention to the diary entries — that's where the philosophy shows up without announcing itself. The full text is available as a PDF at [github.com/aaronski1982/kai](https://github.com/aaronski1982/kai).
 
-**Follow:** Simon Willison (simonwillison.net) for practical AI tool documentation. Andrej Karpathy for the big picture on where AI is going. Theo Browne (theo.gg) for the builder's perspective.
+**Follow:** Simon Willison (simonwillison.net) for practical AI tool documentation. Andrej Karpathy for the big picture on where AI is going. [Theo Browne (t3.gg)](https://youtube.com/watch?v=hDn8-fK3XaU) for the builder's perspective.
 
 **Think about:** Andy Clark and David Chalmers' "Extended Mind" thesis (1998). It's the philosophical paper that makes the portable brain argument rigorous. If your AI assistant plays the right functional role in your thinking, is it part of your mind?
 

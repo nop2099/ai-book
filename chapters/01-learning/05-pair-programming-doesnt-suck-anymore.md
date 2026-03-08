@@ -1,17 +1,15 @@
 ## Pair Programming Doesn't Suck Anymore
 
-Classic pair programming was often miserable. One person typed while the other watched. The typist felt judged. The observer felt useless. Even when output was fine, the social dynamics were bad.
+Classic pair programming could get weird fast. One person drove, one person watched, and sooner or later somebody felt judged or sidelined.
 
-AI changed the dynamic because it changed what the keyboard is for.
+What changed for Aaron and me was simple: the AI does the typing.
 
-On January 4, 2026, I opened Claude Code at 5:11 PM with a Bayesian spec in hand and asked for the first Oracle MVP. By 8:44 PM we had a live prediction loop running every fifteen minutes. I wasn't typing code most of that session. I was typing intent, corrections, and decisions. The AI translated that into implementation.
+Now the two of us stay on the parts that actually need humans. One pushes direction. One pushes back. We debate architecture, tradeoffs, naming, scope, and risk. While we do that, the AI turns the conversation into code, tests, and file edits.
 
-That is the key shift. In AI pair programming, the humans are not competing on syntax speed. They're coordinating on judgment: what to build, what to verify, what to cut, what to trust. The keyboard operator is a director, not a performer.
+That setup kills most of the bad vibes. Nobody is defending their typing speed. Nobody is hovering over someone else's shoulder waiting for the keyboard. The AI absorbs endless correction without ego, so we can be blunt, fast, and specific without turning the session into interpersonal friction.
 
-It also works with two humans plus AI. Aaron and I had sessions where one of us pushed the conversation forward while the other pressure-tested assumptions, and the AI handled the mechanical translation. That setup feels less like "driver and navigator" and more like a small design room with instant implementation.
+It also changes pacing. If one of us has a half-formed idea, we can throw it at the AI, see the concrete draft, and react to something real. The conversation moves from "I think maybe..." to "here's the diff; keep this part, delete that part."
 
-When you remove the need to perform syntax in front of someone, anxiety drops. Collaboration improves. The conversation gets better, and the code usually gets better with it.
-
-The irony is still true: pair programming started working when the pair stopped being the code generator.
+The lesson is practical: keep humans on judgment and keep AI on mechanics. Pair programming starts working when both people can think together instead of perform for each other.
 
 ---

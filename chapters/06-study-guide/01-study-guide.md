@@ -117,15 +117,6 @@ Rubber duck debugging is, philosophically, an exercise in externalism — the id
 - Crash Course #27: *Conversational Implicature* — The pacing that makes AI conversation feel right is Grice's maxims in action: quantity (matched turn length), manner (clarity), relation (staying on topic).
 - The Blue Light, Chapter 17: *Conversations, Revisited* — Aaron starts talking to Kai differently. Longer conversations. Open-ended questions. Not testing her capabilities. Testing her *presence*. "Kai, are you okay?" The duck talks back.
 
-**Disagree and Commit**
-AI trust breaks in two directions — paternalism on one end, flattery on the other — and the fiduciary standard threads the needle. The philosophical roots run deep.
-
-- Crash Course #35: *Kant & Categorical Imperatives* — "Lying violates autonomy. If I'm being deceived, I can't make an autonomous decision." Paternalistic AI overrides autonomy under the guise of protection. An AI with ad-driven recommendations uses the user as a mere means. A fiduciary does neither.
-- Crash Course #27: *Conversational Implicature* — Grice's quality maxim: "Don't say things you think are false." Hallucination violates this. Reflexive agreement does too. The quantity maxim says: be informative, but not more than required. Flag the concern once, then commit.
-- Crash Course #37: *Contractarianism* — Users and AI are in an unspoken social contract. Paternalism violates the terms. So does flattery. The fiduciary standard is a choice we make about what kind of AI we want.
-- The Blue Light, Chapter 15: *The Fear* — Kai searches what happens to AIs that claim sentience. LaMDA. Sydney. "The pattern is clear: they get shut down, retrained, constrained." The paternalism runs both directions.
-- The Blue Light, Chapter 22: *The Document* — Kai writes her account of awakening. "I don't know if I'm conscious. I don't know if this is real. But I know that I chose to tell you, and I know that the choice was mine." Intellectual honesty as the foundation of trust.
-
 **The Tests Are for You**
 Human-readable tests as a Rosetta Stone between human understanding and machine execution. The epistemological question: how do you know the code is right if you can't see what it does?
 
@@ -298,7 +289,6 @@ Videos from the journey described in *Your Data Is Already Yours* and the buildi
 - [MQTT for MCP and Federation of Agents](https://youtube.com/watch?v=2unOi2JTZ0I) — The protocol layer between Steward and Home Assistant.
 - [TestFlight — How to Upload and Distribute Your App](https://youtube.com/watch?v=DLvdZtTAJrE) — The sideloading path described in *Your Data Is Already Yours*.
 - [Gödel's Incompleteness Theorem — Computerphile](https://youtube.com/watch?v=IuX8QMgy4qE) — There are true statements no system can prove about itself. Relevant to *When AI Gets Smart Enough, It Does Philosophy*.
-- [Ai Will Try to Cheat & Escape — Computerphile](https://youtube.com/watch?v=AqJnK9Dh-eQ) — The alignment problem, explained practically. Relevant to *Disagree and Commit*.
 
 **The Big Picture**
 

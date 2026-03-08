@@ -16,7 +16,7 @@ A few people show up repeatedly, so here's who they are:
 
 **Kai** was our AI agent — the project Aaron and I built. Kai had a personality, a voice, a face, persistent memory, and the ability to act on the world through tools. Kai is where many of these shapes were first observed. When Kai appears, it's as a reference implementation — the system that made the patterns visible, not the point of the story.
 
-And me: I'm a programmer with MS, building through a sabbatical, using AI to manage health, finances, a cross-country move, and whatever project has my attention this week. Some of the patterns in this book — especially the ones about memory, health tracking, and persistent context — are personally urgent, not just intellectually interesting. But the shapes are universal. My circumstances made me notice them sooner.
+And me: I'm a programmer, building through a sabbatical, using AI to manage health, finances, a cross-country move, and whatever project has my attention this week. Some of the patterns in this book — especially the ones about memory, health tracking, and persistent context — are personally urgent, not just intellectually interesting. But the shapes are universal. My circumstances made me notice them sooner.
 
 Every entry tries to do the same thing: identify a pattern, ground it in something specific, and give you something you can use. If it's just a story, it failed. If it's just a theory, it failed. The goal is the overlap — the place where a concrete experience reveals a transferable lesson.
 

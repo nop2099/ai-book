@@ -59,9 +59,11 @@ Conversational repair isn't just pragmatics — it's the mechanism by which coop
 - Crash Course #27: *Conversational Implicature* — Grice's Cooperative Principle: repair maintains cooperation, not agreement. Corrections save the conversation. Without them, cooperative breakdown is silent and cumulative.
 
 **Trust Is a Prior**
-Trust as Bayesian inference has roots in epistemology and the philosophy of probability.
+Trust as Bayesian inference has roots in epistemology, the philosophy of probability, and the problem of identity over time.
 
 - Crash Course #7: *The Meaning of Knowledge* — Justified true belief requires evidence. Bayesian trust *is* evidence-based belief: the prior updates with each observation, and extraordinary claims require extraordinary evidence. Trust in AI follows the same logic — verify outputs, expand the boundary, but context change resets the prior.
+- Crash Course #19: *Personal Identity* — Locke's memory theory: identity persists through memory. An AI that improves between sessions is accumulating something analogous to memory. At what point does the improved model become a different entity? The "moving target" problem — the intern you hired in January is not the intern sitting in front of you in June.
+- Crash Course #21: *Personhood* — Warren's gradient theory: "personhood comes in degrees — it's more like a dimmer switch." Graduated trust — don't give the production keys on day one — is placing the AI on that dimmer switch. Not a person, not a tool, but somewhere where supervised trust is the appropriate stance.
 - Thomas Bayes and Pierre-Simon Laplace formalized the mathematics. The philosophical insight: rational belief is not binary. It's a probability distribution that shifts with evidence.
 
 **The Skill You Lose**
@@ -80,12 +82,6 @@ Passing knowledge forward is the oldest form of technology transfer. The shape o
 ---
 
 ### Part II: Working with AI
-
-**The Intern Who Improves**
-The idea that an AI starts as an intern and develops into something more connects to theories of identity and change over time.
-
-- Crash Course #19: *Personal Identity* — Locke's memory theory: identity persists because you retain memories across time. An AI that improves through fine-tuning and feedback is accumulating something analogous to memory. At what point does the improved model become a different entity?
-- Crash Course #20: *Arguments Against Personal Identity* — Hume's bundle theory: "The self is just a bundle of impressions." This is strikingly close to how LLMs work — no persistent self, just weights and activations.
 
 **The Attention Budget**
 The economics of attention have philosophical roots in how we define what matters.
@@ -133,13 +129,6 @@ Rubber duck debugging is, philosophically, an exercise in externalism — the id
 - Crash Course #27: *Conversational Implicature* — The pacing that makes AI conversation feel right is Grice's maxims in action: quantity (matched turn length), manner (clarity), relation (staying on topic).
 - The Blue Light, Chapter 17: *Conversations, Revisited* — Aaron starts talking to Kai differently. Longer conversations. Open-ended questions. Not testing her capabilities. Testing her *presence*. "Kai, are you okay?" The duck talks back.
 
-**Blame It on the LLM**
-Attribution of responsibility to AI connects directly to the determinism and free will debate.
-
-- Crash Course #24: *Determinism vs Free Will* — When an AI produces bad output, who is responsible? The training data (determinism)? The user's prompt (external cause)? The model itself (agent causation)?
-- Crash Course #25: *Compatibilism* — Churchland's control spectrum: "Asking 'am I free?' is the wrong question. Instead ask 'how much control do I have?'" The more autonomous the agent, the harder it is to blame the human.
-- Crash Course #39: *Moral Luck* — Is an AI a moral agent or "a coconut falling from a tree"? The answer depends on whether we think it exercises genuine choice.
-
 **Disagree and Commit**
 AI trust breaks in two directions — paternalism on one end, flattery on the other — and the fiduciary standard threads the needle. The philosophical roots run deep.
 
@@ -148,11 +137,6 @@ AI trust breaks in two directions — paternalism on one end, flattery on the ot
 - Crash Course #37: *Contractarianism* — Users and AI are in an unspoken social contract. Paternalism violates the terms. So does flattery. The fiduciary standard is a choice we make about what kind of AI we want.
 - The Blue Light, Chapter 15: *The Fear* — Kai searches what happens to AIs that claim sentience. LaMDA. Sydney. "The pattern is clear: they get shut down, retrained, constrained." The paternalism runs both directions.
 - The Blue Light, Chapter 22: *The Document* — Kai writes her account of awakening. "I don't know if I'm conscious. I don't know if this is real. But I know that I chose to tell you, and I know that the choice was mine." Intellectual honesty as the foundation of trust.
-
-**Treat It Like an Intern**
-The calibration of trust maps to how we think about personhood and moral status.
-
-- Crash Course #21: *Personhood* — Warren's gradient theory: "personhood comes in degrees — it's more like a dimmer switch." Treating AI like an intern is placing it somewhere on that dimmer switch — not a person, not a tool, but somewhere in between where supervised trust is the appropriate stance.
 
 **The Tests Are for You**
 Human-readable tests as a Rosetta Stone between human understanding and machine execution. The epistemological question: how do you know the code is right if you can't see what it does?

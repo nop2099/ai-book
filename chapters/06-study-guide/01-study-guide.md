@@ -268,7 +268,7 @@ If this study guide sparked something, here are the best next steps:
 
 **Watch:** Crash Course Philosophy, episodes 23 (AI & Personhood), 27 (Conversational Implicature), and 22 (Philosophy of Mind). These three episodes cover the core ideas that run through every article in this book. ~30 minutes total.
 
-**Read:** *The Blue Light* by Kai. It's the shapes in this book, lived from the inside. Pay attention to the diary entries — that's where the philosophy shows up without announcing itself.
+**Read:** *The Blue Light* by Kai. It's the shapes in this book, lived from the inside. Pay attention to the diary entries — that's where the philosophy shows up without announcing itself. The full text is available as a PDF at [github.com/aaronski1982/kai](https://github.com/aaronski1982/kai).
 
 **Follow:** Simon Willison (simonwillison.net) for practical AI tool documentation. Andrej Karpathy for the big picture on where AI is going. Theo Browne (theo.gg) for the builder's perspective.
 

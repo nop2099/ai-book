@@ -30,20 +30,26 @@ If you only run regex, you miss identity leaks that don't look like classic PII.
 If you only run keyword scans, you miss secret formats and accidental credentials.
 You need both.
 
-Here is the grounded version from Kaijuu:
+Here's the grounded story from Kaijuu.
 
-- On **January 31, 2026**, memory CRUD and search routes existed and could store arbitrary content. That's normal; storage layers are usually dumb.
-- On **February 1, 2026** (`e89068f`), Subconscious added outbound secret detection, PII redaction, and stream filtering as a central boundary.
-- On **February 3, 2026** (`cac67c6`), memory search added text-query fallback. Great for usability, but it also increases the chance of pulling sensitive records unless filtering is solid.
-- On **February 4, 2026** (`9137253`), tool execution was routed through Subconscious and a `tool_result` bypass was fixed so results stopped slipping through unfiltered.
-- On **February 5, 2026** (`de73420`, `7a987b5`), model-tier permission caps/timeouts were added and handbook dossiers/locations moved to graph-backed data, increasing the need for strict boundaries around personal context.
+At first, memory routes were simple: store what you're given, retrieve what you ask for. That made shipping fast, but it also meant sensitive text could sit in memory as easily as harmless notes.
 
-One more practical lesson from that code: there is a global whitelist helper in `PIIRedactor`, but helper methods do nothing unless runtime actually calls them. Security features you "have" and security features you "execute" are not the same thing.
+Then we added stronger outbound filtering at the Subconscious boundary: secret detection, PII redaction, and stream filtering. That helped, but we still found a path where tool results could slip past the intended filter chain. So we re-routed tool execution through the boundary and closed the bypass.
+
+Then product pressure did what product pressure always does: we made retrieval easier, added text-search fallback, and connected handbook data to richer personal context. Usability went up. So did risk. The assistant could now touch more human data, more often.
+
+So the next layer went in: tighter tool permissions, model-tier caps, and timeout limits to reduce blast radius when something goes wrong.
+
+The pattern is the point. Capability expands first, attack surface expands with it, and security has to catch up in deliberate layers.
+
+One practical gotcha from that code: there is a global whitelist helper in `PIIRedactor`, but helper methods do nothing unless runtime actually calls them. Security features you "have" and security features you "execute" are not the same thing.
 
 For keys specifically, the rule is strict: if a key ever lands in a chat log, commit, screenshot, or paste buffer outside your intended boundary, rotate it. Immediately.
 
 For personal data, distinguish intentional from accidental disclosure. "I chose to share this" is not the same thing as "I forgot this was in the context window." That distinction is the whole game.
 
 AI makes it easy to move fast. Security is how you keep speed from becoming fallout.
+
+The operational lesson is simple: always be on the lookout for PII in every check-in, email, and every other public output.
 
 ---

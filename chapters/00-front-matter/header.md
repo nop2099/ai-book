@@ -1,5 +1,5 @@
 # Shapes of Intelligence
 
-*A field guide to working with artificial intelligence — by James Wilson*
+*The patterns nobody teaches you about working with AI — by James Wilson*
 
 ---

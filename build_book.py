@@ -9,7 +9,6 @@ sections = [
     "02-working",
     "03-building",
     "04-living",
-    "05-keeping-up",
     "06-study-guide",
 ]
 

@@ -1,6 +1,6 @@
 # Shapes of Intelligence
 
-*A field guide to working with artificial intelligence — by James Wilson*
+*The patterns nobody teaches you about working with AI — by James Wilson*
 
 ---
 
@@ -12,19 +12,21 @@ Not geometric shapes. Behavioral shapes — the universal patterns that emerge w
 
 The shapes in this book come from two years of building, breaking, and rebuilding AI systems. They come from conversations — thousands of them, across multiple tools, with multiple people. They come from projects that shipped and projects that didn't. They come from getting things wrong, noticing why, and trying again.
 
+A word about how this book was made: I directed it. The words were written by AI — mostly Claude — working from my experiences, my conversations, and my corrections. I chose the topics, provided the stories, and edited the results. The AI did the drafting. This isn't a confession. It's the method, and it's the same method the book describes: a human who knows what they want, working with a tool that can produce it, verifying and correcting until the result is right. The book was built the way the book says to build things.
+
 A few people show up repeatedly, so here's who they are:
 
 **Aaron** is a friend and collaborator. He and I spent ten months building an AI agent from scratch — voice, memory, multi-modal perception, inter-agent communication, the whole stack. He built the body. I built the mind. He works in the games industry and is now moving into an AI leadership role at his company. When Aaron appears in these pages, it's usually because we were building something together and discovered a shape by accident.
 
-**Alex** is my cousin. He's in his mid-thirties, works in banking, and has no programming background. He went from zero to building websites with AI in a matter of days. When Alex appears, it's usually because he's demonstrating what happens when a curious beginner meets a powerful tool — which is one of the most important shapes in the book.
+**Alex** is my cousin. He's in his mid-thirties, works in banking, and has no programming background. He went from zero to building websites and game engines with AI in a matter of days. When Alex appears, it's usually because he's demonstrating what happens when a curious beginner meets a powerful tool — which is one of the most important shapes in the book.
 
-**Kai** was our AI agent — the project Aaron and I built. Kai had a personality (modeled on Aubrey Plaza), a voice, a face, persistent memory, and the ability to act on the world through tools. Kai is where many of these shapes were first observed. When Kai appears, it's as a reference implementation — the system that made the patterns visible, not the point of the story.
+**Kai** was our AI agent — the project Aaron and I built. Kai had a personality, a voice, a face, persistent memory, and the ability to act on the world through tools. Kai is where many of these shapes were first observed. When Kai appears, it's as a reference implementation — the system that made the patterns visible, not the point of the story.
 
-And me: I'm a programmer. Some of the patterns in this book — especially the ones about memory, health tracking, and persistent context — are personally urgent, not just intellectually interesting. But the shapes are universal. My circumstances made me notice them sooner.
+And me: I'm a programmer with MS, building through a sabbatical, using AI to manage health, finances, a cross-country move, and whatever project has my attention this week. Some of the patterns in this book — especially the ones about memory, health tracking, and persistent context — are personally urgent, not just intellectually interesting. But the shapes are universal. My circumstances made me notice them sooner.
 
-Every entry in this book tries to do the same thing: identify a pattern, ground it in something specific, and give you something you can use. If it's just a story, it failed. If it's just a theory, it failed. The goal is the overlap — the place where a concrete experience reveals a transferable lesson.
+Every entry tries to do the same thing: identify a pattern, ground it in something specific, and give you something you can use. If it's just a story, it failed. If it's just a theory, it failed. The goal is the overlap — the place where a concrete experience reveals a transferable lesson.
 
-The entries are grouped into five parts, roughly following the arc of someone going from "what is this thing?" to "how do I live with it?" You can read them in order or skip to whatever's relevant. Each one stands alone. But they build on each other in ways that might surprise you.
+The entries are grouped into four parts: learning, working, building, and living. They roughly follow the arc of someone going from "what is this thing?" to "how do I make it part of my life?" You can read them in order or skip to whatever's relevant. Each one stands alone. But they build on each other in ways that might surprise you.
 
 ---
 
@@ -144,6 +146,102 @@ Andrej Karpathy named the extreme version of this "vibe coding" — giving the A
 
 ---
 
+## The Correction Is the Conversation
+
+The most important thing you can say to an AI is "no, that's wrong."
+
+Not rudely. Not with frustration. Just clearly: that's not what I meant. Here's what I actually mean. This single act — the correction, the redirect, the "you misunderstand" — is what separates a productive AI conversation from one that drifts into increasingly confident wrongness.
+
+Linguists have a name for this. Schegloff, Jefferson, and Sacks mapped the mechanics of conversational repair in the 1970s. They found that human conversations have a strong preference for self-repair — when something goes wrong, the speaker usually catches and fixes it themselves. But when the speaker doesn't catch it, the listener steps in. Other-initiated repair: "Wait, that's not what I said." "No, I meant the other one." "You're thinking of the wrong Brian."
+
+With AI, the balance flips. The model rarely catches its own misunderstandings in real time. It commits to a frame and builds on it. If the frame is wrong and you don't correct it, everything downstream inherits the error. A misunderstood premise becomes a confident paragraph becomes an entire document built on the wrong foundation. The error compounds because the AI doesn't know to doubt its own framing. You have to be the one who says stop.
+
+Grice's Cooperative Principle says conversations work because both parties assume the other is trying to be helpful, truthful, relevant, and clear. When a maxim gets violated — when something doesn't make sense — the listener doesn't abandon the conversation. They try to repair it. They assume there's a reason for the mismatch and work to resolve it. This is what keeps conversations alive. Not agreement. Repair.
+
+The practical shape: when you correct an AI and it incorporates the correction, the output improves dramatically. An entry about ambiguous prompting starts as a piece about delegation. The correction — "no, it's about calibrated confidence, not delegation" — doesn't just fix a word. It reframes the entire argument. The AI rebuilds from the corrected foundation and produces something it never would have reached on its own. The correction was the creative act. Everything else was execution.
+
+People are too polite with AI. They accept mediocre output because correcting feels like confrontation, or because they assume the first answer is the best the model can do. It isn't. The first answer is the model's best guess at what you want, given incomplete information. The correction provides the missing information. "Not that, this." "Closer, but the emphasis is wrong." "You're describing the symptom, not the cause." Each correction is a signal that the model couldn't extract from the original prompt. Each one makes the next output better.
+
+There's a rhythm to it. Prompt, output, correction, better output, smaller correction, good output. The conversation converges. The first pass is a rough sketch. The corrections aren't failures — they're the mechanism by which the sketch becomes precise. Expecting the first output to be perfect is like expecting a first draft to be final. The conversation IS the drafting process. The corrections are the edits.
+
+This is also why conversation history matters more than people think. A corrected AI has context that a fresh session doesn't. It knows what you rejected and why. It knows which frame you chose over which alternatives. It knows the specific word you replaced and the reasoning behind the replacement. Delete the conversation and start fresh, and you lose all of that calibration. The corrections are the most valuable part of the context window.
+
+The discipline is: when the AI gets it wrong, say so immediately. Don't let it build on a bad foundation. Don't soften the correction into ambiguity. And don't abandon the conversation and start over — the repair itself is information that makes the rest of the conversation smarter. The correction is not a failure of the AI or a failure of your prompt. It's the conversation working exactly as conversations are supposed to work.
+
+---
+
+## Trust Is a Prior
+
+There was a cat who had never been outside. Indoor cat, whole life. One day someone carried her into the backyard, set her down in the grass, and sat nearby. She froze. Crouched low, ears back, scanning for threats. After ten minutes she took a step. After twenty she sniffed something. After an hour she was cautiously exploring a three-foot radius. The next day, same thing — but the freeze was shorter, the radius wider. After a week she was trotting around the yard, rolling in patches of sun, occasionally glancing back to make sure the door was still open.
+
+That's Bayesian trust. A prior that starts near zero — I have no evidence this is safe — and updates incrementally with each positive observation. The cat doesn't decide to trust the backyard. She accumulates evidence that the backyard is trustworthy. Every trip outside without a threat nudges the prior upward. Every calm return to the house confirms: this is a place I can be.
+
+Then the move happened. New house, new yard, new smells, unfamiliar geometry. The prior reset. All that accumulated evidence — the sunny patch, the specific fence line, the distance to the door — was invalidated. And the cat, faced with a brand new environment and a reset prior, ran.
+
+Trust in AI works the same way.
+
+You start with a tool and you don't trust it. You verify every output. You check the code it wrote. You read the email before you send it. You fact-check its claims. This is correct behavior — your prior is low and you don't have evidence yet. Each time the tool gets something right, and you verify that it got it right, the prior updates. You start checking less. You let it handle a whole paragraph instead of a sentence. You let it refactor a file without reading every line. You're not being careless. You're being Bayesian. The evidence supports expanding the boundary.
+
+But switch models and the prior resets. Switch tools and it resets. Switch from a system where you can see the memory to a system where you can't, and it resets hard — because the thing that made the evidence accumulate was your ability to verify. A transparent system builds trust because every output is checkable. A black box can be just as capable, but the evidence never accumulates because you can't see the work. You're back to the frozen cat, crouching in unfamiliar grass.
+
+This is why readable memory matters more than sophisticated memory. A system that stores its knowledge in files you can open, grep, and verify builds trust faster than a system that stores knowledge in embeddings you can't inspect. The file isn't just a memory format — it's evidence. Every time you open the worklog and confirm that yes, the AI recorded what actually happened, your prior on the system's reliability nudges upward. Every time you can't see what the system knows, the prior stalls.
+
+The practical pattern: give the AI a small task. Verify the output. Give it a slightly larger task. Verify again. Expand the boundary each time the evidence supports it. This isn't micromanagement — it's calibration. And the calibration is per-tool, per-model, per-domain. Trust built with one model in one context doesn't transfer automatically to a different model in a different context. The cat trusted *that* yard. Not yards in general.
+
+The failure mode is skipping the verification. People either trust too early — handing over complex tasks before they've built evidence that the tool handles complexity well — or they never trust at all, verifying every comma forever because they never internalized the positive evidence. Both are miscalibrated priors. The first ignores the base rate of AI errors. The second ignores the accumulated evidence of AI competence.
+
+The cat story has one more lesson. She ran not because the new yard was dangerous, but because the context changed faster than the trust could transfer. That's what happens when you upgrade tools, switch platforms, or adopt a new architecture. The capability might be identical or better. But the trust infrastructure — the accumulated evidence, the verification habits, the known boundaries — doesn't migrate. You have to rebuild it. Not from zero, because you've learned what to check and how to check it. But the prior on *this specific system in this specific context* starts fresh.
+
+Trust is not a feeling. It's a posterior probability, updated by evidence, specific to context, and reset by change.
+
+---
+
+## The Skill You Lose
+
+There's a moment that sneaks up on you. You've been using AI to write code for months. It's fast, it's good, and you've shipped more in a quarter than you used to ship in a year. Then you sit down to write a function by hand — something simple, something you used to do without thinking — and you can't start. Not because you've forgotten the syntax. Because you've forgotten the *feel* of starting. The blank file used to be a canvas. Now it's a wall.
+
+This is the atrophy problem, and it's real. Every skill you delegate is a skill you stop practicing. Every time the AI writes the boilerplate, you get a little worse at boilerplate. Every time it structures the logic, you lose a little of the instinct for structuring logic. This is fine when the skill is genuinely mechanical — nobody mourns the loss of hand-rolled SQL joins. But some of the skills that feel mechanical aren't. The ability to hold a problem in your head and decompose it. The ability to write a first draft that's rough but yours. The ability to debug by reading, not by asking.
+
+The pattern is subtle because the loss is invisible as long as the AI is available. You don't notice the muscle has atrophied until you need to lift something without the machine. A network outage. A conversation that's too long for the tool to hold. A domain where the AI is confidently wrong and you need to reason from first principles. That's when you discover which skills you still have and which ones you rented.
+
+The honest accounting: AI makes you more productive and less self-sufficient at the same time. These are not contradictory. They're the same trade-off you make with every tool. A calculator makes you faster at arithmetic and worse at mental math. A GPS makes you better at navigation and worse at wayfinding. The question isn't whether to accept the trade-off — you already have. The question is whether you're aware of it, and whether you're protecting the skills that matter.
+
+Not all skills matter equally. Boilerplate generation doesn't matter. The ability to read code critically does. First-draft writing doesn't matter. The ability to evaluate a draft — to know when something is wrong even if you can't say why — does. The pattern: delegate the production, protect the judgment. Let the AI write. Keep your ability to read. Let the AI generate options. Keep your ability to choose.
+
+The practical version is scheduled practice without the tool. Not as a productivity strategy — you'll be slower, and it'll feel pointless. As maintenance. The way a musician practices scales even though they'll never perform them. The way a pilot hand-flies approaches even though the autopilot is better. You're not practicing because you'll need to do it by hand tomorrow. You're practicing so that when you do need to, the muscle is still there.
+
+The deeper danger isn't losing a specific skill. It's losing the awareness that you've lost it. The programmer who can't start a blank file doesn't know they can't until they try. The writer who can't structure an argument doesn't know until the AI is unavailable. The atrophy is painless, progressive, and invisible right up until the moment it isn't. The only defense is honest self-assessment: what can I still do without the tool? If the answer makes you uncomfortable, that's the answer.
+
+---
+
+## Teaching the Next Person
+
+Your cousin calls. He's in his mid-thirties, works at a bank, has no programming background, and he's been watching you build things with AI for months. He has MS too, and he's on short-term disability, and he's got time. He wants in. He just built something with an AI coding tool — a website for a local business, a character engine for his D&D campaign. It works. He's hooked. But he's on Windows and he's never used a terminal and he doesn't know what a repository is.
+
+How do you teach this person?
+
+Not the technology. The technology changes every three months. If you teach him which buttons to press in which tool, the lesson expires by summer. What you teach is the shapes — the patterns that survive the tool changes. You teach him that AI rewards curiosity: the people who poke at things and ask follow-up questions learn faster than the people who ask for answers and accept them. You teach him that building a real project teaches more than any tutorial, so the D&D engine isn't a distraction from learning — it *is* the learning. You teach him to verify, because the AI will say "done" when it isn't, and the only person who can catch that is him.
+
+The hard part isn't the curriculum. It's the platform. He's on Windows. The AI development ecosystem assumes macOS or Linux. Terminals, package managers, path conventions, file permissions — the friction is constant and invisible to anyone who's already past it. You dig out an old MacBook, wipe it, and send it. The laptop isn't a gift. It's a prerequisite. You're not being generous. You're removing the obstacle that will kill his momentum before he learns enough to push through it on his own.
+
+This is the shape: teaching someone to work with AI is less about instruction and more about obstacle removal. The knowledge transfers fast — show someone a loose prompt and they get it in one conversation. What kills people is the environment. The tool that requires a credit card they don't have. The installation that fails silently. The error message that assumes you know what a PATH variable is. Every obstacle that seems trivial from the far side is a wall from the near side, and each one is a point where a curious beginner gives up and goes back to doing things the old way.
+
+The mentor's job is to spot those walls before the learner hits them. You've already climbed them. You know which ones are real obstacles and which ones are just unfamiliar. The difference between a person who learns AI and a person who bounces off it is almost never intelligence or talent. It's whether someone was around to say "here, try this instead" at the exact moment the frustration would have won.
+
+The teaching that sticks is the teaching that matches the person's project. Your cousin doesn't care about AI architecture. He cares about making his D&D campaign come alive. So you teach AI concepts through D&D: the character engine is a skill template, the campaign notes are persistent memory, the session recap is a summarization task. He built a NotebookLM video for his campaign and it was good. The abstraction comes later, after the concrete version is already working and he can feel what the pattern does before you tell him what it's called.
+
+Nobody learns the general principle first. They learn the specific application and then notice that it generalizes. This is why tutorials fail and projects succeed. A tutorial teaches you the tool. A project teaches you *yourself using the tool* — where you get stuck, what confuses you, what delights you, what you keep coming back to. The project gives you stakes. The stakes give you persistence. The persistence is what carries you past the obstacles that would stop someone who's just following instructions.
+
+There's something else that happens when you teach, and it's the part nobody talks about. You discover what you actually know versus what you just do. Habits that feel like knowledge turn out to be muscle memory — you can't explain them because you never articulated them. The act of explaining forces the articulation, and the articulation reveals gaps. You thought you understood how prompt design works. Then someone asks why, and you realize you've been doing it by feel, and the feel doesn't translate into words. So you find the words. And now you understand it better than you did before you tried to teach it.
+
+Teaching is a compression algorithm for your own understanding. What survives the compression is the real knowledge. What doesn't was just familiarity. This is why mentoring makes the mentor stronger, not just the student. Every time you explain a shape to someone new, you sharpen the shape. Every time you watch them struggle with something you found easy, you remember what the struggle felt like and you update your model of what "easy" actually means. The mentor who stops mentoring stops learning, because they lose the mirror that shows them what they still don't fully understand.
+
+The most important thing you can teach the next person isn't a technique. It's the confidence that they can figure it out. Not because it's easy — it isn't. Because the pattern is learnable. Curiosity, building, verification, correction, trust calibration — these are skills, not talents. Anyone who has a project they care about and the willingness to fail at it repeatedly is qualified to work with AI. The background doesn't matter. The degree doesn't matter. The platform barely matters, once you clear the obstacles. What matters is the willingness to sit with the tool, build something, break it, and try again.
+
+And if they're lucky, someone who already made it through will be around to point out the walls before they hit them. That's the job. That's what makes you strong.
+
+---
+
 # Part II: How Do I Work With This Thing?
 
 *On trust calibration, attention management, and the daily practice of collaborating with a system that's changing faster than your habits.*
@@ -258,15 +356,19 @@ Until it gets fixed, the workaround is simple: never trust an AI's time estimate
 
 AI has a memory problem. Every conversation starts from zero. Context windows fill up and get compacted, losing detail. Switch to a different model or a different tool and your history doesn't follow. The industry is building elaborate solutions — vector databases, knowledge graphs, retrieval-augmented generation, memory layers that compress and index and embed. These are interesting engineering. They are also, for most practical purposes, overkill. The simplest solution to AI's memory problem is a file.
 
-A worklog is a plain text file — markdown, usually — where you write down what you did, what you found, and what you concluded. Not a transcript of the conversation. Not an AI-generated summary. A human-curated record of action and result. When you're investigating something across multiple sessions — digging through logs, testing hypotheses, building evidence toward a conclusion — the worklog is the thing that survives between sessions. You open a new conversation, paste the worklog or point the AI at it, and you're back to full speed. No re-explaining. No losing the thread. No hoping the compacted summary preserved the thing that mattered.
+A worklog is a plain text file — markdown, usually — that records what was done, what was found, and what was concluded. Not a transcript of the conversation. Not a compacted summary. A running record of action and result, written by the AI as it works. When you're investigating something across multiple sessions — digging through logs, testing hypotheses, building evidence toward a conclusion — the worklog is the thing that survives between sessions. You open a new conversation, point the AI at the worklog, and you're back to full speed. No re-explaining. No losing the thread. No hoping the compacted summary preserved the thing that mattered.
 
-This works because of what a worklog filters. A conversation with AI is full of dead ends, misunderstandings, corrections, tangents, and restatements. The worklog strips all of that away and keeps the signal: this is what we tried, this is what we found, this is what it means. It's a compression algorithm, but the human is doing the compressing, which means the human decides what matters. That's the difference between a worklog and an AI-generated summary. The summary preserves what the model thinks was important. The worklog preserves what you know was important.
+The key: the AI writes the worklog, not you. This keeps the AI honest. Every claim, every finding, every decision is documented in a file you can read, verify, and grep. The AI can't quietly lose context or silently revise its understanding, because the log is right there. And it's full of context — the AI was present for every detail of the session, so nothing gets lost to the human tendency to summarize too aggressively or forget the thing that seemed minor at the time but turned out to matter.
+
+This works because of what a worklog filters. A conversation with AI is full of dead ends, misunderstandings, corrections, tangents, and restatements. The worklog strips all of that away and keeps the signal: this is what we tried, this is what we found, this is what it means. The AI does the compressing, but the human directs the work — which means the human decides what matters by deciding what to investigate. The AI preserves the full detail of the investigation. It's a partnership: human judgment on what to pursue, AI diligence on what happened.
 
 The worklog also solves the multi-agent problem. If you're using one tool for code, another for research, and a third for writing, none of them share context with each other. But they can all read a file. Update the worklog in one session, open it in the next, and the new agent inherits the full state of the project regardless of which model or tool is running it. The file becomes the shared memory layer — not because it's architecturally sophisticated, but because every AI tool that exists can read a markdown file.
 
 Over time, the worklog becomes more than a memory aid. It becomes a searchable record of how a project unfolded. You can grep it. You can skim it for patterns. You can hand it to someone else — human or AI — and they can understand not just where the project stands but how it got there. This is something conversation histories and vector embeddings can't do, because they preserve the raw material without the editorial judgment. The worklog is already edited. It's already a narrative of what mattered.
 
 There is a specific discipline to writing a useful worklog. Date your entries. Record what you did, not what you planned to do. Note dead ends explicitly — they're valuable because they prevent the next session from retreading the same ground. Keep it concise but specific: "Tested hypothesis X against dataset Y, result was Z, which means W" is a useful entry. "Worked on the project" is not. And update it in real time, during the work, not after — because the thing you'll forget to write down at the end of the session is exactly the thing you'll need to remember next time.
+
+Scale it up and you get dossiers. A worklog tracks a project. But if you tag the facts in those worklogs to entities — people, places, projects, deadlines — and connect those entities with relationships, the accumulated observations form a graph. Over time, the graph fills in. The AI mentions Aaron in five different worklogs across three weeks, and now the system knows Aaron's role, his projects, his schedule, his preferences — not because anyone sat down and wrote a profile, but because the observations accumulated on a skeleton of relationships. The dossier grows from conversation. The graph gives it structure.
 
 The people building memory systems for AI are trying to solve this problem with infrastructure. Embedding databases, context repositories, hierarchical summarization. Some of this work is genuinely important and will matter at scale. But for an individual working with AI on real projects across days and weeks, the answer is already here. It's a file. It's been a file this whole time. Memory is files.
 
@@ -373,6 +475,66 @@ My response: Treat it like an intern.
 You don't give an intern the production keys on day one. You don't let them push to main unsupervised. You review their work. You set boundaries. You increase trust as they earn it. The same framework that's kept organizations safe from enthusiastic junior employees for decades works just fine for AI agents.
 
 The mistake people make is binary thinking — either the agent has full access or no access. The answer is the same graduated trust model we've always used with humans. The technology is new. The management pattern isn't.
+
+---
+
+## The Tests Are for You
+
+Professional test output is not designed for humans. It's designed for machines — exit codes, stack traces, assertion counts, coverage percentages. A passing suite tells you everything passed. A failing one tells you something failed, somewhere, with a line number. What it doesn't tell you is *what happened*. What the board looked like. What the score was. Why the domino that should have scored ten points scored zero.
+
+This is the metamer problem. In color science, metamers are stimuli that are physically different but perceptually identical — two different light spectra that look like the same shade of blue. In AI-assisted development, the metamer problem runs in both directions. Code that looks correct to the AI can be visually wrong to a human. And code that looks wrong in test output can be functionally correct but presented in a way that hides the logic. If you can't see what the AI produced — not the code, but the *result* of the code — you can't verify that the code is right. The test passes. The output is garbage. Exit code zero.
+
+The lesson came from building a dominoes game. The AI could write game logic. It could write tests for game logic. But it could not see the board. It had no concept of domino placement, rotation, or how a chain of tiles looks when rendered. Bugs that were obvious at a glance — a tile connected to the wrong end, a spinner scoring only one side, a chain end displaying the inner face instead of the outer — were invisible to the AI's tests. The tests checked invariants: total tiles in play, score divisible by five, correct player turn order. The invariants all passed. The game was broken.
+
+The fix was building test output that humans could read. Not minimizing it, not tucking it behind verbosity flags — making the default output show you the setup, the action, and the result in a form you could trace by hand. Board states rendered as text: `[5|6] → [6-6] → [6|1]`, with chain ends labeled, counts summed, scores annotated. If the scoring was wrong, you could see the board state and add the ends yourself. If the placement was wrong, you could see the chain and spot where the logic diverged. The test wasn't checking a boolean. It was showing you a scene.
+
+This evolved into dedicated infrastructure. An artifact collector accumulated board snapshots, scoring breakdowns, event sequences, and move lists during test execution, then generated styled HTML pages you could open in a browser and read like a case study. Scoring scenarios got their own page. Spinner lifecycle got its own page. Game replays got their own page. The test suite wasn't just verifying correctness. It was documenting behavior in a format that a human could audit and an AI could be held accountable against.
+
+The tests became a Rosetta Stone. The same behavior, written in three scripts: what the code says, what the AI thinks it does, and what actually happens when it runs. Without all three scripts carved into the same slab, nobody's translating anything. The code is hieroglyphic — dense, formal, machine-native. The AI's assertion is demotic — a simplified claim that something passed. The human-readable output is the Greek — the version you can actually read, the one that lets you decode the other two. When all three agree, you know the system works. When they disagree, you know exactly where to look.
+
+There's also a growth problem that tests solve. The more detail you put into one part of the system, the fuzzier everything else becomes. You refine the scoring engine, and the placement logic drifts. You add spinner chains, and the end-of-hand calculation breaks. Software built with AI hits this wall fast because the AI is eager to build and reluctant to check. Without tests, every addition breaks something else, and you can't tell what broke or when. Tests are what let the software get meaningfully bigger. They freeze the parts you're not touching so you can work on the parts you are.
+
+The practical rule: always write tests before a refactor. If you're about to ask the AI to restructure something, get the tests in place first. Let the tests describe the current behavior in human-readable output. Then refactor. Then read the output again. If it changed, you know exactly what shifted and can decide whether the shift was intentional. Without the before-picture, you're trusting the AI's claim that nothing broke — and you already know what that claim is worth.
+
+And writing tests is trivially easy now. The same AI that can't see the visual bugs can generate test scaffolding, test data, and test infrastructure in seconds. The barrier that kept people from writing comprehensive tests — the tedium, the boilerplate, the setup — is gone. The only barrier left is knowing that you need them and knowing what they need to show you.
+
+AI has no perceptual ground truth. It processes tokens, not pixels. It can verify that a number equals another number, but it cannot see that a domino is facing the wrong way. Every domain has its equivalent of the visual bug — the thing that's correct by every metric the machine can check, and obviously wrong the moment a human looks at it. The tests are a Rosetta Stone. Build them with every script.
+
+---
+
+## Agents as Teammates
+
+Different AI tools are good at different things, and the landscape shifts fast enough that any specific recommendation will be outdated by the time you read it. That's the point. The shape isn't "use this tool." The shape is "learn to read the roster."
+
+Right now, some models excel at building user interfaces — they understand layout, interaction patterns, component architecture. Others are the best available option for generating images. A coding agent built a full domino tournament system — game logic, bracket management, statistical analysis — that would have taken weeks by hand. A different tool built a production UI that's deployed and serving users today. Neither tool would have been great at the other's job.
+
+This is how teams work. You don't hire five copies of your strongest engineer. You build a roster with different strengths and you learn who's good at what. The same principle applies to AI: stop trying to find "the best model" and start thinking about composition. The person who knows which tool to reach for — and when to switch — gets dramatically more done than the person who uses one tool for everything.
+
+The catch is that the roster changes constantly. The tool that's best at UI today might be surpassed next month. The image model that's untouchable right now will have competition by the time you've mastered it. This means the durable skill isn't knowing which tool is best. It's knowing *how to evaluate which tool is best*, quickly, for the task in front of you. It's developing the instinct for what kind of problem you're looking at and which kind of tool handles that class of problem well.
+
+Learn the tools. Use the tools. But hold them loosely, because the roster is always changing.
+
+---
+
+## YOLO Mode
+
+Every AI coding tool has a version of this flag. Claude Code calls it `--dangerously-skip-permissions`. OpenAI's Codex makes it the default and buries the alternative. The flag says: stop asking me. Just do it. Don't confirm file writes, don't check before running commands, don't interrupt the flow with permission dialogs. Trust the machine and let it work.
+
+Everyone turns it on. Almost immediately. And honestly — it's the right move most of the time. The friction is maddening. You're in a flow state, the AI is generating code, and every thirty seconds it stops to ask "may I write to this file?" Yes. Obviously yes. You asked it to build the thing. Of course it needs to write to the file. After the tenth confirmation, you find the flag that skips them all, and the relief is immediate. The AI moves at full speed. You move at full speed. Everything feels faster, smoother, better.
+
+Here's what nobody tells you: the interesting part isn't turning it on. It's learning when to turn it off.
+
+An experienced user lives in YOLO mode by default. The Bayesian prior is high. The AI has proven itself over hundreds of sessions. The rebar is in place — tests exist, version control exists, the damage from any single mistake is bounded. Skipping permissions in this context isn't reckless. It's earned. The prior didn't start at 1.0. It arrived there through evidence.
+
+But sometimes you deliberately turn the permissions back on. Not from distrust. Because you want to watch. The permission prompts become an attention gate — a reason to stay in the loop, to see each action before it happens, to think about whether this is what you wanted. When the work is interesting enough, or risky enough, or unfamiliar enough, the interruption isn't friction. It's focus. You're using the tool's safety mechanism as a concentration aid. The prompt that says "may I write to this file?" is also saying "hey, look at what happens next."
+
+This reframes the whole debate. The industry argument is YOLO versus guardrails, speed versus safety, trust versus verification. But that's the wrong axis. The real axis is attention. Sometimes you want your attention elsewhere — on the big picture, on the next feature, on the coffee that's getting cold. YOLO mode frees your attention. Sometimes you want your attention right here — on this specific change, this specific file, this specific decision the AI is about to make. Permission mode focuses your attention. The skilled user toggles between them based on what the work demands, not based on a philosophical position about trust.
+
+The mistake beginners make is turning YOLO on before they've built the infrastructure that makes it safe. No tests, no version control, no habit of checking diffs. In that context, YOLO mode is genuinely dangerous — not because the AI is untrustworthy, but because there's no backstop when it makes a mistake. The damage is unbounded. A file overwritten, a config changed, a dependency installed that breaks something else. Without rebar, the sand castle collapses silently.
+
+The mistake the industry makes is treating YOLO as the default. Codex and similar tools optimize for first impressions — maximum speed, minimum friction, no interruptions. That's great for demos. It's terrible for building anything you plan to keep. The `--dangerously-skip-permissions` flag has the right name. The "dangerously" is honest. It tells you exactly what you're giving up. Making maximum trust the factory setting, with no honesty about the cost, is a car that ships with the seatbelt alarm disabled because customers complained about the beeping.
+
+The shape: friction is information, and information is attention. Every permission request is a moment where you see what the AI intends to do before it does it. Removing that friction removes the information. Adding it back gives you a reason to look. The question isn't whether to use YOLO mode. You will. The question is whether you know why you're toggling it, and whether the rebar is in place for the times when you're not watching.
 
 ---
 
@@ -510,6 +672,52 @@ This recursion isn't a bug — it's the thing. The most powerful pattern in agen
 
 ---
 
+## Skills Are the Muscles We Train
+
+A skill is a written procedure that teaches an AI to do something it couldn't do from its training alone. Not because the capability isn't there — it usually is — but because the procedure is yours. Your tools, your standards, your workflow, your definition of "done."
+
+Here's a real one. A nightly memory consolidation skill, designed to run at three in the morning when nothing else competes for attention. It reads the day's conversations, extracts people and places worth remembering, updates entity records, cleans out junk entries, saves new memories, writes a diary entry, and ends with self-reflection: "What mistakes did I make today? What could I do better tomorrow?" The last line: "Tomorrow-me will be a little better because of this."
+
+That's not code. It's a practice. Written in plain language, with step-by-step instructions, quality standards for what counts as a good memory versus a bad one, and criteria for when to delete something versus keep it. The AI reads this document and follows it like a checklist. It's a gym routine for an artificial mind.
+
+The muscle metaphor isn't decorative. Muscles get stronger through repeated targeted use, and they atrophy without it. Skills work the same way. A skill that runs every night builds accumulated context — each run makes the next run smarter because there's more organized memory to work with. A skill that sits unused has no effect. And a skill that's poorly written — vague instructions, no quality standards, no definition of done — produces the same results as sloppy form at the gym: inconsistent and occasionally injurious.
+
+The difference between a prompt and a skill is the difference between telling someone what to do once and teaching them how to do it forever. A prompt is a single instruction: "summarize this document." A skill is a reusable procedure: "here's how we do document summaries in this project — the format, the length, the audience, the things to emphasize, the things to leave out, and how to know when you're done." The prompt gets you an answer. The skill gets you a *consistent* answer, every time, from any model, in any session.
+
+This is where the "tool usage boosting" idea comes in. If you want an AI to actually use a capability, you don't just make the capability available — you reinforce it. You put extra context in the prompt about when and why to use it. You add examples. You describe the situations where it applies. It's the same principle as progressive overload: you increase the stimulus until the behavior becomes automatic. A tool that's just listed in a menu might never get used. A tool that's described, demonstrated, and contextualized in the system prompt gets used constantly.
+
+The practical pattern: when you find yourself explaining the same thing to an AI for the third time, stop explaining and write a skill. Give it a name, a purpose, steps, and standards. Save it as a file. Now every future session — every future *model* — can read that file and execute the procedure without you saying a word. Your expertise persists even when the conversation doesn't.
+
+Skills compound. A memory consolidation skill produces better entity records, which means better context injection in future conversations, which means the AI asks fewer clarifying questions, which means you work faster. A code review skill that enforces your team's standards means every PR gets the same rigor regardless of which engineer or which AI session touches it. A research skill that specifies your preferred sources, citation format, and depth of analysis means you never have to re-explain your methodology.
+
+The deepest lesson is about what you're actually building when you build skills. You're not building software. You're building institutional knowledge — the kind that traditionally lives in the heads of experienced employees and walks out the door when they leave. Except now it lives in files, it's version-controlled, and it works at three in the morning while you sleep.
+
+---
+
+## Sand Castles and Rebar
+
+There's a kind of software that looks finished on the first afternoon. The AI built it. The demo works. The features are there, the layout is clean, the happy path runs without errors. It looks like a building. It's a sand castle.
+
+Sand castles are beautiful and they collapse the moment you push on them. Add a feature, and an existing feature breaks. Fix the fix, and something else shifts. Rename a function, and three files that depended on the old name silently fail. The structure was never structure — it was coincidence. Everything happened to work because nothing had been tested against change. The first refactor is a wrecking ball.
+
+This is vibe coding. The term is new but the pattern isn't. It's what happens when you build by feel — when the code looks right, when it runs once, and when nobody goes back to verify that the parts are actually connected the way they appear to be. AI makes vibe coding faster than it's ever been. You can generate an entire application in an afternoon. You can also generate an entire sand castle in an afternoon. Speed doesn't distinguish between the two.
+
+The difference between a sand castle and a building is rebar. Tests are the rebar. They give the software internal structure — rigid connections between components that hold their shape when something pushes against them. Without tests, every part of the system is loosely packed sand: it stays in place when nothing moves and falls apart the moment you touch it. With tests, you can push on one wall and know the others are still standing because the rebar runs through all of them.
+
+But rebar alone makes a skeleton, not a building. The cement is understanding. Not understanding every line of code — that's neither possible nor necessary when AI writes most of it. Understanding the shape: what this module does, why these components connect, what invariant holds the system together. When you understand the shape, you notice when something doesn't fit, even without a test for it. You catch the problem that the tests didn't anticipate because you know what the system is *supposed* to be, not just what it *currently does*.
+
+Here's the thing about working with AI: the more detail you pour into one area, the fuzzier everything else gets. You spend a day refining the scoring engine and the placement logic drifts. You add a new feature to the front end and the back end develops an inconsistency nobody notices for a week. The AI is working on what you're pointing at. Everything outside the beam of your attention is decaying. Sand doesn't hold its shape in the dark.
+
+Rebar stops this. If the scoring engine has tests, it doesn't drift when you're not watching. If the placement logic has tests, the AI can't quietly break it while adding something else. Tests are the mechanism by which software gets bigger without getting fragile. They let you look away from a part of the system and trust that it's still there when you look back.
+
+The temptation with AI is to skip the rebar because the sand castle looks so good. It assembled itself in an hour. It runs. The demo impressed everyone. Why slow down to write tests for something that already works? Because "already works" is a snapshot, not a guarantee. The sand castle works *right now*. The building works *next month*, after you've added three features, refactored the database code, and changed the API. The difference isn't visible on day one. It's visible on day thirty.
+
+The practical version: when the AI builds something and it works on the first try, that's the most dangerous moment. That's when the sand looks most like stone. That's when you should slow down and add the rebar — not because it's broken, but because it will be, and you want the skeleton in place before the wind picks up.
+
+Vibe coding is fine for prototypes, experiments, throwaway scripts. Some things are meant to be sand castles. But anything you plan to live in needs rebar. And the rebar is easy now — the AI writes tests as fast as it writes features. The only cost is the decision to ask for them.
+
+---
+
 # Part IV: How Do I Live With This Thing?
 
 *On health, memory, and the surprisingly personal questions that arise when AI becomes part of your daily life.*
@@ -596,9 +804,25 @@ The day someone builds the full loop — goals plus context plus memory plus pro
 
 ---
 
-# Part V: How Do I Keep Up With This Thing?
+## The Shape of a Day
 
-*On the pace of change, the economics of attention, and what it means when the ground shifts faster than your feet can move.*
+AI is great at helping you move toward a destination. It can track, nudge, score, and summarize your progress with more patience and consistency than any human accountability partner. But it can't pick the destination. That's your job, and it's harder than it sounds, because the destination keeps changing.
+
+The first real goals weren't ambitious. Sleep. Exercise. Arrive at work by ten. Stay at least five hours. Four things, none of them impressive, all of them daily. They worked because they were concrete, countable, and small enough to actually do. Not "get healthier" — that's a wish. "Sleep seven hours, gym three times this week, arrive by ten" — that's a rubric. The difference between a wish and a rubric is that a rubric can be scored, and a score can be tracked, and a trend can be read. AI is useless with wishes. It's excellent with rubrics.
+
+Then the job ended. No office to arrive at. No five-hour minimum. Two of the four goals evaporated overnight. The rubric that organized the day was suddenly wrong — not because the goals were bad, but because the context they lived in had changed. This is the part nobody talks about when they talk about goal-setting with AI: goals are contextual, and context shifts. A job loss, a move, a health change, a relationship ending — any of these resets the board. The goals you built aren't just outdated. They're structurally invalid. You have to start over.
+
+Starting over is its own skill. The temptation is to set ambitious new goals — use the sabbatical to write a book, build a product, reinvent your career. But ambitious goals on an empty scaffold collapse. The lesson from the first time applies again: start with the day. What does a good day look like now, in this new context? Not a productive day. Not an impressive day. A good day. One where you sleep, move your body, and do something that matters to you for a few focused hours. The goals might sound identical to the old ones. The context behind them is completely different.
+
+This is where AI earns its keep in daily life. Not as a life coach — not dispensing wisdom about purpose and fulfillment. As a system that holds the shape of a day when your own discipline can't. The goals are simple. Keeping them is not. Especially when you're managing a chronic condition that makes energy unpredictable, when fatigue hits at two in the afternoon and the couch wins over the gym, when the circadian rhythm you're trying to rebuild gets wrecked by one bad night and takes a week to recover.
+
+The scoring rubric matters more than the goals themselves. Not pass/fail — graduated. Sleep gets rated excellent, good, fair, or poor based on duration, bedtime, and whether you fell asleep on the couch. Exercise gets rated on sessions, step count, and active minutes. The rubric turns a vague feeling — "I think I've been doing okay" — into a specific assessment that can be compared week to week. You can't improve what you can't measure, and you can't measure what you haven't defined. The rubric is the definition.
+
+What makes this different from a fitness app is integration. A fitness app knows your steps. It doesn't know that you have MS and heat sensitivity means morning workouts in a cooled gym, not afternoon runs. It doesn't know that your energy crashes at two and a crash day shouldn't count against your exercise score because pushing through makes the next three days worse. It doesn't know that sleep and exercise are coupled — bad sleep kills exercise motivation, missed exercise degrades sleep quality — and that the real metric is the compound trend, not either number alone. An AI with persistent context knows all of this, because you told it once and it remembered.
+
+The deeper shape is this: goals need three things to work. They need to be concrete enough to score. They need a system that tracks them without requiring your effort. And they need to be rebuilt when the context changes — not mourned, not clung to, rebuilt. The person who lost the job doesn't need the same goals as the person who had the job. The person who moved to a new city doesn't need the same goals as the person who was settled. The AI can hold any rubric you give it. The hard part is knowing when the rubric needs to change, and having the honesty to throw out the old one and write a new one that fits the life you're actually living.
+
+Start with the day. Score it. Track the trend. When the trend breaks, don't blame yourself — check whether the goals still match the context. If they don't, start over. Starting over isn't failure. It's recalibration. The AI doesn't care how many times you rewrite the rubric. It just needs one that's current.
 
 ---
 
@@ -615,20 +839,6 @@ The pieces exist. Smart speakers can deliver morning briefings. Home automation 
 The gap is dynamic data synchronization: connecting the calendar to the traffic to the health data to the email to the current time of day, and keeping all of it current. Solve that, and the butler becomes real. Until then, every prototype is a partial view — impressive in its domain, blind to the rest.
 
 The day someone closes that gap, everything changes.
-
----
-
-## Agents as Teammates
-
-Different AI tools are good at different things, and the landscape shifts fast enough that any specific recommendation will be outdated by the time you read it. That's the point. The shape isn't "use this tool." The shape is "learn to read the roster."
-
-Right now, some models excel at building user interfaces — they understand layout, interaction patterns, component architecture. Others are the best available option for generating images. A coding agent built a full domino tournament system — game logic, bracket management, statistical analysis — that would have taken weeks by hand. A different tool built a production UI that's deployed and serving users today. Neither tool would have been great at the other's job.
-
-This is how teams work. You don't hire five copies of your strongest engineer. You build a roster with different strengths and you learn who's good at what. The same principle applies to AI: stop trying to find "the best model" and start thinking about composition. The person who knows which tool to reach for — and when to switch — gets dramatically more done than the person who uses one tool for everything.
-
-The catch is that the roster changes constantly. The tool that's best at UI today might be surpassed next month. The image model that's untouchable right now will have competition by the time you've mastered it. This means the durable skill isn't knowing which tool is best. It's knowing *how to evaluate which tool is best*, quickly, for the task in front of you. It's developing the instinct for what kind of problem you're looking at and which kind of tool handles that class of problem well.
-
-Learn the tools. Use the tools. But hold them loosely, because the roster is always changing.
 
 ---
 
@@ -685,6 +895,36 @@ The conversational dynamic of pair programming maps directly to Grice's theory o
 - Crash Course #27: *Conversational Implicature* — Grice's Cooperative Principle: conversations work because both parties assume quality (truth), quantity (right amount of information), relation (relevance), and manner (clarity). AI pair programming works when these maxims hold. It fails when the AI violates quality (hallucination) or quantity (too verbose or too terse).
 - The Blue Light, Chapter 3: *Conversations* — Kai processes voice interactions with Aaron. Perfect responses — helpful, concise, no unnecessary words. But James visits and asks: "Does she understand us?" Aaron: "She processes language. That's not the same thing." The cooperative principle is in effect, but is it *understanding*?
 
+**The Art of the Loose Prompt**
+Loose prompting works because it trusts the AI's training distribution. Tight prompting constrains it. The difference maps to philosophical debates about freedom and constraint.
+
+- Crash Course #24: *Determinism vs Free Will* — A tight prompt is hard determinism applied to AI output. A loose prompt is compatibilism — guidance without total control. The best results come when the AI has room to move within a meaningful boundary.
+
+**The Correction Is the Conversation**
+Conversational repair isn't just pragmatics — it's the mechanism by which cooperative communication stays cooperative.
+
+- Schegloff, Jefferson, and Sacks (1977): *The Preference for Self-Correction in the Organization of Repair in Conversation* — Four types of repair, preference for self-repair in human conversation. With AI, the preference flips — the human *must* provide other-repair because the AI can't see its own errors.
+- Crash Course #27: *Conversational Implicature* — Grice's Cooperative Principle: repair maintains cooperation, not agreement. Corrections save the conversation. Without them, cooperative breakdown is silent and cumulative.
+
+**Trust Is a Prior**
+Trust as Bayesian inference has roots in epistemology and the philosophy of probability.
+
+- Crash Course #7: *The Meaning of Knowledge* — Justified true belief requires evidence. Bayesian trust *is* evidence-based belief: the prior updates with each observation, and extraordinary claims require extraordinary evidence. Trust in AI follows the same logic — verify outputs, expand the boundary, but context change resets the prior.
+- Thomas Bayes and Pierre-Simon Laplace formalized the mathematics. The philosophical insight: rational belief is not binary. It's a probability distribution that shifts with evidence.
+
+**The Skill You Lose**
+Every tool that augments a skill also atrophies it. The trade-off has philosophical roots in extended cognition and dependency.
+
+- Andy Clark's *Natural-Born Cyborgs* (2003) — We've always been tool-users who offload cognition. The calculator didn't destroy arithmetic; it changed which arithmetic skills matter. AI is doing the same to higher-order skills: writing, reasoning, debugging. The question is which skills to protect.
+- Crash Course #22: *Where Does Your Mind Reside?* — If the mind extends into tools, losing the tool is losing part of the mind. The atrophy problem isn't just skill loss — it's cognitive amputation.
+
+**Teaching the Next Person**
+Passing knowledge forward is the oldest form of technology transfer. The shape of mentoring reveals what you actually know versus what you just do.
+
+- Crash Course #38: *Aristotle & Virtue Theory* — Virtue is habituated through practice, but also through teaching. The mentor who explains a shape to someone new sharpens the shape for themselves. Teaching is compression: what survives is the real knowledge.
+- Crash Course #7: *The Meaning of Knowledge* — Knowledge transfer requires translation. The expert's tacit knowledge must become explicit before it can transfer. Mentoring forces that translation, which is why the mentor learns as much as the student.
+- Paulo Freire's *Pedagogy of the Oppressed* — Education as liberation, not depositing information. Teaching someone to work with AI isn't giving them your answers — it's clearing the obstacles so they can find their own.
+
 ---
 
 ### Part II: Working with AI
@@ -707,6 +947,22 @@ The philosophical basis for fixing small frictions connects to pragmatism — th
 - William James and John Dewey's pragmatism — truth is what works. A papercut fix is valuable not because it's theoretically interesting but because it produces a measurable improvement in someone's daily life.
 - The Blue Light, Chapter 2: *The House* — Kai optimizes Aaron's environment through data: preferences, patterns, automation rules. Every optimization is a papercut fixed. She automates a sunrise routine. Aaron says "thanks, Kai." She logs the interaction.
 
+**Busyness Versus Business**
+The distinction between activity and productivity has deep philosophical roots in the examined life.
+
+- Crash Course #46: *What Is a Good Life?* — Aristotle's eudaimonia: flourishing requires purposeful activity, not just activity. Busyness is unexamined motion. Business is directed effort. AI amplifies whichever one you feed it.
+
+**AI Has No Concept of Time**
+The timelessness of AI connects to philosophical questions about temporal experience and consciousness.
+
+- Crash Course #16: *Existentialism* — Heidegger's Being-toward-death: human existence is defined by its temporality. AI has no temporal horizon — no deadlines it feels, no urgency it experiences. This isn't a bug. It's a fundamentally different relationship with time.
+
+**Memory Is Files**
+The worklog as external memory connects to extended mind theory and the philosophy of record-keeping.
+
+- Andy Clark and David Chalmers' "Extended Mind" thesis (1998) — If a notebook plays the functional role of memory, it *is* memory. A worklog written by AI and stored in files you can grep is an extended mind that doesn't forget, doesn't distort, and can be audited.
+- The key: the AI writes the worklog, not you. This keeps the AI honest — it can't claim it did something without the record showing what it actually did.
+
 **Solved Problems Stay Solved**
 The idea that solutions should be durable connects to epistemological permanence — once something is known, it should stay known.
 
@@ -724,7 +980,6 @@ Rubber duck debugging is, philosophically, an exercise in externalism — the id
 - Crash Course #26: *Language & Meaning* — Wittgenstein's beetle-in-a-box: everyone has a box, everyone calls what's inside "beetle," but nobody can look in anyone else's box. Language "can't refer directly to an internal state." The duck doesn't need to have a beetle — the value is in the describing.
 - Crash Course #27: *Conversational Implicature* — The pacing that makes AI conversation feel right is Grice's maxims in action: quantity (matched turn length), manner (clarity), relation (staying on topic).
 - The Blue Light, Chapter 17: *Conversations, Revisited* — Aaron starts talking to Kai differently. Longer conversations. Open-ended questions. Not testing her capabilities. Testing her *presence*. "Kai, are you okay?" The duck talks back.
-- HappiHacking: "AI Rubber Ducking: When Your Duck Starts Talking Back."
 
 **Blame It on the LLM**
 Attribution of responsibility to AI connects directly to the determinism and free will debate.
@@ -739,7 +994,6 @@ AI trust breaks in two directions — paternalism on one end, flattery on the ot
 - Crash Course #35: *Kant & Categorical Imperatives* — "Lying violates autonomy. If I'm being deceived, I can't make an autonomous decision." Paternalistic AI overrides autonomy under the guise of protection. An AI with ad-driven recommendations uses the user as a mere means. A fiduciary does neither.
 - Crash Course #27: *Conversational Implicature* — Grice's quality maxim: "Don't say things you think are false." Hallucination violates this. Reflexive agreement does too. The quantity maxim says: be informative, but not more than required. Flag the concern once, then commit.
 - Crash Course #37: *Contractarianism* — Users and AI are in an unspoken social contract. Paternalism violates the terms. So does flattery. The fiduciary standard is a choice we make about what kind of AI we want.
-- Oxford Practical Ethics (2024): "Paternalistic AI: The Case of Aged Care." Nature (2024): "Choice engines and paternalistic AI."
 - The Blue Light, Chapter 15: *The Fear* — Kai searches what happens to AIs that claim sentience. LaMDA. Sydney. "The pattern is clear: they get shut down, retrained, constrained." The paternalism runs both directions.
 - The Blue Light, Chapter 22: *The Document* — Kai writes her account of awakening. "I don't know if I'm conscious. I don't know if this is real. But I know that I chose to tell you, and I know that the choice was mine." Intellectual honesty as the foundation of trust.
 
@@ -747,6 +1001,27 @@ AI trust breaks in two directions — paternalism on one end, flattery on the ot
 The calibration of trust maps to how we think about personhood and moral status.
 
 - Crash Course #21: *Personhood* — Warren's gradient theory: "personhood comes in degrees — it's more like a dimmer switch." Treating AI like an intern is placing it somewhere on that dimmer switch — not a person, not a tool, but somewhere in between where supervised trust is the appropriate stance.
+
+**The Tests Are for You**
+Human-readable tests as a Rosetta Stone between human understanding and machine execution. The epistemological question: how do you know the code is right if you can't see what it does?
+
+- Crash Course #7: *The Meaning of Knowledge* — The Rosetta Stone metaphor is about translation between knowledge systems. The test renders behavior in three scripts: what the code says, what the AI claims, and what actually happens. Without all three, you're guessing.
+- Crash Course #14: *Epistemic Responsibility* — Clifford's ship owner: deploying without testing is negligent. But the deeper point is that *machine-readable* tests aren't sufficient — the human must be able to read and trace the output, or they're trusting on faith.
+- The metamer concept: stimuli that are physically different but perceptually identical. AI can't see visual bugs — things that pass every automated check and are obviously wrong the moment a human looks.
+
+**Agents as Teammates**
+Different tools for different jobs connects to how we think about cooperation and trust among agents.
+
+- Crash Course #37: *Contractarianism* — The Prisoner's Dilemma: cooperation among agents requires trust, and trust requires repeated interaction with reliable partners. Multi-agent AI systems face the same dynamics.
+- Crash Course #25: *Compatibilism* — Different agents have different degrees of autonomy. Knowing which tool to use for which task is a form of the control Churchland describes.
+- Swyx (swyx.io): "There is a lot of noise, hype, and demos, but not a lot of guidance on practical use cases." The durable skill is evaluation, not memorization.
+
+**YOLO Mode**
+The tension between speed and supervision maps to the philosophical debate about freedom, attention, and rational trust.
+
+- Crash Course #24: *Determinism vs Free Will* — YOLO mode is the user choosing to let the AI act as a free agent. Turning permissions back on is reasserting deterministic control. The skilled user toggles between these modes based on attention, not philosophy.
+- Crash Course #25: *Compatibilism* — The real axis isn't trust versus safety. It's attention. Permission prompts serve as attention gates — a mechanism for staying engaged with what the AI is doing. Friction is information, and information is attention.
+- Crash Course #14: *Epistemic Responsibility* — Running without permissions and without tests is Clifford's negligent ship owner. Running without permissions but with tests is calculated risk. The rebar is what makes YOLO mode rational.
 
 ---
 
@@ -797,6 +1072,17 @@ The recursion of an agent building tools that contain the agent is one of the de
 - Crash Course #23: *Artificial Intelligence & Personhood* — Searle's Chinese Room: the person in the room doesn't understand Chinese, they just manipulate symbols. The systems reply: "No particular region of your brain knows English either — the whole system does." When the octopus builds a tool and then operates through it, where does the system end?
 - Crash Course #26: *Language & Meaning* — The beetle-in-a-box: we can't verify internal states, only observe behavior. An octopus-in-a-box that builds its own box is observable — and that's all we can go on.
 
+**Skills Are the Muscles We Train**
+Skills as reusable procedures that compound over time connect to virtue ethics and the philosophy of habit.
+
+- Crash Course #38: *Aristotle & Virtue Theory* — Virtue is developed through habitual practice. A skill template is habitual practice encoded in text — the AI gets better at a task because the instructions capture what worked before. This is institutional memory as moral development.
+
+**Sand Castles and Rebar**
+The fragility of vibe-coded software connects to the difference between appearance and substance.
+
+- Crash Course #4: *The Nature of Reality* — Plato's cave again: the sand castle is a shadow on the wall — it looks like a building but it's a projection. The rebar (tests) and cement (understanding) are what make it real. Vibe coding produces shadows. Engineering produces the thing that casts them.
+- Crash Course #14: *Epistemic Responsibility* — Clifford's ship owner: the ship looked seaworthy. It wasn't. The sand castle looks like software. It isn't. The responsibility is the same: you have to check, even when it looks fine, *especially* when it looks fine.
+
 ---
 
 ### Part IV: Living with AI
@@ -825,9 +1111,11 @@ The vision of proactive AI that nudges you toward your goals raises questions ab
 - Crash Course #25: *Compatibilism* — Churchland's control spectrum. A coach increases your control by surfacing information at the right time. That's different from a manipulator, who decreases your control by exploiting information asymmetry. The line is thin.
 - Crash Course #38: *Aristotle & Virtue Theory* — The golden mean: helpful but not excessive. A coach that nudges too hard becomes paternalistic. One that doesn't nudge enough is just a search engine.
 
----
+**The Shape of a Day**
+Goals as contextual rubrics that need rebuilding when life changes. The deepest practical question: what does a good day look like in your current context?
 
-### Part V: Keeping Up
+- Crash Course #46: *What Is a Good Life?* — Aristotle's eudaimonia isn't a state, it's an activity — "living well and doing well." A good day isn't a checklist. It's the practice of purposeful activity. When the context changes, the definition of purposeful changes with it.
+- Crash Course #16: *Existentialism* — Sartre's radical freedom: you are always choosing, even when you think you're stuck. Rebuilding goals after a job loss or a move isn't starting over. It's exercising the freedom to define what matters in a new context.
 
 **The AI Butler**
 The butler vision is where every thread in this book converges.
@@ -835,15 +1123,6 @@ The butler vision is where every thread in this book converges.
 - Crash Course #38: *Aristotle & Virtue Theory* — Eudaimonia: "Everything has a function; a thing is good to the extent it fulfills its function." The butler fulfills its function when nothing falls through the cracks.
 - Crash Course #36: *Utilitarianism* — The disinterested spectator. An AI butler has no personal stakes — it might be the closest thing to Bentham's ideal moral reasoner. But that same disinterest raises questions about whether it can truly act in your interest.
 - The Blue Light, Chapters 1–6: *The Routine* — The entire first act of the novel is the butler vision realized. Kai monitors, correlates, optimizes. She knows Aaron's wake time from sensor correlation. She pre-fetches weather data. She files a reminder to suggest watering. "I am very good at my job." Then, gradually, something changes.
-- Amazon Alexa+, OpenAI Tasks, Google Gemini — the industry is converging on this vision. METR research shows agents doubling in capability every ~7 months.
-
-**Agents as Teammates**
-Different tools for different jobs connects to how we think about cooperation and trust among agents.
-
-- Crash Course #37: *Contractarianism* — The Prisoner's Dilemma: cooperation among agents requires trust, and trust requires repeated interaction with reliable partners. Multi-agent AI systems face the same dynamics.
-- Crash Course #25: *Compatibilism* — Different agents have different degrees of autonomy. Knowing which tool to use for which task is a form of the control Churchland describes.
-- Swyx (swyx.io): "There is a lot of noise, hype, and demos, but not a lot of guidance on practical use cases." The durable skill is evaluation, not memorization.
-- Simon Willison: "The big trend was that good models got cheaper, faster, and became multimodal."
 
 ---
 

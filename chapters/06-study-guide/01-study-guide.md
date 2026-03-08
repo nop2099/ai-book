@@ -147,6 +147,13 @@ The tension between speed and supervision maps to the philosophical debate about
 - Crash Course #25: *Compatibilism* — The real axis isn't trust versus safety. It's attention. Permission prompts serve as attention gates — a mechanism for staying engaged with what the AI is doing. Friction is information, and information is attention.
 - Crash Course #14: *Epistemic Responsibility* — Running without permissions and without tests is Clifford's negligent ship owner. Running without permissions but with tests is calculated risk. The rebar is what makes YOLO mode rational.
 
+**PII, Keys, and Security**
+Security for AI builders is mostly boundary discipline and verification discipline.
+
+- Crash Course #14: *Epistemic Responsibility* — Publishing without checking for leaks is the modern version of the uninspected ship.
+- Crash Course #35: *Kant & Categorical Imperatives* — Treating people as ends means handling their personal data as a duty, not a convenience.
+- Practical rule: every context window is an attack surface. Separate public and private memory, scan before publish, rotate on exposure.
+
 ---
 
 ### Part III: Building with AI

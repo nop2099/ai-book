@@ -2,6 +2,12 @@
 
 *The patterns nobody teaches you about working with AI — by James Wilson*
 
+## Status
+
+**Work in progress.** This book is an actively edited draft.
+
+**Draft version:** `v4` (working label inferred from git history; no formal git tags yet, 14 commits on `main` as of March 8, 2026).
+
 ## Don't Read This Yet
 
 If your attention span is cooked and you just want results, do this:

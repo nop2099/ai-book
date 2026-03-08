@@ -2,6 +2,12 @@
 
 *The patterns nobody teaches you about working with AI — by James Wilson*
 
+## Status
+
+**Work in progress.** This book is an actively edited draft.
+
+**Draft version:** `v4` (working label inferred from git history; no formal git tags yet, 14 commits on `main` as of March 8, 2026).
+
 ## Don't Read This Yet
 
 If your attention span is cooked and you just want results, do this:
@@ -567,6 +573,56 @@ The risk is that you forget which hat you're wearing. Engineer-brain will over-b
 This isn't new. Musicians have been doing it for decades. Before digital audio workstations, making a record required a songwriter, an arranger, a band, a recording engineer, a mix engineer, a mastering engineer, and a producer to hold the vision. The DAW compressed all of those roles into one seat. One person could write, arrange, perform, record, mix, and master — not as well as a team of specialists, but well enough to make a Grammy-winning album in a bedroom. The tradeoff was the same: less specialist depth, more unified context, faster iteration, and a final product that reflected one person's taste all the way through.
 
 AI is the DAW for building software. The roles are all still real. The work is all still real. But the barrier to playing each role dropped from "hire someone" to "switch hats." The biggest shift is realizing that all these roles were always the same work, just viewed from different angles. Building something that works, that people want, that ships on time, that doesn't break. Large organizations split that work across roles because no single person could hold all the context. AI compresses the context enough that one person can. Not perfectly. But well enough to build, ship, and learn from what happens next.
+
+---
+
+## PII, Keys, and Security
+
+The fastest way to lose trust in AI is one accidental paste.
+
+PII means **Personally Identifiable Information**: data that can identify a person directly or indirectly.
+Direct examples: full name, email address, phone number, street address, SSN.
+Indirect examples: employer plus city plus unique medical details, account handles, or combinations of facts that point to one specific person.
+
+When you build with agents, context is power. It's also liability. The same corpus that helps an AI solve your problems can contain your email history, health notes, phone numbers, API keys, auth tokens, and private conversations. If you hand all of that to a model without boundaries, you are one copy-paste away from a leak.
+
+The shape is simple: **every useful context window is also an attack surface**.
+
+This isn't hypothetical. Before checking in changes on this book, I ran a PII and secret scan across the publish surface. Most of what looked risky was intentional disclosure in the narrative. But that pass is the point: you verify before publish, not after regret.
+
+A practical security loop looks like this:
+
+1. Separate raw archives from publishable content.
+2. Give agents least privilege by default (directory, tool, and token scope).
+3. Run two scans before commit: pattern scan and known-entity scan.
+4. Treat every found credential as compromised until rotated.
+5. Redact by policy, not by vibe.
+6. Keep a public memory and a private memory. Never mix them casually.
+
+That third step matters more than it looks.
+
+Pattern scans catch structure: emails, phone numbers, SSNs, key formats.
+Known-entity scans catch context: your name, family names, city, employer, account handles, project codenames.
+
+If you only run regex, you miss identity leaks that don't look like classic PII.
+If you only run keyword scans, you miss secret formats and accidental credentials.
+You need both.
+
+Here is the grounded version from Kaijuu:
+
+- On **January 31, 2026**, memory CRUD and search routes existed and could store arbitrary content. That's normal; storage layers are usually dumb.
+- On **February 1, 2026** (`e89068f`), Subconscious added outbound secret detection, PII redaction, and stream filtering as a central boundary.
+- On **February 3, 2026** (`cac67c6`), memory search added text-query fallback. Great for usability, but it also increases the chance of pulling sensitive records unless filtering is solid.
+- On **February 4, 2026** (`9137253`), tool execution was routed through Subconscious and a `tool_result` bypass was fixed so results stopped slipping through unfiltered.
+- On **February 5, 2026** (`de73420`, `7a987b5`), model-tier permission caps/timeouts were added and handbook dossiers/locations moved to graph-backed data, increasing the need for strict boundaries around personal context.
+
+One more practical lesson from that code: there is a global whitelist helper in `PIIRedactor`, but helper methods do nothing unless runtime actually calls them. Security features you "have" and security features you "execute" are not the same thing.
+
+For keys specifically, the rule is strict: if a key ever lands in a chat log, commit, screenshot, or paste buffer outside your intended boundary, rotate it. Immediately.
+
+For personal data, distinguish intentional from accidental disclosure. "I chose to share this" is not the same thing as "I forgot this was in the context window." That distinction is the whole game.
+
+AI makes it easy to move fast. Security is how you keep speed from becoming fallout.
 
 ---
 
@@ -1232,6 +1288,13 @@ The tension between speed and supervision maps to the philosophical debate about
 - Crash Course #24: *Determinism vs Free Will* — YOLO mode is the user choosing to let the AI act as a free agent. Turning permissions back on is reasserting deterministic control. The skilled user toggles between these modes based on attention, not philosophy.
 - Crash Course #25: *Compatibilism* — The real axis isn't trust versus safety. It's attention. Permission prompts serve as attention gates — a mechanism for staying engaged with what the AI is doing. Friction is information, and information is attention.
 - Crash Course #14: *Epistemic Responsibility* — Running without permissions and without tests is Clifford's negligent ship owner. Running without permissions but with tests is calculated risk. The rebar is what makes YOLO mode rational.
+
+**PII, Keys, and Security**
+Security for AI builders is mostly boundary discipline and verification discipline.
+
+- Crash Course #14: *Epistemic Responsibility* — Publishing without checking for leaks is the modern version of the uninspected ship.
+- Crash Course #35: *Kant & Categorical Imperatives* — Treating people as ends means handling their personal data as a duty, not a convenience.
+- Practical rule: every context window is an attack surface. Separate public and private memory, scan before publish, rotate on exposure.
 
 ---
 

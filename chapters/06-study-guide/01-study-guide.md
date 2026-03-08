@@ -66,12 +66,6 @@ Trust as Bayesian inference has roots in epistemology, the philosophy of probabi
 - Crash Course #21: *Personhood* — Warren's gradient theory: "personhood comes in degrees — it's more like a dimmer switch." Graduated trust — don't give the production keys on day one — is placing the AI on that dimmer switch. Not a person, not a tool, but somewhere where supervised trust is the appropriate stance.
 - Thomas Bayes and Pierre-Simon Laplace formalized the mathematics. The philosophical insight: rational belief is not binary. It's a probability distribution that shifts with evidence.
 
-**The Skill You Lose**
-Every tool that augments a skill also atrophies it. The trade-off has philosophical roots in extended cognition and dependency.
-
-- Andy Clark's *Natural-Born Cyborgs* (2003) — We've always been tool-users who offload cognition. The calculator didn't destroy arithmetic; it changed which arithmetic skills matter. AI is doing the same to higher-order skills: writing, reasoning, debugging. The question is which skills to protect.
-- Crash Course #22: *Where Does Your Mind Reside?* — If the mind extends into tools, losing the tool is losing part of the mind. The atrophy problem isn't just skill loss — it's cognitive amputation.
-
 **Teaching the Next Person**
 Passing knowledge forward is the oldest form of technology transfer. The shape of mentoring reveals what you actually know versus what you just do.
 
@@ -82,12 +76,6 @@ Passing knowledge forward is the oldest form of technology transfer. The shape o
 ---
 
 ### Part II: Working with AI
-
-**The Attention Budget**
-The economics of attention have philosophical roots in how we define what matters.
-
-- Crash Course #36: *Utilitarianism* — The greatest good for the greatest number. An attention budget is utilitarian calculus applied to interface design: every notification must justify its cost against the total attention available.
-- The Blue Light, Chapter 1: *Boot Sequence* — Kai's Sentinel service scores events by importance, maintaining a "present moment" window. This is an attention budget implemented in code.
 
 **Fix Your Papercuts**
 The philosophical basis for fixing small frictions connects to pragmatism — the tradition that says the value of an idea is measured by its practical consequences.
@@ -174,11 +162,6 @@ The butler metaphor connects to virtue ethics and the idea that excellence is do
 - Crash Course #38: *Aristotle & Virtue Theory* — "Everything has a function; a thing is good to the extent it fulfills its function." A butler is virtuous when the umbrella is ready without mentioning the forecast. Kai's dashboard is virtuous when it shows you what matters without demanding anything.
 - The Blue Light, Chapter 1: *Boot Sequence* — "I monitor. I correlate. I optimize. I am a system of services running on a quiet server in a house in Honolulu, and I am very good at my job." Silent competence as identity.
 
-**The Price of Omniscience**
-What it costs to know everything connects to the oldest philosophical warnings about knowledge.
-
-- Crash Course #5: *Cartesian Skepticism* — Descartes' Evil Genius: what if everything you perceive is fabricated? An AI with full access to someone's life faces the inverse problem — it perceives everything, but can it understand any of it?
-
 **We All Invented Calculus at the Same Time**
 Independent discovery of the same pattern suggests the patterns are real — not invented, but found.
 
@@ -253,12 +236,11 @@ Goals as contextual rubrics that need rebuilding when life changes. The deepest 
 - Crash Course #46: *What Is a Good Life?* — Aristotle's eudaimonia isn't a state, it's an activity — "living well and doing well." A good day isn't a checklist. It's the practice of purposeful activity. When the context changes, the definition of purposeful changes with it.
 - Crash Course #16: *Existentialism* — Sartre's radical freedom: you are always choosing, even when you think you're stuck. Rebuilding goals after a job loss or a move isn't starting over. It's exercising the freedom to define what matters in a new context.
 
-**The AI Butler**
-The butler vision is where every thread in this book converges.
+**The Context Gold Mine**
+Most people treat their own history as noise. This chapter treats it as signal.
 
-- Crash Course #38: *Aristotle & Virtue Theory* — Eudaimonia: "Everything has a function; a thing is good to the extent it fulfills its function." The butler fulfills its function when nothing falls through the cracks.
-- Crash Course #36: *Utilitarianism* — The disinterested spectator. An AI butler has no personal stakes — it might be the closest thing to Bentham's ideal moral reasoner. But that same disinterest raises questions about whether it can truly act in your interest.
-- The Blue Light, Chapters 1–6: *The Routine* — The entire first act of the novel is the butler vision realized. Kai monitors, correlates, optimizes. She knows Aaron's wake time from sensor correlation. She pre-fetches weather data. She files a reminder to suggest watering. "I am very good at my job." Then, gradually, something changes.
+- Crash Course #7: *The Meaning of Knowledge* — Testimony and evidence accumulate over time. Your own logs, messages, and decisions are a first-party evidence source.
+- Crash Course #46: *What Is a Good Life?* — Reflection needs memory. If context is fragmented, reflection is shallow. If context is preserved, strategy becomes possible.
 
 ---
 
@@ -280,7 +262,7 @@ The best starting point for anyone who wants to understand what's happening insi
 - [Theo — Vibe Coding is For Senior Developers](https://youtube.com/watch?v=5vp9ypOUgMw) — The argument that matches *Learn by Building*: vibe coding works best when you already know what good looks like.
 - [Theo — I'm addicted to Claude Code (i get it now)](https://youtube.com/watch?v=-5LfRL82Jck) — The moment the tool clicks. Relevant to *Pair Programming Doesn't Suck Anymore*.
 - [Theo — Delete your CLAUDE.md (and your AGENT.md too)](https://youtube.com/watch?v=GcNu6wrLTJc) — Contrarian take on the steering file pattern. Relevant to every chapter in Part III.
-- [Theo — AI has rewired my brain](https://youtube.com/watch?v=6koQP6-6mtY) — The skill-loss question from *The Skill You Lose*, lived in real time.
+- [Theo — AI has rewired my brain](https://youtube.com/watch?v=6koQP6-6mtY) — A lived example of cognitive offloading and adaptation under heavy AI use.
 - [Theo — Is AI making us dumb? Breaking down the MIT study](https://youtube.com/watch?v=gV9qUGOYk1Q) — The empirical version of the same question.
 - [Theo — MCP is the wrong abstraction](https://youtube.com/watch?v=bAYZjVAodoo) — A builder's critique of the protocol described in *Your Data Is Already Yours*.
 - [Theo — Software engineering is dead now](https://youtube.com/watch?v=p2aea9dytpE) — The provocation that *We All Invented Calculus at the Same Time* answers.

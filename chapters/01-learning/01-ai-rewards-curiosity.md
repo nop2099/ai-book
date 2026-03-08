@@ -1,14 +1,16 @@
 ## AI Rewards Curiosity
 
-The people getting the most out of AI right now aren't the most technical. They're the most curious.
+The people getting the most out of AI right now aren't always the most technical. They're the most curious.
 
-A programmer with ten years of experience sits down with a coding agent and writes a tightly scoped prompt. The agent returns exactly what was asked for. Efficient. Predictable. Done. Meanwhile, someone with no programming background asks a weird follow-up question — "but what if the menu changed depending on the weather?" — and stumbles into a design pattern that the experienced developer would never have explored.
+I can see this pattern in my own project history. In one stretch I was bouncing between VTuber pipelines, Bayesian prediction systems, domino tournament logic, and training game models for domino play. That looks unfocused from the outside. It wasn't. It was curiosity doing search.
 
-This plays out over and over. The engineer with the perfectly structured prompt gets a perfectly predictable answer. The person who pushes into an unexpected corner, who treats the conversation like exploration rather than a transaction — they're the ones who find something genuinely surprising. There's almost an inverse relationship between how "optimized" your prompt is and how interesting your results are.
+One thread started with "could I run two VTuber personas with different voices and control them cleanly?" Another started with "can we represent every double-six domino compactly and validate legal board states?" Another was "if I only have 12GB, what training setup is realistic?" None of these questions looked like a master plan. But each one forced me to learn a new piece of the stack.
 
-The reason is structural. AI doesn't reward expertise the way traditional tools do. A table saw rewards skill — a novice makes bad cuts. But a conversational AI rewards *engagement*. The more you ask, the more you diverge, the more you follow the thread that feels interesting rather than the one that feels productive, the more the system has to work with. Curiosity gives AI room to operate. Tight control constrains it.
+That's the shape: curiosity generates high-quality constraints. You don't ask for "an AI app." You ask for a weird, specific thing you actually care about. The weirdness is useful because it forces concrete tradeoffs, and concrete tradeoffs are where learning happens.
 
-This doesn't mean expertise is irrelevant. Knowing what questions to ask matters. But the barrier to entry has moved. The limiting factor is no longer "do you know enough to use this tool?" It's "are you willing to keep pulling the thread?" The curious beginner and the curious expert both get further than the incurious professional.
+This is why heavily optimized prompting can plateau. A perfect prompt often gets you a predictable answer. Curiosity gets you a better question, and better questions pull you into architecture, data, UX, and implementation details you didn't know to ask for.
+
+Expertise still matters. It helps you judge what's real and what's noise. But with AI, expertise is no longer the gate. Engagement is. The person who keeps pulling the thread usually learns faster than the person who stops at the first acceptable answer.
 
 Curiosity is the real prompt engineering.
 

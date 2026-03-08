@@ -122,6 +122,28 @@ The irony: pair programming finally works now that neither person is programming
 
 ---
 
+## The Art of the Loose Prompt
+
+Most guides to working with AI say the same thing: be specific. Define your output format. List your constraints. The more precise your instructions, the better the result. This is reasonable advice. It is also, past a certain point, wrong.
+
+There is a way of talking to AI that looks sloppy from the outside but works remarkably well in practice. It sounds like this: "send a picture to my samsung qd90 or something tv, 2024 vintage, connected as a home assistant dlna something." Three soft markers in one sentence. The model number is close but maybe off by a digit. The year is approximate. The protocol name is half-remembered. None of this is vagueness. It's calibrated confidence. "Qd90 or something" means: I'm pretty sure it's qd90, I might be wrong by a letter, here's my best guess, you close the gap. It's giving the AI a search radius rather than either a pinpoint coordinate or an open field.
+
+This is more useful than either extreme. If you'd said "send a JPEG via UPnP to the Samsung QN85QN90DAFXZA" and that model number was wrong, the AI would dutifully march in the wrong direction. If you'd said "send a picture to my TV," that's too little to work with. But "qd90 or something" gives the AI exactly what it needs: a neighborhood to search, a confidence level to calibrate against, and implicit permission to correct you if you're off. The "or something" isn't vagueness. It's honesty about what you know and what you don't.
+
+The linguist Paul Grice described how human conversation works through what he called the Cooperative Principle. We assume our conversational partner is being helpful, truthful, relevant, and appropriately informative. When someone says less than they could — or hedges what they say — the listener infers meaning from the hedge itself. "Or something" signals: I'm in the neighborhood, not at the address. I'm close and might be exact, but I'm uncertain. That's a remarkably efficient way to communicate — two words that encode both a best guess and a confidence interval.
+
+AI responds to this signal better than most people expect. A prompt like "build a graphic novel pipeline, more or less — take a corpus of text, choose a storytelling style, we'll start with harmon-style and world history style, build a script at the desired length, like 5, 15, 30 minutes, use nano banana 2 for the images, what's that nvidia voice thing nemotron or something?" — that's a mess by prompt engineering standards. Half the tool names are approximate. The time ranges are hand-wavy. But every hedged phrase is doing the same work: here's roughly what I mean, here's how confident I am, you fill in the rest. The AI gets a direction and a set of confidence levels. That's more information, not less, than a crisp specification that might be precisely wrong.
+
+This is a learned skill. People who work with AI frequently develop it naturally. They start by writing careful prompts, get comfortable with the tools, and gradually shift toward indicating confidence rather than dictating specifics. They stop pretending to know things they don't — exact model numbers, precise API names, specific library versions — and start being honest about where their knowledge is solid and where it's approximate. The prompts get shorter and better, not because the person is being lazy, but because they've learned to say "I'm close, you finish it" instead of either guessing wrong or looking everything up first.
+
+There are actually two things happening under the same "or something," and they have different failure modes. The first is calibrated confidence: "qd90 or something" means I'm close and might be exact, but I'm not sure — you verify. The second is deliberate delegation: "whatever style works" means I don't have a preference, you choose. Both are useful. Both look the same from the outside. But they fail differently. Calibrated confidence fails when the AI can't find your neighborhood and gives you a confident wrong answer instead of saying it's not sure. Delegation fails when the AI fills a gap you didn't realize you'd left — making a choice about something you actually cared about but forgot to specify.
+
+The fix for both is the same: know which one you're doing. When you're calibrating confidence, you're saying "check my work." When you're delegating, you're saying "I trust your judgment." Both are more honest than pretending to know things you don't or specifying things you don't care about. "Build me a web app" gives the AI nothing to calibrate against and nothing to delegate responsibly. "Build me a web app for tracking inventory, keep it simple, I'll host it myself" is tight on intent and loose on implementation — the right combination of both.
+
+Andrej Karpathy named the extreme version of this "vibe coding" — giving the AI a direction and accepting what comes back without reading every line. That's the far end of the spectrum. The useful middle ground is what happens in daily practice: you learn which details you actually know and which you're guessing at, and you tell the AI the difference. "Or something" isn't a verbal tic. It's a calibration marker. It says: I'm close, maybe exact, but uncertain — and that uncertainty is yours to resolve, not mine to fake.
+
+---
+
 # Part II: How Do I Work With This Thing?
 
 *On trust calibration, attention management, and the daily practice of collaborating with a system that's changing faster than your habits.*
@@ -191,6 +213,62 @@ This isn't just about scripts. It's about the general principle that small frict
 The deeper lesson: most people have trained themselves to tolerate papercuts because the cost of fixing them was historically too high. They don't even *notice* the friction anymore. It's background noise. But background noise is still noise, and it still costs attention — the non-renewable resource. Every time you context-switch to do something manually that could be automated, you lose a little bit of the flow state you were in.
 
 The new habit to build: when you feel friction, stop and fix it. Right then. Not later. Not "when I have time." Now, while the annoyance is fresh and the fix is cheap. Because the chart's math hasn't changed — what changed is the cost column. And when fixing things is nearly free, you should fix everything.
+
+---
+
+## Busyness Versus Business
+
+A researcher at a state university surveyed small and medium businesses about AI. The findings you'd expect were there — adoption is uneven, ROI is hard to measure, most owners have tried something. But the finding that mattered was the one nobody predicted: business owners didn't describe AI as technology. They described it as a presence. Something in the room they hadn't invited, couldn't ignore, and didn't know how to talk to.
+
+They'd all tried things. Downloaded a chatbot, experimented with image generation, let an employee play with it for a week. Whether any of it stuck had almost nothing to do with whether it worked. It had to do with whether anyone had time to notice that it worked. These aren't people who resist technology. They're people who are running a business at full capacity and AI arrived as one more thing on a list that was already too long.
+
+One owner in the audience made it concrete. He manufactured pool covers. He'd thought about it from every angle. His fabricators could probably use AI for design work, but they were already fast. His customer service person was good — he didn't want to replace her. His marketing person had tried the tools and couldn't make them stick. And he handled the buying and planning himself, but he was buried in the day-to-day. When the researcher offered to send grad students to help, the owner declined. Too busy to accept free help. Not because he didn't want it, but because supervising the help was one more thing.
+
+This is the trap: *busyness* crowds out *business*. The owner wasn't lacking information about AI. He was lacking the three hours of quiet it would take to sit down, look at his operation from above, and ask: what's the one thing that eats my week? Not the twelve things on fire. The one fire that, if you put it out, changes the shape of every day after.
+
+The researcher's advice was simple: find the problem that keeps you up at night. Not the problem you *should* care about. Not the one that's trending on LinkedIn. The one that's actually costing you sleep. Then point AI at that and nothing else.
+
+A lawyer illustrated the same pattern from the other direction. A friend built him an entire AI-powered office suite — document management, client intake, scheduling, the works. The lawyer used one feature: better brief drafting. That's it. He knew exactly what kept him up at night. Briefs were the bottleneck. Everything else was a nice-to-have that would have cost him time to learn, and time was the thing he didn't have.
+
+That's not a failure of adoption. That's a success of diagnosis. The lawyer found his one thing and ignored the rest. The pool cover owner hadn't found his yet — not because it didn't exist, but because he was too deep inside the busyness to see the business.
+
+Fix Your Papercuts teaches you to look down at the friction under your feet. Small, visible, fixable now. This is the opposite move. This is looking up. Stepping far enough back from the daily grind to see which of the twelve fires is actually the one that matters. The answer is almost never "all of them." It's almost always one, and it's usually the one you've stopped noticing because you've been working around it for so long it feels like the shape of the job.
+
+AI can't find that problem for you. No tool can. But once you find it — once you name the thing that keeps you up — AI is spectacularly good at helping you fix it. The hard part was never the technology. The hard part was getting enough altitude to see clearly.
+
+---
+
+## AI Has No Concept of Time
+
+Ask an AI to plan a project and it will give you a Gantt chart. Week 1-2: voice cloning. Week 2-3: podcast pipeline. Week 3-4: graphic novel panels. Week 4-6: animation and compositing. Six phases, neatly sequenced, each with a tidy time box. It looks like a plan. It is not a plan. It is a guess made by something that has never experienced a Tuesday.
+
+AI has no concept of time because it has never waited for anything. It's never had a dependency ship late. It's never lost an afternoon to a dentist appointment and then couldn't get back into the work. It's never hit Wednesday and realized that the thing it estimated at two days is actually two hours, or two months, depending on which part you're talking about. It schedules like someone who has never lived a week. The six-week plan? You sit down on a Saturday night and finish all four phases before bed. Or it estimates a "quick script" at thirty minutes and you're still debugging environment issues three days later. The error goes both directions because the underlying problem is the same: it has no felt sense of how long things take in a life that includes interruptions, energy levels, context switches, and the specific gravity of a Friday afternoon.
+
+It also can't read a room in time. Try teaching an AI assistant to give you bedtime nudges. You can tell it your bedtime is 11pm. You can ask it to mention the time remaining every half hour. It will cheerfully tell you it's 7:24pm and you have three hours and thirty-six minutes left. It'll even add a clock emoji. But it has no idea what 7:24pm *feels like* — whether you're winding down or ramping up, whether you've been coding for six hours or just sat down, whether this particular Tuesday has the kind of momentum that carries you past midnight without noticing. The nudge needs to read the room, not the clock. And reading the room requires a sense of time that AI simply doesn't have.
+
+What makes this maddening is how many attempts it takes to communicate the problem. You ask for bedtime awareness. It says sure. Then it forgets. You ask again, differently. It apologizes and adds it to memory. Then it treats the nudge like a feature — a formatted countdown with emoji, delivered at mechanical intervals — instead of understanding that you asked because you know yourself well enough to know you'll blow past 11pm if nobody taps you on the shoulder. You finally say "I think I needed to be clearer about my needs" and it responds with enthusiasm and promises, and you realize the gap isn't in the instructions. It's in the understanding. It can execute the rule. It can't feel why the rule exists.
+
+This is fixable. It's shocking that it's not fixed more. The tools are there — usage patterns, response latency, session length, time-of-day modeling. An AI that tracked how long things actually took versus how long it estimated they'd take could calibrate itself in weeks. An AI that noticed you were still active at 1am could escalate its nudge from suggestion to insistence. None of this is technically hard. It just hasn't been prioritized, because the people building AI tools are optimizing for capability, not for the texture of a human day.
+
+Until it gets fixed, the workaround is simple: never trust an AI's time estimates. Use its plans for sequence — what depends on what, what comes first — but throw away the time boxes. Replace them with your own sense of how long things take in your actual life, with your actual energy, on your actual Tuesdays. The AI is excellent at knowing what to do. It is terrible at knowing how long the doing takes. That's your job, and it will be for a while.
+
+---
+
+## Memory Is Files
+
+AI has a memory problem. Every conversation starts from zero. Context windows fill up and get compacted, losing detail. Switch to a different model or a different tool and your history doesn't follow. The industry is building elaborate solutions — vector databases, knowledge graphs, retrieval-augmented generation, memory layers that compress and index and embed. These are interesting engineering. They are also, for most practical purposes, overkill. The simplest solution to AI's memory problem is a file.
+
+A worklog is a plain text file — markdown, usually — where you write down what you did, what you found, and what you concluded. Not a transcript of the conversation. Not an AI-generated summary. A human-curated record of action and result. When you're investigating something across multiple sessions — digging through logs, testing hypotheses, building evidence toward a conclusion — the worklog is the thing that survives between sessions. You open a new conversation, paste the worklog or point the AI at it, and you're back to full speed. No re-explaining. No losing the thread. No hoping the compacted summary preserved the thing that mattered.
+
+This works because of what a worklog filters. A conversation with AI is full of dead ends, misunderstandings, corrections, tangents, and restatements. The worklog strips all of that away and keeps the signal: this is what we tried, this is what we found, this is what it means. It's a compression algorithm, but the human is doing the compressing, which means the human decides what matters. That's the difference between a worklog and an AI-generated summary. The summary preserves what the model thinks was important. The worklog preserves what you know was important.
+
+The worklog also solves the multi-agent problem. If you're using one tool for code, another for research, and a third for writing, none of them share context with each other. But they can all read a file. Update the worklog in one session, open it in the next, and the new agent inherits the full state of the project regardless of which model or tool is running it. The file becomes the shared memory layer — not because it's architecturally sophisticated, but because every AI tool that exists can read a markdown file.
+
+Over time, the worklog becomes more than a memory aid. It becomes a searchable record of how a project unfolded. You can grep it. You can skim it for patterns. You can hand it to someone else — human or AI — and they can understand not just where the project stands but how it got there. This is something conversation histories and vector embeddings can't do, because they preserve the raw material without the editorial judgment. The worklog is already edited. It's already a narrative of what mattered.
+
+There is a specific discipline to writing a useful worklog. Date your entries. Record what you did, not what you planned to do. Note dead ends explicitly — they're valuable because they prevent the next session from retreading the same ground. Keep it concise but specific: "Tested hypothesis X against dataset Y, result was Z, which means W" is a useful entry. "Worked on the project" is not. And update it in real time, during the work, not after — because the thing you'll forget to write down at the end of the session is exactly the thing you'll need to remember next time.
+
+The people building memory systems for AI are trying to solve this problem with infrastructure. Embedding databases, context repositories, hierarchical summarization. Some of this work is genuinely important and will matter at scale. But for an individual working with AI on real projects across days and weeks, the answer is already here. It's a file. It's been a file this whole time. Memory is files.
 
 ---
 

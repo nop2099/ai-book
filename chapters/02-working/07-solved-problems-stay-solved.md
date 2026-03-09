@@ -8,7 +8,9 @@ If someone solved a problem — face tracking, PDF parsing, voice synthesis, dat
 
 This changes what you should spend your time on. Every hour you spend rebuilding something that already exists is an hour you didn't spend on the thing that *doesn't* exist — the bespoke work. The novel combination. The part that's actually yours. The value isn't in the plumbing. It's in what you build on top of the plumbing.
 
-Someone needed a virtual avatar for an AI agent. The technology exists — VTuber rigs, face-tracking libraries, ready-made character models. The old instinct says: learn 3D rendering, build a face system, understand blend shapes. The new instinct says: import the VTuber library. It works. Now spend your time on what the face *says*, not how the mouth moves.
+I learned this the hard way with a VTuber model. The project had gone sideways — transparency wasn't rendering right, and what we'd built was basically wiggling a JPG. We kept trying to fix it with more code, more examples, more patches on a broken foundation. Each fix made it worse. My solution, after too many wasted hours: stop fixing. Download a working VTuber model, get it running, and then make it look like ours bit by bit. A file in my folder and a vision in my heart. Start with something that works and steer it where you need it to go.
+
+That's the shape in practice: the solved problem is the foundation. Your creativity goes on top. The old instinct says learn 3D rendering, build a face system, understand blend shapes. The new instinct says import the working model. It already handles transparency. Now spend your time on what the face *says*, not how the mouth moves.
 
 This scales down, too. Need a color picker? Import it. Need date parsing? Import it. Need Markdown rendering? Import it. The question isn't "can I build this?" The question is "has someone already built this, and is my time better spent elsewhere?" The answer is almost always yes and yes.
 

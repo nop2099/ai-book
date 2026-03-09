@@ -15,6 +15,8 @@ Delegation means: I don't care about this choice, you choose.
 
 If you mix those up, errors get expensive. So the skill is not "be loose." The skill is to mark what you know, what you suspect, and what you're intentionally handing off.
 
+This generalizes beyond technical work. When my cousin Alex described what he wanted a website to do, he didn't use developer jargon. He said what he meant in plain language with rough edges. The AI filled the gaps because Alex's intent was clear even when his terminology wasn't. His loose prompts worked for the same reason mine did: strong signal on what matters, honest uncertainty on the rest.
+
 Loose prompts are not lazy prompts. They're compressed prompts with explicit uncertainty.
 
 ---

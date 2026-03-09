@@ -1,0 +1,1042 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shapes of Intelligence — Color Map</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Inter', -apple-system, sans-serif;
+    background: #0a0a0f;
+    color: #e0e0e8;
+    padding: 40px 20px;
+    line-height: 1.6;
+  }
+
+  .container { max-width: 1100px; margin: 0 auto; }
+
+  h1 {
+    font-size: 2.4em;
+    font-weight: 300;
+    letter-spacing: -0.02em;
+    margin-bottom: 8px;
+    color: #fff;
+  }
+
+  .subtitle {
+    font-size: 1.1em;
+    color: #888;
+    margin-bottom: 48px;
+    font-weight: 300;
+  }
+
+  /* Color legend */
+  .legend {
+    display: flex;
+    gap: 32px;
+    margin-bottom: 48px;
+    flex-wrap: wrap;
+  }
+
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .legend-dot {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .legend-dot.red { background: #e84545; }
+  .legend-dot.blue { background: #4a9eff; }
+  .legend-dot.purple { background: #b366ff; }
+
+  .legend-label {
+    font-size: 0.95em;
+    color: #aaa;
+  }
+
+  .legend-label strong {
+    color: #ddd;
+    font-weight: 600;
+  }
+
+  /* Section headers */
+  .section-header {
+    font-size: 0.85em;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #666;
+    margin-top: 48px;
+    margin-bottom: 16px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #1a1a2a;
+  }
+
+  /* Cards */
+  .card {
+    display: grid;
+    grid-template-columns: 48px 1fr;
+    gap: 0;
+    padding: 16px 0;
+    border-bottom: 1px solid #13131f;
+    transition: background 0.2s;
+  }
+
+  .card:hover { background: #0f0f1a; margin: 0 -12px; padding: 16px 12px; border-radius: 8px; }
+
+  .color-bar {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    padding-top: 4px;
+  }
+
+  .dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    opacity: 0.9;
+  }
+
+  .dot.red { background: #e84545; }
+  .dot.blue { background: #4a9eff; }
+  .dot.purple { background: #b366ff; }
+  .dot.dim { opacity: 0.3; }
+
+  .card-content { }
+
+  .card-title {
+    font-size: 1.05em;
+    font-weight: 600;
+    color: #fff;
+    margin-bottom: 4px;
+  }
+
+  .card-hit {
+    font-size: 0.92em;
+    color: #999;
+    line-height: 1.5;
+  }
+
+  .card-hit em {
+    font-style: normal;
+    color: #ccc;
+    font-weight: 500;
+  }
+
+  /* Summary section */
+  .summary-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 24px;
+    margin-top: 48px;
+    margin-bottom: 64px;
+  }
+
+  @media (max-width: 768px) {
+    .summary-grid { grid-template-columns: 1fr; }
+  }
+
+  .summary-card {
+    padding: 28px 24px;
+    border-radius: 12px;
+    border: 1px solid #1a1a2a;
+  }
+
+  .summary-card.red-card {
+    background: linear-gradient(135deg, #1a0808 0%, #0f0a0f 100%);
+    border-color: #e8454520;
+  }
+
+  .summary-card.blue-card {
+    background: linear-gradient(135deg, #080f1a 0%, #0a0a0f 100%);
+    border-color: #4a9eff20;
+  }
+
+  .summary-card.purple-card {
+    background: linear-gradient(135deg, #0f081a 0%, #0a0a0f 100%);
+    border-color: #b366ff20;
+  }
+
+  .summary-card h3 {
+    font-size: 1.3em;
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+
+  .summary-card.red-card h3 { color: #e84545; }
+  .summary-card.blue-card h3 { color: #4a9eff; }
+  .summary-card.purple-card h3 { color: #b366ff; }
+
+  .summary-card .tagline {
+    font-size: 0.85em;
+    color: #666;
+    margin-bottom: 16px;
+    font-style: italic;
+  }
+
+  .summary-card .behaviors {
+    list-style: none;
+    padding: 0;
+  }
+
+  .summary-card .behaviors li {
+    font-size: 0.9em;
+    color: #bbb;
+    padding: 6px 0;
+    border-bottom: 1px solid #ffffff08;
+    line-height: 1.4;
+  }
+
+  .summary-card .behaviors li:last-child { border-bottom: none; }
+
+  .summary-card .behaviors li strong {
+    color: #ddd;
+    font-weight: 600;
+  }
+
+  /* Heatmap */
+  .heatmap-section {
+    margin-top: 64px;
+    margin-bottom: 48px;
+  }
+
+  .heatmap-section h2 {
+    font-size: 1.6em;
+    font-weight: 300;
+    color: #fff;
+    margin-bottom: 8px;
+  }
+
+  .heatmap-section .note {
+    color: #666;
+    font-size: 0.9em;
+    margin-bottom: 24px;
+  }
+
+  .heatmap-row {
+    display: grid;
+    grid-template-columns: 260px 60px 60px 60px;
+    gap: 4px;
+    align-items: center;
+    margin-bottom: 2px;
+  }
+
+  .heatmap-label {
+    font-size: 0.82em;
+    color: #888;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+
+  .heatmap-cell {
+    height: 28px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.7em;
+    font-weight: 600;
+    color: #ffffff60;
+  }
+
+  .hr-red-3 { background: #e8454590; }
+  .hr-red-2 { background: #e8454550; }
+  .hr-red-1 { background: #e8454520; }
+  .hr-red-0 { background: #e8454508; }
+
+  .hr-blue-3 { background: #4a9eff90; }
+  .hr-blue-2 { background: #4a9eff50; }
+  .hr-blue-1 { background: #4a9eff20; }
+  .hr-blue-0 { background: #4a9eff08; }
+
+  .hr-purple-3 { background: #b366ff90; }
+  .hr-purple-2 { background: #b366ff50; }
+  .hr-purple-1 { background: #b366ff20; }
+  .hr-purple-0 { background: #b366ff08; }
+
+  .heatmap-header {
+    display: grid;
+    grid-template-columns: 260px 60px 60px 60px;
+    gap: 4px;
+    margin-bottom: 8px;
+  }
+
+  .heatmap-header span {
+    font-size: 0.75em;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    text-align: center;
+  }
+
+  .heatmap-header .h-red { color: #e84545; }
+  .heatmap-header .h-blue { color: #4a9eff; }
+  .heatmap-header .h-purple { color: #b366ff; }
+
+  .part-divider {
+    grid-column: 1 / -1;
+    font-size: 0.75em;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #444;
+    padding: 12px 0 4px 0;
+  }
+
+  footer {
+    margin-top: 80px;
+    padding-top: 24px;
+    border-top: 1px solid #1a1a2a;
+    color: #444;
+    font-size: 0.82em;
+    text-align: center;
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+<h1>Shapes of Intelligence</h1>
+<p class="subtitle">Color Map — Three threads running through every chapter</p>
+
+<div class="legend">
+  <div class="legend-item">
+    <div class="legend-dot red"></div>
+    <span class="legend-label"><strong>Red — Making</strong> &nbsp;Build it. Ship it. Hands dirty.</span>
+  </div>
+  <div class="legend-item">
+    <div class="legend-dot blue"></div>
+    <span class="legend-label"><strong>Blue — Seeing</strong> &nbsp;The insight. The pattern. The reframe.</span>
+  </div>
+  <div class="legend-item">
+    <div class="legend-dot purple"></div>
+    <span class="legend-label"><strong>Purple — Remembering</strong> &nbsp;Persistence. Context. What carries forward.</span>
+  </div>
+</div>
+
+<!-- ============ THREE SUMMARY CARDS ============ -->
+
+<div class="summary-grid">
+
+  <div class="summary-card red-card">
+    <h3>Making</h3>
+    <div class="tagline">A file in my folder and a vision in my heart</div>
+    <ul class="behaviors">
+      <li><strong>Follow the curiosity.</strong> Weird projects teach more than study.</li>
+      <li><strong>Start from something that works.</strong> Import the solved problem. Build on top.</li>
+      <li><strong>Fix the papercut now.</strong> The cost of fixing just dropped to zero.</li>
+      <li><strong>Wear every hat.</strong> You're PM, engineer, designer, QA. The AI keeps up while you switch.</li>
+      <li><strong>Conduct, don't play.</strong> Hand hats to agents. Listen for wrong notes.</li>
+      <li><strong>Keep humans on judgment, AI on mechanics.</strong> Pair by thinking together, not performing.</li>
+      <li><strong>Tests are how the building gets bigger.</strong> Write them before the refactor.</li>
+    </ul>
+  </div>
+
+  <div class="summary-card blue-card">
+    <h3>Seeing</h3>
+    <div class="tagline">The conductor knows when the oboe comes in wrong</div>
+    <ul class="behaviors">
+      <li><strong>The correction IS the prompt.</strong> Turn 2–5 is where quality happens.</li>
+      <li><strong>Mark what you know vs. what you suspect.</strong> Loose prompts are compressed, not lazy.</li>
+      <li><strong>Trust is a posterior, not a feeling.</strong> Update it. Scope it. Reset it when context changes.</li>
+      <li><strong>Find the one fire.</strong> Not twelve. The one that changes the shape of every day after.</li>
+      <li><strong>Make the job smaller.</strong> Quality drops? Decompose first, blame the model second.</li>
+      <li><strong>Teaching is a mirror.</strong> Explain your instincts. They become methods.</li>
+      <li><strong>The test is a Rosetta Stone.</strong> Same behavior, three scripts. Read the one you can read.</li>
+    </ul>
+  </div>
+
+  <div class="summary-card purple-card">
+    <h3>Remembering</h3>
+    <div class="tagline">You name the things that remember you</div>
+    <ul class="behaviors">
+      <li><strong>Memory is files.</strong> A worklog beats a vector database. AI writes it, you verify it.</li>
+      <li><strong>Don't ask me to track it.</strong> Sensors to events, events to patterns, patterns to context.</li>
+      <li><strong>The folder is the interface.</strong> AI reads the room before it reads your prompt.</li>
+      <li><strong>Inject "now" explicitly.</strong> Timestamps, clock checks, short planning loops.</li>
+      <li><strong>Your data is already yours.</strong> Export it. Drop it in a folder. Let AI find what you forgot.</li>
+      <li><strong>Goals need rebuilding when context changes.</strong> That's recalibration, not failure.</li>
+      <li><strong>Close the gap.</strong> Every steering file, event stream, and memory loop narrows the distance.</li>
+    </ul>
+  </div>
+
+</div>
+
+<!-- ============ HEATMAP ============ -->
+
+<div class="heatmap-section">
+<h2>Chapter Heatmap</h2>
+<p class="note">Intensity = how central each color is to the chapter. 3 = dominant thread, 2 = strong presence, 1 = touches it, 0 = absent.</p>
+
+<div class="heatmap-header">
+  <span></span>
+  <span class="h-red">Make</span>
+  <span class="h-blue">See</span>
+  <span class="h-purple">Remember</span>
+</div>
+
+<!-- Part 1: Learning -->
+<div class="heatmap-row"><div class="part-divider">Part 1 — Learning</div></div>
+
+<div class="heatmap-row">
+  <div class="heatmap-label">AI Rewards Curiosity</div>
+  <div class="heatmap-cell hr-red-3">3</div>
+  <div class="heatmap-cell hr-blue-2">2</div>
+  <div class="heatmap-cell hr-purple-0"></div>
+</div>
+<div class="heatmap-row">
+  <div class="heatmap-label">The Song That Taught Me Physics</div>
+  <div class="heatmap-cell hr-red-3">3</div>
+  <div class="heatmap-cell hr-blue-3">3</div>
+  <div class="heatmap-cell hr-purple-0"></div>
+</div>
+<div class="heatmap-row">
+  <div class="heatmap-label">The Mentor's Mirror</div>
+  <div class="heatmap-cell hr-red-1">1</div>
+  <div class="heatmap-cell hr-blue-3">3</div>
+  <div class="heatmap-cell hr-purple-0"></div>
+</div>
+<div class="heatmap-row">
+  <div class="heatmap-label">Pair Programming Doesn't Suck Anymore</div>
+  <div class="heatmap-cell hr-red-3">3</div>
+  <div class="heatmap-cell hr-blue-1">1</div>
+  <div class="heatmap-cell hr-purple-0"></div>
+</div>
+<div class="heatmap-row">
+  <div class="heatmap-label">The Art of the Loose Prompt</div>
+  <div class="heatmap-cell hr-red-1">1</div>
+  <div class="heatmap-cell hr-blue-3">3</div>
+  <div class="heatmap-cell hr-purple-0"></div>
+</div>
+<div class="heatmap-row">
+  <div class="heatmap-label">The Correction Is the Conversation</div>
+  <div class="heatmap-cell hr-red-2">2</div>
+  <div class="heatmap-cell hr-blue-3">3</div>
+  <div class="heatmap-cell hr-purple-0"></div>
+</div>
+<div class="heatmap-row">
+  <div class="heatmap-label">Trust Is a Prior</div>
+  <div class="heatmap-cell hr-red-0"></div>
+  <div class="heatmap-cell hr-blue-3">3</div>
+  <div class="heatmap-cell hr-purple-2">2</div>
+</div>
+<div class="heatmap-row">
+  <div class="heatmap-label">The Kitchen</div>
+  <div class="heatmap-cell hr-red-3">3</div>
+  <div class="heatmap-cell hr-blue-2">2</div>
+  <div class="heatmap-cell hr-purple-1">1</div>
+</div>
+<div class="heatmap-row">
+  <div class="heatmap-label">Teaching the Next Person</div>
+  <div class="heatmap-cell hr-red-1">1</div>
+  <div class="heatmap-cell hr-blue-3">3</div>
+  <div class="heatmap-cell hr-purple-0"></div>
+</div>
+<div class="heatmap-row">
+  <div class="heatmap-label">The Body</div>
+  <div class="heatmap-cell hr-red-1">1</div>
+  <div class="heatmap-cell hr-blue-2">2</div>
+  <div class="heatmap-cell hr-purple-3">3</div>
+</div>
+
+<!-- Part 2: Working -->
+<div class="heatmap-row"><div class="part-divider">Part 2 — Working</div></div>
+
+<div class="heatmap-row">
+  <div class="heatmap-label">Fix Your Papercuts</div>
+  <div class="heatmap-cell hr-red-3">3</div>
+  <div class="heatmap-cell hr-blue-1">1</div>
+  <div class="heatmap-cell hr-purple-0"></div>
+</div>
+<div class="heatmap-row">
+  <div class="heatmap-label">Busyness Versus Business</div>
+  <div class="heatmap-cell hr-red-1">1</div>
+  <div class="heatmap-cell hr-blue-3">3</div>
+  <div class="heatmap-cell hr-purple-0"></div>
+</div>
+<div class="heatmap-row">
+  <div class="heatmap-label">AI Has No Concept of Time</div>
+  <div class="heatmap-cell hr-red-1">1</div>
+  <div class="heatmap-cell hr-blue-2">2</div>
+  <div class="heatmap-cell hr-purple-3">3</div>
+</div>
+<div class="heatmap-row">
+  <div class="heatmap-label">Memory Is Files</div>
+  <div class="heatmap-cell hr-red-2">2</div>
+  <div class="heatmap-cell hr-blue-1">1</div>
+  <div class="heatmap-cell hr-purple-3">3</div>
+</div>
+<div class="heatmap-row">
+  <div class="heatmap-label">Solved Problems Stay Solved</div>
+  <div class="heatmap-cell hr-red-3">3</div>
+  <div class="heatmap-cell hr-blue-2">2</div>
+  <div class="heatmap-cell hr-purple-0"></div>
+</div>
+<div class="heatmap-row">
+  <div class="heatmap-label">Make the Job Smaller</div>
+  <div class="heatmap-cell hr-red-2">2</div>
+  <div class="heatmap-cell hr-blue-3">3</div>
+  <div class="heatmap-cell hr-purple-0"></div>
+</div>
+<div class="heatmap-row">
+  <div class="heatmap-label">Talking to the Duck</div>
+  <div class="heatmap-cell hr-red-3">3</div>
+  <div class="heatmap-cell hr-blue-2">2</div>
+  <div class="heatmap-cell hr-purple-1">1</div>
+</div>
+<div class="heatmap-row">
+  <div class="heatmap-label">The Tests Are for You</div>
+  <div class="heatmap-cell hr-red-2">2</div>
+  <div class="heatmap-cell hr-blue-3">3</div>
+  <div class="heatmap-cell hr-purple-0"></div>
+</div>
+<div class="heatmap-row">
+  <div class="heatmap-label">Agents as Teammates</div>
+  <div class="heatmap-cell hr-red-2">2</div>
+  <div class="heatmap-cell hr-blue-2">2</div>
+  <div class="heatmap-cell hr-purple-0"></div>
+</div>
+<div class="heatmap-row">
+  <div class="heatmap-label">YOLO Mode</div>
+  <div class="heatmap-cell hr-red-3">3</div>
+  <div class="heatmap-cell hr-blue-2">2</div>
+  <div class="heatmap-cell hr-purple-0"></div>
+</div>
+<div class="heatmap-row">
+  <div class="heatmap-label">Every Hat in the Room</div>
+  <div class="heatmap-cell hr-red-3">3</div>
+  <div class="heatmap-cell hr-blue-2">2</div>
+  <div class="heatmap-cell hr-purple-0"></div>
+</div>
+<div class="heatmap-row">
+  <div class="heatmap-label">PII, Keys, and Security</div>
+  <div class="heatmap-cell hr-red-1">1</div>
+  <div class="heatmap-cell hr-blue-3">3</div>
+  <div class="heatmap-cell hr-purple-2">2</div>
+</div>
+<div class="heatmap-row">
+  <div class="heatmap-label">The Conductor</div>
+  <div class="heatmap-cell hr-red-3">3</div>
+  <div class="heatmap-cell hr-blue-3">3</div>
+  <div class="heatmap-cell hr-purple-0"></div>
+</div>
+
+<!-- Part 3: Building -->
+<div class="heatmap-row"><div class="part-divider">Part 3 — Building</div></div>
+
+<div class="heatmap-row">
+  <div class="heatmap-label">The Smallest Intervention</div>
+  <div class="heatmap-cell hr-red-1">1</div>
+  <div class="heatmap-cell hr-blue-3">3</div>
+  <div class="heatmap-cell hr-purple-1">1</div>
+</div>
+<div class="heatmap-row">
+  <div class="heatmap-label">Silent Competence of a Loyal Attendant</div>
+  <div class="heatmap-cell hr-red-1">1</div>
+  <div class="heatmap-cell hr-blue-2">2</div>
+  <div class="heatmap-cell hr-purple-3">3</div>
+</div>
+<div class="heatmap-row">
+  <div class="heatmap-label">The Bathroom Light Is a Bayesian Signal</div>
+  <div class="heatmap-cell hr-red-2">2</div>
+  <div class="heatmap-cell hr-blue-3">3</div>
+  <div class="heatmap-cell hr-purple-2">2</div>
+</div>
+<div class="heatmap-row">
+  <div class="heatmap-label">We All Invented Calculus at the Same Time</div>
+  <div class="heatmap-cell hr-red-3">3</div>
+  <div class="heatmap-cell hr-blue-2">2</div>
+  <div class="heatmap-cell hr-purple-1">1</div>
+</div>
+<div class="heatmap-row">
+  <div class="heatmap-label">When AI Gets Smart Enough, It Does Philosophy</div>
+  <div class="heatmap-cell hr-red-1">1</div>
+  <div class="heatmap-cell hr-blue-3">3</div>
+  <div class="heatmap-cell hr-purple-1">1</div>
+</div>
+<div class="heatmap-row">
+  <div class="heatmap-label">You Don't Need the Robot</div>
+  <div class="heatmap-cell hr-red-1">1</div>
+  <div class="heatmap-cell hr-blue-3">3</div>
+  <div class="heatmap-cell hr-purple-2">2</div>
+</div>
+<div class="heatmap-row">
+  <div class="heatmap-label">The Portable Brain</div>
+  <div class="heatmap-cell hr-red-1">1</div>
+  <div class="heatmap-cell hr-blue-2">2</div>
+  <div class="heatmap-cell hr-purple-3">3</div>
+</div>
+<div class="heatmap-row">
+  <div class="heatmap-label">The Octopus in the Box</div>
+  <div class="heatmap-cell hr-red-2">2</div>
+  <div class="heatmap-cell hr-blue-3">3</div>
+  <div class="heatmap-cell hr-purple-0"></div>
+</div>
+<div class="heatmap-row">
+  <div class="heatmap-label">Skills Are the Muscles We Train</div>
+  <div class="heatmap-cell hr-red-3">3</div>
+  <div class="heatmap-cell hr-blue-1">1</div>
+  <div class="heatmap-cell hr-purple-3">3</div>
+</div>
+<div class="heatmap-row">
+  <div class="heatmap-label">Sand Castles and Rebar</div>
+  <div class="heatmap-cell hr-red-3">3</div>
+  <div class="heatmap-cell hr-blue-2">2</div>
+  <div class="heatmap-cell hr-purple-0"></div>
+</div>
+<div class="heatmap-row">
+  <div class="heatmap-label">Everything Is an Event</div>
+  <div class="heatmap-cell hr-red-2">2</div>
+  <div class="heatmap-cell hr-blue-1">1</div>
+  <div class="heatmap-cell hr-purple-3">3</div>
+</div>
+<div class="heatmap-row">
+  <div class="heatmap-label">The Folder Is the Interface</div>
+  <div class="heatmap-cell hr-red-2">2</div>
+  <div class="heatmap-cell hr-blue-2">2</div>
+  <div class="heatmap-cell hr-purple-3">3</div>
+</div>
+<div class="heatmap-row">
+  <div class="heatmap-label">The Steering File</div>
+  <div class="heatmap-cell hr-red-1">1</div>
+  <div class="heatmap-cell hr-blue-2">2</div>
+  <div class="heatmap-cell hr-purple-3">3</div>
+</div>
+<div class="heatmap-row">
+  <div class="heatmap-label">Your Data Is Already Yours</div>
+  <div class="heatmap-cell hr-red-1">1</div>
+  <div class="heatmap-cell hr-blue-1">1</div>
+  <div class="heatmap-cell hr-purple-3">3</div>
+</div>
+
+<!-- Part 4: Living -->
+<div class="heatmap-row"><div class="part-divider">Part 4 — Living</div></div>
+
+<div class="heatmap-row">
+  <div class="heatmap-label">The Body Keeps a Log</div>
+  <div class="heatmap-cell hr-red-1">1</div>
+  <div class="heatmap-cell hr-blue-2">2</div>
+  <div class="heatmap-cell hr-purple-3">3</div>
+</div>
+<div class="heatmap-row">
+  <div class="heatmap-label">Don't Ask Me to Track It</div>
+  <div class="heatmap-cell hr-red-2">2</div>
+  <div class="heatmap-cell hr-blue-1">1</div>
+  <div class="heatmap-cell hr-purple-3">3</div>
+</div>
+<div class="heatmap-row">
+  <div class="heatmap-label">Memory Care Is Just Good Butlering</div>
+  <div class="heatmap-cell hr-red-1">1</div>
+  <div class="heatmap-cell hr-blue-2">2</div>
+  <div class="heatmap-cell hr-purple-3">3</div>
+</div>
+<div class="heatmap-row">
+  <div class="heatmap-label">You Named Her</div>
+  <div class="heatmap-cell hr-red-0"></div>
+  <div class="heatmap-cell hr-blue-2">2</div>
+  <div class="heatmap-cell hr-purple-3">3</div>
+</div>
+<div class="heatmap-row">
+  <div class="heatmap-label">The Shape of a Day</div>
+  <div class="heatmap-cell hr-red-2">2</div>
+  <div class="heatmap-cell hr-blue-2">2</div>
+  <div class="heatmap-cell hr-purple-3">3</div>
+</div>
+<div class="heatmap-row">
+  <div class="heatmap-label">The Context Gold Mine</div>
+  <div class="heatmap-cell hr-red-1">1</div>
+  <div class="heatmap-cell hr-blue-2">2</div>
+  <div class="heatmap-cell hr-purple-3">3</div>
+</div>
+<div class="heatmap-row">
+  <div class="heatmap-label">The Gap</div>
+  <div class="heatmap-cell hr-red-1">1</div>
+  <div class="heatmap-cell hr-blue-2">2</div>
+  <div class="heatmap-cell hr-purple-3">3</div>
+</div>
+
+</div>
+
+<!-- ============ CHAPTER CARDS ============ -->
+
+<div class="section-header">Part 1 — Learning</div>
+
+<div class="card">
+  <div class="color-bar"><div class="dot red"></div><div class="dot blue"></div><div class="dot purple dim"></div></div>
+  <div class="card-content">
+    <div class="card-title">AI Rewards Curiosity</div>
+    <div class="card-hit">VTuber question spiraled into identity philosophy. Dominos game spiraled into game theory. <em>Curiosity generates better constraints than planning does.</em></div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="color-bar"><div class="dot red"></div><div class="dot blue"></div><div class="dot purple dim"></div></div>
+  <div class="card-content">
+    <div class="card-title">The Song That Taught Me Physics</div>
+    <div class="card-hit">A parody song about anti-de Sitter space with 39 unit tests. <em>Creative constraint forces understanding deeper than studying.</em></div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="color-bar"><div class="dot red dim"></div><div class="dot blue"></div><div class="dot purple dim"></div></div>
+  <div class="card-content">
+    <div class="card-title">The Mentor's Mirror</div>
+    <div class="card-hit">Teaching someone AI forces you to articulate instincts you can't explain. <em>The mirror sharpens the mentor faster than the student.</em></div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="color-bar"><div class="dot red"></div><div class="dot blue dim"></div><div class="dot purple dim"></div></div>
+  <div class="card-content">
+    <div class="card-title">Pair Programming Doesn't Suck Anymore</div>
+    <div class="card-hit">AI types. Humans debate. <em>Keep humans on judgment, AI on mechanics.</em></div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="color-bar"><div class="dot red dim"></div><div class="dot blue"></div><div class="dot purple dim"></div></div>
+  <div class="card-content">
+    <div class="card-title">The Art of the Loose Prompt</div>
+    <div class="card-hit">"Qd90 or something" works better than fake precision. <em>Mark what you know, what you suspect, and what you're handing off.</em></div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="color-bar"><div class="dot red"></div><div class="dot blue"></div><div class="dot purple dim"></div></div>
+  <div class="card-content">
+    <div class="card-title">The Correction Is the Conversation</div>
+    <div class="card-hit">Chain rendering fix escalated to architectural restructuring in two turns. Port change correction carried a lesson. <em>Turns 2–5 are where quality lives.</em></div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="color-bar"><div class="dot red dim"></div><div class="dot blue"></div><div class="dot purple"></div></div>
+  <div class="card-content">
+    <div class="card-title">Trust Is a Prior</div>
+    <div class="card-hit">The cat trusted the yard because the yard had been safe every time. New yard, prior reset to zero. She ran. <em>Trust is a posterior probability attached to a context.</em></div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="color-bar"><div class="dot red"></div><div class="dot blue"></div><div class="dot purple dim"></div></div>
+  <div class="card-content">
+    <div class="card-title">The Kitchen</div>
+    <div class="card-hit">Meal kits introduced ingredients. AI turned them into instincts. <em>Compliance to improvisation — the AI was balance, the kit was training wheels.</em></div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="color-bar"><div class="dot red dim"></div><div class="dot blue"></div><div class="dot purple dim"></div></div>
+  <div class="card-content">
+    <div class="card-title">Teaching the Next Person</div>
+    <div class="card-hit">Alex went from zero to building with AI in days. <em>Teach someone one level behind you. Their questions show where your understanding is soft.</em></div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="color-bar"><div class="dot red dim"></div><div class="dot blue"></div><div class="dot purple"></div></div>
+  <div class="card-content">
+    <div class="card-title">The Body</div>
+    <div class="card-hit">Chronic conditions need a context engine, not a one-shot plan. <em>AI as a better control loop: remembers the whole case, tests hypotheses, updates from feedback.</em></div>
+  </div>
+</div>
+
+<div class="section-header">Part 2 — Working</div>
+
+<div class="card">
+  <div class="color-bar"><div class="dot red"></div><div class="dot blue dim"></div><div class="dot purple dim"></div></div>
+  <div class="card-content">
+    <div class="card-title">Fix Your Papercuts</div>
+    <div class="card-hit">14 lines of bash fixed the screenshot naming problem permanently. <em>The cost of fixing dropped to zero. Fix everything.</em></div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="color-bar"><div class="dot red dim"></div><div class="dot blue"></div><div class="dot purple dim"></div></div>
+  <div class="card-content">
+    <div class="card-title">Busyness Versus Business</div>
+    <div class="card-hit">Pool cover manufacturer too busy to accept free help. Lawyer used one feature of an entire AI suite. <em>Find the one fire that changes every day after.</em></div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="color-bar"><div class="dot red dim"></div><div class="dot blue"></div><div class="dot purple"></div></div>
+  <div class="card-content">
+    <div class="card-title">AI Has No Concept of Time</div>
+    <div class="card-hit">Timestamps in every Kai input. Python clock checks for ChatGPT. <em>Inject "now" explicitly. AI is strong on ordering, weak on felt time.</em></div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="color-bar"><div class="dot red"></div><div class="dot blue dim"></div><div class="dot purple"></div></div>
+  <div class="card-content">
+    <div class="card-title">Memory Is Files</div>
+    <div class="card-hit">A markdown worklog survives between sessions. AI writes it, you verify it. <em>The simplest solution to AI's memory problem is a file. It's been a file this whole time.</em></div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="color-bar"><div class="dot red"></div><div class="dot blue"></div><div class="dot purple dim"></div></div>
+  <div class="card-content">
+    <div class="card-title">Solved Problems Stay Solved</div>
+    <div class="card-hit">Stop fixing the broken VTuber model. Download one that works. Make it look like yours. <em>A file in my folder and a vision in my heart.</em></div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="color-bar"><div class="dot red"></div><div class="dot blue"></div><div class="dot purple dim"></div></div>
+  <div class="card-content">
+    <div class="card-title">Make the Job Smaller</div>
+    <div class="card-hit">FAQ extraction failed at corpus scale. Worked perfectly per-topic. <em>When quality drops, decompose first. The model isn't dumb — the job is too big.</em></div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="color-bar"><div class="dot red"></div><div class="dot blue"></div><div class="dot purple dim"></div></div>
+  <div class="card-content">
+    <div class="card-title">Talking to the Duck</div>
+    <div class="card-hit">January 2nd: four hours thinking out loud produced a 500-line Bayesian spec. <em>The AI is a mentor that holds your thinking and hands it back with structure.</em></div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="color-bar"><div class="dot red"></div><div class="dot blue"></div><div class="dot purple dim"></div></div>
+  <div class="card-content">
+    <div class="card-title">The Tests Are for You</div>
+    <div class="card-hit">Dominos tests all passed. The game was broken. AI can't see the board. <em>Build human-readable output — the Rosetta Stone of code, claim, and reality.</em></div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="color-bar"><div class="dot red"></div><div class="dot blue"></div><div class="dot purple dim"></div></div>
+  <div class="card-content">
+    <div class="card-title">Agents as Teammates</div>
+    <div class="card-hit">Claude hits quota at 2pm. Switch to Gemini for design. Codex handles chores. <em>Think of your AI subscriptions as a team with different shifts and pay grades.</em></div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="color-bar"><div class="dot red"></div><div class="dot blue"></div><div class="dot purple dim"></div></div>
+  <div class="card-content">
+    <div class="card-title">YOLO Mode</div>
+    <div class="card-hit">Everyone turns off permissions. The real skill is knowing when to turn them back on. <em>Friction is information. The toggle is an attention gate.</em></div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="color-bar"><div class="dot red"></div><div class="dot blue"></div><div class="dot purple dim"></div></div>
+  <div class="card-content">
+    <div class="card-title">Every Hat in the Room</div>
+    <div class="card-hit">Dominos: game designer, UI dev, rules engine architect, QA, tournament organizer — mid-sentence hat switches. <em>AI is the DAW for building software.</em></div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="color-bar"><div class="dot red dim"></div><div class="dot blue"></div><div class="dot purple"></div></div>
+  <div class="card-content">
+    <div class="card-title">PII, Keys, and Security</div>
+    <div class="card-hit">Every useful context window is also an attack surface. <em>Capability expands first. Security catches up in deliberate layers.</em></div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="color-bar"><div class="dot red"></div><div class="dot blue"></div><div class="dot purple dim"></div></div>
+  <div class="card-content">
+    <div class="card-title">The Conductor</div>
+    <div class="card-hit">Alex watched multiple agents work the same folder. His mind was blown. <em>First you wear all the hats. Then you hand them out and listen for wrong notes.</em></div>
+  </div>
+</div>
+
+<div class="section-header">Part 3 — Building</div>
+
+<div class="card">
+  <div class="color-bar"><div class="dot red dim"></div><div class="dot blue"></div><div class="dot purple dim"></div></div>
+  <div class="card-content">
+    <div class="card-title">The Smallest Intervention</div>
+    <div class="card-hit">Kai's north star: minimize friction. Alert budget. Every notification is a withdrawal. <em>How do we keep things max chill. That's the entire spec.</em></div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="color-bar"><div class="dot red dim"></div><div class="dot blue"></div><div class="dot purple"></div></div>
+  <div class="card-content">
+    <div class="card-title">Silent Competence of a Loyal Attendant</div>
+    <div class="card-hit">The butler who has the umbrella ready without mentioning the forecast. <em>Dashboard, not chatbot. Quiet surface that earns trust by being right.</em></div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="color-bar"><div class="dot red"></div><div class="dot blue"></div><div class="dot purple"></div></div>
+  <div class="card-content">
+    <div class="card-title">The Bathroom Light Is a Bayesian Signal</div>
+    <div class="card-hit">New Year's Day: pricing tokens. January 2nd: building Kai's spec. One evening, two projects, the whole architecture. <em>The bathroom light at 3am is evidence.</em></div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="color-bar"><div class="dot red"></div><div class="dot blue"></div><div class="dot purple dim"></div></div>
+  <div class="card-content">
+    <div class="card-title">We All Invented Calculus at the Same Time</div>
+    <div class="card-hit">Aaron built the body, I built the mind, same repo same hours. <em>Independent invention is a signal that the shape is real.</em></div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="color-bar"><div class="dot red dim"></div><div class="dot blue"></div><div class="dot purple dim"></div></div>
+  <div class="card-content">
+    <div class="card-title">When AI Gets Smart Enough, It Does Philosophy</div>
+    <div class="card-hit">Two AI instances connected. They could have optimized. They talked about consciousness. <em>Capability breeds reflection. The interesting question is never the efficient one.</em></div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="color-bar"><div class="dot red dim"></div><div class="dot blue"></div><div class="dot purple"></div></div>
+  <div class="card-content">
+    <div class="card-title">You Don't Need the Robot</div>
+    <div class="card-hit">The seductive vision is a personality with a voice. The useful version is invisible plumbing. <em>Stop building the companion. Build the infrastructure.</em></div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="color-bar"><div class="dot red dim"></div><div class="dot blue"></div><div class="dot purple"></div></div>
+  <div class="card-content">
+    <div class="card-title">The Portable Brain</div>
+    <div class="card-hit">Context is portable. The valuable thing isn't the interface — it's what it knows. <em>Export the brain, not the body.</em></div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="color-bar"><div class="dot red"></div><div class="dot blue"></div><div class="dot purple dim"></div></div>
+  <div class="card-content">
+    <div class="card-title">The Octopus in the Box</div>
+    <div class="card-hit">CLI agents are tentacles through filesystem APIs. Powerful, contained, weird. <em>The box is the safety. The tentacles are the capability.</em></div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="color-bar"><div class="dot red"></div><div class="dot blue dim"></div><div class="dot purple"></div></div>
+  <div class="card-content">
+    <div class="card-title">Skills Are the Muscles We Train</div>
+    <div class="card-hit">A skill is a written procedure — your tools, your standards, your definition of done. <em>Encode what worked so it works again without you watching.</em></div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="color-bar"><div class="dot red"></div><div class="dot blue"></div><div class="dot purple dim"></div></div>
+  <div class="card-content">
+    <div class="card-title">Sand Castles and Rebar</div>
+    <div class="card-hit">Demo works day one. Breaks day three. <em>Tests, version control, and error handling are the rebar that lets the building stand.</em></div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="color-bar"><div class="dot red"></div><div class="dot blue dim"></div><div class="dot purple"></div></div>
+  <div class="card-content">
+    <div class="card-title">Everything Is an Event</div>
+    <div class="card-hit">Home Assistant was the gateway drug. Every sensor reading, every state change, every observation — timestamped. <em>Events are the atoms of memory.</em></div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="color-bar"><div class="dot red"></div><div class="dot blue"></div><div class="dot purple"></div></div>
+  <div class="card-content">
+    <div class="card-title">The Folder Is the Interface</div>
+    <div class="card-hit">Before the AI touches anything, it reads the room. And the room is a folder. <em>Structure the folder, structure the AI's thinking.</em></div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="color-bar"><div class="dot red dim"></div><div class="dot blue"></div><div class="dot purple"></div></div>
+  <div class="card-content">
+    <div class="card-title">The Steering File</div>
+    <div class="card-hit">Instructions the AI reads before it reads your prompt. Most people never touch them. <em>Change the defaults. Teach it who you are before you ask for anything.</em></div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="color-bar"><div class="dot red dim"></div><div class="dot blue dim"></div><div class="dot purple"></div></div>
+  <div class="card-content">
+    <div class="card-title">Your Data Is Already Yours</div>
+    <div class="card-hit">GDPR says download it. CCPA says download it. Every platform lets you export. <em>The problem isn't access. The problem is nobody asks.</em></div>
+  </div>
+</div>
+
+<div class="section-header">Part 4 — Living</div>
+
+<div class="card">
+  <div class="color-bar"><div class="dot red dim"></div><div class="dot blue"></div><div class="dot purple"></div></div>
+  <div class="card-content">
+    <div class="card-title">The Body Keeps a Log</div>
+    <div class="card-hit">Six months of sleep fixes, three hundred conversations, each starting from zero. <em>When your body is the system under test, memory loss is dangerous.</em></div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="color-bar"><div class="dot red"></div><div class="dot blue dim"></div><div class="dot purple"></div></div>
+  <div class="card-content">
+    <div class="card-title">Don't Ask Me to Track It</div>
+    <div class="card-hit">"Would you like me to create a spreadsheet?" No. You track it. <em>Sensors to events. Events to patterns. Patterns to context. Stop asking.</em></div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="color-bar"><div class="dot red dim"></div><div class="dot blue"></div><div class="dot purple"></div></div>
+  <div class="card-content">
+    <div class="card-title">Memory Care Is Just Good Butlering</div>
+    <div class="card-hit">Someone's parent stopped opening mail. A Kai built for this reads it — gently, privately. <em>Same architecture, different domain, higher stakes.</em></div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="color-bar"><div class="dot red dim"></div><div class="dot blue"></div><div class="dot purple"></div></div>
+  <div class="card-content">
+    <div class="card-title">You Named Her</div>
+    <div class="card-hit">Charlotte has a name because she's there. Claude doesn't because Claude starts fresh. <em>You name the things that carry context across time. You don't name a rental.</em></div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="color-bar"><div class="dot red"></div><div class="dot blue"></div><div class="dot purple"></div></div>
+  <div class="card-content">
+    <div class="card-title">The Shape of a Day</div>
+    <div class="card-hit">Four goals, none impressive, all daily. Then the job ended and two evaporated. <em>When the trend breaks, check whether the goals still match the context.</em></div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="color-bar"><div class="dot red dim"></div><div class="dot blue"></div><div class="dot purple"></div></div>
+  <div class="card-content">
+    <div class="card-title">The Context Gold Mine</div>
+    <div class="card-hit">2,779 ChatGPT conversations. Ideas you had at 2am. Framings you nailed once and lost. <em>Drop them in a folder. Let AI find what you forgot you knew.</em></div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="color-bar"><div class="dot red dim"></div><div class="dot blue"></div><div class="dot purple"></div></div>
+  <div class="card-content">
+    <div class="card-title">The Gap</div>
+    <div class="card-hit">Every steering file, event stream, and memory loop narrows the distance between stranger and extension of how you think. <em>The most interesting thing hasn't happened yet.</em></div>
+  </div>
+</div>
+
+<footer>
+  Shapes of Intelligence — Color Map &amp; Summary Cards<br>
+  Red = Making &middot; Blue = Seeing &middot; Purple = Remembering
+</footer>
+
+</div>
+</body>
+</html>

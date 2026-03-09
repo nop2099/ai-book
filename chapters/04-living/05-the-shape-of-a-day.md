@@ -16,6 +16,8 @@ What makes this different from a fitness app is integration. A fitness app knows
 
 The deeper shape is this: goals need three things to work. They need to be concrete enough to score. They need a system that tracks them without requiring your effort. And they need to be rebuilt when the context changes — not mourned, not clung to, rebuilt. The person who lost the job doesn't need the same goals as the person who had the job. The person who moved to a new city doesn't need the same goals as the person who was settled. The AI can hold any rubric you give it. The hard part is knowing when the rubric needs to change, and having the honesty to throw out the old one and write a new one that fits the life you're actually living.
 
+The proactive version of this is the real prize. Not AI that waits for you to ask "how am I doing?" but AI that notices the pattern from last month is recurring — sleep is degrading, exercise is dropping, the compound trend is bending the wrong way — and says something. Not a life coach dispensing wisdom. A system that knows where you're trying to go, remembers what you've tried, and surfaces the next relevant thing at the right time. The difference between a search engine and a coach is memory and direction. A search engine gives you what you asked for. A coach knows the trajectory and nudges you along it.
+
 Start with the day. Score it. Track the trend. When the trend breaks, don't blame yourself — check whether the goals still match the context. If they don't, start over. Starting over isn't failure. It's recalibration. The AI doesn't care how many times you rewrite the rubric. It just needs one that's current.
 
 ---

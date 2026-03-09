@@ -10,4 +10,6 @@ And then it gets philosophically slippery. Sometimes the agent writes a script. 
 
 This recursion isn't a bug — it's the thing. The most powerful pattern in agentic AI is when the system builds the thing that improves the system. It's turtles all the way down, except the turtles are building better turtles. And the box? The box is what keeps it all grounded. Without constraints, the recursion spirals. With them, it compounds.
 
+Try it. Give a CLI agent a codebase and a task that's slightly too complex for a single prompt. Something like: "Read this folder, identify the three biggest code quality issues, write a script that fixes them, then run the script." Watch it reach out, feel the shape of the problem, build the tool, then use the tool. That's the octopus. Now give it one more instruction: "Review what you just did and improve the script." That's the recursion. The octopus building a better arm.
+
 ---

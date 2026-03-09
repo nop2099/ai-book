@@ -2,9 +2,11 @@
 
 Every Hat in the Room is about one person wearing every role. This is the next shape: you stop wearing the hats and start handing them out.
 
-Alex saw it happen today. Multiple AI agents, each with a different specialty, working in the same folder on the same project. One agent handled the research. Another wrote the code. Another reviewed the output. They didn't talk to each other. They talked to the folder. And Alex — no programming background, no software experience — was the only one who saw the whole picture.
+Alex saw it happen on a Tuesday afternoon. He was building a landing page for a side project — three AI agents working the same folder. One handled the copy. Another built the components. A third reviewed the output and flagged inconsistencies. They didn't talk to each other. They talked to the folder.
 
-His reaction wasn't "that's useful." It was profound. He'd already experienced wearing every hat himself, and that had felt like discovering a new dimension. This was different. This was: the hats can be worn by different agents, simultaneously, and you just... conduct.
+At one point, the copy agent generated a headline that contradicted the feature list the component agent was building from. Alex caught it. Not because he understood the code — he's never written JavaScript in his life — but because he knew what the page was *for*, and the headline didn't match. He corrected the copy agent, re-ran the component agent, and the page snapped into alignment. That was the wrong note, and he heard it because he was the only one listening to the whole piece.
+
+His reaction wasn't "that's useful." It was something closer to awe. He'd already experienced wearing every hat himself, and that had felt like discovering a new dimension. This was different. This was: the hats can be worn by different agents, simultaneously, and you just... conduct.
 
 The shape is orchestration. A conductor doesn't play the violin or the timpani. A conductor holds the vision — the tempo, the dynamics, the shape of the piece — and each musician plays their part. The conductor's value isn't in any single instrument. It's in the fact that someone has to hear the whole thing at once.
 

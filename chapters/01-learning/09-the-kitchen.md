@@ -12,6 +12,8 @@ Midway through the subscription, the dynamic changed. Instead of asking for full
 
 By the time the subscription ended, the recipe cards were optional. The spice rack stayed. The confidence stayed. Cooking moved from compliance to improvisation.
 
+Aaron had a version of this with woodworking. The AI couldn't hold the board, but it could answer "is this joint strong enough for a shelf this wide?" in the middle of a cut. The pattern is the same: real-time coaching in a domain where the learning happens by doing, not by studying. Books give you theory. AI gives you a sous chef who's read every book and is standing next to you while the onions burn.
+
 The shape: you don't just learn from instructions anymore. You learn from an ongoing conversation that remembers your constraints, your preferences, and your last mistake. Meal kits were training wheels. The AI was balance.
 
 ---

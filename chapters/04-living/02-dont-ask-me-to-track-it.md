@@ -6,9 +6,7 @@ No. Absolutely not. *You* track it. That's the whole point of having you.
 
 This response reveals the deepest failure mode in current AI tools: they treat the human as the system of record. They'll research, summarize, draft, generate — but when it comes to maintaining state over time, they hand you a spreadsheet and wish you luck. They're offering you a better clipboard when what you need is a better brain.
 
-Think about what a person with a chronic health condition needs from an AI. Not a one-time summary of their medications. Not a spreadsheet template for tracking symptoms. They need a system that *already knows* they have the condition, that remembers what medications they're on, that noticed they mentioned a headache on Tuesday and a migraine on Thursday and connects those dots without being asked. They need the AI to carry the context so they don't have to reload it every session.
-
-This chapter is about burden ownership. The health continuity stakes are covered in *The Body Keeps a Log*. Here the question is simpler: who does the tracking work, the human or the machine?
+*The Body Keeps a Log* explains why this matters — what happens when the system forgets your health history, your treatment patterns, your context. This chapter is about what to do about it. The question is simple: who does the tracking work, the human or the machine?
 
 So I built the answer. Or at least the first draft of one.
 

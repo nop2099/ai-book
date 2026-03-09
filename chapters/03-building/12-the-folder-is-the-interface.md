@@ -18,8 +18,6 @@ The same pattern applies at every scale. A single script with clear variable nam
 
 You don't need an existing project to start. Open a new folder. Name it something honest — not `stuff` or `new_project` but something that describes what you're actually trying to do. Create the subfolders before you have anything to put in them. `data`, `output`, `reference`, whatever makes sense for the work. The empty structure is a thinking tool. It forces you to decide what the project is made of before you've made any of it. And when the AI opens that folder for the first time, it sees intent. It sees a plan. It starts working inside a framework instead of inventing one.
 
-The most common failure mode is skipping this step and hoping to add structure later. This never works. By the time the project is complex enough to need organization, the cost of reorganizing is high enough that nobody does it. Start with the folders. Even if they're mostly empty. An empty folder named `data/exports/chatgpt` is a commitment to a structure. When the exports arrive, they have a home. When the AI arrives, it has a map.
-
-The folder you're working in right now — whether it's a desktop cluttered with screenshots or a cleanly partitioned project directory — is the interface your AI will use to understand what you need. It can't ask you where things are. It reads the directory listing and works with what it finds. Make the listing worth reading.
+The folder you're working in right now — whether it's a desktop cluttered with screenshots or a cleanly partitioned project directory — is the interface your AI will use to understand what you need. It can't ask you where things are. It reads the directory listing and works with what it finds. An empty folder named `data/exports/chatgpt` is a commitment to a structure. When the exports arrive, they have a home. When the AI arrives, it has a map.
 
 ---

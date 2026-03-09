@@ -1,8 +1,10 @@
 ## Sand Castles and Rebar
 
-There's a kind of software that looks finished on the first afternoon. The AI built it. The demo works. The features are there, the layout is clean, the happy path runs without errors. It looks like a building. It's a sand castle.
+The dominos game looked finished on a Thursday night. AI had built it in a single session — board rendering, tile placement, scoring, the whole thing. I showed Aaron. He played a round. It worked. We were both grinning.
 
-Sand castles are beautiful and they collapse the moment you push on them. Add a feature, and an existing feature breaks. Fix the fix, and something else shifts. Rename a function, and three files that depended on the old name silently fail. The structure was never structure — it was coincidence. Everything happened to work because nothing had been tested against change. The first refactor is a wrecking ball.
+Friday morning I tried to add a spinner for the Mexican Train variant. The spinner needed to sit at the center of the board and accept tiles from multiple players simultaneously. I described the feature, the AI generated the code, and the board stopped rendering entirely. Not the spinner — the *board*. The placement logic had been quietly dependent on assumptions the spinner violated, and those assumptions were invisible because nothing had ever tested them. I spent the weekend rebuilding the foundation that the Thursday-night demo had been standing on. The demo had never been a building. It was a sand castle.
+
+Add a feature, and an existing feature breaks. Fix the fix, and something else shifts. Rename a function, and three files that depended on the old name silently fail. The structure was never structure — it was coincidence. Everything happened to work because nothing had been tested against change. The first refactor is a wrecking ball.
 
 This is vibe coding. The term is new but the pattern isn't. It's what happens when you build by feel — when the code looks right, when it runs once, and when nobody goes back to verify that the parts are actually connected the way they appear to be. AI makes vibe coding faster than it's ever been. You can generate an entire application in an afternoon. You can also generate an entire sand castle in an afternoon. Speed doesn't distinguish between the two.
 

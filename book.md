@@ -236,27 +236,6 @@ The shape: you don't just learn from instructions anymore. You learn from an ong
 
 ---
 
-## Teaching the Next Person
-
-Your cousin calls. He's in his mid-thirties, works at a bank, has no programming background, and he's been watching you build things with AI for months. He has time, curiosity, and momentum. He built a site for a local business and a character engine for his D&D campaign. It works. He's hooked.
-
-He's on Windows, which is sometimes annoying in AI tooling, but that's not the real story.
-
-The real story is what teaching does to the teacher.
-The lesson is simple: I learn by teaching.
-
-When someone new asks "why did that work?" you can't hide behind instinct. You have to explain your thinking in plain language: why this prompt, why this check, why this tradeoff, why this output is good enough to ship. In that moment, fuzzy intuition becomes explicit method.
-
-That's why mentoring compounds. You teach one person, and your own model sharpens. You notice the gaps in your explanations. You discover which parts of your workflow are principles and which parts are habit. You stop saying "I just do it this way" and start saying "here is the pattern and here's when it breaks."
-
-The project still matters. Your cousin doesn't care about abstract AI theory; he cares about bringing his campaign to life. So you teach through the real thing in front of him. A character engine becomes a lesson in structure. A session recap becomes a lesson in summarization. A broken script becomes a lesson in verification.
-
-That is the transferable shape: people learn by building, and mentors learn by explaining. The student's progress is obvious. The mentor's progress is quieter, but just as real.
-
-If you want to level up quickly with AI, teach someone one level behind you. Their questions will show you exactly where your own understanding is still soft.
-
----
-
 ## The Body
 
 The useful part of AI in this chapter is not motivation. It is state management.
@@ -1166,13 +1145,6 @@ Trust as Bayesian inference has roots in epistemology, the philosophy of probabi
 - Crash Course #19: *Personal Identity* — Locke's memory theory: identity persists through memory. An AI that improves between sessions is accumulating something analogous to memory. At what point does the improved model become a different entity? The "moving target" problem — the intern you hired in January is not the intern sitting in front of you in June.
 - Crash Course #21: *Personhood* — Warren's gradient theory: "personhood comes in degrees — it's more like a dimmer switch." Graduated trust — don't give the production keys on day one — is placing the AI on that dimmer switch. Not a person, not a tool, but somewhere where supervised trust is the appropriate stance.
 - Thomas Bayes and Pierre-Simon Laplace formalized the mathematics. The philosophical insight: rational belief is not binary. It's a probability distribution that shifts with evidence.
-
-**Teaching the Next Person**
-Passing knowledge forward is the oldest form of technology transfer. The shape of mentoring reveals what you actually know versus what you just do.
-
-- Crash Course #38: *Aristotle & Virtue Theory* — Virtue is habituated through practice, but also through teaching. The mentor who explains a shape to someone new sharpens the shape for themselves. Teaching is compression: what survives is the real knowledge.
-- Crash Course #7: *The Meaning of Knowledge* — Knowledge transfer requires translation. The expert's tacit knowledge must become explicit before it can transfer. Mentoring forces that translation, which is why the mentor learns as much as the student.
-- Paulo Freire's *Pedagogy of the Oppressed* — Education as liberation, not depositing information. Teaching someone to work with AI isn't giving them your answers — it's clearing the obstacles so they can find their own.
 
 ---
 

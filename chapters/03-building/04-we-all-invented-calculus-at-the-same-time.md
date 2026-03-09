@@ -14,6 +14,8 @@ That's what happened with AI agents in 2025. A hundred teams, a thousand hobbyis
 
 The lesson isn't about being first. It's about what you learn by building. Aaron and I didn't end up with a product. We ended up with *understanding*. We know how these systems work — not because we read about them, but because we built them from scratch, hit every wall, solved every problem, and watched the solutions become commodities. That knowledge doesn't depreciate when someone else ships a competing feature. If anything, it appreciates — because now we can see exactly what they got right, what they got wrong, and what's still missing.
 
-The benchmark was never the product. The benchmark was always us.
+I remember the specific afternoon OpenAI shipped memory for ChatGPT. I was in the middle of debugging Kai's memory layer — the tier system, the attention weights, the decay curves. I saw the announcement, and the first feeling wasn't jealousy. It was recognition. I could see exactly which problems they'd solved, which ones they'd punted on, and why their architecture made the choices it did. I couldn't have seen any of that six months earlier. Building gave me the eyes.
+
+The benchmark was never the product. The benchmark was always what you understood by the time someone else shipped it.
 
 ---

@@ -10,7 +10,7 @@ That's the shape: curiosity generates high-quality constraints. You don't ask fo
 
 This is why heavily optimized prompting can plateau. A perfect prompt often gets you a predictable answer. Curiosity gets you a better question, and better questions pull you into architecture, data, UX, and implementation details you didn't know to ask for.
 
-My cousin Alex had the same experience. He went from zero programming knowledge to building websites with AI in days. His message after one of our sessions: "I traveled through space and I found the barrier to the end of the universe. The question I have now is how to get through it." He wasn't learning HTML. He was following a thread, and the thread was teaching him how to learn. The curiosity spiral works whether you're technical or not. The prerequisite isn't skill. It's engagement.
+My cousin Alex had the same experience. He went from zero programming knowledge to building websites with AI in days — not because the AI was a good teacher, but because his questions kept getting better. Each answer opened a door he hadn't known was there, and he kept walking through. The curiosity spiral works whether you're technical or not. The prerequisite isn't skill. It's engagement.
 
 Curiosity is the real prompt engineering.
 

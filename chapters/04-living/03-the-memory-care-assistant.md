@@ -16,4 +16,6 @@ I haven't built this version yet. But I know what it needs because it needs what
 
 If you're choosing tools for this kind of work, the filter isn't "is it clever?" It's: can it hold context across weeks, apply it gently, and stay grounded in the present without losing the thread?
 
+And if you're building — or even just thinking about building — the first step is the same one Kai started with: what does this person need to know right now, and what can wait? Answer that for one week of mail. One week of medications. One week of appointments. The architecture follows the answer.
+
 ---

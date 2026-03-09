@@ -12,12 +12,10 @@ The current tools fail this person in a specific, measurable way. Each conversat
 
 This isn't just a sleep problem. It's any problem that unfolds over time. Financial planning. Career transitions. Learning a complex skill. Relationship patterns. Grief. Anything where the important signal is the *trend*, not the *snapshot*. Current AI gives you brilliant snapshots and no trend line.
 
-The infrastructure fix is in *Don't Ask Me to Track It*. The health-specific point here is different: when your body is the system under test, memory loss is not inconvenient. It's dangerous.
+When your body is the system under test, memory loss is not inconvenient. It's dangerous.
 
-Steward made this concrete for me. Once sensor data from phone and watch flowed into a persistent event timeline, I stopped arguing from memory and started arguing from trend. "How did I sleep last night?" became less important than "what has repeated for six months?"
+The right response to "I can't sleep" isn't "Would you like me to create a spreadsheet?" It's: "The last time you tried a new sleep treatment, it worked for four days. That's happened with every treatment you've tried. Here's what your sleep doctor said about that pattern in October. Want to discuss alternatives that work differently?"
 
-The right response isn't "Would you like me to create a spreadsheet?" It's: "The last time you tried a new sleep treatment, it worked for four days. That's happened with every treatment you've tried. Here's what your sleep doctor said about that pattern in October. Want to discuss alternatives that work differently?"
-
-Steward isn't running anymore. The hardware situation changed, I got busy. But the shape is clear: sensors to events, events to patterns, patterns to context, context to every conversation. Not a fresh start every morning. A *continuation*.
+No current tool can say that, because no current tool remembers October. The fix — the infrastructure that makes continuity possible — is in *Don't Ask Me to Track It*. This chapter is about why it matters. That chapter is about how to build it.
 
 ---

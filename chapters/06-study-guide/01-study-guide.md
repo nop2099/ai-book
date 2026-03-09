@@ -66,13 +66,6 @@ Trust as Bayesian inference has roots in epistemology, the philosophy of probabi
 - Crash Course #21: *Personhood* — Warren's gradient theory: "personhood comes in degrees — it's more like a dimmer switch." Graduated trust — don't give the production keys on day one — is placing the AI on that dimmer switch. Not a person, not a tool, but somewhere where supervised trust is the appropriate stance.
 - Thomas Bayes and Pierre-Simon Laplace formalized the mathematics. The philosophical insight: rational belief is not binary. It's a probability distribution that shifts with evidence.
 
-**Teaching the Next Person**
-Passing knowledge forward is the oldest form of technology transfer. The shape of mentoring reveals what you actually know versus what you just do.
-
-- Crash Course #38: *Aristotle & Virtue Theory* — Virtue is habituated through practice, but also through teaching. The mentor who explains a shape to someone new sharpens the shape for themselves. Teaching is compression: what survives is the real knowledge.
-- Crash Course #7: *The Meaning of Knowledge* — Knowledge transfer requires translation. The expert's tacit knowledge must become explicit before it can transfer. Mentoring forces that translation, which is why the mentor learns as much as the student.
-- Paulo Freire's *Pedagogy of the Oppressed* — Education as liberation, not depositing information. Teaching someone to work with AI isn't giving them your answers — it's clearing the obstacles so they can find their own.
-
 ---
 
 ### Part II: Working with AI

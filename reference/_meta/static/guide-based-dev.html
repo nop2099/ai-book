@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Guide-Based Development — Shapes of Intelligence</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,700;1,9..144,300&display=swap');
+
+    :root {
+      --void: #0a0a10;
+      --deep: #0f0f1a;
+      --surface: #161625;
+      --raised: #1e1e32;
+      --edge: #2a2a44;
+      --muted: #8888aa;
+      --text: #d0d0e2;
+      --bright: #eeeef5;
+      --white: #f5f5ff;
+      --amber: #e8a83e;
+      --amber-dim: #c4882a;
+      --teal: #4ecdc4;
+      --rose: #e85577;
+      --blue: #5588dd;
+      --purple: #9977dd;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'DM Mono', 'SF Mono', monospace;
+      background: var(--void);
+      color: var(--text);
+      line-height: 1.7;
+      min-height: 100vh;
+    }
+    a { color: var(--amber); text-decoration: none; }
+    a:visited { color: var(--amber); }
+    a:hover { color: var(--text); }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 9999;
+    }
+
+    .shell {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 3rem 1.5rem 4rem;
+    }
+
+    .masthead {
+      padding: 1.5rem 0 2rem;
+      border-bottom: 1px solid var(--edge);
+      margin-bottom: 2.5rem;
+      position: relative;
+    }
+
+    .masthead::after {
+      content: '';
+      position: absolute;
+      bottom: -1px;
+      left: 0;
+      width: 60px;
+      height: 1px;
+      background: var(--amber);
+    }
+
+    .breadcrumb {
+      font-size: 0.65rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 0.8rem;
+    }
+
+    .breadcrumb a {
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .breadcrumb a:hover { color: var(--amber); }
+
+    .masthead h1 {
+      font-family: 'Fraunces', serif;
+      font-weight: 300;
+      font-size: 2rem;
+      color: var(--white);
+      letter-spacing: -0.01em;
+    }
+
+    .masthead .sub {
+      color: var(--muted);
+      font-size: 0.75rem;
+      margin-top: 0.4rem;
+      letter-spacing: 0.03em;
+      line-height: 1.8;
+      max-width: 55ch;
+    }
+
+    h2 {
+      font-family: 'Fraunces', serif;
+      font-weight: 500;
+      font-size: 1.05rem;
+      color: var(--bright);
+      margin: 2.2rem 0 0.6rem;
+    }
+
+    h2:first-of-type { margin-top: 0; }
+
+    h3 {
+      font-family: 'Fraunces', serif;
+      font-weight: 500;
+      font-size: 0.88rem;
+      color: var(--text);
+      margin: 1.5rem 0 0.5rem;
+    }
+
+    p {
+      font-size: 0.78rem;
+      margin-bottom: 0.8rem;
+      line-height: 1.8;
+    }
+
+    strong { color: var(--bright); }
+    em { color: var(--amber); font-style: normal; }
+
+    ul {
+      list-style: none;
+      margin: 0.6rem 0 1rem 0;
+      padding: 0;
+    }
+
+    ul li {
+      font-size: 0.78rem;
+      padding: 0.2rem 0 0.2rem 1.2rem;
+      position: relative;
+      line-height: 1.8;
+    }
+
+    ul li::before {
+      content: '\2013';
+      position: absolute;
+      left: 0;
+      color: var(--muted);
+    }
+
+    hr {
+      border: none;
+      border-top: 1px solid var(--edge);
+      margin: 2rem 0;
+    }
+
+    code {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.73rem;
+      color: var(--bright);
+      background: var(--surface);
+      padding: 0.1rem 0.35rem;
+      border-radius: 3px;
+    }
+
+    pre {
+      background: var(--surface);
+      border: 1px solid var(--edge);
+      border-radius: 4px;
+      padding: 0.8rem 1rem;
+      margin: 0.6rem 0 1rem;
+      overflow-x: auto;
+      font-size: 0.7rem;
+      line-height: 1.7;
+    }
+
+    pre code {
+      background: none;
+      padding: 0;
+      font-size: 0.7rem;
+    }
+
+    /* ── Inline copyable commands ── */
+    .cmd {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--surface);
+      border: 1px solid var(--edge);
+      border-radius: 4px;
+      padding: 0.4rem 0.7rem;
+      margin: 0.35rem 0;
+      cursor: pointer;
+      transition: border-color 0.2s;
+    }
+
+    .cmd:hover { border-color: #3a3a55; }
+
+    .cmd code {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.73rem;
+      color: var(--bright);
+      background: none;
+      padding: 0;
+      flex: 1;
+      user-select: all;
+    }
+
+    .cmd .cc {
+      flex-shrink: 0;
+      width: 18px;
+      height: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0.4;
+      transition: opacity 0.2s;
+    }
+
+    .cmd:hover .cc { opacity: 0.8; }
+
+    .cmd .cc svg {
+      width: 13px;
+      height: 13px;
+      fill: none;
+      stroke: var(--muted);
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .cmd.copied-cmd { border-color: var(--amber-dim); }
+    .cmd.copied-cmd .cc { opacity: 1; }
+    .cmd.copied-cmd .cc svg { stroke: var(--amber); }
+
+    .cmd-note {
+      font-size: 0.65rem;
+      color: var(--muted);
+      margin: 0.2rem 0 0.3rem;
+      line-height: 1.6;
+      padding-left: 0.2rem;
+    }
+
+    /* ── Agent block ── */
+    .agent-block {
+      background: var(--surface);
+      border: 1px solid var(--edge);
+      border-left: 3px solid var(--teal);
+      border-radius: 4px;
+      padding: 1rem 1.2rem;
+      margin: 1.5rem 0;
+      font-size: 0.75rem;
+      line-height: 1.8;
+    }
+
+    .agent-block .label {
+      font-size: 0.58rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--teal);
+      margin-bottom: 0.5rem;
+    }
+
+    .agent-block ol {
+      margin: 0.4rem 0;
+      padding-left: 1.4rem;
+    }
+
+    .agent-block ol li {
+      font-size: 0.75rem;
+      padding: 0.15rem 0;
+      line-height: 1.8;
+    }
+
+    .agent-block ul { margin: 0.3rem 0; }
+
+    /* ── Source cards ── */
+    .source-group { margin: 1.2rem 0; }
+
+    .source-group-title {
+      font-family: 'Fraunces', serif;
+      font-weight: 500;
+      font-size: 0.82rem;
+      color: var(--bright);
+      margin-bottom: 0.4rem;
+      padding-left: 2px;
+    }
+
+    .source {
+      background: var(--deep);
+      border: 1px solid var(--edge);
+      border-radius: 4px;
+      padding: 0.6rem 0.9rem;
+      margin: 3px 0;
+      display: flex;
+      align-items: baseline;
+      gap: 0.8rem;
+    }
+
+    .source-name {
+      font-size: 0.75rem;
+      color: var(--bright);
+      font-weight: 500;
+      white-space: nowrap;
+      min-width: 130px;
+    }
+
+    .source-how {
+      font-size: 0.68rem;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .source-folder {
+      margin-left: auto;
+      font-size: 0.58rem;
+      letter-spacing: 0.06em;
+      color: var(--teal);
+      background: var(--raised);
+      padding: 0.1rem 0.4rem;
+      border-radius: 3px;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    /* ── Patterns ── */
+    .patterns {
+      background: var(--deep);
+      border: 1px solid var(--edge);
+      border-radius: 6px;
+      padding: 1rem 1.2rem;
+      margin: 1.5rem 0;
+    }
+
+    .patterns .label {
+      font-size: 0.6rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--purple);
+      margin-bottom: 0.5rem;
+    }
+
+    .patterns p { font-size: 0.72rem; }
+
+    /* ── Start box ── */
+    .start-box {
+      background: var(--deep);
+      border: 1px solid var(--edge);
+      border-radius: 6px;
+      padding: 1.2rem 1.2rem;
+      margin: 2rem 0;
+    }
+
+    .start-box .label {
+      font-size: 0.6rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--amber);
+      margin-bottom: 0.5rem;
+    }
+
+    .start-box p {
+      font-size: 0.72rem;
+      margin-bottom: 0.6rem;
+    }
+
+    footer {
+      margin-top: 3rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--edge);
+      font-size: 0.62rem;
+      color: var(--muted);
+    }
+
+    footer a {
+      color: var(--muted);
+      text-decoration: none;
+      border-bottom: 1px solid var(--edge);
+      transition: color 0.2s, border-color 0.2s;
+    }
+
+    footer a:hover { color: var(--amber); border-color: var(--amber-dim); }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .ani { animation: fadeUp 0.4s ease-out both; }
+    .d1 { animation-delay: 0.05s; }
+    .d2 { animation-delay: 0.1s; }
+
+    @media (min-height: 1000px) and (max-width: 800px) {
+      .shell { max-width: 92vw; padding: 2rem 4vw 3rem; }
+      .masthead h1 { font-size: 2.8rem; }
+      .masthead .sub { font-size: 0.95rem; }
+      .breadcrumb { font-size: 0.78rem; }
+      h2 { font-size: 1.3rem; }
+      h3 { font-size: 1.1rem; }
+      p, ul li { font-size: 0.98rem; }
+      .source-name { font-size: 0.92rem; }
+      .source-how { font-size: 0.85rem; }
+      .source-folder { font-size: 0.72rem; }
+      .source-group-title { font-size: 1.05rem; }
+      .agent-block { font-size: 0.92rem; }
+      .agent-block .label { font-size: 0.72rem; }
+      .agent-block ol li { font-size: 0.92rem; }
+      .patterns p, .patterns li { font-size: 0.9rem; }
+      .patterns .label { font-size: 0.72rem; }
+      .start-box .label { font-size: 0.72rem; }
+      .start-box p { font-size: 0.9rem; }
+      .cmd code { font-size: 0.9rem; }
+      .cmd-note { font-size: 0.8rem; }
+      footer { font-size: 0.75rem; }
+      pre { font-size: 0.85rem; }
+      pre code { font-size: 0.85rem; }
+      code { font-size: 0.88rem; }
+    }
+
+    @media (max-width: 600px) {
+      .shell { padding: 1.5rem 1rem 3rem; }
+      .masthead h1 { font-size: 1.5rem; }
+      .source { flex-wrap: wrap; gap: 0.3rem; }
+      .source-folder { margin-left: 0; }
+    }
+  </style>
+</head>
+<body>
+  <div class="shell">
+
+    <header class="masthead ani">
+      <div class="breadcrumb">
+        <a href="index.html">Shapes of Intelligence</a> / Meta-Guide
+      </div>
+      <h1>Guide-Based Development</h1>
+      <p class="sub">The guide that builds guides. A page you paste into an agent, and the agent builds the next page.</p>
+    </header>
+
+    <main class="ani d1">
+
+      <h2>What this is</h2>
+
+      <p>Every guide on this site has the same shape. A masthead. An explanation. Content sections. An agent instructions block with numbered steps and approval gates. A patterns section linking back to book chapters. A start box with copyable commands and a handoff prompt. Same CSS. Same typography. Same dark theme. Same bones.</p>
+
+      <p>This page describes that shape precisely enough that an agent can replicate it. You tell the agent what your guide is about. The agent builds the page. You review it. The guide enters the world already formatted, already linked, already consistent with every other guide on the site.</p>
+
+      <p>This is the <a href="book/02-working/07-solved-problems-stay-solved.html">Solved Problems Stay Solved</a> chapter applied to guide creation itself. The format is a solved problem. Don't re-solve it every time.</p>
+
+      <hr>
+
+      <h2>The anatomy</h2>
+
+      <p>Every guide has these sections, in this order. Some are optional, but the order never changes.</p>
+
+      <div class="source-group">
+        <div class="source-group-title">Required sections</div>
+        <div class="source">
+          <span class="source-name">Masthead</span>
+          <span class="source-how">Breadcrumb, h1 title, subtitle. The breadcrumb links back to index.html. The subtitle is one sentence, max 55 characters wide.</span>
+          <span class="source-folder">always</span>
+        </div>
+        <div class="source">
+          <span class="source-name">What this is</span>
+          <span class="source-how">2-3 paragraphs. What the guide does, why it exists, what book chapter it implements. Link to the chapter.</span>
+          <span class="source-folder">always</span>
+        </div>
+        <div class="source">
+          <span class="source-name">Content sections</span>
+          <span class="source-how">The meat. h2 for major sections, h3 for subsections. Separated by hr dividers. This is where the guide teaches.</span>
+          <span class="source-folder">always</span>
+        </div>
+        <div class="source">
+          <span class="source-name">Agent instructions</span>
+          <span class="source-how">A teal-bordered block with numbered steps. Approval gates between steps. Key rules paragraph at the end.</span>
+          <span class="source-folder">always</span>
+        </div>
+        <div class="source">
+          <span class="source-name">Patterns at work</span>
+          <span class="source-how">Links to book chapters that this guide implements. Bold chapter title, em-dash, one-line description.</span>
+          <span class="source-folder">always</span>
+        </div>
+        <div class="source">
+          <span class="source-name">Start box</span>
+          <span class="source-how">Copyable commands: cd to work folder, mkdir, cd, launch agent, paste handoff prompt with page URL.</span>
+          <span class="source-folder">always</span>
+        </div>
+        <div class="source">
+          <span class="source-name">Footer</span>
+          <span class="source-how">"Part of Shapes of Intelligence" link + GitHub link.</span>
+          <span class="source-folder">always</span>
+        </div>
+      </div>
+
+      <div class="source-group">
+        <div class="source-group-title">Optional sections</div>
+        <div class="source">
+          <span class="source-name">Output structure</span>
+          <span class="source-how">File/folder layout the agent creates. Uses source cards with name, description, and optional badges.</span>
+          <span class="source-folder">if applicable</span>
+        </div>
+        <div class="source">
+          <span class="source-name">Data sources</span>
+          <span class="source-how">Where the guide reads from. Same source card format with frequency badges (weekly, monthly, etc).</span>
+          <span class="source-folder">if applicable</span>
+        </div>
+        <div class="source">
+          <span class="source-name">Related guides</span>
+          <span class="source-how">Links to other guides on the site. Separate patterns block with purple label.</span>
+          <span class="source-folder">if applicable</span>
+        </div>
+      </div>
+
+      <hr>
+
+      <h2>The design system</h2>
+
+      <h3>Typography</h3>
+      <p><strong>Headings:</strong> Fraunces, serif. Weight 300 for h1 (2rem), weight 500 for h2 (1.05rem) and h3 (0.88rem).</p>
+      <p><strong>Body:</strong> DM Mono, monospace. 0.78rem for paragraphs and list items. Line-height 1.8.</p>
+      <p><strong>Emphasis:</strong> <code>strong</code> renders in <strong>bright white</strong>. <code>em</code> renders in <em>amber</em>, no italics.</p>
+
+      <h3>Color</h3>
+      <ul>
+        <li><strong>Background stack:</strong> void (#0a0a10) &rarr; deep (#0f0f1a) &rarr; surface (#161625) &rarr; raised (#1e1e32). Darker = further back.</li>
+        <li><strong>Text stack:</strong> muted (#8888aa) &rarr; text (#d0d0e2) &rarr; bright (#eeeef5) &rarr; white (#f5f5ff). Brighter = more important.</li>
+        <li><strong>Accent colors:</strong> amber for links and actions. Teal for agent/system elements. Purple for metadata. Rose for warnings. Blue for informational.</li>
+      </ul>
+
+      <h3>Components</h3>
+      <ul>
+        <li><strong>.cmd</strong> &mdash; Copyable command. Click to copy. Amber border flash on success. Contains <code>code</code> + copy icon SVG.</li>
+        <li><strong>.agent-block</strong> &mdash; Instructions for the AI agent. Teal left border. Numbered <code>ol</code> with approval gates.</li>
+        <li><strong>.source / .source-group</strong> &mdash; Data cards. Deep background, flex layout: name (bright, bold) | description (muted) | badge (teal on raised).</li>
+        <li><strong>.patterns</strong> &mdash; Chapter/guide links. Deep background, purple label. List of linked items with em-dash descriptions.</li>
+        <li><strong>.start-box</strong> &mdash; How to start. Deep background, amber label. Multiple .cmd blocks + handoff prompt with dynamic URL.</li>
+      </ul>
+
+      <h3>Responsive</h3>
+      <p>Two breakpoints. Tablet portrait (min-height 1000px, max-width 800px) scales everything up ~25%. Mobile (max-width 600px) wraps source cards and tightens padding. The shell max-width is 680px.</p>
+
+      <hr>
+
+      <h2>The agent instructions block</h2>
+
+      <p>This is the most important part of any guide. It's the section the agent reads when someone pastes <em>"Follow the instructions on this page."</em> Every guide has one. The structure is always the same.</p>
+
+      <h3>The pattern</h3>
+      <ul>
+        <li><strong>Opening instruction.</strong> One bold sentence: <em>"Walk the user through X, one step at a time."</em></li>
+        <li><strong>Numbered steps.</strong> Each step has a bold title and a plain-text explanation. Steps that produce output say <em>"Show the user"</em> or <em>"Wait for approval."</em></li>
+        <li><strong>Approval gates.</strong> The agent does not proceed past a gate until the user confirms. Gates appear after interview, after output review, after any write that touches system config.</li>
+        <li><strong>Key rules paragraph.</strong> At the bottom. Safety constraints, scope limits, what the agent should refuse to do silently. Always includes: <em>"If anything looks unsafe or beyond what the user would reasonably want, say so."</em></li>
+      </ul>
+
+      <h3>What makes a good step</h3>
+      <ul>
+        <li>One action per step. Don't combine "read the data" and "propose metrics."</li>
+        <li>Steps that read data come before steps that write data.</li>
+        <li>Steps that need human judgement have explicit approval gates.</li>
+        <li>The last step is always a summary or self-assessment &mdash; the agent reviews what it built.</li>
+      </ul>
+
+      <hr>
+
+      <h2>The handoff prompt</h2>
+
+      <p>Every guide ends with a start box containing three copyable commands:</p>
+
+      <ul>
+        <li><code>cd ~/work && mkdir project-name && cd project-name</code> &mdash; navigate and create the project folder.</li>
+        <li><code>claude</code> &mdash; launch the agent. (With a note: "Or use codex, gemini, or whichever agent you prefer.")</li>
+        <li>The handoff: <code>Follow the instructions on this page. If anything looks unsafe or beyond what I'd reasonably want, tell me before doing it: [page URL]</code></li>
+      </ul>
+
+      <p>The page URL is injected dynamically by JavaScript using <code>window.location.href</code>. This means the handoff prompt works regardless of where the page is hosted.</p>
+
+      <p>When an agent receives this prompt, it fetches the page, finds the agent instructions block (the HTML comment above it says <em>"This is the section you follow"</em>), and works through the numbered steps with the user.</p>
+
+      <hr>
+
+      <h2>Adding a new guide to the site</h2>
+
+      <h3>The file</h3>
+      <p>Create <code>reference/_meta/static/your-guide.html</code>. Copy the HTML structure from any existing guide. The CSS is self-contained in each file &mdash; no shared stylesheet, no framework. This is intentional: each page is a standalone document that can be read, copied, or served independently.</p>
+
+      <h3>The index card</h3>
+      <p>Add a card to <code>reference/_meta/static/index.html</code>. The card needs a title, one-line description, accent color, and tag (e.g., "full guide", "reference", "changelog").</p>
+
+      <h3>Cross-links</h3>
+      <p>Add the new guide to the "Related guides" section of any guide it connects to. If it implements a book chapter, add it to that chapter's "see also" if one exists.</p>
+
+      <h3>Build and deploy</h3>
+      <p><code>build.sh</code> copies static pages to <code>reference/site/</code>. Deploy with rsync. The <code>/publish</code> skill handles the full checklist.</p>
+
+      <hr>
+
+      <!--
+      ============================================================
+      INSTRUCTIONS FOR THE AI AGENT READING THIS PAGE.
+      You were told to "follow the instructions on this page."
+      This is the section you follow. Work through each stage
+      with the user. One stage at a time. Don't rush.
+      ============================================================
+      -->
+
+      <div class="agent-block">
+        <div class="label">Instructions for you, the AI agent</div>
+        <p><strong>Build a new guide page for the user's topic, following the established pattern exactly.</strong> Every section has an approval gate. Do not skip ahead.</p>
+        <ol>
+          <li><strong>Interview.</strong> Ask the user: What is the guide about? What problem does it solve? Which book chapter does it connect to? What data sources or systems does it involve? What should the output folder structure look like? Get enough context to write the page. <strong>Wait for answers.</strong></li>
+          <li><strong>Draft the masthead.</strong> Propose a title, subtitle, and breadcrumb. The subtitle should be one sentence that captures the guide's purpose. <strong>Show for approval.</strong></li>
+          <li><strong>Write the "What this is" section.</strong> 2-3 paragraphs. What the guide does, why it matters, what chapter it implements. Link to the chapter. <strong>Show for review.</strong></li>
+          <li><strong>Write the content sections.</strong> This is the guide's teaching material. Use h2 for major sections, h3 for subsections. Include data source cards, output structure cards, or examples as needed. Separate sections with hr dividers. <strong>Show each section for review before writing the next.</strong></li>
+          <li><strong>Write the agent instructions block.</strong> Numbered steps with approval gates. One action per step. Reading before writing. Human judgement steps gated. Key rules at the bottom. <strong>Show the full block for review.</strong></li>
+          <li><strong>Write the patterns section.</strong> Link to every book chapter this guide connects to. Bold title, em-dash, one-line description. Add a related guides section if the guide connects to other site pages. <strong>Show for review.</strong></li>
+          <li><strong>Assemble the page.</strong> Combine all approved sections into a complete HTML file. Use the standard CSS (copy from any existing guide). Add the start box with the three copyable commands. Add the footer. Write to <code>reference/_meta/static/</code>.</li>
+          <li><strong>Add the index card.</strong> Add a card for the new guide to <code>reference/_meta/static/index.html</code>. Choose the accent color and tag. <strong>Show for approval.</strong></li>
+          <li><strong>Cross-link.</strong> Add the new guide to the "Related guides" section of any connected guide pages. Add it to the slush pile's open threads as completed.</li>
+          <li><strong>Build and verify.</strong> Run <code>bash reference/_meta/build.sh</code> and confirm the page appears in the site output. Open in browser if possible.</li>
+        </ol>
+        <p><strong>Key rules:</strong> Use the exact CSS from an existing guide &mdash; do not invent new styles unless the content genuinely requires a new component. Keep the same typography, colors, spacing, and responsive breakpoints. Every guide is a standalone HTML file with no external dependencies beyond Google Fonts. The agent instructions block must include approval gates and a key rules paragraph. If the user's topic doesn't naturally fit the guide format (no clear agent workflow, no repeatable steps), say so &mdash; not everything is a guide.</p>
+      </div>
+
+      <hr>
+
+      <div class="patterns">
+        <div class="label">Patterns at work</div>
+        <ul>
+          <li><a href="book/02-working/07-solved-problems-stay-solved.html"><strong>Solved Problems Stay Solved</strong></a> &mdash; the guide format is a solved problem. This page makes sure it stays solved.</li>
+          <li><a href="book/02-working/06-memory-is-files.html"><strong>Memory Is Files</strong></a> &mdash; each guide is a file. The agent reads it, follows it, and the knowledge persists without anyone memorizing it.</li>
+          <li><a href="book/03-building/13-the-steering-file.html"><strong>The Steering File</strong></a> &mdash; the agent instructions block is a steering file for a single task. One read, permanent behavior change.</li>
+          <li><a href="book/01-learning/07-the-correction-is-the-conversation.html"><strong>The Correction Is the Conversation</strong></a> &mdash; each guide was refined through conversation. The corrections became the instructions.</li>
+          <li><a href="book/03-building/04-we-all-invented-calculus-at-the-same-time.html"><strong>We All Invented Calculus</strong></a> &mdash; the guide format is a shape that emerged from building six guides. This page documents the inevitable discovery.</li>
+        </ul>
+      </div>
+
+      <div class="patterns">
+        <div class="label">Related guides</div>
+        <ul>
+          <li><a href="flywheel.html">Flywheel</a> &mdash; mine your own process to find the next guide that needs building</li>
+          <li><a href="slush-pile.html">Slush Pile</a> &mdash; where guide ideas sit before they become pages</li>
+          <li><a href="maintenance.html">Maintenance</a> &mdash; keeping existing guides current</li>
+          <li><a href="zero-to-dev.html">Zero to Dev</a> &mdash; the first guide most people need</li>
+        </ul>
+      </div>
+
+      <hr>
+
+      <div class="start-box">
+        <div class="label">How to start</div>
+        <p>Open your terminal, navigate to the repo, and start an agent. Tell it what guide you want to build.</p>
+        <div class="cmd" onclick="copyCmd(this)">
+          <code>cd ~/work/aibook</code>
+          <span class="cc"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></span>
+        </div>
+        <div class="cmd" onclick="copyCmd(this)">
+          <code>claude</code>
+          <span class="cc"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></span>
+        </div>
+        <div class="cmd-note">Or use <strong>codex</strong>, <strong>gemini</strong>, or whichever agent you prefer.</div>
+        <div class="cmd" onclick="copyCmd(this)">
+          <code class="handoff-cmd">Follow the instructions on this page. I want to build a guide about [your topic]: <span class="page-url"></span></code>
+          <span class="cc"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></span>
+        </div>
+      </div>
+
+    </main>
+
+    <footer class="ani d2">
+      <p>Part of <a href="index.html">Shapes of Intelligence</a> &mdash; a companion reference for the book.</p>
+      <p><a href="https://github.com/nop2099/ai-book">GitHub</a></p>
+    </footer>
+
+  </div>
+
+  <script>
+    // Fill in page URLs
+    document.querySelectorAll('.page-url').forEach(el => {
+      el.textContent = window.location.href;
+    });
+
+    // Copy individual command
+    function copyCmd(el) {
+      const code = el.querySelector('code').textContent;
+      navigator.clipboard.writeText(code).then(() => {
+        el.classList.add('copied-cmd');
+        setTimeout(() => el.classList.remove('copied-cmd'), 1200);
+      });
+    }
+  </script>
+</body>
+</html>

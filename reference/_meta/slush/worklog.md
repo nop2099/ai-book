@@ -579,6 +579,104 @@ Different shape from the flywheel. The flywheel discovers friction you didn't kn
 - API keys — which ones expire? When? Who has access?
 - Subscriptions — what are you paying for? Is any of it unused?
 
+**Scheduler — what makes a good one**
+
+Inspired by TaskBridge. A scheduler isn't just cron. There are four kinds of scheduled work, and a good scheduler handles all of them:
+
+*The four types:*
+
+1. **Absolute.** Run at a specific time. "Generate the daily briefing at 6am." "Check SSL certs on the 1st of each month." This is cron. It works. But it's only one dimension.
+
+2. **Recurring.** Run on an interval relative to the last run. "Run the flywheel every 7 days." "Check backups every 3 days." Different from absolute because it drifts — if you run late, the next run shifts. This is what most personal scheduling actually is. You don't check your backups at exactly 9am Tuesday — you check them roughly weekly.
+
+3. **Delta.** Run when something changes. "When a new commit lands, run the PII scanner." "When a new message arrives, update the heat map." "When the status dashboard goes red, notify immediately." This is event-driven. The trigger is a change, not a clock. File watchers, webhooks, database triggers, inotify.
+
+4. **Event.** Run in response to a specific external event. "When I arrive at the office (location change), pull today's briefing." "When my calendar shows a meeting starting in 15 minutes, prep the context." "When an API key is 30 days from expiry, create a renewal task." Events are like deltas but from external systems — calendars, locations, health signals, environmental sensors.
+
+*Why this matters:*
+
+Most personal automation is cron-only. But the interesting scheduling is delta and event. The flywheel should run weekly (recurring), but also when a new conversation transcript appears (delta). The daily briefing runs at 6am (absolute), but also when you ask for it (event — the ask is the trigger). The maintenance check runs daily (absolute), but also when a deploy happens (delta).
+
+*A good scheduler:*
+- Handles all four types with a unified interface
+- Persists schedule state across restarts (SQLite, file, whatever)
+- Logs every run: when, what triggered it, duration, result (pass/fail/skip)
+- Supports dependencies: "run B after A completes"
+- Supports conditions: "only run if the previous run was more than N hours ago" (debounce)
+- Supports backoff: "if it failed, wait longer before retrying"
+- Is observable: you can ask "when did this last run?" and "what's scheduled next?"
+- Self-manages: if a schedule is consistently unused or failing, it proposes changes
+
+*Implementation notes:*
+- TaskBridge model: tasks as first-class objects with metadata (created, due, recurring, status, tags)
+- Could be a Claude Code hook: `post_tool_call` triggers that fire on file changes
+- Could be a cron wrapper that reads a `schedule.md` file and dispatches accordingly
+- Could be an MCP server that exposes scheduling as tools
+- The scheduler is itself a system in the maintenance guide — it has health checks and a runbook
+
+*The shape:* a scheduler is the clock of the operating system. The flywheel is the brain, the daily briefing is the eyes, maintenance is the immune system, and the scheduler is the heartbeat that makes them all run.
+
+*Connects to:*
+- Every guide (they all need scheduling)
+- The Flywheel (manages its own schedule, but needs something to tick it)
+- Maintenance (scheduler health is a critical system to monitor)
+- Don't Ask Me to Track It (the scheduler tracks timing so you don't)
+- The Steering File (schedule config could live in CLAUDE.md or a dedicated file)
+
+**Google Meet Mining — extracting text and screenshots from video calls**
+
+A guide for turning Google Meet recordings into searchable, referenceable artifacts. The meeting is data. The recording sits in Google Drive. You just haven't read it yet.
+
+*The problem:* You had a meeting. Important things were said. Decisions were made. Screenshots were shown. A week later, you can't remember the details. The recording exists but it's a 47-minute video file — nobody's going to scrub through that. The value is locked in an unwatchable format.
+
+*The extraction pipeline:*
+
+1. **Get the recording.** Google Meet recordings land in the organizer's Google Drive under "Meet Recordings." Use rclone or the Drive API to pull the video file. If you set up <a href="oauth-setup.html">OAuth credentials</a>, this is automatic.
+
+2. **Extract the transcript.** Google auto-generates captions (SBV/SRT format) alongside the recording. Pull those — they're already text. If captions aren't available, run the audio through Whisper (local, free, accurate). `whisper meeting.mp4 --model medium --output_format txt`. The transcript is the highest-value output.
+
+3. **Extract screenshots.** Use ffmpeg to pull frames at intervals: `ffmpeg -i meeting.mp4 -vf "fps=1/30" -q:v 2 frames/frame_%04d.jpg` — one frame every 30 seconds. Then use an LLM with vision to identify which frames contain slides, screenshares, or whiteboard content vs. talking heads. Keep the content frames, discard the faces.
+
+4. **Identify key frames.** Scene detection catches transitions: `ffmpeg -i meeting.mp4 -vf "select='gt(scene,0.3)'" -vsync vfn keyframes/frame_%04d.jpg`. These are the moments where the screen changed — usually a new slide, a code demo, or a screenshare switch. Higher signal density than fixed intervals.
+
+5. **Combine into a meeting summary.** Feed the transcript + key screenshots to an LLM. Ask for: decisions made, action items assigned, questions raised, topics discussed, and any URLs or references mentioned. Output as markdown with embedded screenshot references.
+
+6. **Store in the wall.** The transcript, screenshots, and summary land in `wall/meetings/YYYY-MM-DD-meeting-name/`. The meeting is now searchable, quotable, and referenceable.
+
+*The output structure:*
+```
+meetings/2026-03-10-team-standup/
+├── recording.mp4          (or symlink to Drive)
+├── transcript.txt         (auto-captions or Whisper)
+├── transcript.srt         (timestamped captions)
+├── frames/                (key screenshots)
+├── summary.md             (LLM-generated: decisions, actions, topics)
+└── meta.md                (date, attendees, duration, source)
+```
+
+*Agent instructions shape:*
+1. Ask: which meeting? (provide Drive link, file path, or search by date)
+2. Pull the recording and captions from Drive
+3. If no captions, run Whisper locally
+4. Extract key frames via scene detection
+5. Filter frames: keep slides/code/whiteboard, discard talking heads
+6. Generate summary with decisions, actions, questions
+7. Write everything to `wall/meetings/` or user's preferred location
+8. Show the summary for review
+
+*Privacy notes:*
+- Meeting recordings may contain sensitive discussion — confirm before processing
+- Transcripts may include names, roles, project codenames — flag PII
+- Frame extraction may capture personal screens — ask before keeping anything unexpected
+- Don't upload recordings to external services for transcription without consent
+
+*Connects to:*
+- Wall of Data (meetings are a data source — the wall collects them)
+- Your Data Is Already Yours (the recording already exists in Drive)
+- The Flywheel (meeting friction is observable — "we discussed this three times" is a papercut)
+- The Context Gold Mine (meeting summaries are context for future conversations)
+- Daily Briefing (today's meeting outcomes can appear in tomorrow's briefing)
+
 ## Open threads
 
 **Ready to run:**
@@ -596,10 +694,12 @@ Different shape from the flywheel. The flywheel discovers friction you didn't kn
 - [ ] Docker, API keys, hosting, AI defaults
 - [x] Google Cloud project + OAuth credential setup guide (done — oauth-setup.html)
 - [x] Flywheel — mine your own process for papercuts (done — flywheel.html)
-- [ ] Daily Briefing — morning dashboard generated by agents (Shape of a Day as a guide)
+- [x] Daily Briefing — morning dashboard generated by agents (done — daily-briefing.html)
 - [ ] Slush Pile — deferred TODO list for every project, including yourself (Memory Is Files as a guide)
 - [ ] Guide-Based Development — a meta-guide for making guides (the guide that builds guides)
-- [ ] Maintenance Guide — keeping the lights on (ops, runbooks, health checks, status dashboard)
+- [x] Maintenance Guide — keeping the lights on (done — maintenance.html)
+- [ ] Google Meet Mining — extract transcripts and screenshots from video call recordings
+- [ ] Scheduler — unified scheduling across absolute, recurring, delta, and event triggers
 - [ ] The Roster, reimplement-don't-import
 
 **Project shape pages to write:**

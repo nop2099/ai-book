@@ -558,14 +558,14 @@
         <p><strong>Walk the user through the flywheel layers, one at a time.</strong> Every layer has an approval gate &mdash; do not proceed until the user confirms.</p>
         <ol>
           <li><strong>Interview.</strong> Ask the user: which data sources should you scan? Start with just one (conversations are the easiest). How far back? What kinds of friction bother them most? Confirm locations before reading anything.</li>
-          <li><strong>Observe.</strong> Read the data source. Log observations as dated facts with no judgement. <em>"2026-03-10: asked about SSH key permissions (4th occurrence across 3 sessions)."</em> Write observations to <code>papercuts/observations/</code> with one file per scan run. <strong>Show the top observations to the user.</strong></li>
-          <li><strong>Identify metrics.</strong> From the observations, propose measurable signals. <em>"SSH re-asks per week: currently 4."</em> <em>"Time to first commit on new projects: ~45 min."</em> The observations suggest the metrics &mdash; don't invent metrics that aren't grounded in what you found. Write to <code>papercuts/metrics.md</code>. <strong>Wait for approval.</strong></li>
-          <li><strong>Identify causal links.</strong> If scanning multiple sources, look for correlations. <em>"SSH questions spike after new project creation."</em> <em>"Zero-commit days correlate with 3+ meetings."</em> These are hypotheses, not certainties &mdash; label them as such. Write to <code>papercuts/causals.md</code>. <strong>Show for review.</strong></li>
-          <li><strong>Propose interventions.</strong> For each metric, draft a concrete fix. A steering file addition, a shell alias, a script, a calendar block, a habit change. Each intervention targets a specific metric. Show each fix to the user for approval before writing it to <code>papercuts/fixes/</code>.</li>
-          <li><strong>Set subgoals.</strong> For each approved intervention, define the target: <em>"SSH re-asks: 4/week &rarr; 0/week."</em> Write to <code>papercuts/subgoals.md</code>. This is a living document &mdash; add new subgoals, update progress, drop ones that flatline.</li>
-          <li><strong>Track wins.</strong> Write <code>papercuts/wins.md</code> with before-and-after measurements. Write <code>papercuts/log.md</code> with today's date and a summary.</li>
+          <li><strong>Observe.</strong> Read the data source. Log observations as dated facts with no judgement. <em>"2026-03-10: asked about SSH key permissions (4th occurrence across 3 sessions)."</em> Write observations to <code>flywheel/observations/</code> with one file per scan run. <strong>Show the top observations to the user.</strong></li>
+          <li><strong>Identify metrics.</strong> From the observations, propose measurable signals. <em>"SSH re-asks per week: currently 4."</em> <em>"Time to first commit on new projects: ~45 min."</em> The observations suggest the metrics &mdash; don't invent metrics that aren't grounded in what you found. Write to <code>flywheel/metrics.md</code>. <strong>Wait for approval.</strong></li>
+          <li><strong>Identify causal links.</strong> If scanning multiple sources, look for correlations. <em>"SSH questions spike after new project creation."</em> <em>"Zero-commit days correlate with 3+ meetings."</em> These are hypotheses, not certainties &mdash; label them as such. Write to <code>flywheel/causals.md</code>. <strong>Show for review.</strong></li>
+          <li><strong>Propose interventions.</strong> For each metric, draft a concrete fix. A steering file addition, a shell alias, a script, a calendar block, a habit change. Each intervention targets a specific metric. Show each fix to the user for approval before writing it to <code>flywheel/fixes/</code>.</li>
+          <li><strong>Set subgoals.</strong> For each approved intervention, define the target: <em>"SSH re-asks: 4/week &rarr; 0/week."</em> Write to <code>flywheel/subgoals.md</code>. This is a living document &mdash; add new subgoals, update progress, drop ones that flatline.</li>
+          <li><strong>Track wins.</strong> Write <code>flywheel/wins.md</code> with before-and-after measurements. Write <code>flywheel/log.md</code> with today's date and a summary.</li>
           <li><strong>Schedule.</strong> Suggest how to automate the next flywheel run. A cron job, a calendar reminder, a note in the steering file. The flywheel should run at least monthly. Let the user choose.</li>
-          <li><strong>Self-assess.</strong> Review the flywheel's own performance. Is the schedule right? Are collection engines producing useful observations? Are there data sources that should be added or dropped? Write any self-improvement proposals to <code>papercuts/fixes/</code> &mdash; the flywheel is its own project. Update its own skills and cadence based on what it finds.</li>
+          <li><strong>Self-assess.</strong> Review the flywheel's own performance. Is the schedule right? Are collection engines producing useful observations? Are there data sources that should be added or dropped? Write any self-improvement proposals to <code>flywheel/fixes/</code> &mdash; the flywheel is its own project. Update its own skills and cadence based on what it finds.</li>
         </ol>
         <p><strong>Key rules:</strong> Observations are facts, not judgements. Present the top 5-10 findings first and let the user guide priority. Don't write any fix files without explicit approval. If a fix touches system config (shell profile, cron, etc.), explain exactly what it does before proceeding. If anything looks unsafe or beyond what the user would reasonably want, say so. This process works with a single data source &mdash; don't pressure the user to connect everything at once. The flywheel treats itself as a project &mdash; it observes its own friction and proposes improvements to its own process.</p>
       </div>
@@ -580,7 +580,7 @@
 
       <ul>
         <li><strong>Calendar block.</strong> A recurring event that says "run the flywheel." You open your terminal, paste the handoff prompt, and walk through it with an agent. Lowest friction to set up.</li>
-        <li><strong>Steering file reminder.</strong> Add a line to your CLAUDE.md: <em>"If it's been more than a week since the last flywheel run, remind me."</em> The agent checks <code>papercuts/log.md</code> on startup.</li>
+        <li><strong>Steering file reminder.</strong> Add a line to your CLAUDE.md: <em>"If it's been more than a week since the last flywheel run, remind me."</em> The agent checks <code>flywheel/log.md</code> on startup.</li>
         <li><strong>Cron job.</strong> Schedule collection engines to run automatically and dump observations. You review them when you're ready. The observation layer runs unattended; the interpretation layers need you.</li>
         <li><strong>Nightly consolidation.</strong> The full Kai architecture: engines run at 3am, observations land in the event database, causal analysis runs across all sources, and you wake up to a briefing. This is the endgame &mdash; not where you start.</li>
       </ul>
@@ -603,7 +603,7 @@
         <li><strong>Causal map.</strong> What connects to what across data sources. A graph of observations, metrics, and interventions. This is where you see the shape of your friction.</li>
       </ul>
 
-      <p>The dashboard reads <code>papercuts/</code> and renders it. Static HTML, same as this page. The flywheel generates the data; the dashboard makes it visible. If the dashboard is missing something, the flywheel observes that too.</p>
+      <p>The dashboard reads <code>flywheel/</code> and renders it. Static HTML, same as this page. The flywheel generates the data; the dashboard makes it visible. If the dashboard is missing something, the flywheel observes that too.</p>
 
       <hr>
 
@@ -633,9 +633,9 @@
 
       <div class="start-box">
         <div class="label">How to start</div>
-        <p>Open your terminal, create the papercuts folder, start an agent, and hand it this page.</p>
+        <p>Open your terminal, navigate to your work folder (wherever you keep projects &mdash; <code>~/work</code>, <code>~/projects</code>, <code>~/dev</code>, wherever), create the flywheel folder, and start an agent.</p>
         <div class="cmd" onclick="copyCmd(this)">
-          <code>mkdir papercuts && cd papercuts</code>
+          <code>cd ~/work && mkdir flywheel && cd flywheel</code>
           <span class="cc"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></span>
         </div>
         <div class="cmd" onclick="copyCmd(this)">

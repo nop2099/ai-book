@@ -34,6 +34,9 @@
       line-height: 1.7;
       min-height: 100vh;
     }
+    a { color: var(--amber); text-decoration: none; }
+    a:visited { color: var(--amber); }
+    a:hover { color: var(--text); }
 
     body::before {
       content: '';
@@ -368,11 +371,11 @@
         </div>
         <div class="term">
           <dt>Context</dt>
-          <dd>What the AI knows right now. The files it's read, the conversation so far, the instructions you gave it. More context = better answers. Too much context = confused answers.</dd>
+          <dd>What the AI knows right now. The files it's read, the conversation so far, the instructions you gave it. More context = better answers. Too much context = confused answers. <a href="book/04-living/07-the-context-gold-mine.html">Read the chapter &rarr;</a></dd>
         </div>
         <div class="term">
           <dt>Steering file <span class="aka">— CLAUDE.md, .codex, etc.</span></dt>
-          <dd>A file in your project that tells the agent how to behave. Preferences, conventions, things to remember. The agent reads it automatically when it starts. Like a briefing document for a new team member.</dd>
+          <dd>A file in your project that tells the agent how to behave. Preferences, conventions, things to remember. The agent reads it automatically when it starts. Like a briefing document for a new team member. <a href="book/03-building/13-the-steering-file.html">Read the chapter &rarr;</a></dd>
         </div>
         <div class="term">
           <dt>Handoff</dt>
@@ -380,11 +383,11 @@
         </div>
         <div class="term">
           <dt>Token</dt>
-          <dd>The unit AI models think in. Roughly one word or part of a word. Models have a context window measured in tokens &mdash; that's how much they can hold in mind at once.</dd>
+          <dd>The unit AI models think in. Roughly one word or part of a word. Models have a <a href="book/04-living/07-the-context-gold-mine.html">context window</a> measured in tokens &mdash; that's how much they can hold in mind at once.</dd>
         </div>
         <div class="term">
           <dt>Corpus</dt>
-          <dd>A collection of text used as source material. Your emails, documents, notes, chat logs. The raw data a chatbot or FAQ is generated from.</dd>
+          <dd>A collection of text used as source material. Your emails, documents, notes, chat logs. The raw data a chatbot or FAQ is generated from. <a href="30-chatbot.html">Build one &rarr;</a></dd>
         </div>
       </dl>
 

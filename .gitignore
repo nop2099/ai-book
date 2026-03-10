@@ -13,6 +13,9 @@ skills/
 split_book.py
 archive/
 
+# Reference data with credentials
+reference/wall-of-data/
+
 # Build output and tooling
 reference/site/
 reference/_meta/.venv/

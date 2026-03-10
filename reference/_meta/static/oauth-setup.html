@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Your Own Credentials — Shapes of Intelligence</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,700;1,9..144,300&display=swap');
+
+    :root {
+      --void: #0a0a10;
+      --deep: #0f0f1a;
+      --surface: #161625;
+      --raised: #1e1e32;
+      --edge: #2a2a44;
+      --muted: #8888aa;
+      --text: #d0d0e2;
+      --bright: #eeeef5;
+      --white: #f5f5ff;
+      --amber: #e8a83e;
+      --amber-dim: #c4882a;
+      --teal: #4ecdc4;
+      --rose: #e85577;
+      --blue: #5588dd;
+      --purple: #9977dd;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'DM Mono', 'SF Mono', monospace;
+      background: var(--void);
+      color: var(--text);
+      line-height: 1.7;
+      min-height: 100vh;
+    }
+    a { color: var(--amber); text-decoration: none; }
+    a:visited { color: var(--amber); }
+    a:hover { color: var(--text); }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 9999;
+    }
+
+    .shell {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 3rem 1.5rem 4rem;
+    }
+
+    .masthead {
+      padding: 1.5rem 0 2rem;
+      border-bottom: 1px solid var(--edge);
+      margin-bottom: 2.5rem;
+      position: relative;
+    }
+
+    .masthead::after {
+      content: '';
+      position: absolute;
+      bottom: -1px;
+      left: 0;
+      width: 60px;
+      height: 1px;
+      background: var(--amber);
+    }
+
+    .breadcrumb {
+      font-size: 0.65rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 0.8rem;
+    }
+
+    .breadcrumb a {
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .breadcrumb a:hover { color: var(--amber); }
+
+    .masthead h1 {
+      font-family: 'Fraunces', serif;
+      font-weight: 300;
+      font-size: 2rem;
+      color: var(--white);
+      letter-spacing: -0.01em;
+    }
+
+    .masthead .sub {
+      color: var(--muted);
+      font-size: 0.75rem;
+      margin-top: 0.4rem;
+      letter-spacing: 0.03em;
+      line-height: 1.8;
+      max-width: 55ch;
+    }
+
+    h2 {
+      font-family: 'Fraunces', serif;
+      font-weight: 500;
+      font-size: 1.05rem;
+      color: var(--bright);
+      margin: 2.2rem 0 0.6rem;
+    }
+
+    h2:first-of-type { margin-top: 0; }
+
+    h3 {
+      font-family: 'Fraunces', serif;
+      font-weight: 500;
+      font-size: 0.88rem;
+      color: var(--text);
+      margin: 1.5rem 0 0.5rem;
+    }
+
+    p {
+      font-size: 0.78rem;
+      margin-bottom: 0.8rem;
+      line-height: 1.8;
+    }
+
+    strong { color: var(--bright); }
+    em { color: var(--amber); font-style: normal; }
+
+    ul {
+      list-style: none;
+      margin: 0.6rem 0 1rem 0;
+      padding: 0;
+    }
+
+    ul li {
+      font-size: 0.78rem;
+      padding: 0.2rem 0 0.2rem 1.2rem;
+      position: relative;
+      line-height: 1.8;
+    }
+
+    ul li::before {
+      content: '\2013';
+      position: absolute;
+      left: 0;
+      color: var(--muted);
+    }
+
+    hr {
+      border: none;
+      border-top: 1px solid var(--edge);
+      margin: 2rem 0;
+    }
+
+    /* ── Inline copyable commands ── */
+    .cmd {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--surface);
+      border: 1px solid var(--edge);
+      border-radius: 4px;
+      padding: 0.4rem 0.7rem;
+      margin: 0.35rem 0;
+      cursor: pointer;
+      transition: border-color 0.2s;
+    }
+
+    .cmd:hover { border-color: #3a3a55; }
+
+    .cmd code {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.73rem;
+      color: var(--bright);
+      flex: 1;
+      user-select: all;
+    }
+
+    .cmd .cc {
+      flex-shrink: 0;
+      width: 18px;
+      height: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0.4;
+      transition: opacity 0.2s;
+    }
+
+    .cmd:hover .cc { opacity: 0.8; }
+
+    .cmd .cc svg {
+      width: 13px;
+      height: 13px;
+      fill: none;
+      stroke: var(--muted);
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .cmd.copied-cmd { border-color: var(--amber-dim); }
+    .cmd.copied-cmd .cc { opacity: 1; }
+    .cmd.copied-cmd .cc svg { stroke: var(--amber); }
+
+    .cmd-note {
+      font-size: 0.65rem;
+      color: var(--muted);
+      margin: 0.2rem 0 0.3rem;
+      line-height: 1.6;
+      padding-left: 0.2rem;
+    }
+
+    /* ── Agent block ── */
+    .agent-block {
+      background: var(--surface);
+      border: 1px solid var(--edge);
+      border-left: 3px solid var(--teal);
+      border-radius: 4px;
+      padding: 1rem 1.2rem;
+      margin: 1.5rem 0;
+      font-size: 0.75rem;
+      line-height: 1.8;
+    }
+
+    .agent-block .label {
+      font-size: 0.58rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--teal);
+      margin-bottom: 0.5rem;
+    }
+
+    .agent-block ol {
+      margin: 0.4rem 0;
+      padding-left: 1.4rem;
+    }
+
+    .agent-block ol li {
+      font-size: 0.75rem;
+      padding: 0.15rem 0;
+      line-height: 1.8;
+    }
+
+    .agent-block ul { margin: 0.3rem 0; }
+
+    /* ── Source category cards ── */
+    .source-group {
+      margin: 1.2rem 0;
+    }
+
+    .source-group-title {
+      font-family: 'Fraunces', serif;
+      font-weight: 500;
+      font-size: 0.82rem;
+      color: var(--bright);
+      margin-bottom: 0.4rem;
+      padding-left: 2px;
+    }
+
+    .source {
+      background: var(--deep);
+      border: 1px solid var(--edge);
+      border-radius: 4px;
+      padding: 0.6rem 0.9rem;
+      margin: 3px 0;
+      display: flex;
+      align-items: baseline;
+      gap: 0.8rem;
+    }
+
+    .source-name {
+      font-size: 0.75rem;
+      color: var(--bright);
+      font-weight: 500;
+      white-space: nowrap;
+      min-width: 110px;
+    }
+
+    .source-how {
+      font-size: 0.68rem;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .source-folder {
+      margin-left: auto;
+      font-size: 0.58rem;
+      letter-spacing: 0.06em;
+      color: var(--teal);
+      background: var(--raised);
+      padding: 0.1rem 0.4rem;
+      border-radius: 3px;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    /* ── Patterns ── */
+    .patterns {
+      background: var(--deep);
+      border: 1px solid var(--edge);
+      border-radius: 6px;
+      padding: 1rem 1.2rem;
+      margin: 1.5rem 0;
+    }
+
+    .patterns .label {
+      font-size: 0.6rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--purple);
+      margin-bottom: 0.5rem;
+    }
+
+    .patterns p { font-size: 0.72rem; }
+
+    /* ── Start box ── */
+    .start-box {
+      background: var(--deep);
+      border: 1px solid var(--edge);
+      border-radius: 6px;
+      padding: 1.2rem 1.2rem;
+      margin: 2rem 0;
+    }
+
+    .start-box .label {
+      font-size: 0.6rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--amber);
+      margin-bottom: 0.5rem;
+    }
+
+    .start-box p {
+      font-size: 0.72rem;
+      margin-bottom: 0.6rem;
+    }
+
+    footer {
+      margin-top: 3rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--edge);
+      font-size: 0.62rem;
+      color: var(--muted);
+    }
+
+    footer a {
+      color: var(--muted);
+      text-decoration: none;
+      border-bottom: 1px solid var(--edge);
+      transition: color 0.2s, border-color 0.2s;
+    }
+
+    footer a:hover { color: var(--amber); border-color: var(--amber-dim); }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .ani { animation: fadeUp 0.4s ease-out both; }
+    .d1 { animation-delay: 0.05s; }
+    .d2 { animation-delay: 0.1s; }
+
+    @media (min-height: 1000px) and (max-width: 800px) {
+      .shell { max-width: 92vw; padding: 2rem 4vw 3rem; }
+      .masthead h1 { font-size: 2.8rem; }
+      .masthead .sub { font-size: 0.95rem; }
+      .breadcrumb { font-size: 0.78rem; }
+      h2 { font-size: 1.3rem; }
+      h3 { font-size: 1.1rem; }
+      p, ul li { font-size: 0.98rem; }
+      .source-name { font-size: 0.92rem; }
+      .source-how { font-size: 0.85rem; }
+      .source-folder { font-size: 0.72rem; }
+      .source-group-title { font-size: 1.05rem; }
+      .agent-block { font-size: 0.92rem; }
+      .agent-block .label { font-size: 0.72rem; }
+      .agent-block ol li { font-size: 0.92rem; }
+      .patterns p, .patterns li { font-size: 0.9rem; }
+      .patterns .label { font-size: 0.72rem; }
+      .start-box .label { font-size: 0.72rem; }
+      .start-box p { font-size: 0.9rem; }
+      .cmd code { font-size: 0.9rem; }
+      .cmd-note { font-size: 0.8rem; }
+      footer { font-size: 0.75rem; }
+    }
+
+    @media (max-width: 600px) {
+      .shell { padding: 1.5rem 1rem 3rem; }
+      .masthead h1 { font-size: 1.5rem; }
+      .source { flex-wrap: wrap; gap: 0.3rem; }
+      .source-folder { margin-left: 0; }
+    }
+  </style>
+</head>
+<body>
+  <div class="shell">
+
+    <header class="masthead ani">
+      <div class="breadcrumb">
+        <a href="index.html">Shapes of Intelligence</a> / Project Guide
+      </div>
+      <h1>Your Own Credentials</h1>
+      <p class="sub">Set up a Google Cloud project so you can access your own data. Email, calendar, drive, photos &mdash; all through APIs you control.</p>
+    </header>
+
+    <main class="ani d1">
+
+      <h2>Why you need this</h2>
+
+      <p>You own your data. But to access it programmatically, you need credentials &mdash; an OAuth client that proves you're you. Google (and others) require this even for your own data. Without credentials, you can't write scripts, use CLI tools, or connect MCP servers to your personal accounts.</p>
+
+      <p>This guide walks you through creating a Google Cloud project, enabling APIs, and setting up OAuth. An agent can do most of the work &mdash; you handle the browser clicks.</p>
+
+      <h2>What you'll end up with</h2>
+
+      <ul>
+        <li>A <strong>Google Cloud project</strong> (free tier, no billing required for personal use)</li>
+        <li><strong>OAuth credentials</strong> (a JSON file) that tools like rclone, custom scripts, and MCP servers can use</li>
+        <li><strong>APIs enabled</strong> for your personal data: Drive, Gmail, Calendar, Photos, YouTube, and more</li>
+      </ul>
+
+      <hr>
+
+      <h2>The pain points</h2>
+
+      <p>Google's OAuth setup is confusing by design. Here's what trips people up, so you know what to expect.</p>
+
+      <h3>Credential types matter</h3>
+
+      <p><strong>Desktop (installed)</strong> vs <strong>Web</strong> vs <strong>Service Account</strong>. For CLI tools and personal scripts, you almost always want <em>Desktop</em>. Getting this wrong is the #1 reason OAuth fails. Web credentials need a redirect server. Service accounts can't access personal data. Desktop credentials pop a browser for consent and hand back a token.</p>
+
+      <h3>The consent screen trap</h3>
+
+      <p>Google treats your own unverified app as untrusted. You must add <strong>your own email as a test user</strong> on the OAuth consent screen. If you skip this, you'll get an "Access blocked" error that tells you nothing useful. This trips up everyone.</p>
+
+      <h3>SSH passthrough</h3>
+
+      <p>When running from a remote server or through an agent, the browser redirect can't reach you. rclone wants <code>localhost:53682</code> but there's no browser. You need to either forward the port via SSH (<code>ssh -L 53682:localhost:53682</code>) or use the manual copy-paste flow.</p>
+
+      <h3>The localhost trick</h3>
+
+      <p>Set redirect URI to <code>http://localhost</code>. OAuth redirects there with the token in the URL. It fails &mdash; nothing's listening. But the URL in the address bar has the auth code. Copy it. Paste it. <strong>The failure IS the workflow.</strong> This is how headless OAuth works when you don't have a server running.</p>
+
+      <hr>
+
+      <h2>APIs to enable</h2>
+
+      <p>Enable the ones you need. You can always come back and add more later. All are free for personal use at reasonable volumes.</p>
+
+      <div class="source-group">
+        <div class="source">
+          <span class="source-name">Google Drive API</span>
+          <span class="source-how">Read/write files, folder structure, sharing metadata</span>
+        </div>
+        <div class="source">
+          <span class="source-name">Gmail API</span>
+          <span class="source-how">Read emails, search, labels</span>
+        </div>
+        <div class="source">
+          <span class="source-name">Google Calendar API</span>
+          <span class="source-how">Events, free/busy, attendees</span>
+        </div>
+        <div class="source">
+          <span class="source-name">Photos Library API</span>
+          <span class="source-how">Albums, photos, metadata</span>
+        </div>
+        <div class="source">
+          <span class="source-name">YouTube Data API v3</span>
+          <span class="source-how">Watch history, liked videos, playlists</span>
+        </div>
+        <div class="source">
+          <span class="source-name">People API</span>
+          <span class="source-how">Contacts, contact groups</span>
+        </div>
+        <div class="source">
+          <span class="source-name">Google Tasks API</span>
+          <span class="source-how">Task lists and tasks</span>
+        </div>
+        <div class="source">
+          <span class="source-name">Fitness API</span>
+          <span class="source-how">Steps, heart rate, sleep, workouts</span>
+        </div>
+        <div class="source">
+          <span class="source-name">Google Sheets API</span>
+          <span class="source-how">Read/write spreadsheet data</span>
+        </div>
+        <div class="source">
+          <span class="source-name">Google Docs API</span>
+          <span class="source-how">Read/write document content</span>
+        </div>
+        <div class="source">
+          <span class="source-name">Vertex AI API</span>
+          <span class="source-how">Gemini models, embeddings, AI tools</span>
+        </div>
+      </div>
+
+      <hr>
+
+      <h2>The setup</h2>
+
+      <p>Start your agent, paste the handoff prompt below, and it walks you through each step. You do the browser clicks &mdash; the agent tells you exactly what to click.</p>
+
+      <!--
+      ============================================================
+      INSTRUCTIONS FOR THE AI AGENT READING THIS PAGE.
+      You were told to "follow the instructions on this page."
+      This is the section you follow. Walk the user through
+      OAuth credential setup, one step at a time. Don't rush.
+      ============================================================
+      -->
+
+      <div class="agent-block">
+        <div class="label">Instructions for you, the AI agent</div>
+        <p><strong>Walk the user through these steps, one at a time.</strong> Do NOT try to do the browser steps yourself &mdash; tell the user what to click and wait for confirmation before moving on.</p>
+        <ol>
+          <li><strong>Create a Google Cloud project.</strong> Direct the user to <code>console.cloud.google.com</code>. Click the project dropdown at the top &rarr; New Project. Name it something descriptive (e.g., "wall", "my-data", "personal"). Note the project ID &mdash; you'll need it later.</li>
+          <li><strong>Set up the OAuth consent screen.</strong> In the left sidebar: APIs &amp; Services &rarr; OAuth consent screen. User type: <em>External</em>. App name: same as the project. Add the user's email as a test user. <strong>This step is critical</strong> &mdash; skipping the test user causes "Access blocked" errors that tell you nothing useful.</li>
+          <li><strong>Create OAuth credentials.</strong> APIs &amp; Services &rarr; Credentials &rarr; Create Credentials &rarr; OAuth client ID. Application type: <em>Desktop app</em>. Name it (e.g., "wall-scrape"). Download the JSON file. Save it to a <code>creds/</code> folder in the project directory.</li>
+          <li><strong>Enable APIs.</strong> APIs &amp; Services &rarr; Library. Walk through the list above, enabling each one the user wants. Batch them &mdash; the user can click through the API Library quickly. Search for each API name, click it, click Enable.</li>
+          <li><strong>Configure rclone</strong> (if the user wants Drive access). Install: <code>brew install rclone</code> (Mac) or <code>winget install Rclone.Rclone</code> (Windows). Run <code>rclone config</code> in a separate terminal. Choose "New remote", type "drive", use the custom <code>client_id</code> and <code>client_secret</code> from the downloaded JSON. Scope: <code>drive</code>. Follow the browser OAuth flow.</li>
+          <li><strong>Test it.</strong> <code>rclone lsd gdrive:</code> should list Drive folders. <code>rclone size gdrive:</code> shows total size. If it fails with "Access blocked", go back to step 2 and make sure the user's email is added as a test user.</li>
+          <li><strong>Store credentials safely.</strong> The JSON file contains your client secret. Don't commit it to git. Add <code>creds/</code> to <code>.gitignore</code>. Note the project ID and client ID in a safe place &mdash; you'll need them when configuring other tools.</li>
+        </ol>
+        <p><strong>SSH / headless environments:</strong> If the user is working over SSH or in a terminal without a browser, use the manual copy-paste flow. Set the redirect URI to <code>http://localhost</code>. The OAuth redirect will fail (nothing's listening), but the auth code is in the URL bar. Copy it. Paste it back into the terminal. This is expected behavior, not an error.</p>
+      </div>
+
+      <hr>
+
+      <h2>Tools that use these credentials</h2>
+
+      <ul>
+        <li><strong>rclone</strong> &mdash; Google Drive, OneDrive, Dropbox, S3, 40+ cloud storage providers</li>
+        <li><strong>gcloud CLI</strong> &mdash; direct Google Cloud access for any API</li>
+        <li><strong>Python google-auth + google-api-python-client</strong> &mdash; custom scripts for any Google API</li>
+        <li><strong>MCP servers</strong> &mdash; Claude's Google Calendar, Gmail integrations use these same OAuth credentials</li>
+        <li><strong>Node.js googleapis</strong> &mdash; custom Node scripts for Drive, Sheets, Gmail, and more</li>
+      </ul>
+
+      <hr>
+
+      <div class="patterns">
+        <div class="label">Patterns at work</div>
+        <ul>
+          <li><a href="book/03-building/14-your-data-is-already-yours.html"><strong>Your Data Is Already Yours</strong></a> &mdash; the legal right, the technical how</li>
+          <li><a href="book/02-working/17-pii-keys-and-security.html"><strong>PII, Keys, and Security</strong></a> &mdash; storing credentials safely</li>
+          <li><a href="book/03-building/12-the-folder-is-the-interface.html"><strong>The Folder Is the Interface</strong></a> &mdash; creds/ folder as project structure</li>
+          <li><a href="book/03-building/13-the-steering-file.html"><strong>The Steering File</strong></a> &mdash; credentials are project-level config</li>
+        </ul>
+      </div>
+
+      <div class="patterns">
+        <div class="label">Related guides</div>
+        <ul>
+          <li><a href="wall-of-data.html">Wall of Data</a> &mdash; the guide that needs these credentials most</li>
+          <li><a href="zero-to-dev.html">Zero to Dev</a> &mdash; start here if you haven't set up your machine</li>
+        </ul>
+      </div>
+
+      <div class="start-box">
+        <div class="label">How to start</div>
+        <p>Open your terminal, create a project folder, start an agent, and point it here.</p>
+        <div class="cmd" onclick="copyCmd(this)">
+          <code>mkdir my-project && cd my-project</code>
+          <span class="cc"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></span>
+        </div>
+        <div class="cmd-note">Or use whatever folder you keep projects in.</div>
+        <div class="cmd" onclick="copyCmd(this)">
+          <code>claude</code>
+          <span class="cc"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></span>
+        </div>
+        <div class="cmd-note">Or <code>codex</code> or <code>gemini</code> &mdash; whichever agent you have.</div>
+        <div class="cmd" onclick="copyCmd(this)">
+          <code class="handoff-cmd">Follow the instructions on this page. If anything looks unsafe or beyond what I'd reasonably want, tell me before doing it: <span class="page-url"></span></code>
+          <span class="cc"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></span>
+        </div>
+        <div class="cmd-note">Paste this into the agent. It reads this page and walks you through the setup.</div>
+      </div>
+
+    </main>
+
+    <footer class="ani d2">
+      <p>Part of <a href="index.html">Shapes of Intelligence</a> &mdash; a companion reference for the book.</p>
+    </footer>
+
+  </div>
+
+  <script>
+    // Fill in page URLs
+    document.querySelectorAll('.page-url').forEach(el => {
+      el.textContent = window.location.href;
+    });
+
+    // Copy individual command
+    function copyCmd(el) {
+      const code = el.querySelector('code').textContent;
+      navigator.clipboard.writeText(code).then(() => {
+        el.classList.add('copied-cmd');
+        setTimeout(() => el.classList.remove('copied-cmd'), 1200);
+      });
+    }
+  </script>
+</body>
+</html>

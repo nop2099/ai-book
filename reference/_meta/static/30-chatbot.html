@@ -34,6 +34,9 @@
       line-height: 1.7;
       min-height: 100vh;
     }
+    a { color: var(--amber); text-decoration: none; }
+    a:visited { color: var(--amber); }
+    a:hover { color: var(--text); }
 
     body::before {
       content: '';
@@ -487,7 +490,7 @@
       <div class="patterns">
         <div class="label">Patterns at work</div>
         <ul>
-          <li><strong>Octopus in a box</strong> &mdash; the chatbot is a contained agent. It only sees the FAQ and the system prompt. It never touches your raw corpus or private data. The box is the boundary you define in the system prompt &mdash; not a Docker container, a trust boundary.</li>
+          <li><a href="book/03-building/08-the-octopus-in-the-box.html"><strong>Octopus in a box</strong></a> &mdash; the chatbot is a contained agent. It only sees the FAQ and the system prompt. It never touches your raw corpus or private data. The box is the boundary you define in the system prompt &mdash; not a Docker container, a trust boundary.</li>
           <li><strong>Entity-first extraction</strong> &mdash; don't ask the AI to "summarize everything." Find the nouns first, then the problems, then the answers. Each step is reviewable.</li>
           <li><strong>Light approval flows</strong> &mdash; the agent does the work, you approve the output. One entity at a time, one FAQ entry at a time. You never lose control, and the agent never hallucinates unchecked.</li>
           <li><strong>CLI arbitrage</strong> &mdash; shell out to <code>claude --print</code> on a flat-rate subscription instead of paying per-token API costs. The CLI is the same model. Your Pro/Max subscription is the budget.</li>
@@ -496,7 +499,7 @@
           <li><strong>The VM is the box</strong> &mdash; no Docker needed. The server itself is the containment boundary. The agent can only touch files placed on it plus allowlisted web domains.</li>
           <li><strong>The flywheel</strong> &mdash; unanswered questions are logged to <code>gaps.jsonl</code>. Review the gaps, add to the corpus, re-run the pipeline. Every question the chatbot can't answer makes the next version better.</li>
           <li><strong>Start small, start now</strong> &mdash; one markdown file, five entities, ten issues. That's a working chatbot. Ship that, then grow it.</li>
-          <li><strong>Memory is files</strong> &mdash; corpus, entities, issues, FAQ, system prompt, and gap log are all files on your machine. Any agent can read them, build on them, improve them.</li>
+          <li><a href="book/02-working/06-memory-is-files.html"><strong>Memory is files</strong></a> &mdash; corpus, entities, issues, FAQ, system prompt, and gap log are all files on your machine. Any agent can read them, build on them, improve them.</li>
         </ul>
       </div>
 
@@ -526,6 +529,26 @@
           <span class="cc"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></span>
         </div>
         <div class="cmd-note">Paste this into the agent. It reads this page and starts the interview.</div>
+      </div>
+
+      <div class="patterns">
+        <div class="label">Related chapters</div>
+        <ul>
+          <li><a href="book/03-building/08-the-octopus-in-the-box.html">The Octopus in the Box</a> &mdash; containment boundaries and trust design</li>
+          <li><a href="book/02-working/06-memory-is-files.html">Memory Is Files</a> &mdash; why corpus, FAQ, and gap log are all just files</li>
+          <li><a href="book/03-building/12-the-folder-is-the-interface.html">The Folder Is the Interface</a> &mdash; how folder structure shapes what the agent sees</li>
+          <li><a href="book/02-working/13-the-tests-are-for-you.html">The Tests Are for You</a> &mdash; light approval flows and human-in-the-loop review</li>
+          <li><a href="book/03-building/09-skills-are-the-muscles-we-train.html">Skills Are the Muscles We Train</a> &mdash; turning the chatbot pipeline into a repeatable skill</li>
+          <li><a href="book/03-building/14-your-data-is-already-yours.html">Your Data Is Already Yours</a> &mdash; building a corpus from data you already have</li>
+        </ul>
+      </div>
+
+      <div class="patterns">
+        <div class="label">Related guides</div>
+        <ul>
+          <li><a href="zero-to-dev.html">Zero to Dev</a> &mdash; set up your machine for building with AI (start here if you haven't)</li>
+          <li><a href="wall-of-data.html">Wall of Data</a> &mdash; collect all your data into one folder (great corpus source)</li>
+        </ul>
       </div>
 
     </main>

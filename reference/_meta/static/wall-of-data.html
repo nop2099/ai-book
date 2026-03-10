@@ -34,6 +34,9 @@
       line-height: 1.7;
       min-height: 100vh;
     }
+    a { color: var(--amber); text-decoration: none; }
+    a:visited { color: var(--amber); }
+    a:hover { color: var(--text); }
 
     body::before {
       content: '';
@@ -392,11 +395,33 @@
 
       <p>The result: <strong>~/wall/</strong> &mdash; one folder with everything, organized by source. Once it's there, you can search it, ask questions about it, feed it to an agent, or load it into a database. But the first step is just getting it into one place.</p>
 
+      <h3>Disk strategy</h3>
+
+      <p>Before you start: check how much free space you have. If your boot drive is small (under 100GB free), put the wall on an external drive and symlink it. Use the boot drive as a staging area for downloads, then move files over.</p>
+
       <div class="cmd" onclick="copyCmd(this)">
-        <code>mkdir -p ~/wall/sources</code>
+        <code>mkdir -p ~/wall</code>
         <span class="cc"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></span>
       </div>
-      <div class="cmd-note">This is where everything lands. Each source gets its own subfolder.</div>
+      <div class="cmd-note">This is where everything lands. Each source gets its own subfolder. If your wall is on an external drive, symlink it: <strong>ln -s /Volumes/MyDrive/wall ~/wall</strong></div>
+
+      <h3>The one tool you need</h3>
+
+      <p><strong>rclone</strong> is a command-line tool that talks to Google Drive, OneDrive, Dropbox, and dozens of other cloud services. It authenticates via your browser (OAuth), then gives you full access from the terminal &mdash; all file types, no API limitations. It's open source, no telemetry, no intermediary server. Your credentials stay on your machine.</p>
+
+      <div class="cmd" onclick="copyCmd(this)">
+        <code>brew install rclone</code>
+        <span class="cc"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></span>
+      </div>
+      <div class="cmd-note">Windows: <strong>winget install Rclone.Rclone</strong>. Then run <strong>rclone config</strong> to set up your first remote (follow the OAuth prompts in the browser).</div>
+
+      <p>rclone replaces manual downloads for Google Drive, OneDrive, Dropbox, and more. Instead of clicking through web UIs, you get commands like:</p>
+
+      <div class="cmd" onclick="copyCmd(this)">
+        <code>rclone copy gdrive: ~/wall/gdrive/ --max-age 7d --progress --dry-run</code>
+        <span class="cc"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></span>
+      </div>
+      <div class="cmd-note">Copy files modified in the last 7 days. <strong>--dry-run</strong> shows what would happen without doing it. Always dry-run first.</div>
 
       <hr>
 
@@ -431,12 +456,15 @@
         <ol>
           <li>Ask if they use it. If no, skip immediately.</li>
           <li>Give them the exact steps (click-by-click for web exports, exact commands for CLI).</li>
-          <li>Help them download/export into <code>~/wall/sources/{source-name}/</code>.</li>
+          <li>Help them download/export into <code>~/wall/{source-name}/</code>.</li>
           <li>Unzip, rename, or organize as needed. Keep originals.</li>
           <li>Confirm it landed before moving to the next source.</li>
         </ol>
-        <p>Start by asking: <em>"What platform are you on &mdash; Mac, Windows, or Linux?"</em> and <em>"Where do you want to collect everything?"</em> (default: ~/wall on Mac/Linux, C:\wall on Windows). Then work through the categories below in order. Be patient &mdash; some exports take hours to prepare. If a service says "we'll email you when your export is ready," note it and move on to the next source.</p>
-        <p>At the end, write a <code>manifest.md</code> in the wall folder listing everything collected: source, date exported, file count, approximate size, and anything skipped.</p>
+        <p>Start by asking: <em>"What platform are you on &mdash; Mac, Windows, or Linux?"</em>, <em>"Where do you want to collect everything?"</em> (default: ~/wall on Mac/Linux, C:\wall on Windows), and <em>"How much free disk space do you have?"</em> (<code>df -h</code>). If the boot drive is small, ask if they have an external drive and use it as the primary wall location with the boot drive as a staging area for downloads. Symlink from home dir for easy access.</p>
+        <p><strong>rclone:</strong> For Google Drive, OneDrive, Dropbox, and other cloud storage &mdash; install rclone (<code>brew install rclone</code> / <code>winget install Rclone.Rclone</code>) and configure a remote (<code>rclone config</code>). This gives you full CLI access to cloud files. Always <code>--dry-run</code> first, always check disk space before and after. Use <code>rclone size remote:</code> to estimate before downloading. Use <code>--max-age 7d</code> to start with recent files. Use <code>--drive-export-formats docx,xlsx,pptx</code> to convert Google Docs on export. Skip large media on first pass (<code>--exclude "*.mp4" --exclude "*.mov"</code>).</p>
+        <p><strong>Filename hygiene:</strong> Sanitize every filename on ingest. Lowercase, hyphens instead of spaces, no parentheses or brackets. Use the pattern: <code>{source}-{date}-{description}.{ext}</code>. Example: <code>meet-2026-03-10-recording.mp4</code> not <code>Meeting (2026-03-10 04_22 GMT-5).mp4</code>. Spaces break shell commands, tab-completion, scripts, and grep. Clean names on arrival so you never have to fix them later.</p>
+        <p><strong>Manifests:</strong> Write a <code>manifest.md</code> in the wall folder AND in each subdirectory. Record: source, date exported, original filename (before sanitization), file count, approximate size, and anything skipped. Makes the wall queryable without opening every file.</p>
+        <p><strong>Learnings file:</strong> Create a <code>wall-learnings.md</code> in the wall folder. Every time you hit a snag, discover a gotcha, or find a better way to do something &mdash; write it down. This is the flywheel: the learnings improve the process for next time. Things like "Takeout doesn't include recent Meet recordings" or "rclone needs --drive-export-formats to convert Google Docs" belong here.</p>
       </div>
 
       <div class="source-group">
@@ -460,6 +488,20 @@
           <span class="source-name">Copilot / Other</span>
           <span class="source-how">GitHub Copilot Chat doesn't export history. If you use other AI tools (Perplexity, Poe, etc.), check their settings for export.</span>
           <span class="source-folder">other-ai/</span>
+        </div>
+      </div>
+
+      <div class="source-group">
+        <div class="source-group-title">Video Calls</div>
+        <div class="source">
+          <span class="source-name">Google Meet</span>
+          <span class="source-how">Recordings land in Google Drive &rarr; Meet Recordings/ folder. Download .mp4 directly from Drive. Chat transcripts are separate .sbv files &mdash; grab those too. Use the meeting code as the filename key.</span>
+          <span class="source-folder">meet/</span>
+        </div>
+        <div class="source">
+          <span class="source-name">Zoom</span>
+          <span class="source-how">zoom.us &rarr; Recordings (cloud recordings). Or check ~/Documents/Zoom/ for local recordings.</span>
+          <span class="source-folder">zoom/</span>
         </div>
       </div>
 
@@ -510,7 +552,7 @@
         <div class="source-group-title">Documents &amp; Notes</div>
         <div class="source">
           <span class="source-name">Google Drive</span>
-          <span class="source-how">Google Takeout &rarr; select Drive. Exports Docs as .docx, Sheets as .xlsx, etc.</span>
+          <span class="source-how"><strong>Best: rclone.</strong> <code>rclone copy gdrive: ~/wall/gdrive/ --progress --drive-export-formats docx,xlsx,pptx</code>. Gets everything &mdash; docs, PDFs, images, videos. Dry-run first. <strong>Alt: Google Takeout</strong> &rarr; select Drive &mdash; but Takeout is a batch snapshot (recent files may not appear) and API tools can't download binary files.</span>
           <span class="source-folder">gdrive/</span>
         </div>
         <div class="source">
@@ -535,12 +577,12 @@
         </div>
         <div class="source">
           <span class="source-name">OneDrive</span>
-          <span class="source-how">Sync to local folder (already on disk if OneDrive is installed), or download via web.</span>
+          <span class="source-how">Already on disk if OneDrive app is installed. Or use rclone: <code>rclone copy onedrive: ~/wall/onedrive/</code> (set up remote with <code>rclone config</code>).</span>
           <span class="source-folder">onedrive/</span>
         </div>
         <div class="source">
           <span class="source-name">Dropbox</span>
-          <span class="source-how">Already synced locally if the app is installed. Otherwise: select all &rarr; download as zip.</span>
+          <span class="source-how">Already synced locally if the app is installed. Or use rclone: <code>rclone copy dropbox: ~/wall/dropbox/</code>.</span>
           <span class="source-folder">dropbox/</span>
         </div>
       </div>
@@ -722,6 +764,40 @@
 
       <hr>
 
+      <h2>Working with your files</h2>
+
+      <p>Once files land in the wall, you need to know how to open them. Most are standard formats your agent already knows, but here are the non-obvious ones:</p>
+
+      <div class="source-group">
+        <div class="source-group-title">File types you'll encounter</div>
+        <div class="source">
+          <span class="source-name">.mbox</span>
+          <span class="source-how">Email archive (Gmail export). Parse headers with <code>grep -E "^(From|Subject|Date):" file.mbox</code>. Import into Thunderbird or use Python's <code>mailbox</code> module.</span>
+        </div>
+        <div class="source">
+          <span class="source-name">.sbv / .vtt</span>
+          <span class="source-how">Subtitle/caption files (Meet transcripts). Plain text with timestamps. <code>grep -i "keyword" file.sbv</code> to find moments in a meeting.</span>
+        </div>
+        <div class="source">
+          <span class="source-name">.ics / .icbu</span>
+          <span class="source-how">Calendar files. Plain text, one event per VEVENT block. Grep-able. Import into any calendar app.</span>
+        </div>
+        <div class="source">
+          <span class="source-name">.vcf</span>
+          <span class="source-how">Contact cards. Plain text (vCard format). One file can contain hundreds of contacts, each as a BEGIN:VCARD block.</span>
+        </div>
+        <div class="source">
+          <span class="source-name">.mp4</span>
+          <span class="source-how">Video. Get metadata with <code>ffprobe file.mp4</code>. Extract audio: <code>ffmpeg -i file.mp4 -vn file.aac</code>. Transcribe with Whisper: <code>whisper file.aac --model base</code>.</span>
+        </div>
+        <div class="source">
+          <span class="source-name">.json / .jsonl</span>
+          <span class="source-how">Structured data (most AI conversation exports). Pretty-print: <code>cat file.json | python3 -m json.tool</code>. Query: <code>jq '.key' file.json</code>.</span>
+        </div>
+      </div>
+
+      <hr>
+
       <h2>What happens next</h2>
 
       <p>Once everything's in <strong>~/wall/</strong>, you have options:</p>
@@ -737,10 +813,33 @@
       <div class="patterns">
         <div class="label">Patterns at work</div>
         <ul>
-          <li><strong>Your data is already yours</strong> &mdash; every service is legally required to let you export. Most just hide the button.</li>
-          <li><strong>The folder is the interface</strong> &mdash; ~/wall is just a folder. Any agent can read it. No special database required to start.</li>
+          <li><a href="book/03-building/14-your-data-is-already-yours.html"><strong>Your data is already yours</strong></a> &mdash; every service is legally required to let you export. Most just hide the button.</li>
+          <li><a href="book/03-building/12-the-folder-is-the-interface.html"><strong>The folder is the interface</strong></a> &mdash; ~/wall is just a folder. Any agent can read it. No special database required to start.</li>
           <li><strong>One source at a time</strong> &mdash; don't try to do it all in one sitting. Some exports take days. Start with what matters most.</li>
-          <li><strong>Memory is files</strong> &mdash; manifest.md records what you collected. Future agents read it to know what's available.</li>
+          <li><a href="book/02-working/06-memory-is-files.html"><strong>Memory is files</strong></a> &mdash; manifest.md records what you collected. Future agents read it to know what's available.</li>
+          <li><strong>Clean names, clean pipes</strong> &mdash; sanitize filenames on arrival (lowercase, hyphens, no spaces). Every tool in the chain &mdash; shell, grep, scripts, agents &mdash; works better with clean names. Do it once on ingest so you never have to fix it later.</li>
+          <li><strong>Staging and storage</strong> &mdash; if your boot drive is small, use it as a staging area for downloads, then move files to an external drive where the wall lives. Symlink from your home directory for easy access.</li>
+          <li><strong>Takeout is a snapshot, not a sync</strong> &mdash; Google Takeout captures what exists at request time. Recent files won't appear. For anything from the last few hours, download directly from the service.</li>
+          <li><strong>The wall builds the guide</strong> &mdash; every time you collect data and hit a snag, write it down. Those learnings improve the instructions for the next person (or the next agent).</li>
+        </ul>
+      </div>
+
+      <div class="patterns">
+        <div class="label">Related chapters</div>
+        <ul>
+          <li><a href="book/03-building/14-your-data-is-already-yours.html">Your Data Is Already Yours</a> &mdash; why every service must let you export, and what to do with it</li>
+          <li><a href="book/03-building/12-the-folder-is-the-interface.html">The Folder Is the Interface</a> &mdash; how folder structure shapes what agents can do with your data</li>
+          <li><a href="book/02-working/06-memory-is-files.html">Memory Is Files</a> &mdash; manifests and logs as long-term memory for agents</li>
+          <li><a href="book/04-living/07-the-context-gold-mine.html">The Context Gold Mine</a> &mdash; your data archive is the richest context source you have</li>
+          <li><a href="book/02-working/17-pii-keys-and-security.html">PII, Keys, and Security</a> &mdash; what to watch for when collecting personal data in one place</li>
+        </ul>
+      </div>
+
+      <div class="patterns">
+        <div class="label">Related guides</div>
+        <ul>
+          <li><a href="zero-to-dev.html">Zero to Dev</a> &mdash; set up your machine first (start here if you haven't)</li>
+          <li><a href="30-chatbot.html">Build a Chatbot</a> &mdash; turn your wall into a searchable chatbot</li>
         </ul>
       </div>
 

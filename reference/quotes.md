@@ -46,3 +46,7 @@ Collected as we go. Some from James, some from conversations, some from the work
 "The consultant who comes back from every job with better software — that's the flywheel."
 
 "Without a start, you've got nothing to build momentum with."
+
+"A guide is a map of a shape."
+
+"I never met a meta I didn't like."

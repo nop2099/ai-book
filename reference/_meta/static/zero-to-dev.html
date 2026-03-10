@@ -34,6 +34,9 @@
       line-height: 1.7;
       min-height: 100vh;
     }
+    a { color: var(--amber); text-decoration: none; }
+    a:visited { color: var(--amber); }
+    a:hover { color: var(--text); }
 
     body::before {
       content: '';
@@ -738,7 +741,7 @@ That last step is where the agent takes over. You got me from zero to a running 
           </li>
           <li><strong>GitHub</strong> (optional): <code>brew install gh && gh auth login</code>. Skip if the user doesn't have or want a GitHub account. Note it for later.</li>
           <li><strong>Write <code>install-log.md</code></strong> in the setup folder. Record: what's installed, versions, what was skipped, user's build goals, the work folder path, timestamp, <em>and the full calibration interview</em> (their answers about experience level, what they want to build, how they like to be talked to). Keep it brief &mdash; this file is memory for future agents, not a novel.</li>
-          <li><strong>Write steering files.</strong> Based on the interview and install log, create config files so every CLI agent already knows who the user is:
+          <li><strong>Write <a href="book/03-building/13-the-steering-file.html">steering files</a>.</strong> Based on the interview and install log, create config files so every CLI agent already knows who the user is:
             <ul>
               <li>Claude Code: write <code>~/.claude/CLAUDE.md</code> with user preferences, experience level, installed tools, and work folder path</li>
               <li>Codex CLI: write <code>~/.codex/instructions.md</code> with the same</li>
@@ -763,12 +766,32 @@ That last step is where the agent takes over. You got me from zero to a running 
         <div class="label">Patterns you just learned</div>
         <p>Without realizing it, this setup taught you the core patterns for working with AI:</p>
         <ul>
-          <li><strong>The correction is the conversation</strong> &mdash; when something didn't work, you told the AI, it adjusted, you tried again. That back-and-forth is how real work gets done.</li>
-          <li><strong>Context is everything</strong> &mdash; the AI interviewed you before it started. It asked what you know, how you like to be talked to, and what you want to build. That interview made everything after it better. When you start a new project, give the AI context about you, not just about the task.</li>
-          <li><strong>The folder is the interface</strong> &mdash; ~/work is where everything lives. Each project gets its own folder. The AI reads your folders to understand context.</li>
-          <li><strong>Memory is files</strong> &mdash; install-log.md is memory. Next time an agent opens this folder, it knows what happened here &mdash; including who you are and how you like to work.</li>
+          <li><a href="book/01-learning/07-the-correction-is-the-conversation.html"><strong>The correction is the conversation</strong></a> &mdash; when something didn't work, you told the AI, it adjusted, you tried again. That back-and-forth is how real work gets done.</li>
+          <li><a href="book/04-living/07-the-context-gold-mine.html"><strong>Context is everything</strong></a> &mdash; the AI interviewed you before it started. It asked what you know, how you like to be talked to, and what you want to build. That interview made everything after it better. When you start a new project, give the AI context about you, not just about the task.</li>
+          <li><a href="book/03-building/12-the-folder-is-the-interface.html"><strong>The folder is the interface</strong></a> &mdash; ~/work is where everything lives. Each project gets its own folder. The AI reads your folders to understand context.</li>
+          <li><a href="book/02-working/06-memory-is-files.html"><strong>Memory is files</strong></a> &mdash; install-log.md is memory. Next time an agent opens this folder, it knows what happened here &mdash; including who you are and how you like to work.</li>
           <li><strong>Start small, start now</strong> &mdash; you started with one prompt and one tool. Everything else grew from there.</li>
-          <li><strong>Your data is already yours</strong> &mdash; setup.html was generated from what actually happened on your machine. No guessing, no templates. Your data, your page.</li>
+          <li><a href="book/03-building/14-your-data-is-already-yours.html"><strong>Your data is already yours</strong></a> &mdash; setup.html was generated from what actually happened on your machine. No guessing, no templates. Your data, your page.</li>
+        </ul>
+      </div>
+
+      <div class="patterns">
+        <div class="label">Related chapters</div>
+        <ul>
+          <li><a href="book/01-learning/07-the-correction-is-the-conversation.html">The Correction Is the Conversation</a> &mdash; how iterating with AI beats getting it right the first time</li>
+          <li><a href="book/02-working/06-memory-is-files.html">Memory Is Files</a> &mdash; why install-log.md and steering files are your AI's long-term memory</li>
+          <li><a href="book/03-building/12-the-folder-is-the-interface.html">The Folder Is the Interface</a> &mdash; folder structure as the most important prompt you'll write</li>
+          <li><a href="book/03-building/13-the-steering-file.html">The Steering File</a> &mdash; configuring agents to know who you are before you say a word</li>
+          <li><a href="book/04-living/07-the-context-gold-mine.html">The Context Gold Mine</a> &mdash; why giving the AI context about you changes everything</li>
+        </ul>
+      </div>
+
+      <div class="patterns">
+        <div class="label">What to build next</div>
+        <ul>
+          <li><a href="30-chatbot.html">Build a Chatbot</a> &mdash; turn your knowledge into a working FAQ and chatbot in 30 minutes</li>
+          <li><a href="wall-of-data.html">Wall of Data</a> &mdash; collect everything you've ever made into a single searchable folder</li>
+          <li><a href="landscape.html">The Landscape</a> &mdash; understand the full AI ecosystem: models, tools, platforms, and how they connect</li>
         </ul>
       </div>
 

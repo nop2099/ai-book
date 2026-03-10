@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dev Log — Shapes of Intelligence</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,700;1,9..144,300&display=swap');
+
+    :root {
+      --void: #0a0a10;
+      --deep: #0f0f1a;
+      --surface: #161625;
+      --raised: #1e1e32;
+      --edge: #2a2a44;
+      --muted: #8888aa;
+      --text: #d0d0e2;
+      --bright: #eeeef5;
+      --white: #f5f5ff;
+      --amber: #e8a83e;
+      --amber-dim: #c4882a;
+      --teal: #4ecdc4;
+      --rose: #e85577;
+      --blue: #5588dd;
+      --purple: #9977dd;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'DM Mono', 'SF Mono', monospace;
+      background: var(--void);
+      color: var(--text);
+      line-height: 1.7;
+      min-height: 100vh;
+    }
+    a { color: var(--amber); text-decoration: none; }
+    a:visited { color: var(--amber); }
+    a:hover { color: var(--text); }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 9999;
+    }
+
+    .shell {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 3rem 1.5rem 4rem;
+    }
+
+    .masthead {
+      padding: 1.5rem 0 2rem;
+      border-bottom: 1px solid var(--edge);
+      margin-bottom: 2.5rem;
+      position: relative;
+    }
+
+    .masthead::after {
+      content: '';
+      position: absolute;
+      bottom: -1px;
+      left: 0;
+      width: 60px;
+      height: 1px;
+      background: var(--amber);
+    }
+
+    .breadcrumb {
+      font-size: 0.65rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 0.8rem;
+    }
+
+    .breadcrumb a {
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .breadcrumb a:hover { color: var(--amber); }
+
+    .masthead h1 {
+      font-family: 'Fraunces', serif;
+      font-weight: 300;
+      font-size: 2rem;
+      color: var(--white);
+      letter-spacing: -0.01em;
+    }
+
+    .masthead .sub {
+      color: var(--muted);
+      font-size: 0.75rem;
+      margin-top: 0.4rem;
+      letter-spacing: 0.03em;
+      line-height: 1.8;
+      max-width: 55ch;
+    }
+
+    /* ── Entry cards ── */
+    .entry {
+      background: var(--deep);
+      border: 1px solid var(--edge);
+      border-radius: 6px;
+      padding: 1.2rem 1.3rem;
+      margin-bottom: 3px;
+      position: relative;
+    }
+
+    .entry-date {
+      font-size: 0.6rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--amber);
+      margin-bottom: 0.4rem;
+    }
+
+    .entry-title {
+      font-family: 'Fraunces', serif;
+      font-weight: 500;
+      font-size: 0.95rem;
+      color: var(--bright);
+      margin-bottom: 0.4rem;
+    }
+
+    .entry p {
+      font-size: 0.75rem;
+      line-height: 1.8;
+      margin-bottom: 0.5rem;
+    }
+
+    .entry ul {
+      list-style: none;
+      margin: 0.4rem 0 0.6rem 0;
+      padding: 0;
+    }
+
+    .entry ul li {
+      font-size: 0.73rem;
+      padding: 0.15rem 0 0.15rem 1.2rem;
+      position: relative;
+      line-height: 1.7;
+    }
+
+    .entry ul li::before {
+      content: '\2013';
+      position: absolute;
+      left: 0;
+      color: var(--muted);
+    }
+
+    strong { color: var(--bright); }
+    em { color: var(--amber); font-style: normal; }
+    code {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.9em;
+      background: var(--surface);
+      padding: 0.1rem 0.3rem;
+      border-radius: 3px;
+    }
+
+    hr {
+      border: none;
+      border-top: 1px solid var(--edge);
+      margin: 2rem 0;
+    }
+
+    footer {
+      margin-top: 3rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--edge);
+      font-size: 0.62rem;
+      color: var(--muted);
+    }
+
+    footer a {
+      color: var(--muted);
+      text-decoration: none;
+      border-bottom: 1px solid var(--edge);
+      transition: color 0.2s, border-color 0.2s;
+    }
+
+    footer a:hover { color: var(--amber); border-color: var(--amber-dim); }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .ani { animation: fadeUp 0.4s ease-out both; }
+    .d1 { animation-delay: 0.05s; }
+    .d2 { animation-delay: 0.1s; }
+
+    @media (min-height: 1000px) and (max-width: 800px) {
+      .shell { max-width: 92vw; padding: 2rem 4vw 3rem; }
+      .masthead h1 { font-size: 2.8rem; }
+      .masthead .sub { font-size: 0.95rem; }
+      .breadcrumb { font-size: 0.78rem; }
+      .entry-date { font-size: 0.72rem; }
+      .entry-title { font-size: 1.15rem; }
+      .entry p { font-size: 0.92rem; }
+      .entry ul li { font-size: 0.9rem; }
+      footer { font-size: 0.75rem; }
+    }
+
+    @media (max-width: 600px) {
+      .shell { padding: 1.5rem 1rem 3rem; }
+      .masthead h1 { font-size: 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+  <div class="shell">
+
+    <header class="masthead ani">
+      <div class="breadcrumb">
+        <a href="index.html">Shapes of Intelligence</a> / Dev Log
+      </div>
+      <h1>Dev Log</h1>
+      <p class="sub">What changed and why. Updated with each check-in to the book.</p>
+    </header>
+
+    <main class="ani d1">
+
+      <div class="entry">
+        <div class="entry-date">March 10, 2026</div>
+        <div class="entry-title">Flywheel guide, scheduling, and Kai's mission</div>
+        <p>Built the <a href="flywheel.html">Flywheel</a> guide &mdash; five layers (observe, metrics, causals, interventions, subgoals), seven collection engines, grounded in real examples from screenshots to sleep data to MSP operations. Added scheduling section (calendar blocks to cron to nightly consolidation). Connected the flywheel to Kai's mission: minimize friction, step one is finding it.</p>
+        <ul>
+          <li>Added <a href="oauth-setup.html">OAuth setup guide</a> &mdash; Google Cloud credentials, consent screen traps, the localhost trick</li>
+          <li>Internal links across all reference pages &mdash; every guide now links to relevant book chapters</li>
+          <li>Fixed link colors site-wide (was default blue/purple, now amber)</li>
+          <li>Added dev log (this page)</li>
+          <li>PII audit &mdash; found database credentials in reference files, excluded from tracking</li>
+        </ul>
+      </div>
+
+      <div class="entry">
+        <div class="entry-date">March 9, 2026</div>
+        <div class="entry-title">Reference site goes live</div>
+        <p>Built the entire reference companion site from scratch. Static HTML, no framework, no build step beyond a bash script. "Reimplement, don't import." Every page works two ways: human-readable and agent-parseable. Paste a URL, tell the agent to follow the instructions, it does.</p>
+        <ul>
+          <li>Entry page with project guides, environment setup, book links</li>
+          <li><a href="30-chatbot.html">30-Minute Chatbot</a> &mdash; knowledge base to public FAQ to AI chatbot</li>
+          <li><a href="20-board-game.html">Board Game</a> guide &mdash; rules to AI opponents to deployment</li>
+          <li><a href="wall-of-data.html">Wall of Data</a> &mdash; collect everything into one folder</li>
+          <li><a href="zero-to-dev.html">Zero to Dev</a> (Mac + Windows) &mdash; two installs, then hand off</li>
+          <li><a href="vic-and-sam.html">Vic and Sam screenplay</a> &mdash; the book explained as graphic novel dialogue</li>
+          <li><a href="chapter-dashboard.html">Chapter Dashboard</a> &mdash; readability metrics, rhythm, arc visualization</li>
+          <li>Tooling: readability analyzer, chapter metrics builder, book compiler</li>
+        </ul>
+      </div>
+
+      <div class="entry">
+        <div class="entry-date">March 9, 2026</div>
+        <div class="entry-title">Cribbage and Bridge in one afternoon</div>
+        <p>Built two complete board games to prove the flywheel. Cribbage: 2.5 hours wall clock, ~15 minutes human attention. Full peg board, scoring engine, AI opponent, training mode with expected value analysis. Bridge: started 40 minutes after cribbage, done same session. Second game was faster because the shape was already learned.</p>
+        <p>The 15-minute ratio: domain expertise matters more than programming skill. Two games in one afternoon = flywheel proof.</p>
+      </div>
+
+      <div class="entry">
+        <div class="entry-date">March 7–8, 2026</div>
+        <div class="entry-title">Repo hygiene and manuscript cleanup</div>
+        <p>Consolidated repos, added <code>.gitignore</code> for data/convo/repos directories. PII audit on the manuscript &mdash; stripped real names, locations, and identifying details. Crash Course Philosophy transcript research for AI personhood material.</p>
+        <ul>
+          <li>Killed redundancy across chapters, sharpened promises</li>
+          <li>Grounded chapters in personal stories</li>
+          <li>Added color map for chapter-to-part associations</li>
+          <li>Refined learning chapters, tightened sensitive context wording</li>
+        </ul>
+      </div>
+
+    </main>
+
+    <footer class="ani d2">
+      <p>Part of <a href="index.html">Shapes of Intelligence</a> &mdash; a companion reference for the book.</p>
+    </footer>
+
+  </div>
+</body>
+</html>

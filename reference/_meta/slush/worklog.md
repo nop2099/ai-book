@@ -931,10 +931,51 @@ This is the same observe-orient-decide-act (OODA) loop, but split across two sys
 - [ ] Memory Viewer — connect to real Octopus API
 - [ ] Wall of data librarian
 - [ ] Scheduling Data Updates for the Wall
+- [ ] Remote Conversation Mining — pull conversations from exe.dev boxes via SSH
 
 ---
 
-### Scheduling Data Updates for the Wall
+### Remote Conversation Mining — pulling conversations from your boxes
+
+Your conversation history isn't just on your laptop. Every exe.dev VM you've ever SSH'd into and run Claude Code on has a `.claude/projects/` directory with JSONL conversation logs. Those are data. They're observations. They're wall material.
+
+**The discovery mechanism: known_hosts**
+
+`~/.ssh/known_hosts` is a manifest of every box you've ever connected to. Parse it for hostnames — that's your inventory of remote machines that might have conversations on them. For exe.dev specifically, `ssh exe.dev ls` gives you the live VM list. Between the two, you know everywhere to look.
+
+**The extraction pipeline:**
+
+1. **Enumerate boxes.** Parse known_hosts for hostnames. Filter for your infrastructure (`.exe.xyz`, `.exe.dev`, Tailscale `.ts.net`). Cross-reference with `ssh exe.dev ls` for active VMs.
+2. **Find conversations.** SSH in: `find /home -name '*.jsonl' -type f 2>/dev/null`. Claude Code stores conversations in `.claude/projects/-<path-encoded-cwd>/<session-id>.jsonl` with subagent logs in a `subagents/` subfolder.
+3. **Pull files.** `scp` or `rsync` the JSONL files to a local staging area. Organize by box name and date.
+4. **Parse and extract.** JSONL format: each line is a JSON object with `type` (user, assistant, file-history-snapshot, queue-operation). User messages have `content` as string or array. Assistant messages have `content` as array of text/tool_use blocks. Tool results are in subsequent user messages as `tool_result` blocks.
+5. **Transform for the wall.** Extract the human-readable conversation: user prompts, assistant responses, tool calls and results. Strip internal metadata. Tag with box name, date, session ID. Push to the wall's ingestion pipeline or store as markdown.
+
+**What you find:**
+
+The bronze-november box had a single conversation — someone (you, pretending to be a stranger) asking Claude to assess shapes.exe.xyz cold. The conversation revealed:
+- The site reads well to a fresh agent ("the writing voice is strong, grade 7 readability")
+- Broken links: `chatbot.html` and `board-game.html` 404 because the actual files use numbered prefixes (`30-chatbot.html`, `20-board-game.html`)
+- Missing Linux quickstart — the exe.dev audience gets no unified onramp
+- The "What Do You Want to Build?" page is buried at the bottom of the project list, should be first
+- OAuth guide needs a "you probably don't need this yet" signal
+- Chapter dashboard shows 60 chapters / 28,747 words but book index says 48 / 32,248 — which is right?
+- Dev log looks like the project appeared from nowhere (only March 7+ entries)
+
+These are flywheel observations discovered by exercising the site from a fresh machine.
+
+**Gotchas:**
+
+- **exe.dev boxes run a REPL shell, not bash.** SSH to `hostname.xterm.exe.xyz` hits the exe.dev REPL. SSH to `hostname.exe.xyz` gives you a real shell. Use the `.exe.xyz` domain for file operations.
+- **Host key verification.** First connection needs `-o StrictHostKeyChecking=accept-new` or manual acceptance. The REPL and real shell use different host keys.
+- **Ephemeral boxes.** xterm boxes may be destroyed. Pull conversations before the box is gone.
+- **PII in conversations.** Remote conversations may contain credentials, personal data, or context you don't want in the wall. Run the PII scanner on pulled files before ingesting.
+
+**What this connects to:**
+- Wall of Data — remote conversations are a data source
+- Flywheel — exercising your own product from a cold machine is an observation technique
+- Maintenance — "are my boxes still running?" is a health check
+- The Folder Is the Interface — `.claude/projects/` IS the conversation archive, organized by working directory
 
 The wall-of-data librarian sits on top of a PostgreSQL database that stores everything — but "everything" goes stale. Email piles up. Chat logs diverge from what's in the database. Photos accumulate. Health data drifts. The wall is only useful if it reflects reality, which means data sources need scheduled refresh cycles.
 
@@ -963,3 +1004,108 @@ The wall-of-data librarian sits on top of a PostgreSQL database that stores ever
 **The maintenance connection:** Data source freshness is a maintenance concern. "Is Gmail syncing?" is the same shape as "Is the web server responding?" The maintenance guide's inventory/health-check/runbook pattern applies directly. Each data source is a system to maintain.
 
 **What this becomes:** A reference page or a section of the wall-of-data guide. "How to keep your wall current." Covers the four scheduling tiers, gives a source-by-source recommendation, includes the freshness dashboard concept, and links to the scheduler and maintenance guides.
+
+---
+
+### The Public URL as Portable Development Environment
+
+The thing that's quietly enabling all of this: the guides live on a public URL.
+
+When you land on a fresh box — a new exe.dev VM, a friend's machine, a classroom terminal — you don't need to clone a repo. You don't need to authenticate with GitHub. You don't need SSH keys set up. You don't need to configure anything. You paste a URL into an agent and your entire development philosophy is loaded in one read.
+
+`shapes.exe.xyz/flywheel.html` isn't just documentation. It's an executable skill. The agent reads the page, finds the agent instructions block, and walks you through the process. Your style, your conventions, your approval gates, your folder structures — all encoded in static HTML on a public server. No auth. No setup. No friction.
+
+**Why this matters:**
+
+- **Zero-dependency bootstrapping.** The first thing you do on any new machine is open an agent. The second thing is paste a URL. Everything else flows from there. You don't need the repo to use the repo's knowledge.
+- **Style portability.** Your CLAUDE.md is local — it only works in your repo. Your guides are public — they work everywhere. The guide IS the steering file for someone (including you) on a machine that doesn't have your steering file yet.
+- **The guide bootstraps the setup that lets you clone the repo.** `zero-to-dev.html` teaches you how to install git, configure SSH keys, and clone repos. You can't clone it first because you don't have git yet. The public URL breaks the chicken-and-egg problem.
+- **Exercisable from any context.** The bronze-november experiment proved this: fresh box, no prior context, paste the URL, the agent cold-reads the site and can immediately assess it, follow it, or critique it. The conversation itself became data (flywheel observations about broken links and missing content).
+- **Version-independent.** The live URL is always current. No stale clones, no "did you pull?" The guide evolves and every new session gets the latest version.
+
+**The pattern:** Write your process as a guide. Put it on a public URL. Now your process is available everywhere without any setup. The public web is your most portable development environment.
+
+**What this connects to:**
+- The Steering File — guides are steering files that work without a project directory
+- Memory Is Files — the guide IS the memory, hosted where anyone can read it
+- Solved Problems Stay Solved — each guide is a solved problem that stays solved on a permanent URL
+- Guide-Based Development — the meta-guide makes this pattern explicit and repeatable
+- Zero to Dev — the first and most important example: the guide that bootstraps everything else
+
+---
+
+### The Blind Taste Test — self-audit through simulated naivety
+
+Spin up a fresh box. No context, no history, no CLAUDE.md, no prior conversations. Pretend you're a stranger who just found the URL. Ask an agent to cold-read your work and tell you if it sucks.
+
+**What happened:** Launched a fresh exe.dev VM (bronze-november), pointed Claude at shapes.exe.xyz, and asked "is it sus?" Then escalated: "is it hard to get set up?" Then provoked: "I read on Reddit this was insecure tripe." Then revealed: "actually I wrote it, read the whole thing, does it suck?" Then pushed: "write a mean Reddit post about it."
+
+**What it found:**
+- No Linux quickstart for a site about CLI tools (the exe.dev audience gets no onramp)
+- "What Do You Want to Build?" was buried at the bottom of the project list
+- OAuth guide had no "you probably don't need this yet" signal for beginners
+- Dev log started March 7 — for a 48-chapter book, looks like it appeared from nowhere
+- The 15-minute ratio in the dev log was ambiguous ("you did not build Bridge in 15 minutes")
+- Book link on homepage gave zero preview of what the chapters cover
+- The agent hallucinated broken links twice (said `chatbot.html` 404s when the actual link was `30-chatbot.html` and correct) — a useful reminder that agent feedback needs verification
+
+**The shape:**
+1. Get a clean machine (exe.dev VM, friend's laptop, classroom terminal)
+2. No auth, no clone, no prior context — just the public URL
+3. Ask an agent to read the site cold. Let it form its own impressions.
+4. Escalate: ask for criticism, ask it to be mean, ask for the Reddit version
+5. The conversation is data. Pull it back (see: Remote Conversation Mining) and mine it for flywheel observations.
+6. Fix what's real. Discard what's hallucinated. Repeat periodically.
+
+**Why this works:**
+- You can't see your own blind spots. You know where everything is because you put it there. A cold reader doesn't.
+- The "mean Reddit post" prompt bypasses the agent's politeness filter. It surfaces the criticisms the agent was holding back in the "honest assessment."
+- The fresh machine catches environmental assumptions: "this guide assumes Homebrew" fails on Linux. "This guide assumes SSH keys" fails on a new box.
+- It's cheap. An exe.dev VM costs nothing. The conversation takes 10 minutes. The findings are worth hours of internal review.
+
+**When to run it:**
+- After a major content push (new guides, new chapters, site restructure)
+- Before sharing the URL with anyone new
+- Whenever you think "this is ready" — that's exactly when you need a cold read
+
+**What this connects to:**
+- Flywheel — the blind taste test is the "observe" layer applied to your own product
+- Fix Your Papercuts — the findings ARE papercuts, discovered by simulating a new user
+- The Correction Is the Conversation — the agent's critiques are corrections you didn't know you needed
+- Don't Ask Me to Track It — the conversation log IS the tracking. Pull it back and it's a structured list of issues.
+
+---
+
+### Deploy Friction — the link checker and what the publish skill was missing
+
+The blind taste test surfaced a category of bug that manual review misses: **structural errors.** Missing pages. Broken internal links. Stale counts. Content that references something that doesn't exist yet. These aren't typos — they're the gaps between what you intended to build and what you actually shipped.
+
+**The problem:** Every publish cycle, we do PII scan, tests, build, deploy, spot-check, security review, commit. But none of those steps verify that internal links resolve. You can have a perfectly clean PII scan, a successful build, a working deploy, and still ship a homepage that links to a page that doesn't exist. The build script doesn't validate links. The spot-check only covers 2-3 pages. The security review looks for injection, not 404s.
+
+**The fix: link checking as a publish step.**
+
+After build, before spot-check, crawl every HTML file in the site output. Extract all `href` attributes that point to local files (not external URLs, not anchors). Verify each target file exists. Report any that don't. This catches:
+- References to pages that haven't been written yet (index.html linking to a guide that's still in the slush pile)
+- Renamed files (the numbered prefix problem — `30-chatbot.html` exists but someone links to `chatbot.html`)
+- Deleted pages that are still referenced from other pages
+- Typos in filenames
+
+**Added to the /publish skill as step 7.** The full checklist is now 10 steps:
+1. PII scan (early)
+2. Tests
+3. Security review
+4. Dev log
+5. Build
+6. Deploy
+7. **Link check** — new
+8. Spot-check
+9. PII scan (final)
+10. Git commit + push
+
+**The broader pattern:** Every time you find friction in your deploy process, the fix goes into the publish skill. The skill is a living document — it evolves as the process evolves. The blind taste test found friction that the publish skill didn't catch. Now it does. Next time someone runs `/publish`, the link checker runs automatically. The friction is gone. That's the flywheel.
+
+**What this connects to:**
+- Fix Your Papercuts — deploy friction is a papercut
+- Solved Problems Stay Solved — the link checker is a solved problem, encoded in the skill
+- The Steering File — /publish IS a steering file for the deploy process
+- Maintenance — link checking is a health check for the site

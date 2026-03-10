@@ -230,6 +230,21 @@
 
       <div class="entry">
         <div class="entry-date">March 10, 2026</div>
+        <div class="entry-title">Blind taste test, Linux quickstart, and deploy friction</div>
+        <p>Ran a blind taste test &mdash; spun up a fresh exe.dev VM, pretended to be a stranger, had Claude cold-read the site. Found real gaps: no Linux quickstart, buried navigation, missing book preview, ambiguous dev log. Fixed them all. Added link checker to <code>/publish</code> skill.</p>
+        <ul>
+          <li>Built <a href="zero-to-dev-linux.html">Zero to Developer (Linux)</a> &mdash; the missing third onramp</li>
+          <li>Moved "What Do You Want to Build?" to top of project guides</li>
+          <li>Added book part titles to homepage card (Learning &middot; Working &middot; Building &middot; Living)</li>
+          <li>OAuth page: added "you probably don't need this yet" warning</li>
+          <li>Dev log: added pre-history entry, clarified 15-minute ratio</li>
+          <li><code>/publish</code> skill: added link checker as step 7 (now 10 steps total)</li>
+          <li>Slush entries: blind taste test shape, deploy friction pattern, remote conversation mining, public URL as portable dev environment</li>
+        </ul>
+      </div>
+
+      <div class="entry">
+        <div class="entry-date">March 10, 2026</div>
         <div class="entry-title">Calculus rewrite, meta-guide, and /publish</div>
         <p>Rewrote <a href="book/03-building/04-we-all-invented-calculus-at-the-same-time.html">We All Invented Calculus</a> with data: OpenClaw (298K stars), Kaijuu divergent architecture, AI DM proliferation dataset (10+ blogs, 6+ MCP servers, 5+ commercial products, 1 thesis), MCP as inflection point. Built <a href="guide-based-dev.html">Guide-Based Development</a> &mdash; the meta-guide that documents the exact anatomy so agents can build new guides from the pattern.</p>
         <ul>
@@ -288,7 +303,7 @@
         <div class="entry-date">March 9, 2026</div>
         <div class="entry-title">Cribbage and Bridge in one afternoon</div>
         <p>Built two complete board games to prove the flywheel. Cribbage (~5:30pm): 2.5 hours wall clock, ~1 hour AI work, ~15 minutes human attention. Full peg board, scoring engine, AI opponent, training mode with expected value analysis. TypeScript, Vite, Vitest, no framework. Bridge: Python/FastAPI + vanilla JS, Chicago scoring, bidding conventions. Started 40 minutes after cribbage, done same session.</p>
-        <p>The 15-minute ratio: domain expertise matters more than programming skill. Two games in one afternoon = flywheel proof.</p>
+        <p>The 15-minute ratio: 2.5 hours wall clock, ~1 hour AI work, ~15 minutes of actual human attention (decisions, corrections, testing). Domain expertise matters more than programming skill. Two games in one afternoon = flywheel proof.</p>
       </div>
 
       <div class="entry">
@@ -301,6 +316,15 @@
           <li>Added color map for chapter-to-part associations</li>
           <li>Refined learning chapters, tightened sensitive context wording</li>
         </ul>
+      </div>
+
+      <hr>
+
+      <div class="entry" style="border-color: var(--edge); opacity: 0.8;">
+        <div class="entry-date">Pre-history</div>
+        <div class="entry-title">Before the dev log</div>
+        <p>The book was written over ten months alongside Kai (a personal AI infrastructure project). By the time this reference site launched on March 9, 2026, the manuscript had 48 chapters across six parts &mdash; ~32,000 words covering learning, working, building, living, society, and a study guide. The companion site was built in a single afternoon session.</p>
+        <p>Earlier work that doesn't have timestamped entries: Kai architecture (voice, memory, scheduling, inter-agent communication), Kaijuu (16-day build, 105 commits, divergent 7-layer architecture), OpenClaw integration, cribbage and bridge game builds, health data pipeline, home automation sensors, report automation consulting, and hundreds of conversations across Claude, ChatGPT, and Gemini that became the material for the book.</p>
       </div>
 
     </main>

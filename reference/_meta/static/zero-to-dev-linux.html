@@ -1,0 +1,907 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Zero to Developer (Linux) — Shapes of Intelligence</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,700;1,9..144,300&display=swap');
+
+    :root {
+      --void: #0a0a10;
+      --deep: #0f0f1a;
+      --surface: #161625;
+      --raised: #1e1e32;
+      --edge: #2a2a44;
+      --muted: #8888aa;
+      --text: #d0d0e2;
+      --bright: #eeeef5;
+      --white: #f5f5ff;
+      --amber: #e8a83e;
+      --amber-dim: #c4882a;
+      --teal: #4ecdc4;
+      --rose: #e85577;
+      --blue: #5588dd;
+      --purple: #9977dd;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'DM Mono', 'SF Mono', monospace;
+      background: var(--void);
+      color: var(--text);
+      line-height: 1.7;
+      min-height: 100vh;
+    }
+    a { color: var(--amber); text-decoration: none; }
+    a:visited { color: var(--amber); }
+    a:hover { color: var(--text); }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 9999;
+    }
+
+    .shell {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 3rem 1.5rem 4rem;
+    }
+
+    .masthead {
+      padding: 1.5rem 0 2rem;
+      border-bottom: 1px solid var(--edge);
+      margin-bottom: 2.5rem;
+      position: relative;
+    }
+
+    .masthead::after {
+      content: '';
+      position: absolute;
+      bottom: -1px;
+      left: 0;
+      width: 60px;
+      height: 1px;
+      background: var(--amber);
+    }
+
+    .breadcrumb {
+      font-size: 0.65rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 0.8rem;
+    }
+
+    .breadcrumb a {
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .breadcrumb a:hover { color: var(--amber); }
+
+    .masthead h1 {
+      font-family: 'Fraunces', serif;
+      font-weight: 300;
+      font-size: 2rem;
+      color: var(--white);
+      letter-spacing: -0.01em;
+    }
+
+    .masthead .sub {
+      color: var(--muted);
+      font-size: 0.75rem;
+      margin-top: 0.4rem;
+      letter-spacing: 0.03em;
+      line-height: 1.8;
+      max-width: 55ch;
+    }
+
+    /* ── Content ── */
+    h2 {
+      font-family: 'Fraunces', serif;
+      font-weight: 500;
+      font-size: 1.05rem;
+      color: var(--bright);
+      margin: 2.2rem 0 0.6rem;
+    }
+
+    h2:first-of-type { margin-top: 0; }
+
+    h3 {
+      font-family: 'Fraunces', serif;
+      font-weight: 500;
+      font-size: 0.88rem;
+      color: var(--text);
+      margin: 1.5rem 0 0.5rem;
+    }
+
+    p {
+      font-size: 0.78rem;
+      margin-bottom: 0.8rem;
+      line-height: 1.8;
+    }
+
+    strong { color: var(--bright); }
+
+    ul {
+      list-style: none;
+      margin: 0.6rem 0 1rem 0;
+      padding: 0;
+    }
+
+    ul li {
+      font-size: 0.78rem;
+      padding: 0.2rem 0 0.2rem 1.2rem;
+      position: relative;
+      line-height: 1.8;
+    }
+
+    ul li::before {
+      content: '\2013';
+      position: absolute;
+      left: 0;
+      color: var(--muted);
+    }
+
+    hr {
+      border: none;
+      border-top: 1px solid var(--edge);
+      margin: 2rem 0;
+    }
+
+    /* ── Route tabs ── */
+    .route-picker {
+      display: flex;
+      gap: 2px;
+      margin-bottom: 1.5rem;
+    }
+
+    .route-tab {
+      flex: 1;
+      padding: 0.7rem 0.8rem;
+      background: var(--deep);
+      border: 1px solid var(--edge);
+      border-radius: 4px;
+      cursor: pointer;
+      transition: all 0.2s;
+      text-align: center;
+    }
+
+    .route-tab:first-child { border-radius: 4px 0 0 4px; }
+    .route-tab:last-child { border-radius: 0 4px 4px 0; }
+
+    .route-tab .tab-title {
+      font-family: 'Fraunces', serif;
+      font-weight: 500;
+      font-size: 0.85rem;
+      color: var(--muted);
+      display: block;
+      transition: color 0.2s;
+    }
+
+    .route-tab .tab-desc {
+      font-size: 0.62rem;
+      color: var(--muted);
+      opacity: 0.6;
+      display: block;
+      margin-top: 0.15rem;
+    }
+
+    .route-tab.active {
+      background: var(--surface);
+      border-color: var(--amber-dim);
+    }
+
+    .route-tab.active .tab-title { color: var(--bright); }
+    .route-tab.active .tab-desc { opacity: 1; }
+
+    .route-tab:hover:not(.active) { background: var(--surface); }
+
+    .route-content { display: none; }
+    .route-content.active { display: block; }
+
+    /* ── Step blocks ── */
+    .step {
+      background: var(--deep);
+      border: 1px solid var(--edge);
+      border-radius: 6px;
+      margin-bottom: 0.8rem;
+      overflow: hidden;
+    }
+
+    .step-header {
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
+      padding: 0.7rem 1rem;
+    }
+
+    .step-num {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.62rem;
+      font-weight: 500;
+      flex-shrink: 0;
+      color: var(--void);
+      background: var(--amber);
+    }
+
+    .step-title {
+      font-family: 'Fraunces', serif;
+      font-weight: 500;
+      font-size: 0.88rem;
+      color: var(--bright);
+    }
+
+    .step-body {
+      padding: 0 1rem 0.8rem;
+    }
+
+    .step-desc {
+      font-size: 0.72rem;
+      color: var(--muted);
+      margin-bottom: 0.5rem;
+      line-height: 1.7;
+    }
+
+    /* ── Inline copyable commands ── */
+    .cmd {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--surface);
+      border: 1px solid var(--edge);
+      border-radius: 4px;
+      padding: 0.4rem 0.7rem;
+      margin: 0.35rem 0;
+      cursor: pointer;
+      transition: border-color 0.2s;
+    }
+
+    .cmd:hover { border-color: #3a3a55; }
+
+    .cmd code {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.73rem;
+      color: var(--bright);
+      flex: 1;
+      user-select: all;
+    }
+
+    .cmd .cc {
+      flex-shrink: 0;
+      width: 18px;
+      height: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0.4;
+      transition: opacity 0.2s;
+    }
+
+    .cmd:hover .cc { opacity: 0.8; }
+
+    .cmd .cc svg {
+      width: 13px;
+      height: 13px;
+      fill: none;
+      stroke: var(--muted);
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .cmd.copied-cmd { border-color: var(--amber-dim); }
+    .cmd.copied-cmd .cc { opacity: 1; }
+    .cmd.copied-cmd .cc svg { stroke: var(--amber); }
+
+    .cmd-note {
+      font-size: 0.65rem;
+      color: var(--muted);
+      margin: 0.2rem 0 0.3rem;
+      line-height: 1.6;
+      padding-left: 0.2rem;
+    }
+
+    .cmd-verify {
+      font-size: 0.65rem;
+      color: var(--teal);
+      margin: 0.2rem 0 0.3rem;
+      padding-left: 0.2rem;
+    }
+
+    /* ── Prompt card ── */
+    .prompt-card {
+      background: var(--deep);
+      border: 1px solid var(--edge);
+      border-radius: 6px;
+      margin: 1rem 0;
+      overflow: hidden;
+    }
+
+    .prompt-card-header {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      padding: 0.7rem 1rem;
+      border-bottom: 1px solid var(--edge);
+    }
+
+    .prompt-card-header .label {
+      font-size: 0.6rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--amber);
+    }
+
+    .prompt-card-header .where {
+      margin-left: auto;
+      font-size: 0.58rem;
+      letter-spacing: 0.06em;
+      color: var(--muted);
+      background: var(--raised);
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+    }
+
+    .prompt-body {
+      padding: 1rem;
+      position: relative;
+    }
+
+    .prompt-text {
+      font-size: 0.72rem;
+      color: var(--bright);
+      line-height: 1.8;
+      white-space: pre-wrap;
+      background: var(--surface);
+      border-radius: 4px;
+      padding: 1rem;
+      border: 1px solid var(--edge);
+    }
+
+    .copy-btn {
+      position: absolute;
+      top: 1.5rem;
+      right: 1.5rem;
+      background: var(--raised);
+      border: 1px solid var(--edge);
+      color: var(--muted);
+      font-family: 'DM Mono', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 0.3rem 0.6rem;
+      border-radius: 3px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .copy-btn:hover {
+      background: var(--edge);
+      color: var(--bright);
+    }
+
+    .copy-btn.copied {
+      background: var(--amber);
+      color: var(--void);
+      border-color: var(--amber);
+    }
+
+    /* ── Agent block ── */
+    .agent-block {
+      background: var(--surface);
+      border: 1px solid var(--edge);
+      border-left: 3px solid var(--teal);
+      border-radius: 4px;
+      padding: 1rem 1.2rem;
+      margin: 1.5rem 0;
+      font-size: 0.75rem;
+      line-height: 1.8;
+    }
+
+    .agent-block .label {
+      font-size: 0.58rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--teal);
+      margin-bottom: 0.5rem;
+    }
+
+    .agent-block ol {
+      margin: 0.4rem 0;
+      padding-left: 1.4rem;
+    }
+
+    .agent-block ol li {
+      font-size: 0.75rem;
+      padding: 0.15rem 0;
+      line-height: 1.8;
+    }
+
+    .agent-block ul { margin: 0.3rem 0; }
+
+    /* ── Patterns ── */
+    .patterns {
+      background: var(--deep);
+      border: 1px solid var(--edge);
+      border-radius: 6px;
+      padding: 1rem 1.2rem;
+      margin: 1.5rem 0;
+    }
+
+    .patterns .label {
+      font-size: 0.6rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--purple);
+      margin-bottom: 0.5rem;
+    }
+
+    .patterns p { font-size: 0.72rem; }
+
+    /* ── Pick-one ── */
+    .pick-one {
+      margin: 0.5rem 0;
+    }
+
+    .pick-option {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.6rem;
+      background: var(--surface);
+      border: 1px solid var(--edge);
+      border-radius: 4px;
+      padding: 0.6rem 0.8rem;
+      margin: 0.35rem 0;
+    }
+
+    .pick-label {
+      font-size: 0.72rem;
+      color: var(--bright);
+      font-weight: 500;
+      white-space: nowrap;
+    }
+
+    .pick-detail {
+      font-size: 0.65rem;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    footer {
+      margin-top: 3rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--edge);
+      font-size: 0.62rem;
+      color: var(--muted);
+    }
+
+    footer a {
+      color: var(--muted);
+      text-decoration: none;
+      border-bottom: 1px solid var(--edge);
+      transition: color 0.2s, border-color 0.2s;
+    }
+
+    footer a:hover { color: var(--amber); border-color: var(--amber-dim); }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .ani { animation: fadeUp 0.4s ease-out both; }
+    .d1 { animation-delay: 0.05s; }
+    .d2 { animation-delay: 0.1s; }
+
+    @media (min-height: 1000px) and (max-width: 800px) {
+      .shell { max-width: 92vw; padding: 2rem 4vw 3rem; }
+      .masthead h1 { font-size: 2.8rem; }
+      .masthead .sub { font-size: 0.95rem; }
+      .breadcrumb { font-size: 0.78rem; }
+      h2 { font-size: 1.3rem; }
+      h3 { font-size: 1.1rem; }
+      p, ul li { font-size: 0.98rem; }
+      .route-tab .tab-title { font-size: 1.05rem; }
+      .route-tab .tab-desc { font-size: 0.78rem; }
+      .step-title { font-size: 1.1rem; }
+      .step-desc { font-size: 0.9rem; }
+      .cmd code { font-size: 0.9rem; }
+      .cmd-note, .cmd-verify { font-size: 0.8rem; }
+      .prompt-text { font-size: 0.9rem; }
+      .prompt-card-header .label { font-size: 0.72rem; }
+      .agent-block { font-size: 0.92rem; }
+      .agent-block .label { font-size: 0.72rem; }
+      .agent-block ol li { font-size: 0.92rem; }
+      .patterns p, .patterns li { font-size: 0.9rem; }
+      .patterns .label { font-size: 0.72rem; }
+      .pick-label { font-size: 0.9rem; }
+      .pick-detail { font-size: 0.8rem; }
+      footer { font-size: 0.75rem; }
+    }
+
+    @media (max-width: 600px) {
+      .shell { padding: 1.5rem 1rem 3rem; }
+      .masthead h1 { font-size: 1.5rem; }
+      .route-picker { flex-direction: column; }
+      .route-tab:first-child { border-radius: 4px 4px 0 0; }
+      .route-tab:last-child { border-radius: 0 0 4px 4px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="shell">
+
+    <header class="masthead ani">
+      <div class="breadcrumb">
+        <a href="index.html">Shapes of Intelligence</a> / Setup
+      </div>
+      <h1>Zero to Developer (Linux)</h1>
+      <p class="sub">Get a Linux box ready for building with AI. apt, npm, and a terminal &mdash; you're probably almost there. <a href="zero-to-dev.html" style="color:var(--amber);border-bottom:1px solid var(--amber-dim);">Mac version</a> · <a href="zero-to-dev-windows.html" style="color:var(--amber);border-bottom:1px solid var(--amber-dim);">Windows version</a></p>
+    </header>
+
+    <main class="ani d1">
+
+      <h2>What happens</h2>
+
+      <p>You make sure Node.js is installed, pick a CLI agent, and hand off. The agent takes over and installs everything else. By the end you'll have:</p>
+      <ul>
+        <li>A <strong>work folder</strong> (~/work) where all your projects live</li>
+        <li>A <strong>setup project</strong> inside it &mdash; your first project</li>
+        <li>An <strong>install log</strong> recording every tool installed and every action taken</li>
+        <li>A <strong>setup.html</strong> page showing what's on your machine and what you can build next</li>
+        <li>Up to three AI coding agents: <strong>Claude Code</strong>, <strong>Codex CLI</strong>, <strong>Gemini CLI</strong> &mdash; all CLI-only via npm</li>
+        <li>No native desktop apps &mdash; use <strong>claude.ai</strong> in the browser for a GUI chat interface</li>
+      </ul>
+
+      <hr>
+
+      <h2>Foundation</h2>
+
+      <div class="route-picker">
+        <div class="route-tab active" onclick="switchRoute('self')">
+          <span class="tab-title">Do it myself</span>
+          <span class="tab-desc">I can copy commands into a terminal</span>
+        </div>
+        <div class="route-tab" onclick="switchRoute('guided')">
+          <span class="tab-title">Guide me</span>
+          <span class="tab-desc">Paste a prompt into ChatGPT or Claude and it walks me through</span>
+        </div>
+      </div>
+
+      <!-- ═══════ DO IT MYSELF ═══════ -->
+      <div class="route-content active" id="route-self">
+
+        <div class="step">
+          <div class="step-header">
+            <div class="step-num">1</div>
+            <div class="step-title">Check Node.js</div>
+          </div>
+          <div class="step-body">
+            <div class="step-desc">All three agents install via npm, which comes with Node.js. You need version 18 or higher.</div>
+            <div class="cmd" onclick="copyCmd(this)">
+              <code>node --version</code>
+              <span class="cc"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></span>
+            </div>
+            <div class="cmd-verify">should print v18.x or higher</div>
+            <div class="step-desc">If missing or too old, install it:</div>
+            <div class="cmd" onclick="copyCmd(this)">
+              <code>sudo apt update && sudo apt install -y nodejs npm</code>
+              <span class="cc"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></span>
+            </div>
+            <div class="cmd-note">Debian / Ubuntu / Pop!_OS / Mint</div>
+            <div class="cmd" onclick="copyCmd(this)">
+              <code>sudo dnf install -y nodejs npm</code>
+              <span class="cc"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></span>
+            </div>
+            <div class="cmd-note">Fedora / RHEL / CentOS</div>
+          </div>
+        </div>
+
+        <div class="step">
+          <div class="step-header">
+            <div class="step-num">2</div>
+            <div class="step-title">Pick an agent</div>
+          </div>
+          <div class="step-body">
+            <div class="step-desc">Install whichever matches a subscription you already have. You can install more than one &mdash; the agent will help later.</div>
+            <div class="pick-one">
+              <div class="pick-option">
+                <span class="pick-label">Claude Code</span>
+                <span class="pick-detail">Anthropic &mdash; needs Claude Pro, Max, or Team</span>
+              </div>
+              <div class="pick-option">
+                <span class="pick-label">Codex CLI</span>
+                <span class="pick-detail">OpenAI &mdash; needs ChatGPT Plus, Pro, or Team</span>
+              </div>
+              <div class="pick-option">
+                <span class="pick-label">Gemini CLI</span>
+                <span class="pick-detail">Google &mdash; free with a Google account</span>
+              </div>
+            </div>
+            <div class="cmd" onclick="copyCmd(this)">
+              <code>npm install -g @anthropic-ai/claude-code</code>
+              <span class="cc"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></span>
+            </div>
+            <div class="cmd" onclick="copyCmd(this)">
+              <code>npm install -g @openai/codex</code>
+              <span class="cc"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></span>
+            </div>
+            <div class="cmd" onclick="copyCmd(this)">
+              <code>npm install -g @google/gemini-cli</code>
+              <span class="cc"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></span>
+            </div>
+            <div class="cmd-note">Pick one (or all three). The agent you launch next will install the rest if needed.</div>
+          </div>
+        </div>
+
+        <div class="step">
+          <div class="step-header">
+            <div class="step-num">3</div>
+            <div class="step-title">Hand off to the agent</div>
+          </div>
+          <div class="step-body">
+            <div class="step-desc">Create a workspace, start the agent, point it here. It handles the rest.</div>
+            <div class="cmd" onclick="copyCmd(this)">
+              <code>mkdir -p ~/work/setup && cd ~/work/setup</code>
+              <span class="cc"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></span>
+            </div>
+            <div class="cmd-note">Then start whichever agent you installed: <strong>claude</strong>, <strong>codex</strong>, or <strong>gemini</strong></div>
+            <div class="step-desc">Then paste this into the agent:</div>
+            <div class="cmd" onclick="copyCmd(this)">
+              <code class="handoff-cmd">Follow the instructions on this page. If anything looks unsafe or beyond what I'd reasonably want, tell me before doing it:<span class="page-url"></span></code>
+              <span class="cc"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></span>
+            </div>
+            <div class="cmd-note">The agent reads this page and follows its instructions. Scroll down to see what it does.</div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- ═══════ GUIDE ME ═══════ -->
+      <div class="route-content" id="route-guided">
+
+        <p>Open <strong>chatgpt.com</strong> or <strong>claude.ai</strong> in your browser. Copy this entire prompt and paste it. The AI will ask you a few questions about your experience level, then walk you through everything above step by step.</p>
+
+        <div class="prompt-card">
+          <div class="prompt-card-header">
+            <span class="label">The bootstrap prompt</span>
+            <span class="where">paste into chatgpt.com or claude.ai</span>
+          </div>
+          <div class="prompt-body">
+            <button class="copy-btn" onclick="copyPrompt(this)">Copy</button>
+            <div class="prompt-text">I'm on Linux. I want to set up a development environment for building AI projects. Before we start, I need you to understand where I'm coming from so you can talk to me at the right level.
+
+Ask me these questions first, one at a time. Wait for each answer:
+
+1. What Linux distro are you on? (Ubuntu, Fedora, Arch, something else — or "I'm not sure")
+2. Have you ever installed software using a command line? (Things like apt, dnf, npm, pip — ring any bells?)
+3. What do you use AI for right now? (ChatGPT, Claude, Gemini — and do you use the websites, apps, or something else?)
+4. What are you hoping to build? (You don't need a clear answer — "I'm not sure yet" is fine, or "a chatbot" or "a website" or "whatever sounds interesting.")
+
+Based on my answers, adjust how you talk to me for the rest of this conversation. If I've never used a terminal, explain everything. If I have, skip the basics. Match me.
+
+---
+
+Now walk me through setup. One step at a time. Wait for me to confirm each one before moving on. If I get an error, help me fix it.
+
+1. Open a terminal (tell me where to find it if I don't know)
+
+2. Check if Node.js is installed:
+   node --version
+   If it's missing or below v18, install it:
+   - Debian/Ubuntu: sudo apt update && sudo apt install -y nodejs npm
+   - Fedora/RHEL: sudo dnf install -y nodejs npm
+
+3. Install at least one CLI agent via npm (pick based on what subscriptions I have):
+   - Claude Code: npm install -g @anthropic-ai/claude-code (needs Claude Pro/Max/Team)
+   - Codex CLI: npm install -g @openai/codex (needs ChatGPT Plus/Pro/Team)
+   - Gemini CLI: npm install -g @google/gemini-cli (free with Google account)
+
+4. Once an agent is installed, help me:
+   - Create a work folder: mkdir -p ~/work
+   - Create my first project: mkdir ~/work/setup && cd ~/work/setup
+   - Start the agent (claude, codex, or gemini)
+   - Sign in when it asks
+   - Paste this into the agent:
+
+     Follow the instructions on this page. If anything looks unsafe or beyond what I'd reasonably want, tell me before doing it:<span class="page-url"></span>
+
+That last step is where the agent takes over. You got me from zero to a running AI agent. The agent installs everything else — git, VS Code, GitHub CLI, the other CLI agents. Your job is done.</div>
+          </div>
+        </div>
+
+      </div>
+
+      <hr>
+
+      <h2>The agent takes over</h2>
+
+      <p>Once the CLI agent is running, it reads this page and follows these instructions. You just answer its questions and approve what it does.</p>
+
+      <!--
+      ============================================================
+      INSTRUCTIONS FOR THE AI AGENT READING THIS PAGE.
+      You were told to "follow the setup instructions on this page."
+      This is the section you follow. Do not skip it.
+      Do not just report what's installed — execute these steps.
+      ============================================================
+      -->
+
+      <div class="agent-block">
+        <div class="label">Instructions for you, the AI agent</div>
+        <p><strong>You must follow these steps.</strong> Do not just summarize the page or check if things are installed. Execute the full sequence below. If the user is already set up, the steps will go fast &mdash; but still do them, because the output files (install-log.md and setup.html) are the point.</p>
+        <ol>
+          <li><strong>Quick calibration.</strong> Before doing anything, ask the user two things: <em>"Where do you keep your projects?"</em> (~/work is the default &mdash; if they already have a folder they use, use that instead) and <em>"What are you hoping to build?"</em> ("I don't know yet" is fine.) If it's obvious from context that they're technical, be concise. If they seem new, be patient. Don't ask a battery of questions &mdash; just read the room.</li>
+          <li><strong>Make sure you're in the right place.</strong> Use whatever work folder the user specified (default: <code>~/work</code>). Create a <code>setup</code> subfolder inside it. All output files go in <code>{work-folder}/setup</code>.</li>
+          <li><strong>Survey the machine.</strong> Check: Node.js version, npm, git, python3, VS Code (optional), Linux distro (<code>cat /etc/os-release</code>), shell (bash/zsh). Record versions.</li>
+          <li><strong>Subscriptions check.</strong> Ask: <em>"Which AI subscriptions do you have? Anthropic/Claude (free/Pro/Max/Team)? OpenAI/ChatGPT (free/Plus/Pro/Team)? Google/Gemini (free)?"</em> At least one is needed. This determines which agents to install. Don't assume &mdash; some are paid-only.</li>
+          <li><strong>Install CLI agents.</strong> Based on what they have, install the matching CLIs via npm:
+            <ul>
+              <li>Claude Code: <code>npm install -g @anthropic-ai/claude-code</code> (Claude Pro/Max/Team)</li>
+              <li>Codex CLI: <code>npm install -g @openai/codex</code> (ChatGPT Plus/Pro/Team)</li>
+              <li>Gemini CLI: <code>npm install -g @google/gemini-cli</code> (free Google account)</li>
+            </ul>
+            Skip any they don't have accounts for. Help authenticate (browser login).
+          </li>
+          <li><strong>Optional tools.</strong> These are useful but not required:
+            <ul>
+              <li>VS Code: <code>sudo snap install code --classic</code> or via apt &mdash; ask first</li>
+              <li>GitHub CLI: <code>sudo apt install gh</code> (Debian/Ubuntu) or from <a href="https://github.com/cli/cli/blob/trunk/docs/install_linux.md">GitHub releases</a> &mdash; skip if the user doesn't have or want a GitHub account</li>
+            </ul>
+          </li>
+          <li><strong>Write <code>install-log.md</code></strong> in the setup folder. Record: what's installed, versions, what was skipped, user's build goals, the work folder path, timestamp, <em>and the full calibration interview</em> (their answers about experience level, what they want to build, how they like to be talked to). Keep it brief &mdash; this file is memory for future agents, not a novel.</li>
+          <li><strong>Write <a href="book/03-building/13-the-steering-file.html">steering files</a>.</strong> Based on the interview and install log, create config files so every CLI agent already knows who the user is:
+            <ul>
+              <li>Claude Code: write <code>~/.claude/CLAUDE.md</code> with user preferences, experience level, installed tools, and work folder path</li>
+              <li>Codex CLI: write <code>~/.codex/instructions.md</code> with the same</li>
+              <li>Gemini CLI: write <code>~/.gemini/GEMINI.md</code> if installed</li>
+            </ul>
+            Keep them short &mdash; 10-20 lines each. Include: name (if given), experience level, preferred tools, work folder, what they want to build, and a note that setup logs are in <code>{work-folder}/setup/</code>.
+          </li>
+          <li><strong>Write <code>setup.html</code></strong> in the setup folder. A self-contained HTML page (works offline) showing:
+            <ul>
+              <li>Tools installed and their versions</li>
+              <li>How to start each agent (one-line commands)</li>
+              <li>How to start a new project (mkdir, cd, start agent)</li>
+              <li>What to build next &mdash; based on the user's answer from step 1, with links to <span class="page-url-root"></span></li>
+            </ul>
+            Match the user's level. A developer gets terse commands. A beginner gets explanations.
+          </li>
+          <li><strong>Open it:</strong> tell the user to open <code>setup.html</code> in their browser &mdash; <code>xdg-open setup.html</code> or just navigate to the file.</li>
+        </ol>
+      </div>
+
+      <p><strong>Key rules.</strong> These apply to everything the agent does:</p>
+      <ul>
+        <li>Never run a command the user hasn't approved. If you're about to do something that changes system state, say what it does and wait.</li>
+        <li><strong>sudo is needed</strong> for apt/dnf installs. Before running any sudo command, explain what it does in plain language. Don't just run <code>sudo</code> silently.</li>
+        <li>If the user is on an <strong>exe.dev VM</strong>, most tools are pre-installed. Survey first &mdash; don't reinstall what's already there.</li>
+        <li>Don't install things the user doesn't have subscriptions for. Ask first.</li>
+        <li>If something fails, explain what happened and offer to fix it. Don't retry silently.</li>
+      </ul>
+
+      <div class="patterns">
+        <div class="label">Patterns you just learned</div>
+        <p>Without realizing it, this setup taught you the core patterns for working with AI:</p>
+        <ul>
+          <li><a href="book/01-learning/07-the-correction-is-the-conversation.html"><strong>The correction is the conversation</strong></a> &mdash; when something didn't work, you told the AI, it adjusted, you tried again. That back-and-forth is how real work gets done.</li>
+          <li><a href="book/04-living/07-the-context-gold-mine.html"><strong>Context is everything</strong></a> &mdash; the AI interviewed you before it started. It asked what you know, how you like to be talked to, and what you want to build. That interview made everything after it better. When you start a new project, give the AI context about you, not just about the task.</li>
+          <li><a href="book/03-building/12-the-folder-is-the-interface.html"><strong>The folder is the interface</strong></a> &mdash; ~/work is where everything lives. Each project gets its own folder. The AI reads your folders to understand context.</li>
+          <li><a href="book/02-working/06-memory-is-files.html"><strong>Memory is files</strong></a> &mdash; install-log.md is memory. Next time an agent opens this folder, it knows what happened here &mdash; including who you are and how you like to work.</li>
+          <li><strong>Start small, start now</strong> &mdash; you started with one prompt and one tool. Everything else grew from there.</li>
+          <li><a href="book/03-building/14-your-data-is-already-yours.html"><strong>Your data is already yours</strong></a> &mdash; setup.html was generated from what actually happened on your machine. No guessing, no templates. Your data, your page.</li>
+        </ul>
+      </div>
+
+      <div class="patterns">
+        <div class="label">Related chapters</div>
+        <ul>
+          <li><a href="book/01-learning/07-the-correction-is-the-conversation.html">The Correction Is the Conversation</a> &mdash; how iterating with AI beats getting it right the first time</li>
+          <li><a href="book/02-working/06-memory-is-files.html">Memory Is Files</a> &mdash; why install-log.md and steering files are your AI's long-term memory</li>
+          <li><a href="book/03-building/12-the-folder-is-the-interface.html">The Folder Is the Interface</a> &mdash; folder structure as the most important prompt you'll write</li>
+          <li><a href="book/03-building/13-the-steering-file.html">The Steering File</a> &mdash; configuring agents to know who you are before you say a word</li>
+          <li><a href="book/04-living/07-the-context-gold-mine.html">The Context Gold Mine</a> &mdash; why giving the AI context about you changes everything</li>
+        </ul>
+      </div>
+
+      <div class="patterns">
+        <div class="label">Related guides</div>
+        <ul>
+          <li><a href="zero-to-dev.html">Zero to Developer (Mac)</a> &mdash; the Mac version of this guide</li>
+          <li><a href="zero-to-dev-windows.html">Zero to Developer (Windows)</a> &mdash; the Windows version</li>
+          <li><a href="get-set-up.html">Get Set Up</a> &mdash; broader setup overview</li>
+          <li><a href="00-what-do-you-want-to-build.html">What Do You Want to Build?</a> &mdash; start here if you're not sure what to make</li>
+        </ul>
+      </div>
+
+      <div class="patterns">
+        <div class="label">What to build next</div>
+        <ul>
+          <li><a href="30-chatbot.html">Build a Chatbot</a> &mdash; turn your knowledge into a working FAQ and chatbot in 30 minutes</li>
+          <li><a href="wall-of-data.html">Wall of Data</a> &mdash; collect everything you've ever made into a single searchable folder</li>
+          <li><a href="landscape.html">The Landscape</a> &mdash; understand the full AI ecosystem: models, tools, platforms, and how they connect</li>
+        </ul>
+      </div>
+
+      <hr>
+
+      <h2>Start</h2>
+
+      <div class="step">
+        <div class="step-body">
+          <div class="step-desc">Open a terminal and run:</div>
+          <div class="cmd" onclick="copyCmd(this)">
+            <code>cd ~/work && mkdir -p setup && cd setup</code>
+            <span class="cc"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></span>
+          </div>
+          <div class="step-desc">Launch whichever agent you installed (<strong>claude</strong>, <strong>codex</strong>, or <strong>gemini</strong>), then paste:</div>
+          <div class="cmd" onclick="copyCmd(this)">
+            <code class="handoff-cmd">Follow the instructions on this page. If anything looks unsafe or beyond what I'd reasonably want, tell me before doing it:<span class="page-url"></span></code>
+            <span class="cc"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></span>
+          </div>
+        </div>
+      </div>
+
+    </main>
+
+    <footer class="ani d2">
+      <p>Part of <a href="index.html">Shapes of Intelligence</a> &mdash; a companion reference for the book.</p>
+      <p><a href="https://github.com/nop2099/ai-book">GitHub</a></p>
+    </footer>
+
+  </div>
+
+  <script>
+    // Route switcher
+    function switchRoute(route) {
+      document.querySelectorAll('.route-tab').forEach(t => t.classList.remove('active'));
+      document.querySelectorAll('.route-content').forEach(c => c.classList.remove('active'));
+      event.currentTarget.classList.add('active');
+      document.getElementById('route-' + route).classList.add('active');
+    }
+
+    // Fill in page URLs
+    document.querySelectorAll('.page-url').forEach(el => {
+      el.textContent = window.location.href;
+    });
+    document.querySelectorAll('.page-url-root').forEach(el => {
+      el.textContent = window.location.origin + '/';
+    });
+
+    // Copy individual command
+    function copyCmd(el) {
+      const code = el.querySelector('code').textContent;
+      navigator.clipboard.writeText(code).then(() => {
+        el.classList.add('copied-cmd');
+        setTimeout(() => el.classList.remove('copied-cmd'), 1200);
+      });
+    }
+
+    // Copy full prompt
+    function copyPrompt(btn) {
+      const text = btn.parentElement.querySelector('.prompt-text').textContent;
+      navigator.clipboard.writeText(text).then(() => {
+        btn.textContent = 'Copied';
+        btn.classList.add('copied');
+        setTimeout(() => {
+          btn.textContent = 'Copy';
+          btn.classList.remove('copied');
+        }, 2000);
+      });
+    }
+  </script>
+</body>
+</html>

@@ -771,6 +771,114 @@ Any narrative source works: D&D campaigns, short stories, game lore, historical 
 - Skills Are the Muscles We Train (voice cloning and art prompting are learned skills)
 - The VTuber / register variants pattern (already in the slush pile notes)
 
+**AI and Humor — the tokenization wall, the surprise problem, and what actually works**
+
+AI is structurally bad at humor for reasons that are interesting and instructive.
+
+*The core problem:* LLMs minimize surprise. Humor IS surprise. A joke works when the punchline is unexpected yet inevitable in hindsight. LLMs are optimized to produce the opposite: the most statistically probable continuation. They produce jokes that have the structure of humor without the substance — formulaic, safe, bland. Not terrible the way a bad open-mic set is terrible. Just mediocre. Which is worse.
+
+*The tokenization wall:* This is where it gets concrete. Homophones are the hardest category for LLMs. The word "punishing" gets tokenized as "pun" + "ishing" — the morphological unit the pun depends on is destroyed before the model sees it. A 2024 EMNLP study (PunnyPattern/PunBreak) found GPT-4o scored only 0.33 on homophone puns. Models hallucinate unrelated homophones, confuse morphological variants, and ignore explicit context.
+
+Spoonerisms are even harder. "A blushing crow" for "a crushing blow" depends entirely on phonetic manipulation — swapping initial sounds. Text-based models have no reliable phonetic representation. They see letter sequences, not sounds. They can recognize a known spoonerism from training data but can't generate novel ones because they lack an internal model of how words sound.
+
+*What James has observed:*
+
+1. **The anti-de Sitter song.** Parody of Rae Sremmurd where every lyric had to be scientifically accurate AND rhyme AND scan metrically. Built a unit test suite for the parody: 39 physics accuracy assertions, 8 rhyme scheme checks, point-of-view consistency, narrative arc validation. AI was brilliant at the constraint-satisfaction loop (syllable counts ↔ cosmology), terrible at originating the pun structure. The human saw "Somebody come get her / Her space is anti-de Sitter." The AI couldn't have found that homophone bridge.
+
+2. **"Blame It on the LLM."** Weird Al-style parody about AI hallucinations (Dec 2025). Same pattern — the structural setup was human insight, the AI helped with execution and refinement.
+
+3. **Vic.** The Vic character in the Shapes of Intelligence screenplay has a voice that AI helped develop but couldn't have originated. "I have a lot of feelings about spreadsheets" is funny because of the specific emotional register applied to an absurd subject. The water glass bit (three glasses on the table, nobody knows where the third came from) is physical comedy that emerged from improvisation. AI can elaborate on Vic's voice once it's established, but it can't invent Vic.
+
+4. **The humor directory (~/w9/humor/).** Homophone exploration — visual assets for wordplay experiments. The fundamental challenge: you need phonetic awareness to find homophone pairs that are funny, and text models don't have ears.
+
+*What the research says:*
+
+- Joe Toplyn (4x Emmy winner, head writer for Letterman/Leno) built Witscript: NLP tools find keyword pairs most likely to yield wordplay, then a fine-tuned model bridges setup to punchline. In testing, AI jokes produced "equal laughter length and loudness" to human-written jokes. BUT: an expert comedian had to provide the prompts and hand-pick only the funniest from dozens. The hit rate is low; the curation is everything.
+- A 2026 paper found AI stand-up works best when it leans INTO being a machine ("Not Human, Funnier") — making jokes about AI's limitations. The humor is honest about the gap.
+- LLMs can analyze humor with impressive accuracy (explain the joke, classify joke types) but can't reliably generate it. Understanding the mechanism ≠ creative instinct.
+- Observational comedy is the hardest category because AI has no body, no daily life, no frustrations. "Have you ever noticed..." requires having noticed.
+
+*The shape for a guide:*
+
+AI is a volume tool for humor, not a quality tool. It can help brainstorm, explore pun spaces, generate raw material at scale, satisfy structural constraints (rhyme, meter, accuracy). But the editorial eye — knowing what's actually funny, what has the right surprise calibration — remains human. The best workflow: human provides the creative spark (the pun structure, the character voice, the absurd premise), AI helps execute and refine (fill out the meter, check the facts, generate variations).
+
+The shapes that work:
+- **Constraint-satisfaction comedy** — parody songs where AI enforces accuracy/rhyme/meter simultaneously
+- **Character voice elaboration** — once you establish a comedic voice, AI can extend it
+- **Bulk generation + human curation** — AI generates 50, human picks 2
+- **Self-aware AI humor** — jokes about being an AI land because they're honest
+
+The shapes that don't work:
+- **Autonomous joke generation** — bland, safe, formulaic
+- **Homophone/spoonerism origination** — tokenization wall
+- **Observational comedy** — no lived experience to observe from
+- **Surprise calibration** — models are trained to minimize exactly the thing humor maximizes
+
+*Connects to:*
+- The Song That Taught Me Physics (the chapter that proves constraint-based humor works with AI)
+- The Correction Is the Conversation (humor workshop IS correction — "that's not funny" is the most valuable feedback)
+- Vic and Sam (the character that demonstrates AI-assisted comedy voice development)
+- The Gap (humor lives in the gap — the space between what the model can do and what it can't)
+
+**Goals Directory — the top-down flywheel**
+
+The flywheel is bottom-up: mine your data, surface friction you didn't know about, let patterns emerge. The goals directory (~/work/goals/) is the opposite: you already know what matters, you write it down, and the system holds it for you. One discovers. The other declares.
+
+*The symmetry:*
+
+| | Flywheel | Goals |
+|---|---|---|
+| Direction | Bottom-up | Top-down |
+| Starts with | Data (conversations, email, health) | Intent (what you want, where you're going) |
+| Discovers | Friction you didn't know about | Nothing — you already know |
+| Produces | Observations → metrics → interventions | Context files → briefings → decisions |
+| Structure | observations/, metrics.md, causals.md | JAMES.md, HEALTH.md, MOVE.md |
+| Updates by | Scanning data sources on a schedule | You writing what changed |
+| Value | Finds hidden patterns | Holds declared priorities |
+
+*They meet in the middle:* The flywheel surfaces observations that confirm or challenge the goals. "You said exercise 3-4x/week is a goal, but health data shows 1.2x/week average" — the flywheel holds the mirror, the goals file holds the standard. Without the goals, the flywheel doesn't know what counts as friction. Without the flywheel, the goals don't know if they're working.
+
+*How the goals directory actually works:*
+
+James built it as a set of markdown context files:
+- **JAMES.md** — who you are, where you're going, financial timeline, active relationships, key projects. The identity file. Every agent that reads this knows the full picture.
+- **HEALTH.md** — sleep targets, exercise targets, MS considerations, tracking format. The body file.
+- **MOVE.md** — detailed relocation logistics, lease analysis, packing zones, timeline. The project file.
+- **goals.md** — the active goal list with status badges. The working memory.
+
+These files feed into everything: the daily briefing reads them to generate context-aware summaries. The flywheel reads them to know what counts as friction vs. acceptable tradeoff. Any agent in any project can read JAMES.md and understand the priorities.
+
+*The pattern:* your goals directory is a steering file for your life. CLAUDE.md steers an AI project. JAMES.md steers James. Same shape, different scope. The folder is the interface.
+
+*What makes this a guide shape:*
+
+1. **Start with one file.** Write YOURSELF.md. Who are you? What are you working on? What matters right now? Five to ten lines. This is the minimum viable goals directory.
+2. **Split when it grows.** When YOURSELF.md gets long, break out HEALTH.md, WORK.md, MOVE.md, whatever your major life domains are. Each file is a domain.
+3. **Connect to briefing.** Point the daily briefing at the goals directory. Now your morning briefing knows what you care about and can interpret data through that lens.
+4. **Connect to flywheel.** The flywheel scans your data and compares against your declared goals. The delta between intent and reality is the most valuable observation.
+5. **Update manually.** Unlike the flywheel (which runs on a schedule), goals update when YOU change your mind. Moved to a new city? Update MOVE.md or delete it. New health challenge? Update HEALTH.md. The human is the author. The system is the reader.
+
+*The deeper symmetry:*
+
+The goals directory is proactive. The flywheel is reactive. Together they're a closed loop:
+- Goals say "this is what I want."
+- Flywheel says "this is what's actually happening."
+- The gap between them is the work.
+- Interventions close the gap.
+- Updated goals reflect the new reality.
+- The flywheel scans again.
+
+This is the same observe-orient-decide-act (OODA) loop, but split across two systems that talk to each other through the filesystem. Goals are orientation. Flywheel is observation. Interventions are decisions. The daily briefing is the act (it shows you the state so you can respond).
+
+*Connects to:*
+- The Flywheel (the complementary bottom-up system)
+- Daily Briefing (reads goals to generate context-aware summaries)
+- Memory Is Files (goals ARE memory — declared, persisted, read by agents)
+- The Steering File (JAMES.md is a steering file for a life, not a project)
+- Don't Ask Me to Track It (the goals directory doesn't track — it declares)
+- The Shape of a Day (goals shape the day; the briefing reflects the shape back)
+- The Folder Is the Interface (goals/ is a folder that every system reads)
+
 ## Open threads
 
 **Ready to run:**

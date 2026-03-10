@@ -520,25 +520,86 @@ The problem: real credentials (database passwords, connection strings, internal 
 - Solved Problems Stay Solved (the pre-commit hook makes it permanent)
 - The Flywheel (PII scanning is a collection engine)
 
+**Maintenance Guide — keeping the lights on**
+
+Different shape from the flywheel. The flywheel discovers friction you didn't know about. The maintenance guide handles friction you already know about — known systems, known failure modes, known fixes. It's ops. It's runbooks.
+
+*The shape:*
+
+1. **What matters.** A ranked inventory of the systems you depend on. Not everything — just the ones where downtime costs you. Server, database, DNS, SSL certs, backups, cron jobs, API keys with expiry dates, subscriptions, domains. Each one gets a priority: critical (down = broken), important (down = degraded), nice-to-have (down = annoying).
+
+2. **How to check it.** For each system, a health check. A command, a URL, a query. Something an agent can run without interpretation. `curl -s https://shapes.exe.xyz | head -1` — did it respond? `psql -c "SELECT 1"` — is the database alive? `certbot certificates` — when do certs expire? The check is the runbook's smallest unit.
+
+3. **How to fix it.** For each known failure mode, a procedure. Not a troubleshooting guide — a script. "If the site is down, check nginx, check DNS, check the deploy. Here are the commands." The fix is a sequence of steps an agent can follow. If the agent can't fix it, it escalates — tells you what it found and what it tried.
+
+4. **When to check it.** A schedule. Daily for critical systems, weekly for important ones, monthly for the rest. The maintenance guide runs on a cron. It produces a report: green/yellow/red for each system. If everything's green, you never see it. If something's yellow, it shows up in the daily briefing. If something's red, it wakes you up.
+
+5. **What changed.** A changelog. Every time a system changes — new deploy, config update, dependency upgrade — the maintenance guide logs it. When something breaks, the changelog is the first place you look. "What changed since it was working?"
+
+*How it differs from the flywheel:*
+- Flywheel: discovery → "I didn't know this was friction." Maintenance: operations → "I know this can break."
+- Flywheel: mines observations from data sources. Maintenance: runs health checks against known systems.
+- Flywheel: proposes interventions. Maintenance: executes runbooks.
+- Flywheel: periodic deep scan. Maintenance: continuous monitoring.
+- Flywheel output: observations, metrics, proposals. Maintenance output: status dashboard, incident log.
+
+*They connect:* the flywheel might discover that a system keeps going down. That's an observation. The intervention is: add it to the maintenance guide. The maintenance guide is where flywheel discoveries go to become permanent operations. Flywheel is R&D. Maintenance is production.
+
+*Inter-system communication:* Any system can dump a call for help into any other system's folder. Maintenance hits a red check it can't fix → writes an observation to `papercuts/observations/`. Flywheel discovers recurring outages → proposes a new health check for the maintenance guide. Daily briefing notices a stale maintenance report → flags it. The protocol is: write a markdown file in the right folder. No API, no message bus. The folder is the interface. Every guide that follows this convention can talk to every other guide. That's the operating system.
+
+*Self-reflection skills:* Every system gets a skill that lets it reflect on its own performance — a periodic self-check with full local context. Maintenance knows its own check history, failure rates, false positives. The daily briefing knows which sections got read vs ignored, which data sources are stale. The chatbot knows which questions it couldn't answer. Each system is the world expert on its own friction. The skill runs locally, observes locally, and logs findings to the flywheel's observations folder. The flywheel doesn't need to understand every system — it just reads the observations. Each system contributes its own local expertise to the global friction map. This is distributed self-improvement through a shared folder convention.
+
+*The maintenance dashboard would show:*
+- System status grid (green/yellow/red)
+- Last check timestamps
+- Upcoming expirations (certs, domains, API keys, subscriptions)
+- Recent incidents and resolutions
+- Changelog (last 10 changes)
+
+*Agent instructions shape:*
+1. Interview: what systems do you run? What breaks? What worries you?
+2. Inventory: build the ranked list with health checks for each
+3. Runbooks: for each system, document the known failure modes and fixes
+4. Schedule: set up automated checks (cron, steering file reminder, or calendar)
+5. Dashboard: generate status page from check results
+6. Self-maintain: the maintenance guide checks itself — are the health checks still valid? Are there new systems that should be tracked?
+
+*Connects to:*
+- Fix Your Papercuts (maintenance prevents known papercuts from recurring)
+- Solved Problems Stay Solved (runbooks are solved problems, written down)
+- Don't Ask Me to Track It (automated checks instead of manual monitoring)
+- The Steering File (maintenance config lives in the project)
+- The Flywheel (discoveries graduate from flywheel to maintenance)
+
+*Real examples:*
+- SSL cert expiry — checked monthly, auto-renewed, but you need to verify the renewal worked
+- Database backups — are they running? Can you restore from one? When did you last test?
+- DNS — is the record still pointing where you think? Did the registrar auto-renew?
+- Cron jobs — are they still running? Did one silently fail three weeks ago?
+- API keys — which ones expire? When? Who has access?
+- Subscriptions — what are you paying for? Is any of it unused?
+
 ## Open threads
 
 **Ready to run:**
-- [ ] Integrate build-book.py into build.sh
+- [x] Integrate build-book.py into build.sh (done — build.sh already calls it)
 - [ ] Verify book pages in browser (generated but not reviewed)
 
 **Security / analysis:**
 - [ ] Security analysis of TaskCreate/TaskUpdate/TaskList — prompt injection via task descriptions, cross-session persistence, task descriptions as working memory influence
 - [ ] Think about shapes-aware /todo — tasks tagged by shape, completed tasks as shape evidence, minimum-interruption capture
+- [ ] PII scanner and history squasher — automated pre-commit hook + git filter-repo cleanup
 
 **Reference pages to write:**
 - [ ] Terminal, package manager, Node, Python, VS Code
 - [ ] Claude Code, Cursor, steering files
 - [ ] Docker, API keys, hosting, AI defaults
-- [ ] Google Cloud project + OAuth credential setup guide
-- [ ] Flywheel — mine your own process for papercuts (Fix Your Papercuts as a guide)
+- [x] Google Cloud project + OAuth credential setup guide (done — oauth-setup.html)
+- [x] Flywheel — mine your own process for papercuts (done — flywheel.html)
 - [ ] Daily Briefing — morning dashboard generated by agents (Shape of a Day as a guide)
 - [ ] Slush Pile — deferred TODO list for every project, including yourself (Memory Is Files as a guide)
 - [ ] Guide-Based Development — a meta-guide for making guides (the guide that builds guides)
+- [ ] Maintenance Guide — keeping the lights on (ops, runbooks, health checks, status dashboard)
 - [ ] The Roster, reimplement-don't-import
 
 **Project shape pages to write:**

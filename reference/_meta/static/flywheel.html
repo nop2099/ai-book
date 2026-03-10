@@ -565,8 +565,9 @@
           <li><strong>Set subgoals.</strong> For each approved intervention, define the target: <em>"SSH re-asks: 4/week &rarr; 0/week."</em> Write to <code>papercuts/subgoals.md</code>. This is a living document &mdash; add new subgoals, update progress, drop ones that flatline.</li>
           <li><strong>Track wins.</strong> Write <code>papercuts/wins.md</code> with before-and-after measurements. Write <code>papercuts/log.md</code> with today's date and a summary.</li>
           <li><strong>Schedule.</strong> Suggest how to automate the next flywheel run. A cron job, a calendar reminder, a note in the steering file. The flywheel should run at least monthly. Let the user choose.</li>
+          <li><strong>Self-assess.</strong> Review the flywheel's own performance. Is the schedule right? Are collection engines producing useful observations? Are there data sources that should be added or dropped? Write any self-improvement proposals to <code>papercuts/fixes/</code> &mdash; the flywheel is its own project. Update its own skills and cadence based on what it finds.</li>
         </ol>
-        <p><strong>Key rules:</strong> Observations are facts, not judgements. Present the top 5-10 findings first and let the user guide priority. Don't write any fix files without explicit approval. If a fix touches system config (shell profile, cron, etc.), explain exactly what it does before proceeding. If anything looks unsafe or beyond what the user would reasonably want, say so. This process works with a single data source &mdash; don't pressure the user to connect everything at once.</p>
+        <p><strong>Key rules:</strong> Observations are facts, not judgements. Present the top 5-10 findings first and let the user guide priority. Don't write any fix files without explicit approval. If a fix touches system config (shell profile, cron, etc.), explain exactly what it does before proceeding. If anything looks unsafe or beyond what the user would reasonably want, say so. This process works with a single data source &mdash; don't pressure the user to connect everything at once. The flywheel treats itself as a project &mdash; it observes its own friction and proposes improvements to its own process.</p>
       </div>
 
       <hr>
@@ -584,7 +585,25 @@
         <li><strong>Nightly consolidation.</strong> The full Kai architecture: engines run at 3am, observations land in the event database, causal analysis runs across all sources, and you wake up to a briefing. This is the endgame &mdash; not where you start.</li>
       </ul>
 
-      <p>Start with a calendar block. Graduate to cron when you trust the engines. The flywheel doesn't spin if you don't come back to it.</p>
+      <p>But here's the thing: <strong>the flywheel manages its own schedule.</strong> If the cadence is wrong &mdash; too frequent and you're ignoring it, too rare and friction piles up &mdash; that's an observation. The flywheel proposes a schedule change the same way it proposes any other intervention. It writes a proposal to its own project folder. It updates its own skills. The schedule isn't a setting you configure once; it's a metric the flywheel tracks and adjusts.</p>
+
+      <p>Start with a calendar block. The flywheel will tell you when to change it.</p>
+
+      <hr>
+
+      <h2>The dashboard</h2>
+
+      <p>The flywheel produces structured data. That data wants a dashboard.</p>
+
+      <ul>
+        <li><strong>Metric trends.</strong> Are your papercut counts going down over time? Line charts, sparklines, before/after comparisons.</li>
+        <li><strong>Win velocity.</strong> How many fixes landed this week, this month? A fix rate that's climbing means the flywheel is accelerating.</li>
+        <li><strong>Active subgoals.</strong> What's being tracked, what's flatlined, what's improving? A flatlined metric is a signal &mdash; either the intervention isn't working or the problem was solved and the metric should be retired.</li>
+        <li><strong>Source coverage.</strong> Which collection engines ran recently? Which are stale? A stale engine is a blind spot.</li>
+        <li><strong>Causal map.</strong> What connects to what across data sources. A graph of observations, metrics, and interventions. This is where you see the shape of your friction.</li>
+      </ul>
+
+      <p>The dashboard reads <code>papercuts/</code> and renders it. Static HTML, same as this page. The flywheel generates the data; the dashboard makes it visible. If the dashboard is missing something, the flywheel observes that too.</p>
 
       <hr>
 

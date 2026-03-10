@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shapes of Intelligence</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,700;1,9..144,300&display=swap');
+
+    :root {
+      --void: #0a0a10;
+      --deep: #0f0f1a;
+      --surface: #161625;
+      --raised: #1e1e32;
+      --edge: #2a2a44;
+      --muted: #5a5a7a;
+      --text: #b8b8d0;
+      --bright: #e8e8f0;
+      --white: #f5f5ff;
+      --amber: #e8a83e;
+      --amber-dim: #c4882a;
+      --teal: #4ecdc4;
+      --rose: #e85577;
+      --blue: #5588dd;
+      --purple: #9977dd;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'DM Mono', 'SF Mono', monospace;
+      background: var(--void);
+      color: var(--text);
+      line-height: 1.7;
+      min-height: 100vh;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 9999;
+    }
+
+    .shell {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 3rem 1.5rem 4rem;
+    }
+
+    /* ── Hero ── */
+    .hero {
+      padding: 2rem 0 2.5rem;
+      border-bottom: 1px solid var(--edge);
+      margin-bottom: 2.5rem;
+      position: relative;
+    }
+
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: -1px;
+      left: 0;
+      width: 80px;
+      height: 1px;
+      background: var(--amber);
+    }
+
+    .hero h1 {
+      font-family: 'Fraunces', serif;
+      font-weight: 300;
+      font-size: 2.6rem;
+      color: var(--white);
+      letter-spacing: -0.02em;
+      margin-bottom: 0.5rem;
+    }
+
+    .hero .tagline {
+      color: var(--muted);
+      font-size: 0.78rem;
+      letter-spacing: 0.04em;
+      line-height: 1.8;
+      max-width: 50ch;
+    }
+
+    .hero .howto {
+      margin-top: 1.5rem;
+      background: var(--deep);
+      border: 1px solid var(--edge);
+      border-radius: 6px;
+      padding: 0.9rem 1.1rem;
+      font-size: 0.72rem;
+      color: var(--text);
+      line-height: 1.8;
+    }
+
+    .hero .howto strong { color: var(--bright); }
+    .hero .howto em { color: var(--amber); font-style: normal; }
+
+    /* ── Section headers ── */
+    .section-label {
+      font-size: 0.6rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 1rem;
+      padding-left: 2px;
+    }
+
+    /* ── Card grid ── */
+    .card-group {
+      margin-bottom: 2.5rem;
+    }
+
+    .cards {
+      display: grid;
+      gap: 2px;
+    }
+
+    .card {
+      display: flex;
+      align-items: baseline;
+      gap: 1rem;
+      background: var(--deep);
+      padding: 0.85rem 1rem;
+      border-radius: 4px;
+      text-decoration: none;
+      transition: background 0.15s, transform 0.15s;
+      position: relative;
+    }
+
+    .card:hover {
+      background: var(--surface);
+      transform: translateX(4px);
+    }
+
+    .card:hover .card-title { color: var(--white); }
+
+    .card-accent {
+      width: 3px;
+      height: 100%;
+      position: absolute;
+      left: 0;
+      top: 0;
+      border-radius: 4px 0 0 4px;
+      opacity: 0;
+      transition: opacity 0.15s;
+    }
+
+    .card:hover .card-accent { opacity: 1; }
+
+    .card-title {
+      font-family: 'Fraunces', serif;
+      font-weight: 500;
+      font-size: 0.92rem;
+      color: var(--bright);
+      transition: color 0.15s;
+      white-space: nowrap;
+    }
+
+    .card-desc {
+      font-size: 0.68rem;
+      color: var(--muted);
+      letter-spacing: 0.02em;
+    }
+
+    .card-tag {
+      margin-left: auto;
+      font-size: 0.55rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      background: var(--raised);
+      padding: 0.15rem 0.45rem;
+      border-radius: 3px;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    /* ── Book section (featured) ── */
+    .book-cards {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2px;
+    }
+
+    .book-card {
+      display: block;
+      background: var(--deep);
+      padding: 1.2rem 1rem;
+      border-radius: 4px;
+      text-decoration: none;
+      transition: background 0.15s;
+      position: relative;
+    }
+
+    .book-card:hover { background: var(--surface); }
+
+    .book-card .card-title {
+      display: block;
+      margin-bottom: 0.3rem;
+    }
+
+    .book-card .card-desc {
+      display: block;
+      line-height: 1.6;
+    }
+
+    .book-card .card-accent {
+      width: 100%;
+      height: 2px;
+      top: 0;
+      left: 0;
+      border-radius: 4px 4px 0 0;
+    }
+
+    .book-card:hover .card-accent { opacity: 1; }
+
+    /* ── Footer ── */
+    footer {
+      margin-top: 3rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--edge);
+      font-size: 0.62rem;
+      color: var(--muted);
+      letter-spacing: 0.03em;
+    }
+
+    footer a {
+      color: var(--muted);
+      text-decoration: none;
+      border-bottom: 1px solid var(--edge);
+      transition: color 0.2s, border-color 0.2s;
+    }
+
+    footer a:hover {
+      color: var(--amber);
+      border-color: var(--amber-dim);
+    }
+
+    /* ── Animations ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .ani { animation: fadeUp 0.4s ease-out both; }
+    .d1 { animation-delay: 0.05s; }
+    .d2 { animation-delay: 0.1s; }
+    .d3 { animation-delay: 0.15s; }
+    .d4 { animation-delay: 0.2s; }
+    .d5 { animation-delay: 0.25s; }
+
+    @media (max-width: 600px) {
+      .shell { padding: 1.5rem 1rem 3rem; }
+      .hero h1 { font-size: 1.8rem; }
+      .book-cards { grid-template-columns: 1fr; }
+      .card { flex-wrap: wrap; gap: 0.3rem; }
+      .card-tag { margin-left: 0; }
+    }
+  </style>
+</head>
+<body>
+  <div class="shell">
+
+    <header class="hero ani">
+      <h1>Shapes of Intelligence</h1>
+      <p class="tagline">Reference companion &mdash; environment setup, project guides, and the full book</p>
+      <div class="howto">
+        <strong>How to use this:</strong> Read a page yourself, or paste it into your AI agent:
+        <em>"Read this page and help me get set up."</em>
+        Each page works both ways &mdash; human-readable and agent-parseable.
+      </div>
+    </header>
+
+    <div class="card-group ani d1">
+      <div class="section-label">The Book</div>
+      <div class="book-cards">
+        <a href="book/index.html" class="book-card">
+          <span class="card-accent" style="background: var(--amber);"></span>
+          <span class="card-title">Read the Book</span>
+          <span class="card-desc">The full text of Shapes of Intelligence, chapter by chapter.</span>
+        </a>
+        <a href="book/full.html" class="book-card">
+          <span class="card-accent" style="background: var(--amber-dim);"></span>
+          <span class="card-title">Full Manuscript</span>
+          <span class="card-desc">The entire text on a single page.</span>
+        </a>
+      </div>
+    </div>
+
+    <div class="card-group ani d2">
+      <div class="section-label">Project Guides</div>
+      <div class="cards">
+        <a href="20-board-game.html" class="card">
+          <span class="card-accent" style="background: var(--teal);"></span>
+          <span class="card-title">Board Game</span>
+          <span class="card-desc">Turn a physical board game into a digital one &mdash; rules to AI opponents to deployment.</span>
+          <span class="card-tag">full guide</span>
+        </a>
+        <a href="00-what-do-you-want-to-build.html" class="card">
+          <span class="card-accent" style="background: var(--blue);"></span>
+          <span class="card-title">What Do You Want to Build?</span>
+          <span class="card-desc">Pick a project shape that matches your ambition.</span>
+          <span class="card-tag">start here</span>
+        </a>
+      </div>
+    </div>
+
+    <div class="card-group ani d3">
+      <div class="section-label">Environment Setup</div>
+      <div class="cards">
+        <a href="01-set-up-your-workspace.html" class="card">
+          <span class="card-accent" style="background: var(--purple);"></span>
+          <span class="card-title">Set Up Your Workspace</span>
+          <span class="card-desc">Terminal, project directory, package manager.</span>
+        </a>
+        <a href="04-ssh-keys.html" class="card">
+          <span class="card-accent" style="background: var(--purple);"></span>
+          <span class="card-title">SSH Keys</span>
+          <span class="card-desc">Generate a key and connect it to GitHub.</span>
+        </a>
+        <a href="05-github.html" class="card">
+          <span class="card-accent" style="background: var(--purple);"></span>
+          <span class="card-title">GitHub</span>
+          <span class="card-desc">Account, CLI, clone, push, pull, commit.</span>
+        </a>
+      </div>
+    </div>
+
+    <div class="card-group ani d4">
+      <div class="section-label">Extras</div>
+      <div class="cards">
+        <a href="quotes.html" class="card">
+          <span class="card-accent" style="background: var(--rose);"></span>
+          <span class="card-title">Quote Pile</span>
+          <span class="card-desc">Maxims and sharp observations collected during writing.</span>
+        </a>
+        <a href="chapter-dashboard.html" class="card">
+          <span class="card-accent" style="background: var(--amber);"></span>
+          <span class="card-title">Chapter Dashboard</span>
+          <span class="card-desc">Readability metrics, rhythm analysis, arc visualization.</span>
+          <span class="card-tag">meta</span>
+        </a>
+      </div>
+    </div>
+
+    <footer class="ani d5">
+      <p><em>Shapes of Intelligence</em> by James Wilson</p>
+    </footer>
+
+  </div>
+</body>
+</html>

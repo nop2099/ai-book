@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Memory Viewer — Octopus</title>
+  <style>
+    :root {
+      --bg: #1a1a2e;
+      --surface: #16213e;
+      --text: #e0e0e0;
+      --text-muted: #8888aa;
+      --accent: #e94560;
+      --accent2: #0f3460;
+      --code-bg: #0d1117;
+      --link: #58a6ff;
+      --border: #30363d;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    /* ── Header ── */
+    .header {
+      background: var(--surface);
+      border-bottom: 2px solid var(--accent);
+      padding: 1.25rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .header-left h1 {
+      font-size: 1.5rem;
+      color: #fff;
+      letter-spacing: -0.02em;
+    }
+
+    .header-left h1 span {
+      color: var(--accent);
+    }
+
+    .header-left .subtitle {
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      margin-top: 0.15rem;
+    }
+
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    /* ── Search ── */
+    .search-box {
+      position: relative;
+    }
+
+    .search-box input {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 0.5rem 0.75rem 0.5rem 2.25rem;
+      border-radius: 6px;
+      font-size: 0.9rem;
+      width: 260px;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .search-box input:focus {
+      border-color: var(--accent);
+    }
+
+    .search-box::before {
+      content: "\1F50D";
+      position: absolute;
+      left: 0.65rem;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 0.85rem;
+      opacity: 0.5;
+    }
+
+    /* ── LOD Toggle ── */
+    .lod-toggle {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    .lod-toggle label {
+      white-space: nowrap;
+    }
+
+    .lod-buttons {
+      display: flex;
+      gap: 2px;
+    }
+
+    .lod-btn {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      padding: 0.3rem 0.6rem;
+      font-size: 0.8rem;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+
+    .lod-btn:first-child { border-radius: 4px 0 0 4px; }
+    .lod-btn:last-child { border-radius: 0 4px 4px 0; }
+
+    .lod-btn.active {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #fff;
+    }
+
+    .lod-btn:hover:not(.active) {
+      border-color: var(--text-muted);
+      color: var(--text);
+    }
+
+    /* ── Layout ── */
+    .layout {
+      display: grid;
+      grid-template-columns: 220px 1fr;
+      grid-template-rows: auto 1fr;
+      gap: 0;
+      height: calc(100vh - 80px);
+    }
+
+    /* ── Sidebar ── */
+    .sidebar {
+      background: var(--surface);
+      border-right: 1px solid var(--border);
+      padding: 1.25rem 1rem;
+      overflow-y: auto;
+      grid-row: 1 / -1;
+    }
+
+    .sidebar h2 {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-muted);
+      margin-bottom: 0.75rem;
+    }
+
+    .entity-list {
+      list-style: none;
+    }
+
+    .entity-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.4rem 0.6rem;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background 0.15s;
+      font-size: 0.9rem;
+      margin-bottom: 2px;
+    }
+
+    .entity-item:hover {
+      background: var(--accent2);
+    }
+
+    .entity-item.active {
+      background: var(--accent);
+      color: #fff;
+    }
+
+    .entity-item.active .entity-count {
+      background: rgba(255,255,255,0.2);
+      color: #fff;
+    }
+
+    .entity-name {
+      text-transform: capitalize;
+    }
+
+    .entity-count {
+      font-size: 0.75rem;
+      background: var(--bg);
+      color: var(--text-muted);
+      padding: 0.1rem 0.45rem;
+      border-radius: 10px;
+      min-width: 1.4rem;
+      text-align: center;
+    }
+
+    .sidebar-section {
+      margin-bottom: 1.75rem;
+    }
+
+    .source-list {
+      list-style: none;
+    }
+
+    .source-item {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.35rem 0.6rem;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background 0.15s;
+      font-size: 0.85rem;
+      margin-bottom: 2px;
+    }
+
+    .source-item:hover {
+      background: var(--accent2);
+    }
+
+    .source-item.active {
+      background: var(--accent2);
+      color: var(--link);
+    }
+
+    .source-icon {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    /* ── Main Content ── */
+    .main-content {
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    /* ── Chalkboard ── */
+    .chalkboard {
+      background: var(--code-bg);
+      border-bottom: 1px solid var(--border);
+      padding: 1.25rem 1.5rem;
+      max-height: 35vh;
+      overflow-y: auto;
+      flex-shrink: 0;
+    }
+
+    .chalkboard-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 0.75rem;
+    }
+
+    .chalkboard-header h2 {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-muted);
+    }
+
+    .chalkboard-version {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      background: var(--surface);
+      padding: 0.15rem 0.5rem;
+      border-radius: 10px;
+    }
+
+    .chalkboard-body {
+      font-size: 0.9rem;
+      line-height: 1.7;
+    }
+
+    .chalkboard-body h2 {
+      font-size: 1.1rem;
+      color: #fff;
+      margin: 0.75rem 0 0.5rem;
+      border: none;
+      padding: 0;
+    }
+
+    .chalkboard-body strong {
+      color: var(--accent);
+    }
+
+    .chalkboard-body p {
+      margin: 0.5rem 0;
+    }
+
+    /* ── Timeline ── */
+    .timeline {
+      flex: 1;
+      overflow-y: auto;
+      padding: 1rem 1.5rem;
+    }
+
+    .timeline-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 1rem;
+    }
+
+    .timeline-header h2 {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-muted);
+    }
+
+    .memory-count {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    .memory-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1rem 1.25rem;
+      margin-bottom: 0.75rem;
+      transition: border-color 0.2s;
+    }
+
+    .memory-card:hover {
+      border-color: var(--text-muted);
+    }
+
+    .memory-meta {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 0.5rem;
+      flex-wrap: wrap;
+    }
+
+    .memory-time {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    .memory-source {
+      font-size: 0.7rem;
+      padding: 0.1rem 0.5rem;
+      border-radius: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-weight: 600;
+    }
+
+    .source-claude { background: #1a3a5c; color: #7cb3f0; }
+    .source-chatgpt { background: #2a3c2a; color: #74c474; }
+    .source-kai-diary { background: #3c2a3c; color: #c474c4; }
+    .source-apple-health { background: #3c332a; color: #c4a474; }
+
+    .memory-lod {
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      background: var(--bg);
+      padding: 0.1rem 0.4rem;
+      border-radius: 3px;
+    }
+
+    .memory-content {
+      font-size: 0.9rem;
+      line-height: 1.6;
+      margin-bottom: 0.6rem;
+    }
+
+    .memory-tags {
+      display: flex;
+      gap: 0.35rem;
+      flex-wrap: wrap;
+    }
+
+    .tag {
+      font-size: 0.7rem;
+      padding: 0.1rem 0.45rem;
+      border-radius: 3px;
+      background: var(--accent2);
+      color: var(--text-muted);
+    }
+
+    .tag-entity {
+      color: var(--link);
+      cursor: pointer;
+    }
+
+    .tag-entity:hover {
+      background: var(--link);
+      color: #fff;
+    }
+
+    .tag-topic {
+      color: var(--text-muted);
+    }
+
+    /* ── Empty state ── */
+    .empty-state {
+      text-align: center;
+      padding: 3rem 1rem;
+      color: var(--text-muted);
+    }
+
+    .empty-state p {
+      font-size: 0.95rem;
+    }
+
+    /* ── Scrollbars ── */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: var(--border);
+      border-radius: 3px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: var(--text-muted);
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 768px) {
+      .layout {
+        grid-template-columns: 1fr;
+        height: auto;
+      }
+
+      .sidebar {
+        border-right: none;
+        border-bottom: 1px solid var(--border);
+        grid-row: auto;
+        max-height: 200px;
+      }
+
+      .header {
+        padding: 1rem;
+      }
+
+      .search-box input {
+        width: 180px;
+      }
+
+      .chalkboard {
+        max-height: 30vh;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <div class="header">
+    <div class="header-left">
+      <h1><span>&#9673;</span> Memory Viewer</h1>
+      <div class="subtitle">Octopus foveated memory system — chalkboard projection</div>
+    </div>
+    <div class="header-right">
+      <div class="lod-toggle">
+        <label>Detail:</label>
+        <div class="lod-buttons">
+          <button class="lod-btn" data-lod="0" title="Headlines only">0</button>
+          <button class="lod-btn" data-lod="1" title="Summaries">1</button>
+          <button class="lod-btn" data-lod="2" title="Key details">2</button>
+          <button class="lod-btn active" data-lod="3" title="Full detail">3</button>
+        </div>
+      </div>
+      <div class="search-box">
+        <input type="text" id="search" placeholder="Filter memories..." autocomplete="off">
+      </div>
+    </div>
+  </div>
+
+  <!-- Layout -->
+  <div class="layout">
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <div class="sidebar-section">
+        <h2>Entities</h2>
+        <ul class="entity-list" id="entity-list"></ul>
+      </div>
+      <div class="sidebar-section">
+        <h2>Sources</h2>
+        <ul class="source-list" id="source-list"></ul>
+      </div>
+    </div>
+
+    <!-- Main -->
+    <div class="main-content">
+
+      <!-- Chalkboard -->
+      <div class="chalkboard" id="chalkboard">
+        <div class="chalkboard-header">
+          <h2>Chalkboard — Current State</h2>
+          <span class="chalkboard-version" id="chalkboard-version"></span>
+        </div>
+        <div class="chalkboard-body" id="chalkboard-body"></div>
+      </div>
+
+      <!-- Timeline -->
+      <div class="timeline" id="timeline">
+        <div class="timeline-header">
+          <h2>Memory Timeline</h2>
+          <span class="memory-count" id="memory-count"></span>
+        </div>
+        <div id="memory-list"></div>
+      </div>
+
+    </div>
+  </div>
+
+<script>
+// ── State ──
+let DATA = null;
+let state = {
+  lod: 3,
+  search: '',
+  entity: null,
+  source: null,
+};
+
+// ── Source colors for sidebar dots ──
+const SOURCE_COLORS = {
+  'claude': '#7cb3f0',
+  'chatgpt': '#74c474',
+  'kai-diary': '#c474c4',
+  'apple-health': '#c4a474',
+};
+
+// ── Load data ──
+async function loadData() {
+  try {
+    const res = await fetch('sample-data.json');
+    DATA = await res.json();
+  } catch (e) {
+    console.warn('Fetch failed, trying inline fallback:', e);
+    return;
+  }
+  render();
+}
+
+// ── Simple markdown-ish renderer ──
+function renderMarkdown(text) {
+  return text
+    .split('\n')
+    .map(line => {
+      if (line.startsWith('## '))
+        return `<h2>${line.slice(3)}</h2>`;
+      if (line.startsWith('**') && line.includes('**:'))
+        return `<p>${line.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')}</p>`;
+      if (line.trim() === '') return '';
+      return `<p>${line.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')}</p>`;
+    })
+    .join('\n');
+}
+
+// ── Format time ──
+function formatTime(ts) {
+  const d = new Date(ts);
+  const now = new Date();
+  const diff = now - d;
+  const days = Math.floor(diff / 86400000);
+
+  if (days === 0) {
+    return 'Today ' + d.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' });
+  } else if (days === 1) {
+    return 'Yesterday ' + d.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' });
+  } else if (days < 7) {
+    return days + 'd ago';
+  } else {
+    return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+  }
+}
+
+// ── Filter memories ──
+function getFilteredMemories() {
+  if (!DATA) return [];
+
+  return DATA.memories
+    .filter(m => m.lod <= state.lod)
+    .filter(m => {
+      if (state.entity && !m.entities.includes(state.entity)) return false;
+      if (state.source && m.source !== state.source) return false;
+      if (state.search) {
+        const q = state.search.toLowerCase();
+        const text = (state.lod <= 1 ? m.summary : m.content).toLowerCase();
+        const tags = [...m.entities, ...m.topics].join(' ').toLowerCase();
+        return text.includes(q) || tags.includes(q);
+      }
+      return true;
+    })
+    .sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
+}
+
+// ── Render everything ──
+function render() {
+  if (!DATA) return;
+  renderChalkboard();
+  renderSidebar();
+  renderTimeline();
+}
+
+function renderChalkboard() {
+  const cb = DATA.chalkboard;
+  document.getElementById('chalkboard-version').textContent = `v${cb.version} — ${formatTime(cb.updated)}`;
+  document.getElementById('chalkboard-body').innerHTML = renderMarkdown(cb.content);
+}
+
+function renderSidebar() {
+  // Entities
+  const entityCounts = {};
+  DATA.memories.forEach(m => {
+    m.entities.forEach(e => {
+      entityCounts[e] = (entityCounts[e] || 0) + 1;
+    });
+  });
+
+  const sorted = Object.entries(entityCounts).sort((a, b) => b[1] - a[1]);
+  const entityList = document.getElementById('entity-list');
+  entityList.innerHTML = sorted.map(([name, count]) =>
+    `<li class="entity-item ${state.entity === name ? 'active' : ''}" data-entity="${name}">
+      <span class="entity-name">${name}</span>
+      <span class="entity-count">${count}</span>
+    </li>`
+  ).join('');
+
+  entityList.querySelectorAll('.entity-item').forEach(el => {
+    el.addEventListener('click', () => {
+      const ent = el.dataset.entity;
+      state.entity = (state.entity === ent) ? null : ent;
+      render();
+    });
+  });
+
+  // Sources
+  const sourceCounts = {};
+  DATA.memories.forEach(m => {
+    sourceCounts[m.source] = (sourceCounts[m.source] || 0) + 1;
+  });
+
+  const sourceList = document.getElementById('source-list');
+  sourceList.innerHTML = Object.entries(sourceCounts)
+    .sort((a, b) => b[1] - a[1])
+    .map(([name, count]) =>
+      `<li class="source-item ${state.source === name ? 'active' : ''}" data-source="${name}">
+        <span class="source-icon" style="background:${SOURCE_COLORS[name] || '#888'}"></span>
+        <span>${name}</span>
+        <span class="entity-count">${count}</span>
+      </li>`
+    ).join('');
+
+  sourceList.querySelectorAll('.source-item').forEach(el => {
+    el.addEventListener('click', () => {
+      const src = el.dataset.source;
+      state.source = (state.source === src) ? null : src;
+      render();
+    });
+  });
+}
+
+function renderTimeline() {
+  const memories = getFilteredMemories();
+  document.getElementById('memory-count').textContent = `${memories.length} memories`;
+
+  const list = document.getElementById('memory-list');
+
+  if (memories.length === 0) {
+    list.innerHTML = '<div class="empty-state"><p>No memories match your filters.</p></div>';
+    return;
+  }
+
+  list.innerHTML = memories.map(m => {
+    const content = state.lod <= 1 ? m.summary : m.content;
+    const sourceClass = 'source-' + m.source.replace(/[^a-z]/g, '-');
+
+    return `<div class="memory-card">
+      <div class="memory-meta">
+        <span class="memory-time">${formatTime(m.timestamp)}</span>
+        <span class="memory-source ${sourceClass}">${m.source}</span>
+        <span class="memory-lod">LOD ${m.lod}</span>
+      </div>
+      <div class="memory-content">${escapeHtml(content)}</div>
+      <div class="memory-tags">
+        ${m.entities.map(e => `<span class="tag tag-entity" data-entity="${e}">${e}</span>`).join('')}
+        ${m.topics.map(t => `<span class="tag tag-topic">${t}</span>`).join('')}
+      </div>
+    </div>`;
+  }).join('');
+
+  // Clickable entity tags in cards
+  list.querySelectorAll('.tag-entity').forEach(el => {
+    el.addEventListener('click', () => {
+      state.entity = (state.entity === el.dataset.entity) ? null : el.dataset.entity;
+      render();
+    });
+  });
+}
+
+function escapeHtml(text) {
+  const div = document.createElement('div');
+  div.textContent = text;
+  return div.innerHTML;
+}
+
+// ── Event listeners ──
+document.querySelectorAll('.lod-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    state.lod = parseInt(btn.dataset.lod);
+    document.querySelectorAll('.lod-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    render();
+  });
+});
+
+document.getElementById('search').addEventListener('input', (e) => {
+  state.search = e.target.value;
+  render();
+});
+
+// ── Go ──
+loadData();
+</script>
+
+</body>
+</html>

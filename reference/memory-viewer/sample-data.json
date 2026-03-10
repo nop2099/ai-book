@@ -1,0 +1,209 @@
+{
+  "chalkboard": {
+    "version": 7,
+    "updated": "2026-03-09T10:30:00Z",
+    "content": "## Current State\n\n**Book**: Drafting chapters on memory systems and the Mirror pattern. James working with Claude on structure. Key tension: how much technical detail vs. narrative.\n\n**Dominos**: Alex exploring competitive strategy pivot. Revenue flat but user engagement up 12%. Next board meeting March 15.\n\n**TrueUp**: Brian's ops reports show Q1 pipeline healthy. Three enterprise deals in negotiation. Burn rate stable.\n\n**Kai**: Started multiplication tables this week. Aaron helping with homework routine. Kai asked about \"what computers think about\" — potential book anecdote.\n\n**Health**: Resting heart rate trending down (58 avg). Sleep consistency improved after setting consistent wake time. 3 runs this week."
+  },
+  "memories": [
+    {
+      "id": "m-001",
+      "content": "Discussed the Mirror pattern chapter with Claude. The key insight is that AI memory isn't about storage — it's about projection. Every time you ask an AI to remember something, you're really asking it to rebuild a world model. This is fundamentally different from human episodic memory. We landed on the metaphor of a chalkboard that gets erased and redrawn, vs. a filing cabinet.",
+      "summary": "Mirror chapter: memory as projection, not storage. Chalkboard metaphor.",
+      "entities": ["book", "james"],
+      "topics": ["mirror-pattern", "memory", "writing"],
+      "source": "claude",
+      "lod": 3,
+      "timestamp": "2026-03-09T09:15:00Z"
+    },
+    {
+      "id": "m-002",
+      "content": "Outlined the companion site structure. Each chapter gets a reference page. Memory Viewer will be the interactive demo for the Octopus chapter.",
+      "summary": "Companion site structure — Memory Viewer as chapter demo.",
+      "entities": ["book", "james"],
+      "topics": ["companion-site", "structure"],
+      "source": "claude",
+      "lod": 2,
+      "timestamp": "2026-03-08T14:20:00Z"
+    },
+    {
+      "id": "m-003",
+      "content": "Revised the chapter ordering. Moved the Conductor pattern earlier because it sets up the idea of orchestration that the Mirror chapter depends on. Kill Your Darlings stays as chapter 3.",
+      "summary": "Chapter reorder: Conductor moved earlier, before Mirror.",
+      "entities": ["book", "james"],
+      "topics": ["structure", "writing"],
+      "source": "claude",
+      "lod": 2,
+      "timestamp": "2026-03-07T11:00:00Z"
+    },
+    {
+      "id": "m-004",
+      "content": "James noted that the book needs more personal stories grounding each pattern. Not just 'here's how AI works' but 'here's the moment I realized this mattered.' The Kai naming story is the prototype for this approach.",
+      "summary": "Book needs more personal grounding — Kai story as prototype.",
+      "entities": ["book", "james", "kai"],
+      "topics": ["writing", "narrative"],
+      "source": "claude",
+      "lod": 2,
+      "timestamp": "2026-03-06T16:45:00Z"
+    },
+    {
+      "id": "m-005",
+      "content": "Alex presented the competitive analysis for Dominos. Main competitor launched a subscription tier. Alex wants to respond with a freemium model rather than matching subscriptions. Board is split. Need data on conversion funnels before March 15 meeting.",
+      "summary": "Dominos competitive response: freemium vs. subscription. Board split.",
+      "entities": ["dominos", "alex"],
+      "topics": ["strategy", "competition", "pricing"],
+      "source": "chatgpt",
+      "lod": 3,
+      "timestamp": "2026-03-08T10:30:00Z"
+    },
+    {
+      "id": "m-006",
+      "content": "Dominos user engagement up 12% month-over-month. Daily active users growing but revenue per user declining. Alex attributes this to the free tier being too generous.",
+      "summary": "Dominos: engagement +12%, but revenue per user declining.",
+      "entities": ["dominos", "alex"],
+      "topics": ["metrics", "engagement"],
+      "source": "chatgpt",
+      "lod": 2,
+      "timestamp": "2026-03-07T09:15:00Z"
+    },
+    {
+      "id": "m-007",
+      "content": "Alex asked ChatGPT to model three pricing scenarios for Dominos. Scenario B (freemium with usage caps) showed best projected LTV. Shared spreadsheet with the team.",
+      "summary": "Pricing model: freemium + usage caps best projected LTV.",
+      "entities": ["dominos", "alex"],
+      "topics": ["pricing", "modeling"],
+      "source": "chatgpt",
+      "lod": 2,
+      "timestamp": "2026-03-05T15:00:00Z"
+    },
+    {
+      "id": "m-008",
+      "content": "Dominos board meeting prep. Alex reviewing pitch deck. Key ask: approval for freemium pivot and $200K marketing budget for Q2.",
+      "summary": "Board meeting prep: freemium pivot + $200K Q2 marketing ask.",
+      "entities": ["dominos", "alex"],
+      "topics": ["board", "planning"],
+      "source": "chatgpt",
+      "lod": 1,
+      "timestamp": "2026-03-09T08:00:00Z"
+    },
+    {
+      "id": "m-009",
+      "content": "Brian's weekly ops report for TrueUp. Pipeline: 3 enterprise deals in late stage (combined ARR $1.2M). Burn rate: $180K/month, 14 months runway. Team: hired senior backend engineer, still looking for a PM. Churn: down to 3.1% from 4.2% last quarter.",
+      "summary": "TrueUp ops: 3 enterprise deals, $180K burn, churn down to 3.1%.",
+      "entities": ["brian", "trueup"],
+      "topics": ["operations", "pipeline", "metrics"],
+      "source": "claude",
+      "lod": 3,
+      "timestamp": "2026-03-07T08:00:00Z"
+    },
+    {
+      "id": "m-010",
+      "content": "Brian flagged a potential issue with the TrueUp data pipeline. One enterprise prospect wants SOC2 compliance before signing. Brian estimating 6-8 weeks to complete if they start now.",
+      "summary": "TrueUp: enterprise prospect needs SOC2, 6-8 week timeline.",
+      "entities": ["brian", "trueup"],
+      "topics": ["compliance", "enterprise", "pipeline"],
+      "source": "claude",
+      "lod": 2,
+      "timestamp": "2026-03-08T11:30:00Z"
+    },
+    {
+      "id": "m-011",
+      "content": "TrueUp Q1 revenue tracking at $340K, slightly ahead of plan. Brian wants to accelerate hiring if Deal #2 closes this month.",
+      "summary": "TrueUp Q1 revenue $340K, ahead of plan. Hiring conditional on Deal #2.",
+      "entities": ["brian", "trueup"],
+      "topics": ["revenue", "hiring", "planning"],
+      "source": "claude",
+      "lod": 2,
+      "timestamp": "2026-03-06T09:00:00Z"
+    },
+    {
+      "id": "m-012",
+      "content": "Brian shared a draft investor update for TrueUp. Tone is confident but honest about the SOC2 gap. James suggested emphasizing the churn improvement as the lead metric.",
+      "summary": "TrueUp investor update draft — lead with churn improvement.",
+      "entities": ["brian", "trueup", "james"],
+      "topics": ["investors", "communication"],
+      "source": "claude",
+      "lod": 2,
+      "timestamp": "2026-03-05T14:00:00Z"
+    },
+    {
+      "id": "m-013",
+      "content": "Kai had a great week at school. Multiplication tables clicking — went from struggling with 7s and 8s to getting 90% on the timed test. Aaron set up a reward chart that seems to be working. Kai also asked 'do computers think about things when they're turned off?' which led to a 20-minute conversation about sleep vs. shutdown.",
+      "summary": "Kai: multiplication breakthrough, 90% on timed test. Asked about computer consciousness.",
+      "entities": ["kai", "aaron"],
+      "topics": ["school", "math", "curiosity"],
+      "source": "kai-diary",
+      "lod": 3,
+      "timestamp": "2026-03-07T19:30:00Z"
+    },
+    {
+      "id": "m-014",
+      "content": "Kai's parent-teacher conference notes. Teacher says Kai is reading above grade level and shows strong creative thinking. Suggested enrichment programs for next year. Social skills good — has a solid friend group.",
+      "summary": "Parent-teacher conference: above grade level reading, strong creative thinking.",
+      "entities": ["kai", "aaron"],
+      "topics": ["school", "development"],
+      "source": "kai-diary",
+      "lod": 2,
+      "timestamp": "2026-03-04T16:00:00Z"
+    },
+    {
+      "id": "m-015",
+      "content": "Kai drew a picture of 'a robot that remembers everything' after overhearing James talk about the book. Aaron photographed it for the diary. Potential book illustration?",
+      "summary": "Kai drew 'a robot that remembers everything' — potential book illustration.",
+      "entities": ["kai", "aaron", "book"],
+      "topics": ["creativity", "family"],
+      "source": "kai-diary",
+      "lod": 1,
+      "timestamp": "2026-03-08T18:00:00Z"
+    },
+    {
+      "id": "m-016",
+      "content": "Resting heart rate this week: 58 avg (down from 62 last month). Sleep score averaging 82. Three runs completed: 3.1mi, 4.2mi, 3.5mi. Weight stable at 175. Blood pressure 118/76.",
+      "summary": "Health: RHR 58 (down from 62), sleep score 82, three runs this week.",
+      "entities": ["james", "health"],
+      "topics": ["fitness", "sleep", "vitals"],
+      "source": "apple-health",
+      "lod": 3,
+      "timestamp": "2026-03-09T07:00:00Z"
+    },
+    {
+      "id": "m-017",
+      "content": "Sleep consistency improved significantly after setting 6:30 AM alarm every day including weekends. Average sleep duration: 7.2 hours. Only one night below 6.5 hours this week.",
+      "summary": "Sleep consistency up with fixed 6:30 AM wake time. Avg 7.2 hrs.",
+      "entities": ["james", "health"],
+      "topics": ["sleep"],
+      "source": "apple-health",
+      "lod": 2,
+      "timestamp": "2026-03-08T07:00:00Z"
+    },
+    {
+      "id": "m-018",
+      "content": "Completed longest run of the month: 4.2 miles at 9:12/mi pace. Felt strong. Considering signing up for a 10K in April.",
+      "summary": "Longest run: 4.2mi at 9:12 pace. Considering April 10K.",
+      "entities": ["james", "health"],
+      "topics": ["fitness", "running"],
+      "source": "apple-health",
+      "lod": 2,
+      "timestamp": "2026-03-06T07:30:00Z"
+    },
+    {
+      "id": "m-019",
+      "content": "Discussed with Claude how the Octopus memory system should handle contradictions — when two memories about the same entity conflict. Landed on: keep both, flag the conflict, let the chalkboard rebuild process resolve it by preferring recency + source trust. This is analogous to how human memory works: you don't delete old memories, you just update your working model.",
+      "summary": "Octopus contradiction handling: keep both, flag, resolve on rebuild.",
+      "entities": ["book", "james"],
+      "topics": ["octopus", "memory", "architecture"],
+      "source": "claude",
+      "lod": 3,
+      "timestamp": "2026-03-09T10:00:00Z"
+    },
+    {
+      "id": "m-020",
+      "content": "Weekly review: feeling good about momentum on the book, Kai is thriving, health metrics all trending right direction. Main stress point is the Dominos board meeting — want to make sure Alex is prepared. TrueUp is in a good groove with Brian driving ops.",
+      "summary": "Weekly review: book momentum good, Kai thriving, health improving. Watch: Dominos board prep.",
+      "entities": ["james", "book", "kai", "dominos", "trueup"],
+      "topics": ["review", "planning"],
+      "source": "claude",
+      "lod": 1,
+      "timestamp": "2026-03-09T10:30:00Z"
+    }
+  ]
+}

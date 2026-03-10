@@ -12,3 +12,7 @@ observations.md
 skills/
 split_book.py
 archive/
+
+# Build output and tooling
+reference/site/
+reference/_meta/.venv/

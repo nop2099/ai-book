@@ -1,0 +1,874 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Landscape — Shapes of Intelligence</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,700;1,9..144,300&display=swap');
+
+    :root {
+      --void: #0a0a10;
+      --deep: #0f0f1a;
+      --surface: #161625;
+      --raised: #1e1e32;
+      --edge: #2a2a44;
+      --muted: #8888aa;
+      --text: #d0d0e2;
+      --bright: #eeeef5;
+      --white: #f5f5ff;
+      --amber: #e8a83e;
+      --amber-dim: #c4882a;
+      --teal: #4ecdc4;
+      --rose: #e85577;
+      --blue: #5588dd;
+      --purple: #9977dd;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'DM Mono', 'SF Mono', monospace;
+      background: var(--void);
+      color: var(--text);
+      line-height: 1.7;
+      min-height: 100vh;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 9999;
+    }
+
+    .shell {
+      max-width: 740px;
+      margin: 0 auto;
+      padding: 3rem 1.5rem 4rem;
+    }
+
+    .masthead {
+      padding: 1.5rem 0 2rem;
+      border-bottom: 1px solid var(--edge);
+      margin-bottom: 2.5rem;
+      position: relative;
+    }
+
+    .masthead::after {
+      content: '';
+      position: absolute;
+      bottom: -1px;
+      left: 0;
+      width: 60px;
+      height: 1px;
+      background: var(--amber);
+    }
+
+    .breadcrumb {
+      font-size: 0.65rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 0.8rem;
+    }
+
+    .breadcrumb a {
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .breadcrumb a:hover { color: var(--amber); }
+
+    .masthead h1 {
+      font-family: 'Fraunces', serif;
+      font-weight: 300;
+      font-size: 2rem;
+      color: var(--white);
+      letter-spacing: -0.01em;
+    }
+
+    .masthead .sub {
+      color: var(--muted);
+      font-size: 0.75rem;
+      margin-top: 0.4rem;
+      letter-spacing: 0.03em;
+      line-height: 1.8;
+      max-width: 60ch;
+    }
+
+    /* ── Vertical sections ── */
+    .vertical {
+      margin-bottom: 2.2rem;
+    }
+
+    .vertical-header {
+      display: flex;
+      align-items: baseline;
+      gap: 0.8rem;
+      margin-bottom: 0.6rem;
+      padding-bottom: 0.4rem;
+      border-bottom: 1px solid var(--edge);
+    }
+
+    .vertical-header h2 {
+      font-family: 'Fraunces', serif;
+      font-weight: 500;
+      font-size: 1.05rem;
+      color: var(--bright);
+    }
+
+    .vertical-header .vq {
+      font-size: 0.62rem;
+      color: var(--muted);
+      font-style: italic;
+    }
+
+    .vertical-desc {
+      font-size: 0.72rem;
+      color: var(--muted);
+      margin-bottom: 0.7rem;
+      line-height: 1.7;
+    }
+
+    /* ── Tool entries ── */
+    .tools {
+      display: grid;
+      gap: 2px;
+    }
+
+    .tool {
+      display: grid;
+      grid-template-columns: 140px 1fr auto;
+      gap: 0.6rem;
+      align-items: baseline;
+      background: var(--deep);
+      padding: 0.55rem 0.8rem;
+      border-radius: 3px;
+      transition: background 0.12s;
+    }
+
+    .tool:hover { background: var(--surface); }
+
+    .tool-name {
+      font-size: 0.78rem;
+      font-weight: 500;
+      color: var(--bright);
+      white-space: nowrap;
+    }
+
+    .tool-desc {
+      font-size: 0.68rem;
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    .tool-pos {
+      font-size: 0.58rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 0.12rem 0.4rem;
+      border-radius: 3px;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .pos-dominant {
+      color: var(--amber);
+      background: rgba(232, 168, 62, 0.12);
+      border: 1px solid rgba(232, 168, 62, 0.25);
+    }
+
+    .pos-strong {
+      color: var(--teal);
+      background: rgba(78, 205, 196, 0.1);
+      border: 1px solid rgba(78, 205, 196, 0.2);
+    }
+
+    .pos-rising {
+      color: var(--purple);
+      background: rgba(153, 119, 221, 0.1);
+      border: 1px solid rgba(153, 119, 221, 0.2);
+    }
+
+    .pos-niche {
+      color: var(--muted);
+      background: rgba(136, 136, 170, 0.08);
+      border: 1px solid rgba(136, 136, 170, 0.15);
+    }
+
+    .pos-legacy {
+      color: var(--rose);
+      background: rgba(232, 85, 119, 0.08);
+      border: 1px solid rgba(232, 85, 119, 0.15);
+    }
+
+    .section-break {
+      border: none;
+      border-top: 1px solid var(--edge);
+      margin: 2.5rem 0;
+    }
+
+    /* ── Legend ── */
+    .legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      margin-bottom: 2rem;
+      padding: 0.7rem 0.9rem;
+      background: var(--deep);
+      border: 1px solid var(--edge);
+      border-radius: 4px;
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+      font-size: 0.6rem;
+      color: var(--muted);
+    }
+
+    footer {
+      margin-top: 3rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--edge);
+      font-size: 0.62rem;
+      color: var(--muted);
+    }
+
+    footer a {
+      color: var(--muted);
+      text-decoration: none;
+      border-bottom: 1px solid var(--edge);
+      transition: color 0.2s, border-color 0.2s;
+    }
+
+    footer a:hover { color: var(--amber); border-color: var(--amber-dim); }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .ani { animation: fadeUp 0.4s ease-out both; }
+    .d1 { animation-delay: 0.05s; }
+    .d2 { animation-delay: 0.1s; }
+
+    @media (min-height: 1000px) and (max-width: 800px) {
+      .shell { max-width: 92vw; padding: 2rem 4vw 3rem; }
+      .masthead h1 { font-size: 2.8rem; }
+      .masthead .sub { font-size: 0.95rem; }
+      .breadcrumb { font-size: 0.78rem; }
+      .vertical-header h2 { font-size: 1.3rem; }
+      .vertical-header .vq { font-size: 0.78rem; }
+      .vertical-desc { font-size: 0.9rem; }
+      .tool-name { font-size: 0.98rem; }
+      .tool-desc { font-size: 0.85rem; }
+      .tool-pos { font-size: 0.7rem; }
+      .legend-item { font-size: 0.72rem; }
+      footer { font-size: 0.75rem; }
+    }
+
+    @media (max-width: 640px) {
+      .shell { padding: 1.5rem 1rem 3rem; }
+      .masthead h1 { font-size: 1.5rem; }
+      .tool {
+        grid-template-columns: 1fr;
+        gap: 0.15rem;
+        padding: 0.6rem 0.8rem;
+      }
+      .tool-pos { justify-self: start; margin-top: 0.15rem; }
+    }
+  </style>
+</head>
+<body>
+  <div class="shell">
+
+    <header class="masthead ani">
+      <div class="breadcrumb">
+        <a href="index.html">Shapes of Intelligence</a> / Reference
+      </div>
+      <h1>The Landscape</h1>
+      <p class="sub">Every tool exists in a category with competitors. This is the map &mdash; what each thing is, what it competes with, and where it sits.</p>
+    </header>
+
+    <main class="ani d1">
+
+      <div class="legend">
+        <div class="legend-item"><span class="tool-pos pos-dominant">dominant</span> market leader</div>
+        <div class="legend-item"><span class="tool-pos pos-strong">strong</span> serious contender</div>
+        <div class="legend-item"><span class="tool-pos pos-rising">rising</span> gaining fast</div>
+        <div class="legend-item"><span class="tool-pos pos-niche">niche</span> specific use case</div>
+        <div class="legend-item"><span class="tool-pos pos-legacy">legacy</span> still around, fading</div>
+      </div>
+
+      <!-- ═══════ FRONTEND FRAMEWORKS ═══════ -->
+      <div class="vertical">
+        <div class="vertical-header">
+          <h2>Frontend Frameworks</h2>
+          <span class="vq">How do I build the UI?</span>
+        </div>
+        <p class="vertical-desc">Libraries and frameworks for building web interfaces. React dominates, but the landscape is fragmenting toward lighter, faster alternatives.</p>
+        <div class="tools">
+          <div class="tool">
+            <span class="tool-name">React</span>
+            <span class="tool-desc">Component model, massive ecosystem, Meta-backed. The default for most teams.</span>
+            <span class="tool-pos pos-dominant">dominant</span>
+          </div>
+          <div class="tool">
+            <span class="tool-name">Next.js</span>
+            <span class="tool-desc">React framework with routing, SSR, and deployment story. Vercel's flagship.</span>
+            <span class="tool-pos pos-dominant">dominant</span>
+          </div>
+          <div class="tool">
+            <span class="tool-name">TanStack</span>
+            <span class="tool-desc">Headless utilities &mdash; Query (data fetching), Router, Table, Form. Framework-agnostic, React-first.</span>
+            <span class="tool-pos pos-strong">strong</span>
+          </div>
+          <div class="tool">
+            <span class="tool-name">Vue</span>
+            <span class="tool-desc">Approachable, incrementally adoptable. Strong in Asia and indie projects. Nuxt is its Next.js equivalent.</span>
+            <span class="tool-pos pos-strong">strong</span>
+          </div>
+          <div class="tool">
+            <span class="tool-name">Svelte</span>
+            <span class="tool-desc">Compiles away the framework. No virtual DOM. SvelteKit for full apps. Loved by developers, smaller ecosystem.</span>
+            <span class="tool-pos pos-rising">rising</span>
+          </div>
+          <div class="tool">
+            <span class="tool-name">SolidJS</span>
+            <span class="tool-desc">React-like API, fine-grained reactivity, no virtual DOM. Fast. SolidStart for full-stack.</span>
+            <span class="tool-pos pos-rising">rising</span>
+          </div>
+          <div class="tool">
+            <span class="tool-name">Astro</span>
+            <span class="tool-desc">Content-focused, ships zero JS by default. Use any component framework inside it. Great for static sites.</span>
+            <span class="tool-pos pos-rising">rising</span>
+          </div>
+          <div class="tool">
+            <span class="tool-name">htmx</span>
+            <span class="tool-desc">HTML attributes for AJAX, WebSockets, SSE. No build step. The anti-framework framework.</span>
+            <span class="tool-pos pos-rising">rising</span>
+          </div>
+          <div class="tool">
+            <span class="tool-name">Angular</span>
+            <span class="tool-desc">Google's enterprise framework. Opinionated, batteries-included. Big in corporate environments.</span>
+            <span class="tool-pos pos-legacy">legacy</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ═══════ JS/TS RUNTIMES ═══════ -->
+      <div class="vertical">
+        <div class="vertical-header">
+          <h2>JavaScript Runtimes</h2>
+          <span class="vq">What runs my code?</span>
+        </div>
+        <p class="vertical-desc">Engines that execute JavaScript and TypeScript outside the browser. Node was the only option for a decade. Now there are real alternatives.</p>
+        <div class="tools">
+          <div class="tool">
+            <span class="tool-name">Node.js</span>
+            <span class="tool-desc">The original server-side JS runtime. Massive ecosystem via npm. V8 engine. Everything supports it.</span>
+            <span class="tool-pos pos-dominant">dominant</span>
+          </div>
+          <div class="tool">
+            <span class="tool-name">Bun</span>
+            <span class="tool-desc">All-in-one: runtime, bundler, package manager, test runner. Extremely fast. Node-compatible. JavaScriptCore engine.</span>
+            <span class="tool-pos pos-rising">rising</span>
+          </div>
+          <div class="tool">
+            <span class="tool-name">Deno</span>
+            <span class="tool-desc">By Node's creator. Secure by default, native TypeScript, web-standard APIs. Deno Deploy for edge hosting.</span>
+            <span class="tool-pos pos-niche">niche</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ═══════ HOSTING / DEPLOYMENT ═══════ -->
+      <div class="vertical">
+        <div class="vertical-header">
+          <h2>Hosting &amp; Deployment</h2>
+          <span class="vq">Where does my site/app live?</span>
+        </div>
+        <p class="vertical-desc">Services that put your code on the internet. Ranges from "git push and done" platforms to "here's a Linux box, figure it out" VPS providers.</p>
+        <div class="tools">
+          <div class="tool">
+            <span class="tool-name">Vercel</span>
+            <span class="tool-desc">Deploy from git. Edge functions, preview deploys, analytics. Made for Next.js but works with anything.</span>
+            <span class="tool-pos pos-dominant">dominant</span>
+          </div>
+          <div class="tool">
+            <span class="tool-name">Cloudflare Pages</span>
+            <span class="tool-desc">Global edge network. Workers for serverless. R2 for storage. D1 for database. Aggressive free tier.</span>
+            <span class="tool-pos pos-strong">strong</span>
+          </div>
+          <div class="tool">
+            <span class="tool-name">Netlify</span>
+            <span class="tool-desc">Git-based deploys, serverless functions, form handling. Pioneer of the Jamstack era. Generous free tier.</span>
+            <span class="tool-pos pos-strong">strong</span>
+          </div>
+          <div class="tool">
+            <span class="tool-name">Railway</span>
+            <span class="tool-desc">Deploy anything &mdash; web apps, databases, cron jobs. Simple UI. Good for backends and full-stack.</span>
+            <span class="tool-pos pos-rising">rising</span>
+          </div>
+          <div class="tool">
+            <span class="tool-name">Render</span>
+            <span class="tool-desc">Heroku replacement. Web services, databases, cron, static sites. Auto-deploy from git.</span>
+            <span class="tool-pos pos-rising">rising</span>
+          </div>
+          <div class="tool">
+            <span class="tool-name">Fly.io</span>
+            <span class="tool-desc">Run Docker containers close to users. Good for stateful apps, databases at the edge. Developer-loved.</span>
+            <span class="tool-pos pos-rising">rising</span>
+          </div>
+          <div class="tool">
+            <span class="tool-name">exe.dev</span>
+            <span class="tool-desc">Your own server. SSH in, rsync files, nginx serves them. Full control. No platform lock-in.</span>
+            <span class="tool-pos pos-niche">niche</span>
+          </div>
+          <div class="tool">
+            <span class="tool-name">GitHub Pages</span>
+            <span class="tool-desc">Free static hosting from any GitHub repo. Custom domains. No backend. Good for docs and project sites.</span>
+            <span class="tool-pos pos-niche">niche</span>
+          </div>
+          <div class="tool">
+            <span class="tool-name">Heroku</span>
+            <span class="tool-desc">The original "git push to deploy." Killed its free tier. Still works, but most devs have moved on.</span>
+            <span class="tool-pos pos-legacy">legacy</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ═══════ CLOUD PROVIDERS ═══════ -->
+      <div class="vertical">
+        <div class="vertical-header">
+          <h2>Cloud Providers</h2>
+          <span class="vq">Where do I run infrastructure?</span>
+        </div>
+        <p class="vertical-desc">Full cloud platforms: compute, storage, databases, networking, AI services, everything. Priced to confuse. Start simple.</p>
+        <div class="tools">
+          <div class="tool">
+            <span class="tool-name">AWS</span>
+            <span class="tool-desc">Amazon. The biggest. 200+ services. EC2, S3, Lambda, RDS, SQS, everything. Complex, powerful, expensive to learn.</span>
+            <span class="tool-pos pos-dominant">dominant</span>
+          </div>
+          <div class="tool">
+            <span class="tool-name">Google Cloud</span>
+            <span class="tool-desc">GCP. Strong in AI/ML (Vertex, TPUs), BigQuery, Kubernetes (they invented it). Firebase for app backends.</span>
+            <span class="tool-pos pos-strong">strong</span>
+          </div>
+          <div class="tool">
+            <span class="tool-name">Azure</span>
+            <span class="tool-desc">Microsoft. Dominant in enterprise. Deep Office 365 / Active Directory integration. OpenAI's exclusive cloud partner.</span>
+            <span class="tool-pos pos-strong">strong</span>
+          </div>
+          <div class="tool">
+            <span class="tool-name">Contabo</span>
+            <span class="tool-desc">Budget VPS. Cheap dedicated resources (not shared). German. Good for personal projects where you want a real box.</span>
+            <span class="tool-pos pos-niche">niche</span>
+          </div>
+          <div class="tool">
+            <span class="tool-name">Hetzner</span>
+            <span class="tool-desc">German. Excellent price-to-performance VPS and dedicated servers. Developer favorite for indie projects.</span>
+            <span class="tool-pos pos-rising">rising</span>
+          </div>
+          <div class="tool">
+            <span class="tool-name">DigitalOcean</span>
+            <span class="tool-desc">Simple cloud. Droplets (VPS), managed databases, app platform. Good docs. The "I just want a server" option.</span>
+            <span class="tool-pos pos-strong">strong</span>
+          </div>
+          <div class="tool">
+            <span class="tool-name">Linode</span>
+            <span class="tool-desc">Now owned by Akamai. Simple VPS, managed Kubernetes. Similar to DigitalOcean. Loyal developer base.</span>
+            <span class="tool-pos pos-niche">niche</span>
+          </div>
+          <div class="tool">
+            <span class="tool-name">Oracle Cloud</span>
+            <span class="tool-desc">Generous always-free tier (ARM instances). Enterprise-focused. Surprisingly competitive on price.</span>
+            <span class="tool-pos pos-niche">niche</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ═══════ SYSTEMS LANGUAGES ═══════ -->
+      <div class="vertical">
+        <div class="vertical-header">
+          <h2>Systems Languages</h2>
+          <span class="vq">What if JavaScript isn't fast enough?</span>
+        </div>
+        <p class="vertical-desc">Compiled languages for performance-critical work: CLIs, game engines, operating systems, databases, network services. Different tradeoffs than scripting languages.</p>
+        <div class="tools">
+          <div class="tool">
+            <span class="tool-name">Rust</span>
+            <span class="tool-desc">Memory safety without garbage collection. Steep learning curve, loved once learned. Powers parts of Firefox, Linux kernel, Cloudflare.</span>
+            <span class="tool-pos pos-rising">rising</span>
+          </div>
+          <div class="tool">
+            <span class="tool-name">Go</span>
+            <span class="tool-desc">Google. Simple, fast compilation, built-in concurrency. The language of cloud infrastructure: Docker, Kubernetes, Terraform.</span>
+            <span class="tool-pos pos-strong">strong</span>
+          </div>
+          <div class="tool">
+            <span class="tool-name">C</span>
+            <span class="tool-desc">The foundation. Operating systems, embedded, everything low-level. No safety nets. Still everywhere under the hood.</span>
+            <span class="tool-pos pos-dominant">dominant</span>
+          </div>
+          <div class="tool">
+            <span class="tool-name">C++</span>
+            <span class="tool-desc">C with objects, templates, and decades of features. Games, browsers, databases, trading systems. Complex but fast.</span>
+            <span class="tool-pos pos-dominant">dominant</span>
+          </div>
+          <div class="tool">
+            <span class="tool-name">Zig</span>
+            <span class="tool-desc">A better C. No hidden allocations, no hidden control flow. Bun is written in Zig. Small but enthusiastic community.</span>
+            <span class="tool-pos pos-rising">rising</span>
+          </div>
+          <div class="tool">
+            <span class="tool-name">Swift</span>
+            <span class="tool-desc">Apple's language. iOS, macOS, server-side. Modern safety features. Required for Apple platform development.</span>
+            <span class="tool-pos pos-strong">strong</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ═══════ MOBILE DEVELOPMENT ═══════ -->
+      <div class="vertical">
+        <div class="vertical-header">
+          <h2>Mobile Development</h2>
+          <span class="vq">How do I build phone apps?</span>
+        </div>
+        <p class="vertical-desc">Native means one codebase per platform (fast, full access). Cross-platform means one codebase for both (faster to ship, some tradeoffs).</p>
+        <div class="tools">
+          <div class="tool">
+            <span class="tool-name">SwiftUI</span>
+            <span class="tool-desc">Apple's native UI framework. iPhone, iPad, Mac, Watch, TV. Declarative. Xcode required. The Apple way.</span>
+            <span class="tool-pos pos-dominant">dominant</span>
+          </div>
+          <div class="tool">
+            <span class="tool-name">Android (Kotlin)</span>
+            <span class="tool-desc">Google's platform. Kotlin is the modern language, Java still works. Android Studio. Jetpack Compose for declarative UI.</span>
+            <span class="tool-pos pos-dominant">dominant</span>
+          </div>
+          <div class="tool">
+            <span class="tool-name">React Native</span>
+            <span class="tool-desc">Write React, get native apps. JavaScript bridge to native components. Expo simplifies everything. Meta-backed.</span>
+            <span class="tool-pos pos-strong">strong</span>
+          </div>
+          <div class="tool">
+            <span class="tool-name">Flutter</span>
+            <span class="tool-desc">Google's cross-platform toolkit. Dart language. Custom rendering engine (not native components). Beautiful defaults.</span>
+            <span class="tool-pos pos-strong">strong</span>
+          </div>
+          <div class="tool">
+            <span class="tool-name">Kotlin Multiplatform</span>
+            <span class="tool-desc">Share business logic across Android, iOS, web, desktop. Native UI per platform. JetBrains-backed.</span>
+            <span class="tool-pos pos-rising">rising</span>
+          </div>
+          <div class="tool">
+            <span class="tool-name">PWA</span>
+            <span class="tool-desc">Progressive Web App. A website that acts like an app. No app store. Works offline. Limited native API access.</span>
+            <span class="tool-pos pos-niche">niche</span>
+          </div>
+          <div class="tool">
+            <span class="tool-name">Capacitor</span>
+            <span class="tool-desc">Wrap any web app in a native shell. Access native APIs from JavaScript. Ionic's successor to Cordova.</span>
+            <span class="tool-pos pos-niche">niche</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ═══════ AI CODING AGENTS ═══════ -->
+      <div class="vertical">
+        <div class="vertical-header">
+          <h2>AI Coding Agents</h2>
+          <span class="vq">What writes code for me?</span>
+        </div>
+        <p class="vertical-desc">CLI agents that read your codebase, write code, run commands, and iterate. The newest category. Moving fast.</p>
+        <div class="tools">
+          <div class="tool">
+            <span class="tool-name">Claude Code</span>
+            <span class="tool-desc">Anthropic. Terminal agent with file access, shell, web. Claude Pro/Max/Team. Deep context understanding.</span>
+            <span class="tool-pos pos-strong">strong</span>
+          </div>
+          <div class="tool">
+            <span class="tool-name">Codex CLI</span>
+            <span class="tool-desc">OpenAI. Zero-dependency install via Homebrew. ChatGPT Plus/Pro/Team. Sandboxed execution.</span>
+            <span class="tool-pos pos-strong">strong</span>
+          </div>
+          <div class="tool">
+            <span class="tool-name">Gemini CLI</span>
+            <span class="tool-desc">Google. Free with Google account. Gemini models. Shell and file access. Newest of the three.</span>
+            <span class="tool-pos pos-rising">rising</span>
+          </div>
+          <div class="tool">
+            <span class="tool-name">Cursor</span>
+            <span class="tool-desc">AI-native code editor (VS Code fork). Inline completions, chat, agent mode. Own subscription, multiple models.</span>
+            <span class="tool-pos pos-strong">strong</span>
+          </div>
+          <div class="tool">
+            <span class="tool-name">GitHub Copilot</span>
+            <span class="tool-desc">Microsoft/OpenAI. Lives in your editor. Autocomplete and chat. The first mainstream AI coding tool.</span>
+            <span class="tool-pos pos-dominant">dominant</span>
+          </div>
+          <div class="tool">
+            <span class="tool-name">Windsurf</span>
+            <span class="tool-desc">AI editor from Codeium. "Flows" for multi-step tasks. Cascade agent. VS Code-based.</span>
+            <span class="tool-pos pos-rising">rising</span>
+          </div>
+          <div class="tool">
+            <span class="tool-name">Aider</span>
+            <span class="tool-desc">Open source CLI agent. Works with any model. Git-aware &mdash; every edit is a commit. Developer favorite.</span>
+            <span class="tool-pos pos-niche">niche</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ═══════ PRODUCTIVITY SUITES ═══════ -->
+      <div class="vertical">
+        <div class="vertical-header">
+          <h2>Productivity Suites</h2>
+          <span class="vq">Where do I write docs, make spreadsheets, check email?</span>
+        </div>
+        <p class="vertical-desc">The tools everyone uses daily. The AI layer is being bolted on fast &mdash; Gemini in Google, Copilot in Microsoft, Claude in standalone apps.</p>
+        <div class="tools">
+          <div class="tool">
+            <span class="tool-name">Google Workspace</span>
+            <span class="tool-desc">Gmail, Docs, Sheets, Drive, Calendar, Meet. Web-first. Real-time collaboration. Gemini AI built in.</span>
+            <span class="tool-pos pos-dominant">dominant</span>
+          </div>
+          <div class="tool">
+            <span class="tool-name">Microsoft 365</span>
+            <span class="tool-desc">Outlook, Word, Excel, Teams, OneDrive. Desktop + web. Enterprise standard. Copilot AI across all apps.</span>
+            <span class="tool-pos pos-dominant">dominant</span>
+          </div>
+          <div class="tool">
+            <span class="tool-name">Apple iWork</span>
+            <span class="tool-desc">Pages, Numbers, Keynote. Free on Apple devices. iCloud sync. Clean design. Less powerful, more than enough.</span>
+            <span class="tool-pos pos-niche">niche</span>
+          </div>
+          <div class="tool">
+            <span class="tool-name">Notion</span>
+            <span class="tool-desc">Docs, wikis, databases, project management in one tool. Blocks-based. AI features. Popular with startups.</span>
+            <span class="tool-pos pos-strong">strong</span>
+          </div>
+          <div class="tool">
+            <span class="tool-name">Obsidian</span>
+            <span class="tool-desc">Local-first markdown notes. Backlinks, graph view, plugins. Your files, your machine. No cloud required.</span>
+            <span class="tool-pos pos-rising">rising</span>
+          </div>
+          <div class="tool">
+            <span class="tool-name">LibreOffice</span>
+            <span class="tool-desc">Open source Office suite. Writer, Calc, Impress. Free. Runs everywhere. Compatible with Microsoft formats (mostly).</span>
+            <span class="tool-pos pos-niche">niche</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ═══════ DATABASES ═══════ -->
+      <div class="vertical">
+        <div class="vertical-header">
+          <h2>Databases</h2>
+          <span class="vq">Where does my data live?</span>
+        </div>
+        <p class="vertical-desc">Where structured data goes. SQL databases store rows in tables. NoSQL databases store documents, key-value pairs, or graphs. Pick based on your data shape.</p>
+        <div class="tools">
+          <div class="tool">
+            <span class="tool-name">PostgreSQL</span>
+            <span class="tool-desc">The serious open-source database. Relational, extensible, reliable. Supports JSON, full-text search, vectors. The default choice.</span>
+            <span class="tool-pos pos-dominant">dominant</span>
+          </div>
+          <div class="tool">
+            <span class="tool-name">SQLite</span>
+            <span class="tool-desc">Database in a single file. No server needed. Embedded in everything &mdash; phones, browsers, desktop apps. Perfect for local-first.</span>
+            <span class="tool-pos pos-dominant">dominant</span>
+          </div>
+          <div class="tool">
+            <span class="tool-name">MySQL</span>
+            <span class="tool-desc">The web's database. WordPress, most PHP apps. Oracle-owned. MariaDB is the community fork.</span>
+            <span class="tool-pos pos-strong">strong</span>
+          </div>
+          <div class="tool">
+            <span class="tool-name">MongoDB</span>
+            <span class="tool-desc">Document database. JSON-like documents instead of rows. Flexible schema. Good for prototyping. Atlas for managed hosting.</span>
+            <span class="tool-pos pos-strong">strong</span>
+          </div>
+          <div class="tool">
+            <span class="tool-name">Redis</span>
+            <span class="tool-desc">In-memory key-value store. Blazing fast. Caching, sessions, queues, pub/sub. Not a primary database &mdash; a sidekick.</span>
+            <span class="tool-pos pos-strong">strong</span>
+          </div>
+          <div class="tool">
+            <span class="tool-name">Supabase</span>
+            <span class="tool-desc">Open-source Firebase alternative. Postgres underneath. Auth, storage, realtime, edge functions. Generous free tier.</span>
+            <span class="tool-pos pos-rising">rising</span>
+          </div>
+          <div class="tool">
+            <span class="tool-name">TimescaleDB</span>
+            <span class="tool-desc">PostgreSQL extension for time-series data. IoT, metrics, analytics. Full SQL. Scales to billions of rows.</span>
+            <span class="tool-pos pos-niche">niche</span>
+          </div>
+          <div class="tool">
+            <span class="tool-name">Turso</span>
+            <span class="tool-desc">SQLite at the edge. LibSQL fork. Embedded replicas. Good for local-first apps that sync.</span>
+            <span class="tool-pos pos-rising">rising</span>
+          </div>
+          <div class="tool">
+            <span class="tool-name">Firebase</span>
+            <span class="tool-desc">Google. Firestore (NoSQL), Auth, Hosting, Functions. Great for prototypes and mobile apps. Vendor lock-in.</span>
+            <span class="tool-pos pos-strong">strong</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ═══════ SCRIPTING LANGUAGES ═══════ -->
+      <div class="vertical">
+        <div class="vertical-header">
+          <h2>Scripting Languages</h2>
+          <span class="vq">What do I write everyday code in?</span>
+        </div>
+        <p class="vertical-desc">Higher-level languages for apps, scripts, automation, data, and AI. You trade raw speed for developer speed.</p>
+        <div class="tools">
+          <div class="tool">
+            <span class="tool-name">Python</span>
+            <span class="tool-desc">The everything language. AI/ML, data science, web (Django/Flask), scripting, automation. Huge ecosystem. Readable. Slow, but rarely matters.</span>
+            <span class="tool-pos pos-dominant">dominant</span>
+          </div>
+          <div class="tool">
+            <span class="tool-name">JavaScript</span>
+            <span class="tool-desc">The web's language. Browser-native. Node.js for server. npm ecosystem. TypeScript for type safety. Inescapable.</span>
+            <span class="tool-pos pos-dominant">dominant</span>
+          </div>
+          <div class="tool">
+            <span class="tool-name">TypeScript</span>
+            <span class="tool-desc">JavaScript with types. Catches bugs at compile time. Industry standard for serious JS projects. Compiles to plain JS.</span>
+            <span class="tool-pos pos-dominant">dominant</span>
+          </div>
+          <div class="tool">
+            <span class="tool-name">Ruby</span>
+            <span class="tool-desc">Elegant, developer-friendly. Rails framework. Shopify, GitHub, Basecamp. Smaller than it was, still beloved.</span>
+            <span class="tool-pos pos-niche">niche</span>
+          </div>
+          <div class="tool">
+            <span class="tool-name">PHP</span>
+            <span class="tool-desc">Powers WordPress (43% of the web). Laravel framework is modern and good. Easy to dismiss, hard to kill.</span>
+            <span class="tool-pos pos-strong">strong</span>
+          </div>
+          <div class="tool">
+            <span class="tool-name">Elixir</span>
+            <span class="tool-desc">Functional, concurrent, fault-tolerant. Phoenix framework. LiveView for real-time UIs. Built on Erlang's VM. Small but passionate.</span>
+            <span class="tool-pos pos-niche">niche</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ═══════ GAME ENGINES / GRAPHICS ═══════ -->
+      <div class="vertical">
+        <div class="vertical-header">
+          <h2>Game Engines &amp; Graphics</h2>
+          <span class="vq">How do I build games and 3D?</span>
+        </div>
+        <p class="vertical-desc">From full game engines to browser-based 3D. The gap between "indie game" and "AAA" is smaller than ever.</p>
+        <div class="tools">
+          <div class="tool">
+            <span class="tool-name">Unity</span>
+            <span class="tool-desc">C#. 2D and 3D. Mobile, desktop, console, VR. Massive asset store. Most-used game engine by count. Indie to mid-tier.</span>
+            <span class="tool-pos pos-dominant">dominant</span>
+          </div>
+          <div class="tool">
+            <span class="tool-name">Unreal Engine</span>
+            <span class="tool-desc">C++ and Blueprints. Photorealistic 3D. AAA games, film, architecture. Epic-backed. Free until you make money.</span>
+            <span class="tool-pos pos-dominant">dominant</span>
+          </div>
+          <div class="tool">
+            <span class="tool-name">Godot</span>
+            <span class="tool-desc">Open source. GDScript (Python-like) or C#. 2D is excellent, 3D is catching up. No royalties, no strings.</span>
+            <span class="tool-pos pos-rising">rising</span>
+          </div>
+          <div class="tool">
+            <span class="tool-name">Three.js</span>
+            <span class="tool-desc">3D in the browser. WebGL wrapper. Scenes, cameras, lights, meshes in JavaScript. React Three Fiber for React integration.</span>
+            <span class="tool-pos pos-dominant">dominant</span>
+          </div>
+          <div class="tool">
+            <span class="tool-name">Pygame</span>
+            <span class="tool-desc">Python 2D game library. Simple, educational. Good for prototypes and learning. Not for production games.</span>
+            <span class="tool-pos pos-niche">niche</span>
+          </div>
+          <div class="tool">
+            <span class="tool-name">Phaser</span>
+            <span class="tool-desc">JavaScript 2D game framework. Browser-native. Sprites, physics, tilemaps. Good for web games and prototypes.</span>
+            <span class="tool-pos pos-niche">niche</span>
+          </div>
+          <div class="tool">
+            <span class="tool-name">Bevy</span>
+            <span class="tool-desc">Rust game engine. Entity Component System. Data-driven. Early but promising. The Rust community's engine.</span>
+            <span class="tool-pos pos-rising">rising</span>
+          </div>
+          <div class="tool">
+            <span class="tool-name">PlayCanvas</span>
+            <span class="tool-desc">Browser-based 3D engine with visual editor. WebGL. Good for interactive web experiences and lightweight 3D.</span>
+            <span class="tool-pos pos-niche">niche</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ═══════ AI MODELS / PROVIDERS ═══════ -->
+      <div class="vertical">
+        <div class="vertical-header">
+          <h2>AI Model Providers</h2>
+          <span class="vq">Whose brain am I using?</span>
+        </div>
+        <p class="vertical-desc">Companies that make and serve the large language models. You access them through APIs, apps, or agents. Different models have different strengths.</p>
+        <div class="tools">
+          <div class="tool">
+            <span class="tool-name">OpenAI</span>
+            <span class="tool-desc">GPT-4o, o1, o3. ChatGPT. The company that started the wave. Strongest brand recognition. API and consumer products.</span>
+            <span class="tool-pos pos-dominant">dominant</span>
+          </div>
+          <div class="tool">
+            <span class="tool-name">Anthropic</span>
+            <span class="tool-desc">Claude (Opus, Sonnet, Haiku). Long context, strong reasoning, safety-focused. Claude Code for agents. This is Claude.</span>
+            <span class="tool-pos pos-strong">strong</span>
+          </div>
+          <div class="tool">
+            <span class="tool-name">Google</span>
+            <span class="tool-desc">Gemini (Ultra, Pro, Flash). Integrated into Search, Workspace, Android. Multimodal. Massive distribution.</span>
+            <span class="tool-pos pos-strong">strong</span>
+          </div>
+          <div class="tool">
+            <span class="tool-name">Meta</span>
+            <span class="tool-desc">Llama (open weights). Free to use and modify. Powers most open-source AI. Not a hosted service &mdash; you run it yourself or use a host.</span>
+            <span class="tool-pos pos-strong">strong</span>
+          </div>
+          <div class="tool">
+            <span class="tool-name">Mistral</span>
+            <span class="tool-desc">French. Efficient open models. Mixtral (mixture of experts). Strong in Europe. Le Chat consumer app.</span>
+            <span class="tool-pos pos-rising">rising</span>
+          </div>
+          <div class="tool">
+            <span class="tool-name">xAI</span>
+            <span class="tool-desc">Grok. Musk-backed. Integrated with X (Twitter). Large model training on Colossus cluster.</span>
+            <span class="tool-pos pos-rising">rising</span>
+          </div>
+          <div class="tool">
+            <span class="tool-name">DeepSeek</span>
+            <span class="tool-desc">Chinese. Open models competitive with frontier labs at fraction of cost. R1 reasoning model. Disrupted pricing assumptions.</span>
+            <span class="tool-pos pos-rising">rising</span>
+          </div>
+        </div>
+      </div>
+
+    </main>
+
+    <footer class="ani d2">
+      <p>Part of <a href="index.html">Shapes of Intelligence</a> &mdash; a companion reference for the book.</p>
+    </footer>
+
+  </div>
+</body>
+</html>

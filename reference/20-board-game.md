@@ -42,6 +42,27 @@ Your choices determine the complexity. Multiplayer Settlers of Catan with expans
     display: block; padding: 0.2rem 0; cursor: pointer; font-size: 0.85rem;
   }
   #generator .checkbox-group input { margin-right: 0.5rem; accent-color: #e94560; }
+  #generator .game-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 0; margin: 0.25rem 0 0.5rem; }
+  #generator .game-grid label {
+    display: flex; align-items: center; padding: 0.25rem 0; cursor: pointer; font-size: 0.85rem;
+  }
+  #generator .game-grid input { margin-right: 0.4rem; accent-color: #e94560; }
+  #generator .game-grid label.active { background: #1a2744; border-radius: 4px; }
+  #generator details { margin: 0.25rem 0 0.75rem; }
+  #generator summary {
+    cursor: pointer; color: #8888aa; font-size: 0.78rem; text-transform: uppercase;
+    letter-spacing: 0.05em; list-style: none; display: flex; align-items: center; gap: 0.4rem;
+    user-select: none;
+  }
+  #generator summary::-webkit-details-marker { display: none; }
+  #generator summary::before { content: '\25B8'; font-size: 0.7rem; transition: transform 0.15s; }
+  #generator details[open] summary::before { transform: rotate(90deg); }
+  #generator .game-name-input {
+    background: #0d1117; border: 1px solid #30363d; color: #e0e0e0;
+    padding: 0.35rem 0.5rem; border-radius: 4px; width: 100%; margin: 0.25rem 0 0.5rem;
+    font-family: inherit; font-size: 0.88rem;
+  }
+  #generator .game-name-input::placeholder { color: #555; }
   #generator .btn-row { display: flex; gap: 0.75rem; margin: 1rem 0 0.5rem; }
   #generator button {
     font-family: inherit; font-size: 0.88rem; padding: 0.5rem 1rem;
@@ -62,16 +83,43 @@ Your choices determine the complexity. Multiplayer Settlers of Catan with expans
 </style>
 
 <div class="field-label">Game</div>
-<select id="gen-game">
-  <option value="">Pick a game...</option>
-  <option>Cribbage</option><option>Hearts</option><option>Bridge</option>
-  <option>Spades</option><option>Gin Rummy</option><option>Uno</option>
-  <option>Dominoes</option><option>Mexican Train</option><option>Scrabble</option><option>Mahjong</option>
-  <option>Chess</option><option>Checkers</option><option>Othello</option>
-  <option>Connect Four</option><option>Backgammon</option><option>Mancala</option>
-  <option>Yahtzee</option><option>Liar's Dice</option><option>Battleship</option>
-  <option>Boggle</option><option>Mille Bornes</option>
-</select>
+<input type="text" id="gen-game" class="game-name-input" placeholder="Type a game not in the list, or pick one below...">
+<details>
+  <summary>Games I know <span id="known-count" style="color:#e94560;font-size:0.75rem;"></span></summary>
+  <p style="color:#8888aa;font-size:0.78rem;margin:0.4rem 0 0.5rem;">Check the ones you know — they're remembered. Click a name to build it.</p>
+  <div class="game-grid" id="game-picker">
+    <label><input type="checkbox" class="know-check" value="Cribbage"> Cribbage</label>
+    <label><input type="checkbox" class="know-check" value="Hearts"> Hearts</label>
+    <label><input type="checkbox" class="know-check" value="Bridge"> Bridge</label>
+    <label><input type="checkbox" class="know-check" value="Spades"> Spades</label>
+    <label><input type="checkbox" class="know-check" value="Gin Rummy"> Gin Rummy</label>
+    <label><input type="checkbox" class="know-check" value="Uno"> Uno</label>
+    <label><input type="checkbox" class="know-check" value="Dominoes"> Dominoes</label>
+    <label><input type="checkbox" class="know-check" value="Mexican Train"> Mexican Train</label>
+    <label><input type="checkbox" class="know-check" value="Scrabble"> Scrabble</label>
+    <label><input type="checkbox" class="know-check" value="Mahjong"> Mahjong</label>
+    <label><input type="checkbox" class="know-check" value="Chess"> Chess</label>
+    <label><input type="checkbox" class="know-check" value="Checkers"> Checkers</label>
+    <label><input type="checkbox" class="know-check" value="Othello"> Othello</label>
+    <label><input type="checkbox" class="know-check" value="Connect Four"> Connect Four</label>
+    <label><input type="checkbox" class="know-check" value="Backgammon"> Backgammon</label>
+    <label><input type="checkbox" class="know-check" value="Mancala"> Mancala</label>
+    <label><input type="checkbox" class="know-check" value="Yahtzee"> Yahtzee</label>
+    <label><input type="checkbox" class="know-check" value="Liar's Dice"> Liar's Dice</label>
+    <label><input type="checkbox" class="know-check" value="Battleship"> Battleship</label>
+    <label><input type="checkbox" class="know-check" value="Boggle"> Boggle</label>
+    <label><input type="checkbox" class="know-check" value="Mille Bornes"> Mille Bornes</label>
+    <label><input type="checkbox" class="know-check" value="Settlers of Catan"> Settlers of Catan</label>
+    <label><input type="checkbox" class="know-check" value="Ticket to Ride"> Ticket to Ride</label>
+    <label><input type="checkbox" class="know-check" value="Carcassonne"> Carcassonne</label>
+    <label><input type="checkbox" class="know-check" value="Risk"> Risk</label>
+    <label><input type="checkbox" class="know-check" value="Clue"> Clue</label>
+    <label><input type="checkbox" class="know-check" value="Monopoly"> Monopoly</label>
+    <label><input type="checkbox" class="know-check" value="Sorry!"> Sorry!</label>
+    <label><input type="checkbox" class="know-check" value="Sequence"> Sequence</label>
+    <label><input type="checkbox" class="know-check" value="Codenames"> Codenames</label>
+  </div>
+</details>
 
 <div class="field-label">Players</div>
 <select id="gen-players">
@@ -100,16 +148,18 @@ Your choices determine the complexity. Multiplayer Settlers of Catan with expans
   <option>Server (VPS / cloud)</option>
 </select>
 
-<div class="field-label">Optional features</div>
-<div class="checkbox-group">
-  <label><input type="checkbox" id="opt-training"> Training mode (recommended plays + EV)</label>
-  <label><input type="checkbox" id="opt-commentator"> Commentator (strategy narration panel)</label>
-  <label><input type="checkbox" id="opt-opponent"> Opponent modeling (card counting / deduction)</label>
-  <label><input type="checkbox" id="opt-visual"> Visual match (look like the real board)</label>
-  <label><input type="checkbox" id="opt-variants"> Variant config (house rules, scoring modes)</label>
-  <label><input type="checkbox" id="opt-step"> Step-through mode (click to advance AI turns)</label>
-  <label><input type="checkbox" id="opt-explain"> Explain via a game I know</label>
-</div>
+<details>
+  <summary>Optional features</summary>
+  <div class="checkbox-group">
+    <label><input type="checkbox" id="opt-training"> Training mode (recommended plays + EV)</label>
+    <label><input type="checkbox" id="opt-commentator"> Commentator (strategy narration panel)</label>
+    <label><input type="checkbox" id="opt-opponent"> Opponent modeling (card counting / deduction)</label>
+    <label><input type="checkbox" id="opt-visual"> Visual match (look like the real board)</label>
+    <label><input type="checkbox" id="opt-variants"> Variant config (house rules, scoring modes)</label>
+    <label><input type="checkbox" id="opt-step"> Step-through mode (click to advance AI turns)</label>
+    <label><input type="checkbox" id="opt-explain"> Explain via a game I know</label>
+  </div>
+</details>
 
 <div class="btn-row">
   <button class="btn-roll" id="gen-roll">Roll d20</button>
@@ -121,7 +171,9 @@ Your choices determine the complexity. Multiplayer Settlers of Catan with expans
 
 <script>
 (function() {
-  const gameSelect = document.getElementById('gen-game');
+  const gameInput = document.getElementById('gen-game');
+  const knowChecks = document.querySelectorAll('.know-check');
+  const knownCountEl = document.getElementById('known-count');
   const playersSelect = document.getElementById('gen-players');
   const devicesSelect = document.getElementById('gen-devices');
   const deploySelect = document.getElementById('gen-deploy');
@@ -135,10 +187,85 @@ Your choices determine the complexity. Multiplayer Settlers of Catan with expans
     explain: document.getElementById('opt-explain')
   };
 
+  const STORAGE_KEY = 'shapes-games-i-know';
+
+  // Load known games from localStorage
+  function loadKnown() {
+    try {
+      return JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
+    } catch { return []; }
+  }
+
+  function saveKnown() {
+    const known = Array.from(knowChecks).filter(c => c.checked).map(c => c.value);
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(known));
+    updateKnownCount();
+  }
+
+  function updateKnownCount() {
+    const n = Array.from(knowChecks).filter(c => c.checked).length;
+    knownCountEl.textContent = n > 0 ? '(' + n + ')' : '';
+  }
+
+  function restoreKnown() {
+    const known = loadKnown();
+    knowChecks.forEach(cb => {
+      cb.checked = known.includes(cb.value);
+    });
+    updateKnownCount();
+  }
+
+  // Restore on load
+  restoreKnown();
+
+  function highlightActive() {
+    const val = gameInput.value.trim();
+    knowChecks.forEach(cb => {
+      cb.closest('label').classList.toggle('active', cb.value === val);
+    });
+  }
+
+  // Clicking any game checks it AND sets it as the build target
+  knowChecks.forEach(cb => {
+    cb.addEventListener('change', function() {
+      if (this.checked) {
+        gameInput.value = this.value;
+        highlightActive();
+      }
+      saveKnown();
+      update();
+    });
+  });
+
+  // Clicking label text (not checkbox) just selects for building
+  document.getElementById('game-picker').addEventListener('click', function(e) {
+    if (e.target.classList.contains('know-check')) return;
+    const label = e.target.closest('label');
+    if (!label) return;
+    const cb = label.querySelector('.know-check');
+    if (!cb) return;
+    gameInput.value = cb.value;
+    highlightActive();
+    update();
+  });
+
+  // If user types, update live
+  gameInput.addEventListener('input', update);
+
+  function getKnownGames() {
+    return Array.from(knowChecks).filter(c => c.checked).map(c => c.value);
+  }
+
   function randomOption(sel) {
     const opts = sel.querySelectorAll('option');
     const start = opts[0].value === '' ? 1 : 0;
     sel.selectedIndex = start + Math.floor(Math.random() * (opts.length - start));
+  }
+
+  function randomGame() {
+    const all = Array.from(knowChecks);
+    const pick = all[Math.floor(Math.random() * all.length)];
+    gameInput.value = pick.value;
   }
 
   function randomCheckboxes() {
@@ -150,15 +277,16 @@ Your choices determine the complexity. Multiplayer Settlers of Catan with expans
   }
 
   function buildPrompt() {
-    const game = gameSelect.value || '[pick a game]';
+    const game = gameInput.value.trim() || '[pick a game]';
     const players = playersSelect.value;
     const devices = devicesSelect.value;
     const deploy = deploySelect.value;
 
-    // Clean up "not sure" to just the default
     const cleanPlayers = players.startsWith('Not sure') ? 'solo vs AI' : players.toLowerCase();
     const cleanDevices = devices.startsWith('Not sure') ? 'desktop' : devices.toLowerCase();
     const cleanDeploy = deploy.startsWith('Not sure') ? 'local' : deploy;
+
+    const known = getKnownGames().filter(g => g !== game);
 
     let extras = [];
     if (checkboxes.training.checked) extras.push('training mode (recommended plays with EV, toggleable)');
@@ -167,13 +295,18 @@ Your choices determine the complexity. Multiplayer Settlers of Catan with expans
     if (checkboxes.visual.checked) extras.push('match the look of a real ' + game + ' board');
     if (checkboxes.variants.checked) extras.push('config page for house rule variants');
     if (checkboxes.step.checked) extras.push('step-through mode (click to advance AI turns)');
-    if (checkboxes.explain.checked) extras.push('I know [OTHER GAME] — explain ' + game + ' as differences from that');
+    if (checkboxes.explain.checked && known.length > 0) {
+      extras.push('I already know ' + known.join(', ') + ' — explain ' + game + ' as differences from those');
+    } else if (checkboxes.explain.checked) {
+      extras.push('explain the rules as differences from a common game');
+    }
 
     const extrasLine = extras.length > 0
       ? '\n\nAlso: ' + extras.join(', ') + '.'
       : '';
 
-    const prompt = `Read this page. Build ${game}. Standard rules, ${cleanPlayers}, ${cleanDevices}, ${cleanDeploy}.${extrasLine}`;
+    const pageUrl = window.location.href;
+    const prompt = `Read ${pageUrl} — then build ${game}. Standard rules, ${cleanPlayers}, ${cleanDevices}, ${cleanDeploy}.${extrasLine}`;
 
     return prompt;
   }
@@ -183,7 +316,7 @@ Your choices determine the complexity. Multiplayer Settlers of Catan with expans
   }
 
   // Live update on any change
-  [gameSelect, playersSelect, devicesSelect, deploySelect].forEach(
+  [playersSelect, devicesSelect, deploySelect].forEach(
     sel => sel.addEventListener('change', update)
   );
   Object.values(checkboxes).forEach(
@@ -191,7 +324,7 @@ Your choices determine the complexity. Multiplayer Settlers of Catan with expans
   );
 
   document.getElementById('gen-roll').addEventListener('click', function() {
-    randomOption(gameSelect);
+    randomGame();
     randomOption(playersSelect);
     randomOption(devicesSelect);
     randomOption(deploySelect);

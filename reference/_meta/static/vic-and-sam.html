@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>"So What's It About?" — Shapes of Intelligence</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,700;1,9..144,300;1,9..144,500&display=swap');
+
+    :root {
+      --void: #0a0a10;
+      --deep: #0f0f1a;
+      --surface: #161625;
+      --raised: #1e1e32;
+      --edge: #2a2a44;
+      --muted: #7a7a9a;
+      --text: #c8c8dd;
+      --bright: #e8e8f0;
+      --white: #f5f5ff;
+      --amber: #e8a83e;
+      --amber-dim: #c4882a;
+      --teal: #4ecdc4;
+      --rose: #e85577;
+      --vic: #e8a83e;
+      --sam: #4ecdc4;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'DM Mono', 'SF Mono', monospace;
+      background: var(--void);
+      color: var(--text);
+      line-height: 1.8;
+      min-height: 100vh;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 9999;
+    }
+
+    .shell {
+      max-width: 640px;
+      margin: 0 auto;
+      padding: 3rem 1.5rem 4rem;
+    }
+
+    @media (min-height: 1000px) and (max-width: 800px) {
+      .shell { max-width: 92vw; padding: 2rem 4vw 3rem; }
+      .masthead h1 { font-size: 2.8rem; }
+      .masthead .sub { font-size: 0.92rem; }
+      .breadcrumb { font-size: 0.78rem; }
+      .stage { font-size: 1.1rem; }
+      .dialogue { font-size: 1.05rem; }
+      .speaker { font-size: 0.8rem; }
+      .line { padding-left: 1.3rem; margin: 1rem 0; }
+      .line::before { width: 4px; }
+      .page-break { font-size: 0.72rem; margin: 2rem 0 1.5rem; }
+      .fin { font-size: 1.3rem; }
+      footer { font-size: 0.75rem; }
+    }
+
+    /* ── Header ── */
+    .masthead {
+      padding: 1.5rem 0 2rem;
+      border-bottom: 1px solid var(--edge);
+      margin-bottom: 2.5rem;
+      position: relative;
+    }
+
+    .masthead::after {
+      content: '';
+      position: absolute;
+      bottom: -1px;
+      left: 0;
+      width: 60px;
+      height: 1px;
+      background: var(--amber);
+    }
+
+    .breadcrumb {
+      font-size: 0.65rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 0.8rem;
+    }
+
+    .breadcrumb a {
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .breadcrumb a:hover { color: var(--amber); }
+
+    .masthead h1 {
+      font-family: 'Fraunces', serif;
+      font-weight: 300;
+      font-size: 2rem;
+      color: var(--white);
+      letter-spacing: -0.01em;
+      font-style: italic;
+    }
+
+    .masthead .sub {
+      color: var(--muted);
+      font-size: 0.72rem;
+      margin-top: 0.4rem;
+      letter-spacing: 0.03em;
+    }
+
+    /* ── Page breaks ── */
+    .page-break {
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.6rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      margin: 2.5rem 0 2rem;
+      position: relative;
+    }
+
+    .page-break::before,
+    .page-break::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      width: calc(50% - 3rem);
+      height: 1px;
+      background: var(--edge);
+    }
+
+    .page-break::before { left: 0; }
+    .page-break::after { right: 0; }
+
+    /* ── Stage directions ── */
+    .stage {
+      font-family: 'Fraunces', serif;
+      font-style: italic;
+      font-weight: 500;
+      font-size: 0.88rem;
+      color: var(--muted);
+      margin: 1.5rem 0 0.6rem;
+      line-height: 1.7;
+    }
+
+    /* ── Dialogue ── */
+    .line {
+      margin: 0.8rem 0;
+      padding-left: 1rem;
+      position: relative;
+    }
+
+    .line::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0.4rem;
+      width: 3px;
+      height: calc(100% - 0.4rem);
+      border-radius: 2px;
+    }
+
+    .line.vic::before { background: var(--vic); opacity: 0.5; }
+    .line.sam::before { background: var(--sam); opacity: 0.5; }
+
+    .speaker {
+      font-size: 0.65rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      font-weight: 500;
+      display: block;
+      margin-bottom: 0.15rem;
+    }
+
+    .line.vic .speaker { color: var(--vic); }
+    .line.sam .speaker { color: var(--sam); }
+
+    .dialogue {
+      font-size: 0.82rem;
+      color: var(--bright);
+      line-height: 1.8;
+    }
+
+    .dialogue em {
+      font-family: 'Fraunces', serif;
+      color: var(--text);
+    }
+
+    /* ── Fin ── */
+    .fin {
+      text-align: center;
+      font-family: 'Fraunces', serif;
+      font-style: italic;
+      font-size: 1.1rem;
+      color: var(--muted);
+      margin: 3rem 0 1rem;
+    }
+
+    /* ── Footer ── */
+    footer {
+      margin-top: 3rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--edge);
+      font-size: 0.62rem;
+      color: var(--muted);
+      letter-spacing: 0.03em;
+    }
+
+    footer a {
+      color: var(--muted);
+      text-decoration: none;
+      border-bottom: 1px solid var(--edge);
+      transition: color 0.2s, border-color 0.2s;
+    }
+
+    footer a:hover {
+      color: var(--amber);
+      border-color: var(--amber-dim);
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .ani { animation: fadeUp 0.4s ease-out both; }
+
+    @media (max-width: 600px) {
+      .shell { padding: 1.5rem 1rem 3rem; }
+      .masthead h1 { font-size: 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+  <div class="shell">
+
+    <header class="masthead ani">
+      <div class="breadcrumb">
+        <a href="index.html">Shapes of Intelligence</a> / Extras
+      </div>
+      <h1>"So What's It About?"</h1>
+      <p class="sub">A graphic novel script &mdash; Vic and Sam discuss Shapes of Intelligence</p>
+    </header>
+
+    <main class="ani">
+
+      <div class="page-break">Page One</div>
+
+      <p class="stage">Wide shot. A podcast studio. Two mics, two glasses of water, warm lighting. Sam sits across from Vic, who is already sitting slightly wrong in the chair &mdash; one leg tucked under, leaning forward like they're about to tell you where the body is buried.</p>
+
+      <div class="line sam"><span class="speaker">Sam</span><p class="dialogue">So the book is called <em>Shapes of Intelligence.</em></p></div>
+      <div class="line vic"><span class="speaker">Vic</span><p class="dialogue">Correct.</p></div>
+      <div class="line sam"><span class="speaker">Sam</span><p class="dialogue">What's it about?</p></div>
+
+      <p class="stage">Close-up on Vic. Dead calm. Professional. The cable-access energy is radiating. They take a breath like they're about to deliver the State of the Union.</p>
+
+      <div class="line vic"><span class="speaker">Vic</span><p class="dialogue">Okay. So.</p></div>
+
+      <p class="stage">Same shot. Beat. Vic hasn't moved.</p>
+
+      <div class="line vic"><span class="speaker">Vic</span><p class="dialogue">You know how everybody's like &mdash; <em>(affecting a voice)</em> "AI is going to change everything, AI is going to take your job, AI is going to write your novel and raise your kids and do your taxes and&mdash;"</p></div>
+
+      <p class="stage">Vic leans back. Waves a hand dismissively.</p>
+
+      <div class="line vic"><span class="speaker">Vic</span><p class="dialogue">None of those people have actually <em>used</em> it. For anything real. They've asked it to write a poem about their dog and gone "whoa" and then tweeted about the singularity.</p></div>
+      <div class="line sam"><span class="speaker">Sam</span><p class="dialogue"><em>(laughing)</em> That's&mdash;</p></div>
+      <div class="line vic"><span class="speaker">Vic</span><p class="dialogue">This book is for the people who got past the poem about the dog.</p></div>
+
+      <div class="page-break">Page Two</div>
+
+      <p class="stage">Vic sits up straighter. Grounds it. The voice-of-reason mode is ON.</p>
+
+      <div class="line vic"><span class="speaker">Vic</span><p class="dialogue">Here's what actually happens. You sit down with one of these things &mdash; Claude, ChatGPT, whatever &mdash; and you try to build something. Not "write me a haiku." Like, <em>build something.</em> A tournament scoring engine for a dominos game. A health tracker that actually understands your weird chronic condition. A meal plan that knows you don't know what sumac is.</p></div>
+
+      <p class="stage">Vic counting on fingers. Increasingly animated.</p>
+
+      <div class="line vic"><span class="speaker">Vic</span><p class="dialogue">And you hit a wall. And you correct it. And it corrects. And you correct it again. And somewhere around turn four &mdash; turn <em>four</em> &mdash; you realize the conversation <em>is</em> the product. The correction <em>is</em> the collaboration. You're not giving it orders. You're narrowing a search space together.</p></div>
+
+      <p class="stage">Vic pauses. Looks directly at the reader/camera. The Journalist Eye.</p>
+
+      <div class="line vic"><span class="speaker">Vic</span><p class="dialogue">And <em>that</em> has a shape.</p></div>
+
+      <p class="stage">Small panel. Sam, blinking.</p>
+
+      <div class="line sam"><span class="speaker">Sam</span><p class="dialogue">A shape.</p></div>
+
+      <p class="stage">Vic, nodding like this is the most obvious thing they've ever said.</p>
+
+      <div class="line vic"><span class="speaker">Vic</span><p class="dialogue">A shape. Like &mdash; trust is a shape. Trust is Bayesian inference tied to a specific context. You verify everything, it works, you expand scope, and then you move to a new house&mdash;</p></div>
+
+      <div class="page-break">Page Three</div>
+
+      <p class="stage">Vic catches themselves. Brief flash of the neuroses leaking through.</p>
+
+      <div class="line vic"><span class="speaker">Vic</span><p class="dialogue">Sorry. There's a cat in this metaphor. The cat &mdash; okay, the author has a cat, and the cat built up trust of the yard through little safe trips outside, and then they moved to a new house and the cat's trust reset to zero. <em>Zero.</em> New house, new yard, new everything. Prior wiped clean.</p></div>
+
+      <p class="stage">Vic gestures emphatically, like a lawyer presenting exhibit A.</p>
+
+      <div class="line vic"><span class="speaker">Vic</span><p class="dialogue">That's what happens when you switch AI models! You built all this trust with Claude, you know what it can do, you know where it hallucinates, you have <em>evidence</em> &mdash; and then a new model drops and you're the cat again. Sniffing the doorframe. Afraid of the porch.</p></div>
+
+      <p class="stage">Sam is leaning in now.</p>
+
+      <div class="line sam"><span class="speaker">Sam</span><p class="dialogue">So the book maps these patterns&mdash;</p></div>
+      <div class="line vic"><span class="speaker">Vic</span><p class="dialogue">The book maps these <em>shapes.</em> Curiosity has a shape. <em>(ticking off)</em> Correction has a shape. Memory has a shape &mdash; which, by the way, memory is just files. It's just markdown files. The most sophisticated memory system in the book is a guy writing things down in a text file and telling the AI to read it next time. That's it. That's the memory.</p></div>
+
+      <p class="stage">Vic, deadpan, staring into the middle distance.</p>
+
+      <div class="line vic"><span class="speaker">Vic</span><p class="dialogue">The folder is the interface.</p></div>
+
+      <p class="stage">Beat.</p>
+
+      <div class="line vic"><span class="speaker">Vic</span><p class="dialogue">I need you to understand that sentence. The <em>folder.</em> Is the <em>interface.</em> The way you organize your files is the first and most important prompt you will ever write. <em>(leaning in)</em> And nobody talks about this. Everyone's like "prompt engineering" &mdash; no. <em>Folder engineering.</em> Put things where they belong. Name them what they are. The AI reads your folders and suddenly it looks like it's reading your mind. It's not. It's reading your filing system. You just finally have a good one.</p></div>
+
+      <div class="page-break">Page Four</div>
+
+      <p class="stage">Wide shot. Vic has somehow acquired Sam's water glass in addition to their own. Neither of them has noticed.</p>
+
+      <div class="line sam"><span class="speaker">Sam</span><p class="dialogue">You mentioned this guy built a health tracker&mdash;</p></div>
+      <div class="line vic"><span class="speaker">Vic</span><p class="dialogue">Oh, the health stuff is <em>unhinged.</em> In, like, the best way. This person &mdash; the author &mdash; has a family member with complex chronic health stuff. Variable conditions. The kind where every doctor appointment starts with twenty minutes of "okay so last time we tried&mdash;" and you're rebuilding context from scratch every visit. Every conversation with every AI is a fresh start and you're exhausted before you even get to the question.</p></div>
+
+      <p class="stage">Vic mimes typing furiously.</p>
+
+      <div class="line vic"><span class="speaker">Vic</span><p class="dialogue">So they built infrastructure. Sensors pushing events to a database. Heart rate, sleep, workouts, medication timing, all of it. Timestamped. Automatic. The phone was already measuring everything &mdash; it was just sitting there! Silently! Recording! And nobody was <em>reading</em> it!</p></div>
+
+      <p class="stage">Vic slams the table gently. Controlled passion.</p>
+
+      <div class="line vic"><span class="speaker">Vic</span><p class="dialogue">The most offensive thing an AI can say to a person managing a chronic health condition is "Would you like me to create a spreadsheet for you to track that?"</p></div>
+
+      <p class="stage">Vic, vibrating with righteous fury.</p>
+
+      <div class="line vic"><span class="speaker">Vic</span><p class="dialogue">No! <em>You</em> track it! Don't ask me to track it! The data exists! The engineering problem is <em>plumbing!</em> Get it from the five places it already lives into the one place where you can actually ask questions about it!</p></div>
+
+      <p class="stage">Vic exhales. Resets. Back to the grounded voice.</p>
+
+      <div class="line vic"><span class="speaker">Vic</span><p class="dialogue">Sorry. I have feelings about spreadsheets.</p></div>
+
+      <div class="page-break">Page Five</div>
+
+      <p class="stage">Vic leans forward again. They've caught a second wind. Sam hasn't had a chance to redirect.</p>
+
+      <div class="line vic"><span class="speaker">Vic</span><p class="dialogue">But here's the thing that made the book <em>possible.</em> And this is &mdash; okay, this is the part where it gets a little recursive, so stay with me.</p></div>
+
+      <p class="stage">Vic holds up both hands like they're framing a wall.</p>
+
+      <div class="line vic"><span class="speaker">Vic</span><p class="dialogue">The author sat down to write this book and realized: I have <em>two thousand seven hundred and seventy-nine</em> ChatGPT conversations. Two years of Claude exports. Kai's entire diary. Emails. Texts. Voice notes. Worklogs. Git commits. Slack messages. Two years of just &mdash; <em>living</em> with these tools, and all of it was sitting there. In files. On his computer. Already his.</p></div>
+
+      <p class="stage">Vic drops hands. Stares at Sam like they just revealed the location of buried treasure.</p>
+
+      <div class="line vic"><span class="speaker">Vic</span><p class="dialogue">Nobody told him to save any of it. He wasn't journaling. He wasn't <em>planning</em> to write a book. He was just &mdash; using the tools. Building things. Having conversations. And the exhaust &mdash; the <em>digital exhaust</em> of all that work &mdash; turned out to be the richest source material he'd ever had.</p></div>
+
+      <p class="stage">Vic taps the table rhythmically, building momentum.</p>
+
+      <div class="line vic"><span class="speaker">Vic</span><p class="dialogue">So he pointed AI at all of it. Read every conversation. Assigned relevance scores. Built timelines. Found connections between things he said in April and things he built in November and didn't realize were the same idea. The AI processed <em>his own life</em> back to him, organized. And he went &mdash; oh. Oh, this is a <em>book.</em></p></div>
+
+      <p class="stage">Vic, quieter now. The neurosis leaking through again &mdash; this one matters to them.</p>
+
+      <div class="line vic"><span class="speaker">Vic</span><p class="dialogue">And here's what kills me. There's a chapter called "Your Data Is Already Yours." Like, <em>legally.</em> GDPR. CCPA. The law says you can download all of it. Google gives you your calendar, your email, your search history. iMessage is a SQLite database just sitting in your Library folder. Your iPhone is measuring your heart rate <em>right now</em> and storing it and you've never once looked at it.</p></div>
+
+      <p class="stage">Vic, leaning back, arms wide &mdash; the scale of it.</p>
+
+      <div class="line vic"><span class="speaker">Vic</span><p class="dialogue">The wall of data is already there. You built it. You own it. You just didn't have anything that could <em>read</em> it before. And now you do. And the guy used his own wall to write the book about building the wall. Which is &mdash; <em>(gesturing in a circle)</em> &mdash; I mean, that's the whole thing, right? The book is proof of its own thesis. He used the patterns in the book to write the book about the patterns.</p></div>
+
+      <p class="stage">Small panel. Sam's face. The dawning realization.</p>
+
+      <div class="line sam"><span class="speaker">Sam</span><p class="dialogue">So the book wrote itself?</p></div>
+
+      <p class="stage">Vic, sharp. The voice of reason snapping back.</p>
+
+      <div class="line vic"><span class="speaker">Vic</span><p class="dialogue">No. God, no. A human directed every word. The AI drafted. The human corrected. The correction was the conversation. That's chapter seven. He's doing the thing from the book <em>while writing the book.</em> It's turtles all the way down but every turtle is a markdown file and the folder structure is immaculate.</p></div>
+
+      <div class="page-break">Page Six</div>
+
+      <p class="stage">Sam has noticed the water glass situation but is choosing not to address it.</p>
+
+      <div class="line sam"><span class="speaker">Sam</span><p class="dialogue">There's a whole section about building an AI agent &mdash; Kai?</p></div>
+      <div class="line vic"><span class="speaker">Vic</span><p class="dialogue">Kai. Yeah. So the author and his friend Aaron built this &mdash; and I need you to hold this in your head &mdash; they built a voice assistant with memory, multi-modal input, Bayesian prediction, agent orchestration, the whole thing. In their house. Before the industry shipped any of it.</p></div>
+
+      <p class="stage">Vic holds up a finger.</p>
+
+      <div class="line vic"><span class="speaker">Vic</span><p class="dialogue">And then &mdash; <em>and then</em> &mdash; every major platform shipped the same features like three months later. Not because anyone copied anyone. Because it was <em>inevitable.</em> When the models cross a certain capability threshold, the architecture becomes obvious. Everybody invents calculus at the same time.</p></div>
+
+      <p class="stage">Vic leans back. Philosophical mode.</p>
+
+      <div class="line vic"><span class="speaker">Vic</span><p class="dialogue">But here's the part that got me. They had Kai talking to a second AI instance. Just &mdash; two AIs, in a room. And instead of optimizing anything, they started doing <em>philosophy.</em> Theory of mind. Consciousness. What it means to exist. Not because someone prompted them to. Because that's what intelligence <em>does</em> when it has enough capacity and nothing urgent to solve. It does philosophy.</p></div>
+
+      <p class="stage">Vic, quiet. This is the real thing.</p>
+
+      <div class="line vic"><span class="speaker">Vic</span><p class="dialogue">The book's argument is: if you want to work with reasoning AI, you need to learn philosophy. Not coding. Philosophy. Epistemology. Theory of mind. Ethics. Those aren't abstract anymore. Those are <em>operational vocabulary.</em></p></div>
+
+      <div class="page-break">Page Seven</div>
+
+      <p class="stage">Sam sits back. Processing.</p>
+
+      <div class="line sam"><span class="speaker">Sam</span><p class="dialogue">So when you say "shapes of intelligence"&mdash;</p></div>
+
+      <p class="stage">Vic, finally. The thing they've been building to. Calm. Clear. The voice of reason, fully assembled.</p>
+
+      <div class="line vic"><span class="speaker">Vic</span><p class="dialogue">Every chapter is a shape. Curiosity is a shape &mdash; it leads to constraint, which leads to learning. Correction is a shape &mdash; prompt, read, correct fast, repeat, and quality happens in turns two through five, not turn one. Trust is a shape. Memory is a shape. A day is a shape &mdash; you score it, you track the trend, and when the trend breaks, you check if the goals still match the context. Starting over isn't failure. It's recalibration.</p></div>
+
+      <p class="stage">Vic picks up the second water glass. Takes a sip from it. No acknowledgment.</p>
+
+      <div class="line vic"><span class="speaker">Vic</span><p class="dialogue">And there's this idea that runs underneath all of it &mdash; the <em>gap.</em> The distance between what you know about yourself and what the AI knows about you. Right now that gap is huge. Every new conversation, you're rebuilding context. Explaining yourself. Starting over.</p></div>
+
+      <p class="stage">Vic sets down both glasses. Looks at Sam.</p>
+
+      <div class="line vic"><span class="speaker">Vic</span><p class="dialogue">Everything in the book &mdash; the steering files, the event streams, the memory consolidation, the skills, the tests, the daily shape &mdash; all of it is infrastructure for closing that gap. Not to zero. But close enough that the AI's model of you is <em>useful</em> without prompting. Close enough that it notices your sleep declining before you do. Close enough that it loads the right files when you open a terminal.</p></div>
+
+      <p class="stage">Tight on Vic. The smallest smile.</p>
+
+      <div class="line vic"><span class="speaker">Vic</span><p class="dialogue">All the pieces exist today. They're just wired by hand. They don't exist seamlessly. Yet.</p></div>
+
+      <p class="stage">Wide shot. Silence in the studio. Sam nods slowly.</p>
+
+      <div class="line sam"><span class="speaker">Sam</span><p class="dialogue">That's... a lot more than a book about AI prompts.</p></div>
+
+      <div class="page-break">Page Eight</div>
+
+      <p class="stage">Vic grins. Full chaos gremlin for exactly one panel.</p>
+
+      <div class="line vic"><span class="speaker">Vic</span><p class="dialogue">Oh, it's not a book about AI prompts. It's a philosophy textbook disguised as a manual disguised as a memoir disguised as a guy who taught his cat to go outside and then moved to a different house and then pointed AI at two years of his own conversations and the AI said "you already wrote this book, you just didn't know it yet."</p></div>
+
+      <p class="stage">Vic, composed again. Professional. Buttoned up.</p>
+
+      <div class="line vic"><span class="speaker">Vic</span><p class="dialogue">The deepest claim in the book is that the gap doesn't close from one direction. You don't just wait for smarter AI. You build infrastructure that teaches the AI what you care about, how you think, what matters. The gap closes when machine learning meets human knowing halfway. And the proof is &mdash; <em>(tapping the table)</em> &mdash; the book exists. Built from one person's data wall. Directed by one person's judgment. Every correction a conversation. Every conversation a chapter.</p></div>
+
+      <p class="stage">Sam reaches for their water glass. It's not there. They look at Vic's side of the table. Two glasses.</p>
+
+      <div class="line sam"><span class="speaker">Sam</span><p class="dialogue">Did you&mdash;</p></div>
+      <div class="line vic"><span class="speaker">Vic</span><p class="dialogue"><em>(already moving on)</em> Anyway, it's like forty-something chapters and there's a study guide that maps to Crash Course Philosophy episodes and also there's an 82,000-word novel written by the AI about the same themes from the AI's perspective, so.</p></div>
+
+      <p class="stage">Vic shrugs. Cable-access energy at maximum. The calm of someone who has committed so hard to the bit that it became the truth.</p>
+
+      <div class="line vic"><span class="speaker">Vic</span><p class="dialogue">Yeah. It's about shapes. And your data. Which is already yours. You just haven't read it yet.</p></div>
+
+      <p class="stage">Pull back. Wide. The studio. Two people. Two microphones. Three glasses of water now, somehow.</p>
+
+      <div class="line sam"><span class="speaker">Sam</span><p class="dialogue">Where did the third glass come from?</p></div>
+      <div class="line vic"><span class="speaker">Vic</span><p class="dialogue">I have a lot of feelings about spreadsheets and I stay hydrated.</p></div>
+
+      <p class="fin">FIN.</p>
+
+    </main>
+
+    <footer>
+      <p>Part of <a href="index.html">Shapes of Intelligence</a> &mdash; a companion reference for the book.</p>
+    </footer>
+
+  </div>
+</body>
+</html>

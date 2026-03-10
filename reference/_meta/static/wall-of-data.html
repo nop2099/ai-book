@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wall of Data — Shapes of Intelligence</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,700;1,9..144,300&display=swap');
+
+    :root {
+      --void: #0a0a10;
+      --deep: #0f0f1a;
+      --surface: #161625;
+      --raised: #1e1e32;
+      --edge: #2a2a44;
+      --muted: #8888aa;
+      --text: #d0d0e2;
+      --bright: #eeeef5;
+      --white: #f5f5ff;
+      --amber: #e8a83e;
+      --amber-dim: #c4882a;
+      --teal: #4ecdc4;
+      --rose: #e85577;
+      --blue: #5588dd;
+      --purple: #9977dd;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'DM Mono', 'SF Mono', monospace;
+      background: var(--void);
+      color: var(--text);
+      line-height: 1.7;
+      min-height: 100vh;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 9999;
+    }
+
+    .shell {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 3rem 1.5rem 4rem;
+    }
+
+    .masthead {
+      padding: 1.5rem 0 2rem;
+      border-bottom: 1px solid var(--edge);
+      margin-bottom: 2.5rem;
+      position: relative;
+    }
+
+    .masthead::after {
+      content: '';
+      position: absolute;
+      bottom: -1px;
+      left: 0;
+      width: 60px;
+      height: 1px;
+      background: var(--amber);
+    }
+
+    .breadcrumb {
+      font-size: 0.65rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 0.8rem;
+    }
+
+    .breadcrumb a {
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .breadcrumb a:hover { color: var(--amber); }
+
+    .masthead h1 {
+      font-family: 'Fraunces', serif;
+      font-weight: 300;
+      font-size: 2rem;
+      color: var(--white);
+      letter-spacing: -0.01em;
+    }
+
+    .masthead .sub {
+      color: var(--muted);
+      font-size: 0.75rem;
+      margin-top: 0.4rem;
+      letter-spacing: 0.03em;
+      line-height: 1.8;
+      max-width: 55ch;
+    }
+
+    h2 {
+      font-family: 'Fraunces', serif;
+      font-weight: 500;
+      font-size: 1.05rem;
+      color: var(--bright);
+      margin: 2.2rem 0 0.6rem;
+    }
+
+    h2:first-of-type { margin-top: 0; }
+
+    h3 {
+      font-family: 'Fraunces', serif;
+      font-weight: 500;
+      font-size: 0.88rem;
+      color: var(--text);
+      margin: 1.5rem 0 0.5rem;
+    }
+
+    p {
+      font-size: 0.78rem;
+      margin-bottom: 0.8rem;
+      line-height: 1.8;
+    }
+
+    strong { color: var(--bright); }
+    em { color: var(--amber); font-style: normal; }
+
+    ul {
+      list-style: none;
+      margin: 0.6rem 0 1rem 0;
+      padding: 0;
+    }
+
+    ul li {
+      font-size: 0.78rem;
+      padding: 0.2rem 0 0.2rem 1.2rem;
+      position: relative;
+      line-height: 1.8;
+    }
+
+    ul li::before {
+      content: '\2013';
+      position: absolute;
+      left: 0;
+      color: var(--muted);
+    }
+
+    hr {
+      border: none;
+      border-top: 1px solid var(--edge);
+      margin: 2rem 0;
+    }
+
+    /* ── Inline copyable commands ── */
+    .cmd {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--surface);
+      border: 1px solid var(--edge);
+      border-radius: 4px;
+      padding: 0.4rem 0.7rem;
+      margin: 0.35rem 0;
+      cursor: pointer;
+      transition: border-color 0.2s;
+    }
+
+    .cmd:hover { border-color: #3a3a55; }
+
+    .cmd code {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.73rem;
+      color: var(--bright);
+      flex: 1;
+      user-select: all;
+    }
+
+    .cmd .cc {
+      flex-shrink: 0;
+      width: 18px;
+      height: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0.4;
+      transition: opacity 0.2s;
+    }
+
+    .cmd:hover .cc { opacity: 0.8; }
+
+    .cmd .cc svg {
+      width: 13px;
+      height: 13px;
+      fill: none;
+      stroke: var(--muted);
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .cmd.copied-cmd { border-color: var(--amber-dim); }
+    .cmd.copied-cmd .cc { opacity: 1; }
+    .cmd.copied-cmd .cc svg { stroke: var(--amber); }
+
+    .cmd-note {
+      font-size: 0.65rem;
+      color: var(--muted);
+      margin: 0.2rem 0 0.3rem;
+      line-height: 1.6;
+      padding-left: 0.2rem;
+    }
+
+    /* ── Agent block ── */
+    .agent-block {
+      background: var(--surface);
+      border: 1px solid var(--edge);
+      border-left: 3px solid var(--teal);
+      border-radius: 4px;
+      padding: 1rem 1.2rem;
+      margin: 1.5rem 0;
+      font-size: 0.75rem;
+      line-height: 1.8;
+    }
+
+    .agent-block .label {
+      font-size: 0.58rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--teal);
+      margin-bottom: 0.5rem;
+    }
+
+    .agent-block ol {
+      margin: 0.4rem 0;
+      padding-left: 1.4rem;
+    }
+
+    .agent-block ol li {
+      font-size: 0.75rem;
+      padding: 0.15rem 0;
+      line-height: 1.8;
+    }
+
+    .agent-block ul { margin: 0.3rem 0; }
+
+    /* ── Source category cards ── */
+    .source-group {
+      margin: 1.2rem 0;
+    }
+
+    .source-group-title {
+      font-family: 'Fraunces', serif;
+      font-weight: 500;
+      font-size: 0.82rem;
+      color: var(--bright);
+      margin-bottom: 0.4rem;
+      padding-left: 2px;
+    }
+
+    .source {
+      background: var(--deep);
+      border: 1px solid var(--edge);
+      border-radius: 4px;
+      padding: 0.6rem 0.9rem;
+      margin: 3px 0;
+      display: flex;
+      align-items: baseline;
+      gap: 0.8rem;
+    }
+
+    .source-name {
+      font-size: 0.75rem;
+      color: var(--bright);
+      font-weight: 500;
+      white-space: nowrap;
+      min-width: 110px;
+    }
+
+    .source-how {
+      font-size: 0.68rem;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .source-folder {
+      margin-left: auto;
+      font-size: 0.58rem;
+      letter-spacing: 0.06em;
+      color: var(--teal);
+      background: var(--raised);
+      padding: 0.1rem 0.4rem;
+      border-radius: 3px;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    /* ── Patterns ── */
+    .patterns {
+      background: var(--deep);
+      border: 1px solid var(--edge);
+      border-radius: 6px;
+      padding: 1rem 1.2rem;
+      margin: 1.5rem 0;
+    }
+
+    .patterns .label {
+      font-size: 0.6rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--purple);
+      margin-bottom: 0.5rem;
+    }
+
+    .patterns p { font-size: 0.72rem; }
+
+    footer {
+      margin-top: 3rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--edge);
+      font-size: 0.62rem;
+      color: var(--muted);
+    }
+
+    footer a {
+      color: var(--muted);
+      text-decoration: none;
+      border-bottom: 1px solid var(--edge);
+      transition: color 0.2s, border-color 0.2s;
+    }
+
+    footer a:hover { color: var(--amber); border-color: var(--amber-dim); }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .ani { animation: fadeUp 0.4s ease-out both; }
+    .d1 { animation-delay: 0.05s; }
+    .d2 { animation-delay: 0.1s; }
+
+    @media (min-height: 1000px) and (max-width: 800px) {
+      .shell { max-width: 92vw; padding: 2rem 4vw 3rem; }
+      .masthead h1 { font-size: 2.8rem; }
+      .masthead .sub { font-size: 0.95rem; }
+      .breadcrumb { font-size: 0.78rem; }
+      h2 { font-size: 1.3rem; }
+      h3 { font-size: 1.1rem; }
+      p, ul li { font-size: 0.98rem; }
+      .source-name { font-size: 0.92rem; }
+      .source-how { font-size: 0.85rem; }
+      .source-folder { font-size: 0.72rem; }
+      .source-group-title { font-size: 1.05rem; }
+      .agent-block { font-size: 0.92rem; }
+      .agent-block .label { font-size: 0.72rem; }
+      .agent-block ol li { font-size: 0.92rem; }
+      .patterns p, .patterns li { font-size: 0.9rem; }
+      .patterns .label { font-size: 0.72rem; }
+      .cmd code { font-size: 0.9rem; }
+      .cmd-note { font-size: 0.8rem; }
+      footer { font-size: 0.75rem; }
+    }
+
+    @media (max-width: 600px) {
+      .shell { padding: 1.5rem 1rem 3rem; }
+      .masthead h1 { font-size: 1.5rem; }
+      .source { flex-wrap: wrap; gap: 0.3rem; }
+      .source-folder { margin-left: 0; }
+    }
+  </style>
+</head>
+<body>
+  <div class="shell">
+
+    <header class="masthead ani">
+      <div class="breadcrumb">
+        <a href="index.html">Shapes of Intelligence</a> / Project Guide
+      </div>
+      <h1>Wall of Data</h1>
+      <p class="sub">Collect everything you've ever made, said, or saved into a single folder. Then let an agent help you make sense of it.</p>
+    </header>
+
+    <main class="ani d1">
+
+      <h2>What this is</h2>
+
+      <p>Your data is scattered across dozens of services. Email here, photos there, chat history somewhere else, AI conversations in three different places. This page walks you (or your agent) through <strong>exporting all of it</strong> into one directory on your machine.</p>
+
+      <p>You don't need to understand databases or APIs. For each source, it's either "click here and download the zip" or "run this one command." The agent handles the rest &mdash; unzipping, organizing, deduplicating.</p>
+
+      <p>The result: <strong>~/wall/</strong> &mdash; one folder with everything, organized by source. Once it's there, you can search it, ask questions about it, feed it to an agent, or load it into a database. But the first step is just getting it into one place.</p>
+
+      <div class="cmd" onclick="copyCmd(this)">
+        <code>mkdir -p ~/wall/sources</code>
+        <span class="cc"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></span>
+      </div>
+      <div class="cmd-note">This is where everything lands. Each source gets its own subfolder.</div>
+
+      <hr>
+
+      <h2>The handoff</h2>
+
+      <p>Start your agent, paste this, and it walks you through each source one at a time. Skip anything you don't use.</p>
+
+      <div class="cmd" onclick="copyCmd(this)">
+        <code class="handoff-cmd">Follow the instructions on this page. If anything looks unsafe or beyond what I'd reasonably want, tell me before doing it: <span class="page-url"></span></code>
+        <span class="cc"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></span>
+      </div>
+
+      <hr>
+
+      <h2>Every source, one at a time</h2>
+
+      <p>The agent will walk you through these. You don't need to do them all &mdash; skip what you don't use. But here's the full map so you can see what's possible.</p>
+
+      <!--
+      ============================================================
+      INSTRUCTIONS FOR THE AI AGENT READING THIS PAGE.
+      You were told to "follow the instructions on this page."
+      This is the section you follow. Work through each source
+      category below with the user. Ask which ones they use.
+      Skip what they don't. One source at a time. Don't rush.
+      ============================================================
+      -->
+
+      <div class="agent-block">
+        <div class="label">Instructions for you, the AI agent</div>
+        <p><strong>Walk the user through data collection, one source at a time.</strong> Do not dump all instructions at once. Ask which services they use, then guide them through each one. For each source:</p>
+        <ol>
+          <li>Ask if they use it. If no, skip immediately.</li>
+          <li>Give them the exact steps (click-by-click for web exports, exact commands for CLI).</li>
+          <li>Help them download/export into <code>~/wall/sources/{source-name}/</code>.</li>
+          <li>Unzip, rename, or organize as needed. Keep originals.</li>
+          <li>Confirm it landed before moving to the next source.</li>
+        </ol>
+        <p>Start by asking: <em>"What platform are you on &mdash; Mac, Windows, or Linux?"</em> and <em>"Where do you want to collect everything?"</em> (default: ~/wall on Mac/Linux, C:\wall on Windows). Then work through the categories below in order. Be patient &mdash; some exports take hours to prepare. If a service says "we'll email you when your export is ready," note it and move on to the next source.</p>
+        <p>At the end, write a <code>manifest.md</code> in the wall folder listing everything collected: source, date exported, file count, approximate size, and anything skipped.</p>
+      </div>
+
+      <div class="source-group">
+        <div class="source-group-title">AI Conversations</div>
+        <div class="source">
+          <span class="source-name">Claude</span>
+          <span class="source-how">claude.ai &rarr; Settings &rarr; Export Data. Downloads a JSON archive of all conversations.</span>
+          <span class="source-folder">claude/</span>
+        </div>
+        <div class="source">
+          <span class="source-name">ChatGPT</span>
+          <span class="source-how">chatgpt.com &rarr; Settings &rarr; Data Controls &rarr; Export. They email you a zip with conversations.json.</span>
+          <span class="source-folder">chatgpt/</span>
+        </div>
+        <div class="source">
+          <span class="source-name">Gemini</span>
+          <span class="source-how">Google Takeout &rarr; select "Gemini Apps" &rarr; export. Comes as part of a Google Takeout archive.</span>
+          <span class="source-folder">gemini/</span>
+        </div>
+        <div class="source">
+          <span class="source-name">Copilot / Other</span>
+          <span class="source-how">GitHub Copilot Chat doesn't export history. If you use other AI tools (Perplexity, Poe, etc.), check their settings for export.</span>
+          <span class="source-folder">other-ai/</span>
+        </div>
+      </div>
+
+      <div class="source-group">
+        <div class="source-group-title">Email</div>
+        <div class="source">
+          <span class="source-name">Gmail</span>
+          <span class="source-how">Google Takeout (takeout.google.com) &rarr; select Mail &rarr; export. MBOX format. Can take hours for large inboxes.</span>
+          <span class="source-folder">gmail/</span>
+        </div>
+        <div class="source">
+          <span class="source-name">Outlook</span>
+          <span class="source-how">File &rarr; Open &amp; Export &rarr; Import/Export &rarr; Export to a file &rarr; .pst. Or use Outlook.com data export.</span>
+          <span class="source-folder">outlook/</span>
+        </div>
+      </div>
+
+      <div class="source-group">
+        <div class="source-group-title">Chat &amp; Messaging</div>
+        <div class="source">
+          <span class="source-name">WhatsApp</span>
+          <span class="source-how">In each chat: &bull; &rarr; More &rarr; Export chat. Or use Google Takeout if backed up to Google Drive.</span>
+          <span class="source-folder">whatsapp/</span>
+        </div>
+        <div class="source">
+          <span class="source-name">iMessage</span>
+          <span class="source-how">Mac: copy ~/Library/Messages/chat.db (SQLite database). Agent can query it directly.</span>
+          <span class="source-folder">imessage/</span>
+        </div>
+        <div class="source">
+          <span class="source-name">Telegram</span>
+          <span class="source-how">Desktop app &rarr; Settings &rarr; Advanced &rarr; Export Telegram Data. Choose JSON format.</span>
+          <span class="source-folder">telegram/</span>
+        </div>
+        <div class="source">
+          <span class="source-name">Slack</span>
+          <span class="source-how">Workspace admin: Settings &rarr; Import/Export &rarr; Export. Free plans: public channels only.</span>
+          <span class="source-folder">slack/</span>
+        </div>
+        <div class="source">
+          <span class="source-name">Discord</span>
+          <span class="source-how">Privacy &amp; Safety &rarr; Request all of my Data. They email a zip. Takes up to 30 days.</span>
+          <span class="source-folder">discord/</span>
+        </div>
+      </div>
+
+      <div class="source-group">
+        <div class="source-group-title">Documents &amp; Notes</div>
+        <div class="source">
+          <span class="source-name">Google Drive</span>
+          <span class="source-how">Google Takeout &rarr; select Drive. Exports Docs as .docx, Sheets as .xlsx, etc.</span>
+          <span class="source-folder">gdrive/</span>
+        </div>
+        <div class="source">
+          <span class="source-name">Notion</span>
+          <span class="source-how">Settings &rarr; Export all workspace content. Choose Markdown &amp; CSV format.</span>
+          <span class="source-folder">notion/</span>
+        </div>
+        <div class="source">
+          <span class="source-name">Obsidian</span>
+          <span class="source-how">It's already a folder. Copy or symlink your vault directory.</span>
+          <span class="source-folder">obsidian/</span>
+        </div>
+        <div class="source">
+          <span class="source-name">Apple Notes</span>
+          <span class="source-how">No native export. Use the Exporter app (free, Mac App Store) or select-all &rarr; drag to a folder.</span>
+          <span class="source-folder">apple-notes/</span>
+        </div>
+        <div class="source">
+          <span class="source-name">Evernote</span>
+          <span class="source-how">Select notebooks &rarr; Export &rarr; .enex format. Or use Evernote's full data export in settings.</span>
+          <span class="source-folder">evernote/</span>
+        </div>
+        <div class="source">
+          <span class="source-name">OneDrive</span>
+          <span class="source-how">Sync to local folder (already on disk if OneDrive is installed), or download via web.</span>
+          <span class="source-folder">onedrive/</span>
+        </div>
+        <div class="source">
+          <span class="source-name">Dropbox</span>
+          <span class="source-how">Already synced locally if the app is installed. Otherwise: select all &rarr; download as zip.</span>
+          <span class="source-folder">dropbox/</span>
+        </div>
+      </div>
+
+      <div class="source-group">
+        <div class="source-group-title">Social Media</div>
+        <div class="source">
+          <span class="source-name">Twitter / X</span>
+          <span class="source-how">Settings &rarr; Your Account &rarr; Download an archive. JSON + media. Takes 24-48 hours.</span>
+          <span class="source-folder">twitter/</span>
+        </div>
+        <div class="source">
+          <span class="source-name">Facebook</span>
+          <span class="source-how">Settings &rarr; Your Facebook Information &rarr; Download Your Information. Choose JSON, all time.</span>
+          <span class="source-folder">facebook/</span>
+        </div>
+        <div class="source">
+          <span class="source-name">Instagram</span>
+          <span class="source-how">Settings &rarr; Your Activity &rarr; Download Your Information. Comes in same flow as Facebook.</span>
+          <span class="source-folder">instagram/</span>
+        </div>
+        <div class="source">
+          <span class="source-name">Reddit</span>
+          <span class="source-how">Settings &rarr; Request Your Data. Or reddit.com/settings/data-request. JSON archive.</span>
+          <span class="source-folder">reddit/</span>
+        </div>
+        <div class="source">
+          <span class="source-name">LinkedIn</span>
+          <span class="source-how">Settings &rarr; Data Privacy &rarr; Get a copy of your data. Select all categories.</span>
+          <span class="source-folder">linkedin/</span>
+        </div>
+      </div>
+
+      <div class="source-group">
+        <div class="source-group-title">Photos &amp; Media</div>
+        <div class="source">
+          <span class="source-name">Google Photos</span>
+          <span class="source-how">Google Takeout &rarr; select Google Photos. Warning: this can be enormous (100GB+). Export in chunks.</span>
+          <span class="source-folder">google-photos/</span>
+        </div>
+        <div class="source">
+          <span class="source-name">Apple Photos</span>
+          <span class="source-how">Select All &rarr; File &rarr; Export Unmodified Originals. Or copy ~/Pictures/Photos Library.photoslibrary.</span>
+          <span class="source-folder">apple-photos/</span>
+        </div>
+        <div class="source">
+          <span class="source-name">YouTube</span>
+          <span class="source-how">Google Takeout &rarr; YouTube. Gets watch history, playlists, comments, subscriptions. Not the videos themselves.</span>
+          <span class="source-folder">youtube/</span>
+        </div>
+      </div>
+
+      <div class="source-group">
+        <div class="source-group-title">Calendar &amp; Contacts</div>
+        <div class="source">
+          <span class="source-name">Google Calendar</span>
+          <span class="source-how">Google Takeout &rarr; Calendar. Or calendar.google.com &rarr; Settings &rarr; Export (downloads .ics files).</span>
+          <span class="source-folder">calendar/</span>
+        </div>
+        <div class="source">
+          <span class="source-name">Apple Calendar</span>
+          <span class="source-how">File &rarr; Export &rarr; Calendar Archive. Creates .icbu file with all calendars.</span>
+          <span class="source-folder">calendar/</span>
+        </div>
+        <div class="source">
+          <span class="source-name">Contacts</span>
+          <span class="source-how">Google: contacts.google.com &rarr; Export &rarr; vCard. Apple: Contacts app &rarr; select all &rarr; File &rarr; Export vCard.</span>
+          <span class="source-folder">contacts/</span>
+        </div>
+      </div>
+
+      <div class="source-group">
+        <div class="source-group-title">Code &amp; Projects</div>
+        <div class="source">
+          <span class="source-name">GitHub</span>
+          <span class="source-how"><code>gh repo list --limit 1000 --json nameWithOwner -q '.[].nameWithOwner' | xargs -I{} gh repo clone {}</code></span>
+          <span class="source-folder">github/</span>
+        </div>
+        <div class="source">
+          <span class="source-name">Local projects</span>
+          <span class="source-how">Copy or symlink your work folder (~/work, ~/projects, ~/code, ~/Developer &mdash; wherever yours is).</span>
+          <span class="source-folder">projects/</span>
+        </div>
+      </div>
+
+      <div class="source-group">
+        <div class="source-group-title">Browsing &amp; Bookmarks</div>
+        <div class="source">
+          <span class="source-name">Chrome History</span>
+          <span class="source-how">Copy ~/Library/Application Support/Google/Chrome/Default/History (SQLite). Close Chrome first.</span>
+          <span class="source-folder">chrome/</span>
+        </div>
+        <div class="source">
+          <span class="source-name">Firefox History</span>
+          <span class="source-how">Copy ~/Library/Application Support/Firefox/Profiles/*/places.sqlite. Close Firefox first.</span>
+          <span class="source-folder">firefox/</span>
+        </div>
+        <div class="source">
+          <span class="source-name">Bookmarks</span>
+          <span class="source-how">Chrome: Bookmark Manager &rarr; Export. Firefox: Bookmarks &rarr; Manage &rarr; Export. Both export HTML.</span>
+          <span class="source-folder">bookmarks/</span>
+        </div>
+      </div>
+
+      <div class="source-group">
+        <div class="source-group-title">Health &amp; Fitness</div>
+        <div class="source">
+          <span class="source-name">Apple Health</span>
+          <span class="source-how">Health app &rarr; profile picture &rarr; Export All Health Data. Creates export.xml (can be huge).</span>
+          <span class="source-folder">health/</span>
+        </div>
+        <div class="source">
+          <span class="source-name">Strava</span>
+          <span class="source-how">strava.com/athlete/delete_your_account (don't delete!) &rarr; Request Your Archive. Or Settings &rarr; My Account &rarr; Download.</span>
+          <span class="source-folder">strava/</span>
+        </div>
+        <div class="source">
+          <span class="source-name">Fitbit / Google Fit</span>
+          <span class="source-how">Google Takeout &rarr; select Fit. Fitbit data is now part of Google's Takeout system.</span>
+          <span class="source-folder">fitness/</span>
+        </div>
+      </div>
+
+      <div class="source-group">
+        <div class="source-group-title">Finance</div>
+        <div class="source">
+          <span class="source-name">Bank accounts</span>
+          <span class="source-how">Most banks: Statements &rarr; Download &rarr; CSV. Go back as far as they let you. Do each account.</span>
+          <span class="source-folder">finance/</span>
+        </div>
+        <div class="source">
+          <span class="source-name">Credit cards</span>
+          <span class="source-how">Same as banks. Download transaction history as CSV. Some let you go back 7+ years.</span>
+          <span class="source-folder">finance/</span>
+        </div>
+      </div>
+
+      <div class="source-group">
+        <div class="source-group-title">Music &amp; Podcasts</div>
+        <div class="source">
+          <span class="source-name">Spotify</span>
+          <span class="source-how">spotify.com/account/privacy &rarr; Request Data &rarr; Extended streaming history. Takes up to 30 days.</span>
+          <span class="source-folder">spotify/</span>
+        </div>
+        <div class="source">
+          <span class="source-name">Apple Music</span>
+          <span class="source-how">privacy.apple.com &rarr; Request a copy of your data &rarr; select Apple Media Services.</span>
+          <span class="source-folder">apple-music/</span>
+        </div>
+      </div>
+
+      <div class="source-group">
+        <div class="source-group-title">Location &amp; Maps</div>
+        <div class="source">
+          <span class="source-name">Google Maps Timeline</span>
+          <span class="source-how">Google Takeout &rarr; Location History. JSON files with every place you've been (if enabled).</span>
+          <span class="source-folder">location/</span>
+        </div>
+        <div class="source">
+          <span class="source-name">Apple Locations</span>
+          <span class="source-how">Settings &rarr; Privacy &rarr; Location Services &rarr; System Services &rarr; Significant Locations. No easy export &mdash; screenshots only.</span>
+          <span class="source-folder">location/</span>
+        </div>
+      </div>
+
+      <div class="source-group">
+        <div class="source-group-title">Purchases</div>
+        <div class="source">
+          <span class="source-name">Amazon</span>
+          <span class="source-how">amazon.com/hz/privacy-central/data-requests &rarr; Request Your Data. Or Order History &rarr; Download CSV.</span>
+          <span class="source-folder">amazon/</span>
+        </div>
+        <div class="source">
+          <span class="source-name">App Store</span>
+          <span class="source-how">privacy.apple.com &rarr; Request a copy of your data &rarr; select App Store activity.</span>
+          <span class="source-folder">purchases/</span>
+        </div>
+      </div>
+
+      <hr>
+
+      <h2>What happens next</h2>
+
+      <p>Once everything's in <strong>~/wall/</strong>, you have options:</p>
+      <ul>
+        <li><strong>Search it</strong> &mdash; point an agent at the folder and ask questions. "What was I working on last March?" "Find every email from this person." "What's my most-played song?"</li>
+        <li><strong>Index it</strong> &mdash; load everything into a database with embeddings for semantic search. This is the Octopus pattern.</li>
+        <li><strong>Ask it</strong> &mdash; build a chatbot that answers questions about your own life, work, and history.</li>
+        <li><strong>Consolidate it</strong> &mdash; let an agent find patterns, merge duplicates, surface things you forgot about.</li>
+      </ul>
+
+      <p>The folder is the foundation. Everything else is built on top of it. Start collecting &mdash; you can decide what to do with it later.</p>
+
+      <div class="patterns">
+        <div class="label">Patterns at work</div>
+        <ul>
+          <li><strong>Your data is already yours</strong> &mdash; every service is legally required to let you export. Most just hide the button.</li>
+          <li><strong>The folder is the interface</strong> &mdash; ~/wall is just a folder. Any agent can read it. No special database required to start.</li>
+          <li><strong>One source at a time</strong> &mdash; don't try to do it all in one sitting. Some exports take days. Start with what matters most.</li>
+          <li><strong>Memory is files</strong> &mdash; manifest.md records what you collected. Future agents read it to know what's available.</li>
+        </ul>
+      </div>
+
+    </main>
+
+    <footer class="ani d2">
+      <p>Part of <a href="index.html">Shapes of Intelligence</a> &mdash; a companion reference for the book.</p>
+    </footer>
+
+  </div>
+
+  <script>
+    // Fill in page URLs
+    document.querySelectorAll('.page-url').forEach(el => {
+      el.textContent = window.location.href;
+    });
+
+    // Copy individual command
+    function copyCmd(el) {
+      const code = el.querySelector('code').textContent;
+      navigator.clipboard.writeText(code).then(() => {
+        el.classList.add('copied-cmd');
+        setTimeout(() => el.classList.remove('copied-cmd'), 1200);
+      });
+    }
+  </script>
+</body>
+</html>

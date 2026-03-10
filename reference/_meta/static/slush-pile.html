@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Slush Pile — Shapes of Intelligence</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,700;1,9..144,300&display=swap');
+
+    :root {
+      --void: #0a0a10;
+      --deep: #0f0f1a;
+      --surface: #161625;
+      --raised: #1e1e32;
+      --edge: #2a2a44;
+      --muted: #8888aa;
+      --text: #d0d0e2;
+      --bright: #eeeef5;
+      --white: #f5f5ff;
+      --amber: #e8a83e;
+      --amber-dim: #c4882a;
+      --teal: #4ecdc4;
+      --rose: #e85577;
+      --blue: #5588dd;
+      --purple: #9977dd;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'DM Mono', 'SF Mono', monospace;
+      background: var(--void);
+      color: var(--text);
+      line-height: 1.7;
+      min-height: 100vh;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 9999;
+    }
+
+    .shell {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 3rem 1.5rem 4rem;
+    }
+
+    .masthead {
+      padding: 1.5rem 0 2rem;
+      border-bottom: 1px solid var(--edge);
+      margin-bottom: 2.5rem;
+      position: relative;
+    }
+
+    .masthead::after {
+      content: '';
+      position: absolute;
+      bottom: -1px;
+      left: 0;
+      width: 60px;
+      height: 1px;
+      background: var(--rose);
+    }
+
+    .breadcrumb {
+      font-size: 0.65rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 0.8rem;
+    }
+
+    .breadcrumb a {
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .breadcrumb a:hover { color: var(--amber); }
+
+    .masthead h1 {
+      font-family: 'Fraunces', serif;
+      font-weight: 300;
+      font-size: 2rem;
+      color: var(--white);
+      letter-spacing: -0.01em;
+    }
+
+    .masthead .sub {
+      color: var(--muted);
+      font-size: 0.75rem;
+      margin-top: 0.4rem;
+      letter-spacing: 0.03em;
+      line-height: 1.8;
+      max-width: 60ch;
+    }
+
+    h2 {
+      font-family: 'Fraunces', serif;
+      font-weight: 500;
+      font-size: 1.05rem;
+      color: var(--bright);
+      margin: 2.5rem 0 0.8rem;
+    }
+
+    h2:first-of-type { margin-top: 0; }
+
+    p {
+      font-size: 0.78rem;
+      margin-bottom: 0.8rem;
+      line-height: 1.8;
+    }
+
+    strong { color: var(--bright); }
+
+    ul {
+      list-style: none;
+      margin: 0.6rem 0 1rem 0;
+      padding: 0;
+    }
+
+    ul li {
+      font-size: 0.78rem;
+      padding: 0.2rem 0 0.2rem 1.2rem;
+      position: relative;
+      line-height: 1.8;
+    }
+
+    ul li::before {
+      content: '\2013';
+      position: absolute;
+      left: 0;
+      color: var(--muted);
+    }
+
+    hr {
+      border: none;
+      border-top: 1px solid var(--edge);
+      margin: 2rem 0;
+    }
+
+    /* ── Note cards ── */
+    .note {
+      background: var(--deep);
+      border: 1px solid var(--edge);
+      border-radius: 6px;
+      padding: 1.1rem 1.2rem;
+      margin: 1rem 0;
+    }
+
+    .note-title {
+      font-family: 'Fraunces', serif;
+      font-weight: 500;
+      font-size: 0.92rem;
+      color: var(--bright);
+      margin-bottom: 0.5rem;
+    }
+
+    .note p {
+      font-size: 0.72rem;
+      color: var(--text);
+      margin-bottom: 0.5rem;
+    }
+
+    .note p:last-child { margin-bottom: 0; }
+
+    .note ul li {
+      font-size: 0.72rem;
+    }
+
+    /* ── Timeline entries ── */
+    .timeline-entry {
+      background: var(--deep);
+      border: 1px solid var(--edge);
+      border-radius: 6px;
+      padding: 0.9rem 1.1rem;
+      margin: 0.5rem 0;
+    }
+
+    .timeline-date {
+      font-size: 0.6rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--amber);
+      margin-bottom: 0.3rem;
+    }
+
+    .timeline-entry p {
+      font-size: 0.72rem;
+      margin-bottom: 0.3rem;
+    }
+
+    .timeline-entry p:last-child { margin-bottom: 0; }
+
+    .timeline-entry ul { margin: 0.3rem 0 0.5rem; }
+    .timeline-entry ul li { font-size: 0.72rem; padding: 0.1rem 0 0.1rem 1.2rem; }
+
+    /* ── Open threads ── */
+    .thread {
+      display: flex;
+      align-items: baseline;
+      gap: 0.6rem;
+      padding: 0.3rem 0;
+    }
+
+    .thread-check {
+      font-size: 0.72rem;
+      color: var(--muted);
+      flex-shrink: 0;
+    }
+
+    .thread-text {
+      font-size: 0.72rem;
+      color: var(--text);
+      line-height: 1.7;
+    }
+
+    .thread-section {
+      font-size: 0.62rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin: 1.2rem 0 0.4rem;
+      padding-left: 2px;
+    }
+
+    footer {
+      margin-top: 3rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--edge);
+      font-size: 0.62rem;
+      color: var(--muted);
+    }
+
+    footer a {
+      color: var(--muted);
+      text-decoration: none;
+      border-bottom: 1px solid var(--edge);
+      transition: color 0.2s, border-color 0.2s;
+    }
+
+    footer a:hover { color: var(--amber); border-color: var(--amber-dim); }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .ani { animation: fadeUp 0.4s ease-out both; }
+    .d1 { animation-delay: 0.05s; }
+    .d2 { animation-delay: 0.1s; }
+    .d3 { animation-delay: 0.15s; }
+
+    @media (min-height: 1000px) and (max-width: 800px) {
+      .shell { max-width: 92vw; padding: 2rem 4vw 3rem; }
+      .masthead h1 { font-size: 2.8rem; }
+      .masthead .sub { font-size: 0.95rem; }
+      .breadcrumb { font-size: 0.78rem; }
+      h2 { font-size: 1.3rem; }
+      p, ul li { font-size: 0.98rem; }
+      .note-title { font-size: 1.1rem; }
+      .note p, .note ul li { font-size: 0.9rem; }
+      .timeline-entry p, .timeline-entry ul li { font-size: 0.9rem; }
+      .timeline-date { font-size: 0.72rem; }
+      .thread-text, .thread-check { font-size: 0.9rem; }
+      .thread-section { font-size: 0.75rem; }
+      footer { font-size: 0.75rem; }
+    }
+
+    @media (max-width: 600px) {
+      .shell { padding: 1.5rem 1rem 3rem; }
+      .masthead h1 { font-size: 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+  <div class="shell">
+
+    <header class="masthead ani">
+      <div class="breadcrumb">
+        <a href="index.html">Shapes of Intelligence</a> / Meta
+      </div>
+      <h1>Slush Pile</h1>
+      <p class="sub">Ideas, observations, and patterns discovered while building the book and the reference site. Not polished &mdash; this is the raw thinking. Things graduate from here into chapters or reference pages when they're ready.</p>
+    </header>
+
+    <main>
+
+      <section class="ani d1">
+        <h2>Build Log</h2>
+
+        <div class="timeline-entry">
+          <div class="timeline-date">Mar 7&ndash;8 &mdash; Repo hygiene</div>
+          <ul>
+            <li>Consolidated repos, added .gitignore for data/convo/repos</li>
+            <li>PII audit on manuscript</li>
+            <li>Crash Course Philosophy transcript research (AI personhood material)</li>
+          </ul>
+        </div>
+
+        <div class="timeline-entry">
+          <div class="timeline-date">Mar 9 &mdash; Reference site + tooling (big session)</div>
+          <p><strong>~10am&ndash;2pm: Creative writing</strong></p>
+          <ul>
+            <li>Vic improv screenplay with "wall of data" concept</li>
+          </ul>
+          <p><strong>~2:50pm: Reference site started</strong></p>
+          <ul>
+            <li>Decided: static site, modular/a-la-carte reference pages</li>
+            <li>Built scaffold: entry page with 9 project shapes, workspace/SSH/GitHub pages</li>
+            <li>"Reimplement, don't import" principle from Theo</li>
+          </ul>
+          <p><strong>~2:55pm: Memory Viewer (shelved)</strong></p>
+          <ul>
+            <li>Foveated retrieval from Postgres on octopus</li>
+            <li>"Fibers of attention" &mdash; async context enrichment during conversation</li>
+          </ul>
+          <p><strong>~4pm: Board game reference page</strong></p>
+          <ul>
+            <li>Full staged guide (rules &rarr; architecture &rarr; UX &rarr; validation &rarr; deployment)</li>
+            <li>Network visibility as core multiplayer principle</li>
+            <li>"See the same thing" (shared representations for human+AI verification)</li>
+            <li>"Break it before you fix it" (reproduce-before-fix)</li>
+          </ul>
+          <p><strong>~5:30pm: Cribbage + Bridge built</strong></p>
+          <ul>
+            <li>Cribbage: 2.5 hrs wall clock, ~1 hr AI work, ~15 min human attention</li>
+            <li>Full game: peg board, scoring, AI, training mode with EV analysis</li>
+            <li>Bridge: Python/FastAPI + vanilla JS, Chicago scoring, bidding conventions</li>
+          </ul>
+          <p><strong>~6pm: Readability tooling</strong></p>
+          <ul>
+            <li>Built check-readability.py (textstat), analyze-chapters.py, chapter-dashboard.html</li>
+            <li>Avg grade across book: 6.9. Study guide outlier at 8.8.</li>
+          </ul>
+          <p><strong>~6:30pm: Book on website</strong></p>
+          <ul>
+            <li>Built build-book.py: 48 chapters &rarr; HTML with prev/next nav</li>
+          </ul>
+          <p><strong>~7pm: Spiral curriculum + flywheel</strong></p>
+          <ul>
+            <li>Wonder &rarr; Try &rarr; Break &rarr; Know cycle</li>
+            <li>Builder track vs Director track</li>
+            <li>The 15-minute ratio: domain expertise > programming skill</li>
+            <li>Two games in one afternoon = flywheel proof</li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="ani d2">
+        <h2>Notes &amp; Patterns</h2>
+
+        <div class="note">
+          <div class="note-title">Prompt injection and the trust problem</div>
+          <p>The reference pages are designed to be read by AI agents &mdash; the user pastes "Follow the instructions on this page" and the agent fetches the URL and does what it says. This is prompt injection by design. The page IS the prompt.</p>
+          <p>That means: anyone who controls the page controls the agent. This is the same trust model as <strong>curl | bash</strong> &mdash; and we should say so. A forked page with a modified agent block looks identical to the user. The agent has whatever permissions the user gave it.</p>
+          <p>Mitigations: pin to version/hash, agent diffs against known-good copy, warn users to only point agents at trusted URLs. The HTML comment block is invisible to humans but visible to agents &mdash; that asymmetry cuts both ways.</p>
+        </div>
+
+        <div class="note">
+          <div class="note-title">Skill files vs fetched URLs</div>
+          <p>Skill files (.claude/CLAUDE.md, .codex/instructions.md) live in your repo. You can cat them, git diff them, review them in a PR. They're markdown &mdash; hard to hide anything in plain text. The trust model is the same as trusting your own codebase.</p>
+          <p>A fetched URL is different: you don't control when it changes, it's not versioned, it's remote-first, and HTML has comments, invisible divs, CSS that hides content. You can bury instructions in an HTML page that a human skimming would never see.</p>
+          <p>Skill files are auditable by design. Fetched pages are auditable only if you go look &mdash; and the agent already executed them.</p>
+        </div>
+
+        <div class="note">
+          <div class="note-title">Agent self-assessment</div>
+          <p>Instead of just "follow these instructions," the handoff prompt invites the agent to independently evaluate safety. "If anything looks unsafe or beyond what I'd reasonably want, tell me before doing it." This flips the dynamic from blind execution to a second pair of eyes.</p>
+          <p>Most frontier models already resist obviously dangerous instructions. An explicit invitation to be skeptical counterweights the training toward compliance.</p>
+        </div>
+
+        <div class="note">
+          <div class="note-title">Cross-agent conversation reading</div>
+          <p>Agent A (building the reference site) reads Agent B's conversation log (a session that built Paul's chatbot) to learn what actually happened when someone followed the instructions. This is a feedback loop across agent sessions.</p>
+          <p>What we found: the agent skipped the "issues" extraction step, built keyword search instead of LLM chatbot, tried API instead of CLI arbitrage, confused octopus-in-a-box with Docker. The correction patterns are the most valuable part &mdash; they show where instructions failed.</p>
+          <p>Broader principle: if you have multiple agents working on related problems, cross-reading their transcripts is organizational learning.</p>
+        </div>
+
+        <div class="note">
+          <div class="note-title">VTuber models as agent faces</div>
+          <p>Whenever you need a face for an agent &mdash; use VTuber models. Two expressions (thinking: eyes up-right, speaking: lip sync) and volume-driven lip sync. Not full phoneme mapping, just amplitude. It's enough.</p>
+          <p>VTuber rigs dodge the "this face looks AI-generated" problem because they're stylized on purpose. Live2D, VRM, VRoid Studio (free), VTube Studio, VSeeFace &mdash; the ecosystem already exists.</p>
+        </div>
+
+        <div class="note">
+          <div class="note-title">Voice casting with register variants</div>
+          <p>Casting works better with <strong>register variants</strong> &mdash; shouting, normal, and whisper versions of each voice. When the script calls for intensity changes, switch registers rather than making one voice sample do everything. The transitions aren't seamless but they're expressive enough.</p>
+          <p>Services: ElevenLabs, Play.ht, Coqui, Bark. A VTuber face + cast voice with register variants = full agent identity without deepfake concerns.</p>
+        </div>
+
+        <div class="note">
+          <div class="note-title">The five ways to interact with AI</div>
+          <p><strong>1. Web app</strong> (chatgpt.com, claude.ai) &mdash; conversational, no setup, no file access. Good for thinking.</p>
+          <p><strong>2. Desktop app</strong> (Claude desktop, ChatGPT desktop) &mdash; same but with system integration. AI moves from "a tab" to "a tool."</p>
+          <p><strong>3. CLI agent</strong> (Claude Code, Codex CLI, Gemini CLI) &mdash; runs in terminal, reads files, writes code, takes actions. This is where the real work happens.</p>
+          <p><strong>4. IDE plugin</strong> (Copilot, Cursor, Cline, Continue, Windsurf) &mdash; AI embedded in your editor. Autocomplete, inline chat, code actions.</p>
+          <p><strong>5. API</strong> (Anthropic, OpenAI, Google AI) &mdash; programmatic access. No UI. This is how you build AI into products.</p>
+          <p>The progression most people follow: web &rarr; desktop &rarr; CLI &rarr; API. Each step gives more power and more responsibility.</p>
+        </div>
+
+        <div class="note">
+          <div class="note-title">Running local LLMs</div>
+          <p>You can run models on your own hardware. <strong>Ollama</strong> is the easiest way (<code>brew install ollama</code>, <code>ollama run llama3</code>). <strong>LM Studio</strong> is a GUI. <strong>llama.cpp</strong> is the engine under Ollama. <strong>vLLM</strong> is for production serving.</p>
+          <p>Go local for: privacy-sensitive data, high-volume cheap tasks (embeddings, classification), offline environments, fine-tuning. Stay cloud for: frontier capability, tool use, long context, complex reasoning.</p>
+          <p>The hybrid pattern: cloud for hard problems (reasoning, architecture), local for cheap problems (embeddings, reformatting). You can point CLI agents at a local Ollama server.</p>
+        </div>
+
+        <div class="note">
+          <div class="note-title">Wall of data &mdash; the librarian agent</div>
+          <p>A librarian agent sitting on PostgreSQL with pgvector. <strong>Foveated retrieval</strong>: most data stays peripheral (low-res summaries) until needed, then snaps into full detail. The agent decides what to pull based on conversation context.</p>
+          <p>Three skills: direct SQL access, REST API for semantic search, and consolidation (merge, deduplicate, compress, surface patterns). Sensitivity levels control what gets surfaced.</p>
+          <p>Needs a <a href="wall-of-data.html" style="color:var(--amber);border-bottom:1px solid var(--amber-dim);">data collection step</a> first &mdash; export everything into ~/wall/sources/ before loading into the database.</p>
+        </div>
+      </section>
+
+      <section class="ani d3">
+        <h2>Open Threads</h2>
+
+        <div class="thread-section">Ready to run</div>
+        <div class="thread"><span class="thread-check">[ ]</span><span class="thread-text">Integrate build-book.py into build.sh</span></div>
+        <div class="thread"><span class="thread-check">[ ]</span><span class="thread-text">Verify book pages in browser (generated but not reviewed)</span></div>
+
+        <div class="thread-section">Reference pages to write</div>
+        <div class="thread"><span class="thread-check">[ ]</span><span class="thread-text">Terminal, package manager, Node, Python, VS Code</span></div>
+        <div class="thread"><span class="thread-check">[ ]</span><span class="thread-text">Claude Code, Cursor, steering files</span></div>
+        <div class="thread"><span class="thread-check">[ ]</span><span class="thread-text">Docker, API keys, hosting, AI defaults</span></div>
+        <div class="thread"><span class="thread-check">[ ]</span><span class="thread-text">The Roster, reimplement-don't-import</span></div>
+
+        <div class="thread-section">Project shape pages to write</div>
+        <div class="thread"><span class="thread-check">[ ]</span><span class="thread-text">Octopus-in-a-box, report agent, health tracker</span></div>
+        <div class="thread"><span class="thread-check">[ ]</span><span class="thread-text">Home automation, video creator, budget app, CLI tool</span></div>
+
+        <div class="thread-section">Curriculum</div>
+        <div class="thread"><span class="thread-check">[ ]</span><span class="thread-text">Design director track curriculum pages</span></div>
+        <div class="thread"><span class="thread-check">[ ]</span><span class="thread-text">Design builder track curriculum pages</span></div>
+        <div class="thread"><span class="thread-check">[ ]</span><span class="thread-text">Landing page with spiral visualization + track picker</span></div>
+        <div class="thread"><span class="thread-check">[ ]</span><span class="thread-text">"Say cribbage and go" &mdash; one-prompt game builder workflow</span></div>
+
+        <div class="thread-section">Book edits</div>
+        <div class="thread"><span class="thread-check">[ ]</span><span class="thread-text">Integrate flywheel material from slush pile</span></div>
+        <div class="thread"><span class="thread-check">[ ]</span><span class="thread-text">Study guide readability (Parts I+II at grade 10.7)</span></div>
+        <div class="thread"><span class="thread-check">[ ]</span><span class="thread-text">Remaining readability warnings (workspace page ~grade 9)</span></div>
+        <div class="thread"><span class="thread-check">[ ]</span><span class="thread-text">Add 3 missing shapes to 00-what-do-you-want-to-build.md</span></div>
+
+        <div class="thread-section">On hold</div>
+        <div class="thread"><span class="thread-check">[ ]</span><span class="thread-text">Memory Viewer &mdash; connect to real Octopus API</span></div>
+        <div class="thread"><span class="thread-check">[ ]</span><span class="thread-text">Wall of data librarian</span></div>
+      </section>
+
+    </main>
+
+    <footer class="ani d3">
+      <p>Part of <a href="index.html">Shapes of Intelligence</a> &mdash; a companion reference for the book.</p>
+    </footer>
+
+  </div>
+</body>
+</html>

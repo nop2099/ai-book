@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Build a Chatbot — Shapes of Intelligence</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,700;1,9..144,300&display=swap');
+
+    :root {
+      --void: #0a0a10;
+      --deep: #0f0f1a;
+      --surface: #161625;
+      --raised: #1e1e32;
+      --edge: #2a2a44;
+      --muted: #8888aa;
+      --text: #d0d0e2;
+      --bright: #eeeef5;
+      --white: #f5f5ff;
+      --amber: #e8a83e;
+      --amber-dim: #c4882a;
+      --teal: #4ecdc4;
+      --rose: #e85577;
+      --blue: #5588dd;
+      --purple: #9977dd;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'DM Mono', 'SF Mono', monospace;
+      background: var(--void);
+      color: var(--text);
+      line-height: 1.7;
+      min-height: 100vh;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 9999;
+    }
+
+    .shell {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 3rem 1.5rem 4rem;
+    }
+
+    .masthead {
+      padding: 1.5rem 0 2rem;
+      border-bottom: 1px solid var(--edge);
+      margin-bottom: 2.5rem;
+      position: relative;
+    }
+
+    .masthead::after {
+      content: '';
+      position: absolute;
+      bottom: -1px;
+      left: 0;
+      width: 60px;
+      height: 1px;
+      background: var(--teal);
+    }
+
+    .breadcrumb {
+      font-size: 0.65rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 0.8rem;
+    }
+
+    .breadcrumb a {
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .breadcrumb a:hover { color: var(--amber); }
+
+    .masthead h1 {
+      font-family: 'Fraunces', serif;
+      font-weight: 300;
+      font-size: 2rem;
+      color: var(--white);
+      letter-spacing: -0.01em;
+    }
+
+    .masthead .sub {
+      color: var(--muted);
+      font-size: 0.75rem;
+      margin-top: 0.4rem;
+      letter-spacing: 0.03em;
+      line-height: 1.8;
+      max-width: 55ch;
+    }
+
+    /* ── Content ── */
+    h2 {
+      font-family: 'Fraunces', serif;
+      font-weight: 500;
+      font-size: 1.05rem;
+      color: var(--bright);
+      margin: 2.2rem 0 0.6rem;
+    }
+
+    h2:first-of-type { margin-top: 0; }
+
+    p {
+      font-size: 0.78rem;
+      margin-bottom: 0.8rem;
+      line-height: 1.8;
+    }
+
+    strong { color: var(--bright); }
+
+    .pipeline {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      margin: 1.2rem 0;
+      flex-wrap: wrap;
+    }
+
+    .pipe-stage {
+      background: var(--surface);
+      border: 1px solid var(--edge);
+      border-radius: 4px;
+      padding: 0.35rem 0.7rem;
+      font-size: 0.7rem;
+      color: var(--bright);
+      white-space: nowrap;
+    }
+
+    .pipe-arrow {
+      color: var(--muted);
+      font-size: 0.7rem;
+    }
+
+    ul {
+      list-style: none;
+      margin: 0.6rem 0 1rem 0;
+      padding: 0;
+    }
+
+    ul li {
+      font-size: 0.78rem;
+      padding: 0.2rem 0 0.2rem 1.2rem;
+      position: relative;
+      line-height: 1.8;
+    }
+
+    ul li::before {
+      content: '\2013';
+      position: absolute;
+      left: 0;
+      color: var(--muted);
+    }
+
+    .callout {
+      background: var(--deep);
+      border: 1px solid var(--edge);
+      border-radius: 6px;
+      padding: 1rem 1.2rem;
+      margin: 1.5rem 0;
+      font-size: 0.75rem;
+      line-height: 1.8;
+    }
+
+    .callout-label {
+      font-size: 0.6rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--teal);
+      margin-bottom: 0.4rem;
+    }
+
+    /* ── Inline copyable commands ── */
+    .cmd {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--surface);
+      border: 1px solid var(--edge);
+      border-radius: 4px;
+      padding: 0.4rem 0.7rem;
+      margin: 0.35rem 0;
+      cursor: pointer;
+      transition: border-color 0.2s;
+    }
+
+    .cmd:hover { border-color: #3a3a55; }
+
+    .cmd code {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.73rem;
+      color: var(--bright);
+      flex: 1;
+      user-select: all;
+    }
+
+    .cmd .cc {
+      flex-shrink: 0;
+      width: 18px;
+      height: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0.4;
+      transition: opacity 0.2s;
+    }
+
+    .cmd:hover .cc { opacity: 0.8; }
+
+    .cmd .cc svg {
+      width: 13px;
+      height: 13px;
+      fill: none;
+      stroke: var(--muted);
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .cmd.copied-cmd { border-color: var(--amber-dim); }
+    .cmd.copied-cmd .cc { opacity: 1; }
+    .cmd.copied-cmd .cc svg { stroke: var(--amber); }
+
+    .cmd-note {
+      font-size: 0.65rem;
+      color: var(--muted);
+      margin: 0.2rem 0 0.3rem;
+      line-height: 1.6;
+      padding-left: 0.2rem;
+    }
+
+    /* ── Agent instructions (visually distinct) ── */
+    .agent-block {
+      background: var(--surface);
+      border: 1px solid var(--edge);
+      border-left: 3px solid var(--teal);
+      border-radius: 4px;
+      padding: 1rem 1.2rem;
+      margin: 1.5rem 0;
+      font-size: 0.75rem;
+      line-height: 1.8;
+    }
+
+    .agent-block .label {
+      font-size: 0.58rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--teal);
+      margin-bottom: 0.5rem;
+    }
+
+    .agent-block ol {
+      margin: 0.4rem 0;
+      padding-left: 1.4rem;
+    }
+
+    .agent-block ol li {
+      font-size: 0.75rem;
+      padding: 0.15rem 0;
+      line-height: 1.8;
+    }
+
+    .agent-block ul { margin: 0.3rem 0; }
+
+    /* ── Patterns ── */
+    .patterns {
+      background: var(--deep);
+      border: 1px solid var(--edge);
+      border-radius: 6px;
+      padding: 1rem 1.2rem;
+      margin: 1.5rem 0;
+    }
+
+    .patterns .label {
+      font-size: 0.6rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--purple);
+      margin-bottom: 0.5rem;
+    }
+
+    .patterns p { font-size: 0.72rem; }
+
+    hr {
+      border: none;
+      border-top: 1px solid var(--edge);
+      margin: 2rem 0;
+    }
+
+    /* ── Start box ── */
+    .start-box {
+      background: var(--deep);
+      border: 1px solid var(--edge);
+      border-radius: 6px;
+      padding: 1.2rem 1.2rem;
+      margin: 2rem 0;
+    }
+
+    .start-box .label {
+      font-size: 0.6rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--amber);
+      margin-bottom: 0.5rem;
+    }
+
+    .start-box p {
+      font-size: 0.72rem;
+      margin-bottom: 0.6rem;
+    }
+
+    footer {
+      margin-top: 3rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--edge);
+      font-size: 0.62rem;
+      color: var(--muted);
+    }
+
+    footer a {
+      color: var(--muted);
+      text-decoration: none;
+      border-bottom: 1px solid var(--edge);
+      transition: color 0.2s, border-color 0.2s;
+    }
+
+    footer a:hover { color: var(--amber); border-color: var(--amber-dim); }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .ani { animation: fadeUp 0.4s ease-out both; }
+    .d1 { animation-delay: 0.05s; }
+    .d2 { animation-delay: 0.1s; }
+
+    @media (min-height: 1000px) and (max-width: 800px) {
+      .shell { max-width: 92vw; padding: 2rem 4vw 3rem; }
+      .masthead h1 { font-size: 2.8rem; }
+      .masthead .sub { font-size: 0.95rem; }
+      .breadcrumb { font-size: 0.78rem; }
+      h2 { font-size: 1.3rem; }
+      p, ul li { font-size: 0.98rem; }
+      .pipe-stage { font-size: 0.88rem; padding: 0.45rem 0.85rem; }
+      .pipe-arrow { font-size: 0.88rem; }
+      .cmd code { font-size: 0.9rem; }
+      .cmd-note { font-size: 0.8rem; }
+      .agent-block { font-size: 0.92rem; }
+      .agent-block .label { font-size: 0.72rem; }
+      .agent-block ol li { font-size: 0.92rem; }
+      .patterns p, .patterns li { font-size: 0.9rem; }
+      .patterns .label { font-size: 0.72rem; }
+      .start-box .label { font-size: 0.72rem; }
+      .start-box p { font-size: 0.9rem; }
+      .callout { font-size: 0.92rem; }
+      .callout-label { font-size: 0.72rem; }
+      footer { font-size: 0.75rem; }
+    }
+
+    @media (max-width: 600px) {
+      .shell { padding: 1.5rem 1rem 3rem; }
+      .masthead h1 { font-size: 1.5rem; }
+      .pipeline { flex-direction: column; align-items: flex-start; }
+      .pipe-arrow { transform: rotate(90deg); }
+    }
+  </style>
+</head>
+<body>
+  <div class="shell">
+
+    <header class="masthead ani">
+      <div class="breadcrumb">
+        <a href="index.html">Shapes of Intelligence</a> / Project Guides
+      </div>
+      <h1>Build a Chatbot</h1>
+      <p class="sub">Turn what you already know into a chatbot that answers questions for your customers.</p>
+    </header>
+
+    <main class="ani d1">
+
+      <h2>The shape</h2>
+
+      <p>You know things your customers keep asking about. That knowledge is scattered &mdash; in your head, in emails you've sent, in documents, in bookmarked web pages, in chat histories. The same questions come up again and again.</p>
+
+      <p>We're going to build a pipeline that turns that mess into a chatbot &mdash; but with a controlled extraction process, not a single "summarize everything" pass:</p>
+
+      <div class="pipeline">
+        <span class="pipe-stage">Corpus (private)</span>
+        <span class="pipe-arrow">&rarr;</span>
+        <span class="pipe-stage">Entities</span>
+        <span class="pipe-arrow">&rarr;</span>
+        <span class="pipe-stage">Issues</span>
+        <span class="pipe-arrow">&rarr;</span>
+        <span class="pipe-stage">FAQ (public)</span>
+        <span class="pipe-arrow">&rarr;</span>
+        <span class="pipe-stage">Chatbot</span>
+      </div>
+
+      <p>The raw data stays on your machine. The agent reads your corpus and extracts <strong>named entities</strong> &mdash; the people, places, processes, organizations, and concepts your customers ask about. You review and refine that list. Then for each entity, the agent finds the relevant documents and extracts the <strong>issues</strong> &mdash; the actual questions and problems. Then it builds the FAQ <strong>one entry at a time</strong>, with you approving each one. The chatbot answers from the FAQ, not the raw data.</p>
+
+      <p>This matters because a single "generate me an FAQ" pass hallucinates, misses things, and gives you no control. Entity-first extraction means you see what the agent found, correct it, and build from confirmed ground truth.</p>
+
+      <h2>Why this works</h2>
+
+      <p>The chatbot never sees your private data directly. It reads the FAQ &mdash; which you control, review, and publish. This is the <strong>octopus in a box</strong>: a smart, capable agent (the octopus) constrained to a defined knowledge boundary (the box). The box isn't a Docker container &mdash; it's a trust boundary you define through what files you put on the server, what domains you allowlist, and what the system prompt tells the agent to refuse.</p>
+
+      <p>For questions not in the FAQ, the chatbot can search allowlisted web sources (expat guides, government sites, Wikipedia). For questions it can't confidently answer, it tells the customer to contact you. For questions outside its domain (legal, medical, tax), it declines and offers a helpful search link. You decide where every line is.</p>
+
+      <h2>The flywheel</h2>
+
+      <p>Every customer interaction makes the system better:</p>
+      <ul>
+        <li>Questions the chatbot can't answer reveal gaps &mdash; missing entities or missing issues</li>
+        <li>You add the new document to the corpus and re-run extraction</li>
+        <li>New entities and issues surface automatically; you approve the ones that matter</li>
+        <li>The FAQ grows one confirmed entry at a time</li>
+        <li>Every engagement makes the next one cheaper</li>
+      </ul>
+
+      <p><strong>Start small, start now.</strong> The first version uses a handful of documents and answers ten questions. That's enough to demo. The architecture is the same whether you have ten pages or ten thousand.</p>
+
+      <h2>Where the corpus comes from</h2>
+
+      <p>You might already have files &mdash; emails, docs, notes. But you might not. The agent can <strong>research the corpus for you</strong>: go out on the web, find authoritative sources, scrape forums for real questions people ask, and assemble it. The first corpus for the Valencia expat chatbot was 6 markdown files built from Google support docs, government sites, expat forums, and ISP comparison pages. The agent did the research. The human reviewed the results.</p>
+
+      <h2>What you need to figure out</h2>
+
+      <p>Before building, you need to know five things. You don't need all the answers yet &mdash; the agent will ask you.</p>
+      <ul>
+        <li><strong>What's the domain?</strong> What do you know that your customers need? Expat paperwork, product support, legal processes, cooking techniques &mdash; the subject doesn't matter, the pattern is the same.</li>
+        <li><strong>Who asks the questions?</strong> What language do they speak? How technical are they? What tone do they expect?</li>
+        <li><strong>What data do you already have?</strong> Emails, documents, chat logs, web bookmarks, notes, a brain full of answers you keep repeating. All of it counts.</li>
+        <li><strong>Where does the chatbot live?</strong> A web page, a widget on your existing site, WhatsApp, or just a demo you show people on your laptop.</li>
+        <li><strong>What should the chatbot refuse to do?</strong> Give legal advice? Share pricing? Guess at things it doesn't know? Every chatbot needs a line.</li>
+      </ul>
+
+      <hr>
+
+      <!--
+      ============================================================
+      INSTRUCTIONS FOR THE AI AGENT READING THIS PAGE.
+      You were told to "follow the instructions on this page."
+      This is the section you follow. Do not skip it.
+      Do not just summarize the page — execute these steps.
+      ============================================================
+      -->
+
+      <div class="agent-block">
+        <div class="label">Instructions for you, the AI agent</div>
+        <p><strong>You must follow these steps.</strong> Do not just summarize the page or describe the architecture. Execute the full sequence below. Each stage has an approval gate &mdash; show your work, get a "yes," then move on.</p>
+        <ol>
+          <li><strong>Interview the user.</strong> Ask about the five questions above &mdash; one at a time. Don't move on until they answer. If they don't know yet, help them think through it. Keep it conversational, not interrogative. Read the room &mdash; if they're technical, be concise. If they're new to this, be patient.</li>
+          <li><strong>Summarize and confirm.</strong> Once you have the answers, tell them exactly what you're going to build. Wait for a "yes" before you start coding.</li>
+          <li><strong>Stage 1 &mdash; Corpus.</strong> Gather raw data into a <code>corpus/</code> folder. Three sources: (a) files the user already has &mdash; emails, docs, notes, chat logs; (b) brain dumps &mdash; help them write down what they know as markdown; (c) web research &mdash; if they don't have enough material, go find authoritative sources, forum threads, official docs. Cite every source. Even a handful of markdown files is a corpus.</li>
+          <li><strong>Stage 2 &mdash; Entity extraction.</strong> Read the entire corpus and extract <strong>named entities</strong>: people, places, organizations, processes, concepts, products &mdash; anything a customer might ask about. Batch this across all documents. Write the results to <code>entities.json</code>. Each entity gets: name, type, description, and which corpus files reference it. <strong>Show the full entity list to the user.</strong> Ask them to add, remove, merge, or rename. Do not proceed until they approve the list.</li>
+          <li><strong>Stage 3 &mdash; Issue extraction.</strong> This step is mandatory &mdash; do not skip it. For each approved entity, go back through the corpus and find every document that mentions it. Extract the <strong>issues</strong>: the questions, problems, confusions, and needs that relate to that entity. Write the results to <code>issues/</code> (one file per entity). <strong>Show each entity's issues to the user</strong> as you go. Let them correct, add, or remove issues before moving on to the next entity.</li>
+          <li><strong>Stage 4 &mdash; FAQ generation.</strong> Now build the FAQ &mdash; <strong>one entry at a time</strong>. For each issue, draft a clear question-and-answer pair matching the tone the user described. Include source attribution (title + URL) for every answer. Show each draft to the user. They approve, edit, or reject. Write approved entries to <code>faq.json</code> organized by category. Do not batch-generate &mdash; the user sees and approves every entry.</li>
+          <li><strong>Stage 5 &mdash; System prompt.</strong> Write a <code>system-prompt.md</code> that defines the chatbot's personality and boundaries. Include: (a) only answer from FAQ context, (b) always cite sources, (c) what to refuse (legal advice, medical, immigration law &mdash; whatever the user specified), (d) tone (match what the user described &mdash; "knowledgeable neighbor" not "corporate support bot"), (e) language/translation rules if applicable, (f) honest about limits ("I don't know &mdash; contact [owner]"). Show it to the user for approval.</li>
+          <li><strong>Stage 6 &mdash; Chatbot.</strong> Build a thin server that wraps the CLI agent. Architecture:
+            <ul>
+              <li><strong>Express.js server</strong> that receives user questions via <code>POST /api/chat</code>.</li>
+              <li><strong>CLI arbitrage:</strong> spawn <code>claude --print --model sonnet --max-turns 10 --allowedTools Read,Grep,Glob</code> via <code>child_process.spawn</code>. Flat-rate CLI subscription instead of per-token API costs. Do NOT pre-search the FAQ yourself &mdash; let Claude search the files directly with its own tools. That's the whole point of giving it an agent with Grep/Read/Glob.</li>
+              <li><strong>System prompt</strong> piped to stdin along with the user question and conversation history.</li>
+              <li><strong>MCP web fetch</strong> (optional): a domain-allowlisted web proxy that saves fetched pages as text files in <code>.cache/</code> and returns the filepath. Claude can then Grep/Read cached web pages the same way it searches corpus files. Allowlist trusted domains only (Wikipedia, official government sites, expat guides, etc). Cache 24h.</li>
+              <li><strong>Conversation history</strong> in the browser via localStorage. Server stays stateless. Each request sends the last 10 messages as context.</li>
+              <li><strong>Markdown rendering</strong> in the chat UI (the agent returns markdown naturally).</li>
+              <li><strong>Gap logging:</strong> log every question to <code>gaps.jsonl</code> &mdash; this is the flywheel's data source.</li>
+              <li><strong>Rate limiting:</strong> in-memory, per-IP.</li>
+            </ul>
+            Start on localhost. Set <code>CLAUDECODE=''</code> in the spawn env if running from inside a Claude Code session.</li>
+          <li><strong>Stage 7 &mdash; Regeneration.</strong> Add a script so when the corpus changes, the user can re-run the pipeline: re-extract entities, re-extract issues, re-generate FAQ entries (showing diffs against the previous version for approval). One command to kick it off. Document the pipeline in a README.</li>
+          <li><strong>Demo first.</strong> Everything runs on localhost. Don't set up hosting, auth, payments, or deployment until the user is happy with the demo.</li>
+        </ol>
+      </div>
+
+      <div class="patterns">
+        <div class="label">Patterns at work</div>
+        <ul>
+          <li><strong>Octopus in a box</strong> &mdash; the chatbot is a contained agent. It only sees the FAQ and the system prompt. It never touches your raw corpus or private data. The box is the boundary you define in the system prompt &mdash; not a Docker container, a trust boundary.</li>
+          <li><strong>Entity-first extraction</strong> &mdash; don't ask the AI to "summarize everything." Find the nouns first, then the problems, then the answers. Each step is reviewable.</li>
+          <li><strong>Light approval flows</strong> &mdash; the agent does the work, you approve the output. One entity at a time, one FAQ entry at a time. You never lose control, and the agent never hallucinates unchecked.</li>
+          <li><strong>CLI arbitrage</strong> &mdash; shell out to <code>claude --print</code> on a flat-rate subscription instead of paying per-token API costs. The CLI is the same model. Your Pro/Max subscription is the budget.</li>
+          <li><strong>Let the agent search</strong> &mdash; don't build a keyword search to pre-filter the FAQ. Give the agent Read/Grep/Glob tools and let it search your files directly. Your janky keyword scorer will always be worse than the agent's own retrieval. Tools compose.</li>
+          <li><strong>File-based caching</strong> &mdash; when the agent fetches a web page, save it as a text file. Now it can Grep across cached pages the same way it searches the corpus. Everything is files.</li>
+          <li><strong>The VM is the box</strong> &mdash; no Docker needed. The server itself is the containment boundary. The agent can only touch files placed on it plus allowlisted web domains.</li>
+          <li><strong>The flywheel</strong> &mdash; unanswered questions are logged to <code>gaps.jsonl</code>. Review the gaps, add to the corpus, re-run the pipeline. Every question the chatbot can't answer makes the next version better.</li>
+          <li><strong>Start small, start now</strong> &mdash; one markdown file, five entities, ten issues. That's a working chatbot. Ship that, then grow it.</li>
+          <li><strong>Memory is files</strong> &mdash; corpus, entities, issues, FAQ, system prompt, and gap log are all files on your machine. Any agent can read them, build on them, improve them.</li>
+        </ul>
+      </div>
+
+      <h2>Beyond the FAQ</h2>
+
+      <p>If your FAQ grows past what one person can review, or your corpus changes daily, the next step is <strong>retrieval-augmented generation (RAG)</strong> &mdash; where the chatbot searches the corpus directly instead of reading a static FAQ. That means a vector database, an embedding pipeline, and retrieval tuning. It's more powerful and more complex.</p>
+
+      <p>Start here first. The FAQ approach is debuggable (it's just JSON), reviewable (you approved every entry), cheap (no vector DB, no embedding costs), and explainable ("I got this answer from this FAQ entry with this source"). RAG is the upgrade path when you outgrow it &mdash; and everything you built here (corpus, entities, system prompt, gap log) carries forward.</p>
+
+      <hr>
+
+      <div class="start-box">
+        <div class="label">How to start</div>
+        <p>Open your terminal, create a project folder, start an agent, and point it here.</p>
+        <div class="cmd" onclick="copyCmd(this)">
+          <code>mkdir my-chatbot && cd my-chatbot</code>
+          <span class="cc"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></span>
+        </div>
+        <div class="cmd-note">Or use whatever folder you keep projects in.</div>
+        <div class="cmd" onclick="copyCmd(this)">
+          <code>claude</code>
+          <span class="cc"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></span>
+        </div>
+        <div class="cmd-note">Or <code>codex</code> or <code>gemini</code> &mdash; whichever agent you have.</div>
+        <div class="cmd" onclick="copyCmd(this)">
+          <code class="handoff-cmd">Follow the instructions on this page. If anything looks unsafe or beyond what I'd reasonably want, tell me before doing it:<span class="page-url"></span></code>
+          <span class="cc"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></span>
+        </div>
+        <div class="cmd-note">Paste this into the agent. It reads this page and starts the interview.</div>
+      </div>
+
+    </main>
+
+    <footer class="ani d2">
+      <p>Part of <a href="index.html">Shapes of Intelligence</a> &mdash; a companion reference for the book.</p>
+    </footer>
+
+  </div>
+
+  <script>
+    // Fill in page URLs
+    document.querySelectorAll('.page-url').forEach(el => {
+      el.textContent = window.location.href;
+    });
+
+    // Copy individual command
+    function copyCmd(el) {
+      const code = el.querySelector('code').textContent;
+      navigator.clipboard.writeText(code).then(() => {
+        el.classList.add('copied-cmd');
+        setTimeout(() => el.classList.remove('copied-cmd'), 1200);
+      });
+    }
+  </script>
+</body>
+</html>

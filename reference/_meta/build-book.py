@@ -200,7 +200,7 @@ CHAPTER_TEMPLATE = """\
 </head>
 <body>
   <nav>
-    <a href="../book/">Shapes of Intelligence</a>
+    <a href="../index.html">Shapes of Intelligence</a>
     <div class="nav-arrows">
       {prev_link}
       {next_link}

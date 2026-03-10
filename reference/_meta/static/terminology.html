@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Terminology — Shapes of Intelligence</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,700;1,9..144,300&display=swap');
+
+    :root {
+      --void: #0a0a10;
+      --deep: #0f0f1a;
+      --surface: #161625;
+      --raised: #1e1e32;
+      --edge: #2a2a44;
+      --muted: #8888aa;
+      --text: #d0d0e2;
+      --bright: #eeeef5;
+      --white: #f5f5ff;
+      --amber: #e8a83e;
+      --amber-dim: #c4882a;
+      --teal: #4ecdc4;
+      --rose: #e85577;
+      --blue: #5588dd;
+      --purple: #9977dd;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'DM Mono', 'SF Mono', monospace;
+      background: var(--void);
+      color: var(--text);
+      line-height: 1.7;
+      min-height: 100vh;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 9999;
+    }
+
+    .shell {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 3rem 1.5rem 4rem;
+    }
+
+    .masthead {
+      padding: 1.5rem 0 2rem;
+      border-bottom: 1px solid var(--edge);
+      margin-bottom: 2.5rem;
+      position: relative;
+    }
+
+    .masthead::after {
+      content: '';
+      position: absolute;
+      bottom: -1px;
+      left: 0;
+      width: 60px;
+      height: 1px;
+      background: var(--amber);
+    }
+
+    .breadcrumb {
+      font-size: 0.65rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 0.8rem;
+    }
+
+    .breadcrumb a {
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .breadcrumb a:hover { color: var(--amber); }
+
+    .masthead h1 {
+      font-family: 'Fraunces', serif;
+      font-weight: 300;
+      font-size: 2rem;
+      color: var(--white);
+      letter-spacing: -0.01em;
+    }
+
+    .masthead .sub {
+      color: var(--muted);
+      font-size: 0.75rem;
+      margin-top: 0.4rem;
+      letter-spacing: 0.03em;
+      line-height: 1.8;
+      max-width: 55ch;
+    }
+
+    /* ── Section headers ── */
+    h2 {
+      font-family: 'Fraunces', serif;
+      font-weight: 500;
+      font-size: 1.05rem;
+      color: var(--bright);
+      margin: 2.2rem 0 0.8rem;
+      padding-bottom: 0.4rem;
+      border-bottom: 1px solid var(--edge);
+    }
+
+    h2:first-of-type { margin-top: 0; }
+
+    /* ── Term entries ── */
+    .term {
+      margin-bottom: 0.6rem;
+      padding: 0.6rem 0.8rem;
+      border-radius: 4px;
+      transition: background 0.15s;
+    }
+
+    .term:hover {
+      background: var(--deep);
+    }
+
+    .term dt {
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: var(--bright);
+      margin-bottom: 0.15rem;
+    }
+
+    .term dt code {
+      font-family: 'DM Mono', monospace;
+      color: var(--amber);
+      font-weight: 400;
+      font-size: 0.75rem;
+    }
+
+    .term dd {
+      font-size: 0.72rem;
+      color: var(--text);
+      line-height: 1.8;
+      margin: 0;
+    }
+
+    .term dd code {
+      font-family: 'DM Mono', monospace;
+      color: var(--bright);
+      font-size: 0.7rem;
+      background: var(--surface);
+      padding: 0.1rem 0.35rem;
+      border-radius: 3px;
+      border: 1px solid var(--edge);
+    }
+
+    .aka {
+      font-size: 0.62rem;
+      color: var(--muted);
+      font-style: italic;
+    }
+
+    footer {
+      margin-top: 3rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--edge);
+      font-size: 0.62rem;
+      color: var(--muted);
+    }
+
+    footer a {
+      color: var(--muted);
+      text-decoration: none;
+      border-bottom: 1px solid var(--edge);
+      transition: color 0.2s, border-color 0.2s;
+    }
+
+    footer a:hover { color: var(--amber); border-color: var(--amber-dim); }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .ani { animation: fadeUp 0.4s ease-out both; }
+    .d1 { animation-delay: 0.05s; }
+    .d2 { animation-delay: 0.1s; }
+
+    @media (min-height: 1000px) and (max-width: 800px) {
+      .shell { max-width: 92vw; padding: 2rem 4vw 3rem; }
+      .masthead h1 { font-size: 2.8rem; }
+      .masthead .sub { font-size: 0.95rem; }
+      .breadcrumb { font-size: 0.78rem; }
+      h2 { font-size: 1.3rem; }
+      .term dt { font-size: 1rem; }
+      .term dd { font-size: 0.9rem; }
+      .aka { font-size: 0.78rem; }
+      footer { font-size: 0.75rem; }
+    }
+
+    @media (max-width: 600px) {
+      .shell { padding: 1.5rem 1rem 3rem; }
+      .masthead h1 { font-size: 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+  <div class="shell">
+
+    <header class="masthead ani">
+      <div class="breadcrumb">
+        <a href="index.html">Shapes of Intelligence</a> / Reference
+      </div>
+      <h1>Terminology</h1>
+      <p class="sub">The basic verbs, nouns, and moving parts. If someone says a word you don't recognize, it's probably here.</p>
+    </header>
+
+    <main class="ani d1">
+
+      <h2>Places</h2>
+
+      <dl>
+        <div class="term">
+          <dt>Terminal</dt>
+          <dd>The text window where you type commands. On a Mac, it's an app called Terminal (or iTerm, or the one built into VS Code). Everything you type here goes directly to the machine.</dd>
+        </div>
+        <div class="term">
+          <dt>Shell</dt>
+          <dd>The program running inside your terminal. On a Mac it's <code>zsh</code>. It reads what you type, runs it, and shows you what happened. Terminal is the window. Shell is the brain inside it.</dd>
+        </div>
+        <div class="term">
+          <dt>Repo <span class="aka">— repository</span></dt>
+          <dd>A project folder that git tracks. Every change is recorded. You can go back in time, branch off, merge work together. If someone says "clone the repo," they mean "download the project."</dd>
+        </div>
+        <div class="term">
+          <dt>Local</dt>
+          <dd>On your machine. "Run it locally" means run it on your laptop, not on the internet. Nothing leaves your computer.</dd>
+        </div>
+        <div class="term">
+          <dt>Remote</dt>
+          <dd>Someone else's machine. GitHub is a remote. A server you deploy to is a remote. When you <code>push</code>, you're sending from local to remote.</dd>
+        </div>
+        <div class="term">
+          <dt>Server</dt>
+          <dd>A computer that's always on and connected to the internet. It serves files, runs your app, responds to requests. Your laptop is not a server (until you run <code>python3 -m http.server</code> and temporarily make it one).</dd>
+        </div>
+        <div class="term">
+          <dt>Localhost</dt>
+          <dd>Your own machine pretending to be a server. When you see <code>localhost:3000</code> in your browser, you're talking to a program running on your laptop. Nobody else can see it.</dd>
+        </div>
+        <div class="term">
+          <dt>PATH</dt>
+          <dd>A list of folders your shell searches when you type a command. If you type <code>node</code> and get "command not found," node isn't in your PATH. Most install problems are PATH problems.</dd>
+        </div>
+      </dl>
+
+      <h2>Git verbs</h2>
+
+      <dl>
+        <div class="term">
+          <dt><code>git commit</code></dt>
+          <dd>Save a snapshot of your work. Like a save point in a game. You can always come back to it. A commit has a message that says what changed: <code>git commit -m "add login page"</code>.</dd>
+        </div>
+        <div class="term">
+          <dt><code>git push</code></dt>
+          <dd>Send your commits to the remote (usually GitHub). Your work goes from your machine to the internet. Other people can now see it.</dd>
+        </div>
+        <div class="term">
+          <dt><code>git pull</code></dt>
+          <dd>Download other people's changes from the remote and merge them into yours. The opposite of push.</dd>
+        </div>
+        <div class="term">
+          <dt><code>git fetch</code></dt>
+          <dd>Check what's changed on the remote without merging anything. Like peeking at the mail without opening it. Pull = fetch + merge.</dd>
+        </div>
+        <div class="term">
+          <dt><code>git clone</code></dt>
+          <dd>Download an entire repo for the first time. <code>git clone https://github.com/someone/project</code> gives you the full project with all its history.</dd>
+        </div>
+        <div class="term">
+          <dt><code>git branch</code></dt>
+          <dd>A parallel version of your project. You branch off to try something without risking the main version. If it works, you merge it back. If not, you delete the branch.</dd>
+        </div>
+        <div class="term">
+          <dt><code>git merge</code></dt>
+          <dd>Combine two branches. Usually merging your branch back into <code>main</code> after your work is done.</dd>
+        </div>
+        <div class="term">
+          <dt><code>git diff</code></dt>
+          <dd>Show what changed. Line by line, what was added (green) and what was removed (red).</dd>
+        </div>
+      </dl>
+
+      <h2>Package management</h2>
+
+      <dl>
+        <div class="term">
+          <dt>Package</dt>
+          <dd>Someone else's code that you use in your project. Instead of writing an image resizer from scratch, you install a package that does it. Packages have packages inside them &mdash; it's packages all the way down.</dd>
+        </div>
+        <div class="term">
+          <dt>Dependency</dt>
+          <dd>A package your project needs to work. "Add it as a dependency" means "install this package and record that we need it." If you delete your <code>node_modules</code> folder, <code>npm install</code> puts them all back.</dd>
+        </div>
+        <div class="term">
+          <dt><code>brew install</code></dt>
+          <dd>Install a system tool via Homebrew (the Mac package manager). <code>brew install node</code> installs Node.js. <code>brew install --cask</code> installs desktop apps.</dd>
+        </div>
+        <div class="term">
+          <dt><code>npm install</code></dt>
+          <dd>Install a JavaScript/Node.js package. <code>npm install express</code> adds it to your project. <code>npm install -g something</code> installs it globally (available everywhere, not just this project).</dd>
+        </div>
+        <div class="term">
+          <dt><code>node_modules</code></dt>
+          <dd>The folder where npm puts all your dependencies. It gets huge. Never commit it to git. If something breaks, delete it and run <code>npm install</code> again.</dd>
+        </div>
+        <div class="term">
+          <dt><code>package.json</code></dt>
+          <dd>The manifest for a Node.js project. Lists the project name, its dependencies, and scripts you can run. If a folder has a <code>package.json</code>, it's a Node project.</dd>
+        </div>
+      </dl>
+
+      <h2>Building and running</h2>
+
+      <dl>
+        <div class="term">
+          <dt>Build</dt>
+          <dd>Turn your source code into something that runs. Sometimes this means compiling TypeScript to JavaScript. Sometimes it means bundling files together. Sometimes there's no build step at all &mdash; you just run the file.</dd>
+        </div>
+        <div class="term">
+          <dt>Deploy</dt>
+          <dd>Put your project somewhere other people can use it. Copy files to a server, push to a hosting service, upload to an app store. "It works on my machine" is not deployed.</dd>
+        </div>
+        <div class="term">
+          <dt><code>rsync</code></dt>
+          <dd>Copy files from one place to another, only sending what changed. The workhorse of simple deployment. <code>rsync -avz ./site/ server:/var/www/html/</code> pushes your site.</dd>
+        </div>
+        <div class="term">
+          <dt>Dev server</dt>
+          <dd>A local server that watches your files and reloads the browser when you change something. Makes development fast. Not for production &mdash; just for building.</dd>
+        </div>
+        <div class="term">
+          <dt>Port</dt>
+          <dd>A number that identifies which program should receive network traffic. <code>localhost:3000</code> means "talk to the program listening on port 3000." If a port is "already in use," another program is sitting on it.</dd>
+        </div>
+        <div class="term">
+          <dt>Environment variable</dt>
+          <dd>A value stored outside your code. API keys, database passwords, configuration. Set with <code>export API_KEY=abc123</code>. Read in code. Never commit secrets to git.</dd>
+        </div>
+      </dl>
+
+      <h2>AI and agents</h2>
+
+      <dl>
+        <div class="term">
+          <dt>Agent</dt>
+          <dd>An AI that can take actions &mdash; read files, run commands, write code, browse the web. Not just chat. Claude Code, Codex CLI, and Gemini CLI are agents.</dd>
+        </div>
+        <div class="term">
+          <dt>CLI <span class="aka">— command-line interface</span></dt>
+          <dd>A program you run by typing in the terminal. No windows, no buttons. Just text in, text out. <code>claude</code>, <code>codex</code>, and <code>gemini</code> are CLIs.</dd>
+        </div>
+        <div class="term">
+          <dt>Prompt</dt>
+          <dd>What you say to the AI. A question, an instruction, context, a file. Everything you give it is the prompt. Better prompts get better results.</dd>
+        </div>
+        <div class="term">
+          <dt>Context</dt>
+          <dd>What the AI knows right now. The files it's read, the conversation so far, the instructions you gave it. More context = better answers. Too much context = confused answers.</dd>
+        </div>
+        <div class="term">
+          <dt>Steering file <span class="aka">— CLAUDE.md, .codex, etc.</span></dt>
+          <dd>A file in your project that tells the agent how to behave. Preferences, conventions, things to remember. The agent reads it automatically when it starts. Like a briefing document for a new team member.</dd>
+        </div>
+        <div class="term">
+          <dt>Handoff</dt>
+          <dd>When you point an agent at a URL or file and say "follow these instructions." The page becomes the prompt. The agent takes over from there.</dd>
+        </div>
+        <div class="term">
+          <dt>Token</dt>
+          <dd>The unit AI models think in. Roughly one word or part of a word. Models have a context window measured in tokens &mdash; that's how much they can hold in mind at once.</dd>
+        </div>
+        <div class="term">
+          <dt>Corpus</dt>
+          <dd>A collection of text used as source material. Your emails, documents, notes, chat logs. The raw data a chatbot or FAQ is generated from.</dd>
+        </div>
+      </dl>
+
+      <h2>Web basics</h2>
+
+      <dl>
+        <div class="term">
+          <dt>HTML</dt>
+          <dd>The structure of a web page. Headings, paragraphs, links, images. Every web page is HTML. You can write it in a text editor and open it in a browser.</dd>
+        </div>
+        <div class="term">
+          <dt>CSS</dt>
+          <dd>The style of a web page. Colors, fonts, layout, spacing. HTML says what's there. CSS says how it looks.</dd>
+        </div>
+        <div class="term">
+          <dt>JavaScript <span class="aka">— JS</span></dt>
+          <dd>The behavior of a web page. Click handlers, animations, fetching data. Also runs on servers (Node.js). The most widely used programming language.</dd>
+        </div>
+        <div class="term">
+          <dt>TypeScript <span class="aka">— TS</span></dt>
+          <dd>JavaScript with types. You declare that a variable is a number, a string, a list of users. Catches bugs before you run the code. Compiles down to regular JavaScript.</dd>
+        </div>
+        <div class="term">
+          <dt>API <span class="aka">— application programming interface</span></dt>
+          <dd>A way for programs to talk to each other. When your chatbot asks Claude a question, it's calling an API. When your app checks the weather, it's calling an API. URLs in, data out.</dd>
+        </div>
+        <div class="term">
+          <dt>Static site</dt>
+          <dd>A website that's just files &mdash; HTML, CSS, JavaScript. No database, no server-side code. Fast, simple, cheap to host. This site is a static site.</dd>
+        </div>
+        <div class="term">
+          <dt>SSH <span class="aka">— secure shell</span></dt>
+          <dd>A way to log into a remote machine securely. <code>ssh myserver.com</code> gives you a terminal on that machine. Also used for authentication &mdash; SSH keys prove who you are without passwords.</dd>
+        </div>
+      </dl>
+
+    </main>
+
+    <footer class="ani d2">
+      <p>Part of <a href="index.html">Shapes of Intelligence</a> &mdash; a companion reference for the book.</p>
+    </footer>
+
+  </div>
+</body>
+</html>

@@ -27,7 +27,7 @@ Collected as we go. Some from James, some from conversations, some from the work
 
 "Your data is already yours. You just haven't read it yet."
 
-"I have a lot of feelings about spreadsheets."  — Vic Michaelis (character)
+"I have a lot of feelings about spreadsheets."  — Vic (character)
 
 "The book is proof of its own thesis."
 

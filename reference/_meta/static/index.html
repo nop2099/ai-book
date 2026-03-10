@@ -13,9 +13,9 @@
       --surface: #161625;
       --raised: #1e1e32;
       --edge: #2a2a44;
-      --muted: #5a5a7a;
-      --text: #b8b8d0;
-      --bright: #e8e8f0;
+      --muted: #8888aa;
+      --text: #d0d0e2;
+      --bright: #eeeef5;
       --white: #f5f5ff;
       --amber: #e8a83e;
       --amber-dim: #c4882a;
@@ -253,6 +253,19 @@
     .d4 { animation-delay: 0.2s; }
     .d5 { animation-delay: 0.25s; }
 
+    @media (min-height: 1000px) and (max-width: 800px) {
+      .shell { max-width: 92vw; padding: 2rem 4vw 3rem; }
+      .hero h1 { font-size: 3.2rem; }
+      .hero .tagline { font-size: 0.98rem; }
+      .hero .howto { font-size: 0.9rem; }
+      .section-label { font-size: 0.72rem; }
+      .card-title { font-size: 1.1rem; }
+      .card-desc { font-size: 0.82rem; }
+      .card-tag { font-size: 0.65rem; }
+      .book-card .card-desc { font-size: 0.82rem; }
+      footer { font-size: 0.75rem; }
+    }
+
     @media (max-width: 600px) {
       .shell { padding: 1.5rem 1rem 3rem; }
       .hero h1 { font-size: 1.8rem; }
@@ -294,10 +307,22 @@
     <div class="card-group ani d2">
       <div class="section-label">Project Guides</div>
       <div class="cards">
+        <a href="30-chatbot.html" class="card">
+          <span class="card-accent" style="background: var(--teal);"></span>
+          <span class="card-title">Chatbot</span>
+          <span class="card-desc">Turn messy knowledge into a public FAQ and a chatbot that answers from it.</span>
+          <span class="card-tag">full guide</span>
+        </a>
         <a href="20-board-game.html" class="card">
           <span class="card-accent" style="background: var(--teal);"></span>
           <span class="card-title">Board Game</span>
           <span class="card-desc">Turn a physical board game into a digital one &mdash; rules to AI opponents to deployment.</span>
+          <span class="card-tag">full guide</span>
+        </a>
+        <a href="wall-of-data.html" class="card">
+          <span class="card-accent" style="background: var(--teal);"></span>
+          <span class="card-title">Wall of Data</span>
+          <span class="card-desc">Collect everything you've ever made, said, or saved into a single folder.</span>
           <span class="card-tag">full guide</span>
         </a>
         <a href="00-what-do-you-want-to-build.html" class="card">
@@ -312,6 +337,23 @@
     <div class="card-group ani d3">
       <div class="section-label">Environment Setup</div>
       <div class="cards">
+        <a href="zero-to-dev.html" class="card">
+          <span class="card-accent" style="background: var(--amber);"></span>
+          <span class="card-title">Zero to Developer (Mac)</span>
+          <span class="card-desc">Brand new Mac to building with AI &mdash; two installs, then the agent takes over.</span>
+          <span class="card-tag">start here</span>
+        </a>
+        <a href="zero-to-dev-windows.html" class="card">
+          <span class="card-accent" style="background: var(--amber);"></span>
+          <span class="card-title">Zero to Developer (Windows)</span>
+          <span class="card-desc">Same pipeline for Windows &mdash; Node.js + Codex CLI, then hand off.</span>
+          <span class="card-tag">start here</span>
+        </a>
+        <a href="get-set-up.html" class="card">
+          <span class="card-accent" style="background: var(--amber);"></span>
+          <span class="card-title">Get Set Up</span>
+          <span class="card-desc">Individual install prompts for Claude, Codex, and Gemini &mdash; apps and CLIs.</span>
+        </a>
         <a href="01-set-up-your-workspace.html" class="card">
           <span class="card-accent" style="background: var(--purple);"></span>
           <span class="card-title">Set Up Your Workspace</span>
@@ -327,12 +369,28 @@
           <span class="card-title">GitHub</span>
           <span class="card-desc">Account, CLI, clone, push, pull, commit.</span>
         </a>
+        <a href="terminology.html" class="card">
+          <span class="card-accent" style="background: var(--purple);"></span>
+          <span class="card-title">Terminology</span>
+          <span class="card-desc">The basic verbs, nouns, and moving parts &mdash; git, npm, deploy, and the rest.</span>
+        </a>
+        <a href="landscape.html" class="card">
+          <span class="card-accent" style="background: var(--purple);"></span>
+          <span class="card-title">The Landscape</span>
+          <span class="card-desc">Every tool in context &mdash; what it competes with and where it sits.</span>
+        </a>
       </div>
     </div>
 
     <div class="card-group ani d4">
       <div class="section-label">Extras</div>
       <div class="cards">
+        <a href="vic-and-sam.html" class="card">
+          <span class="card-accent" style="background: var(--rose);"></span>
+          <span class="card-title">"So What's It About?"</span>
+          <span class="card-desc">Vic and Sam discuss Shapes of Intelligence &mdash; a graphic novel script.</span>
+          <span class="card-tag">script</span>
+        </a>
         <a href="quotes.html" class="card">
           <span class="card-accent" style="background: var(--rose);"></span>
           <span class="card-title">Quote Pile</span>
@@ -342,6 +400,12 @@
           <span class="card-accent" style="background: var(--amber);"></span>
           <span class="card-title">Chapter Dashboard</span>
           <span class="card-desc">Readability metrics, rhythm analysis, arc visualization.</span>
+          <span class="card-tag">meta</span>
+        </a>
+        <a href="slush-pile.html" class="card">
+          <span class="card-accent" style="background: var(--rose);"></span>
+          <span class="card-title">Slush Pile</span>
+          <span class="card-desc">Raw notes, patterns, and open threads from building the book.</span>
           <span class="card-tag">meta</span>
         </a>
       </div>

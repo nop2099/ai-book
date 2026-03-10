@@ -677,6 +677,100 @@ meetings/2026-03-10-team-standup/
 - The Context Gold Mine (meeting summaries are context for future conversations)
 - Daily Briefing (today's meeting outcomes can appear in tomorrow's briefing)
 
+**Calculus Chapter Rewrite — OpenClaw and the proliferation of Kai-likes**
+
+The "We All Invented Calculus at the Same Time" chapter tells the story of Aaron and James building Kai over ten months, and the recognition moment when OpenAI shipped memory for ChatGPT while James was debugging Kai's memory layer. The thesis: when capability crosses a threshold, multiple people independently discover the same architecture.
+
+The chapter needs a data-informed update. Since the chapter was written, the evidence for the thesis has gotten dramatically stronger — and more specific.
+
+*What happened with OpenClaw:*
+
+OpenClaw (originally "Clawd," renamed after Anthropic's legal team intervened) launched November 2025 and went viral in late January 2026. It's a personal AI assistant that uses messaging platforms (WhatsApp, Telegram, Discord, iMessage) as its interface. TypeScript orchestration, tool use, browser control. 298K GitHub stars by March 2026.
+
+Aaron integrated OpenClaw's WebSocket protocol into Kai in February 2026 — enabling bidirectional Kai-Kaijuu communication through OpenClaw's transport layer. The same week, James built Kaijuu (Kai's sister system) with a completely different architecture (7-layer security-first design vs. Kai's microservice mesh). Two implementations of the same vision, in the same household, by the same collaborators.
+
+That's calculus. Newton and Leibniz. Same math, different notation.
+
+*The proliferation of AI DMs (the broader calculus moment):*
+
+The AI Dungeon Master space exploded across all axes simultaneously:
+
+**Spring-Summer 2025:** Cluster of "I built an AI DM" blog posts — Micheal Lanham (OpenAI Agents SDK, May 2025), Konna Giann (April 2025), Paul's Gameblog "Martha" (custom GPT for B/X D&D, April 2025), Caden Burleson, Johan de Coster, John Polacek. All independent. All arrived at the same architecture.
+
+**Fall 2025:** MCP protocol spawns an entire sub-category of D&D servers — DMCP (Shawn Rushefsky), Gamemaster MCP, DM20 Protocol, ChatDM (Lauri Mukkala, a fantasy writer who built it for solo play), Mnehmos' suite. Same enabling technology (MCP + capable LLMs), same obvious application.
+
+**Late 2025–Early 2026:** Multi-agent sophistication — AIDM project (21+ specialized agents for anime TTRPG, January 2026, 305 commits in weeks). Commercial products maturing simultaneously: Friends & Fables, AI Realm, Questwright, AI Game Master app.
+
+**Every major LLM provider represented:** GPT-4/4.1, Claude, Gemini, Grok, local models via KoboldAI. The shape is platform-agnostic.
+
+**The Hacker News signal:** University of Utrecht published a thesis on "LLM based agents as Dungeon Masters." Commenters independently noted the pattern — multiple developers building the same system simultaneously, all driven by the permanent DM shortage + LLMs crossing the capability threshold.
+
+*What the chapter should add:*
+
+1. **Ground the OpenClaw moment.** Aaron integrating OpenClaw into Kai is the calculus metaphor made literal — two independent projects (Kai and OpenClaw) discovering compatible architectures and merging in February 2026. The fact that Anthropic asked them to rename it proves even the naming converged (Clawd ≈ Claude).
+
+2. **The proliferation evidence.** The chapter currently says "a hundred teams and a thousand hobbyists built the same butler." Now we have the receipts: 10+ independent "I built an AI DM" blog posts, 6+ MCP servers for the same use case, 8+ GitHub repos, 5+ commercial products, a university thesis, all in an 18-month window. That's not anecdotal — it's a dataset.
+
+3. **The Kaijuu angle.** James built Kaijuu in 16 days (105 commits, January-February 2026) with a fundamentally different architecture than Kai — and it converged on the same capabilities. Calculus within the same household. The notation was different (7-layer vs. microservice mesh) but the math was identical.
+
+4. **The MCP inflection point.** MCP (Model Context Protocol) as the capability threshold that triggered the DM explosion — just like "models had matured to the point where calculus was the next thing." Before MCP, building an AI DM required bespoke tool plumbing. After MCP, it was the obvious project shape.
+
+5. **Update the recognition moment.** The original moment was seeing OpenAI ship memory. The new, stronger moment: seeing OpenClaw go viral (298K stars) and realizing Aaron had already integrated it into Kai. Not jealousy, not surprise — recognition. "I can see exactly which problems they solved."
+
+*Connects to:*
+- The Flywheel (Kai is the original flywheel — minimize friction across all domains)
+- The Folder Is the Interface (OpenClaw + Kai communicate via WebSocket, Kaijuu via folder convention)
+- Skills Are the Muscles We Train (building Kai trained the recognition muscle)
+- The Steering File (Kai's SPECIFICATION.md is the ultimate steering file)
+
+**Jack Video Engine — motion comic generation guide**
+
+Jack is a motion comic video generation engine built at ~/w9/jack/. It converts narrative text into finished video content through a four-stage pipeline. The current implementation produces the Ashenfall campaign — a D&D adaptation from Alex Meringer's YouTube channel.
+
+*The pipeline:*
+
+1. **Story Engine.** Raw text (campaign notes, lore, transcripts) → graphic novel script via Claude API. Panel descriptions, dialogue, captions, SFX cues, timing. Uses Dan Harmon's Story Circle for narrative structure. World history and character studies feed the generation.
+
+2. **Art Generation.** Script panels → 4K comic art via Gemini API (Imagen 3 / Nano Banana 2). Consistent character appearances across panels. Style-locked to graphic novel aesthetic.
+
+3. **Audio Production.** Three sub-systems:
+   - Voice cloning via Qwen3-TTS — 3 seconds of audio sample produces a character voice. Register variants (shouting, normal, whisper) for emotional range.
+   - Sound effects via Stable Audio Open / AISFX — generated from SFX cues in the script.
+   - Ambient scoring — music beds matched to scene mood.
+
+4. **Composition.** FFmpeg assembles everything: panels with Ken Burns motion effects (pan, zoom, drift), synced voice and SFX, transitions between scenes. Face-aware text placement using SAM3 saliency detection — captions don't overlap character faces.
+
+*What makes this a guide shape:*
+
+The pipeline is modular and each stage can be run independently. You could use just the story engine to generate scripts. You could feed existing art into the audio + composition stages. The guide would teach the pipeline pattern, not just the Ashenfall implementation.
+
+Any narrative source works: D&D campaigns, short stories, game lore, historical events, educational content. The shape is "text → motion comic video" with AI at each stage.
+
+*The guide would cover:*
+1. Setting up the pipeline (Python, FFmpeg, API keys for Claude + Gemini)
+2. Preparing source material (campaign notes, character profiles, world bible)
+3. Running the story engine (script generation, narrative structure)
+4. Art generation (style locking, character consistency, panel composition)
+5. Voice production (cloning setup, register variants, dialogue sync)
+6. Sound design (SFX generation, music selection, mixing)
+7. Final composition (motion effects, text placement, rendering)
+8. Iteration (re-running stages when output quality doesn't match vision)
+
+*Technical requirements:*
+- Claude API (story generation — ~$0.01/panel)
+- Gemini API (art generation — free tier or ~$0.005/image)
+- Qwen3-TTS (runs locally, free, needs GPU for real-time)
+- FFmpeg (free, runs everywhere)
+- Python orchestration
+- Total cost per finished minute of video: ~$0.50–2.00
+
+*Connects to:*
+- We All Invented Calculus (jack is another independent invention — motion comic generators are proliferating)
+- Your Data Is Already Yours (campaign recordings are data; the engine reads them)
+- The Folder Is the Interface (each pipeline stage reads from and writes to folders)
+- Skills Are the Muscles We Train (voice cloning and art prompting are learned skills)
+- The VTuber / register variants pattern (already in the slush pile notes)
+
 ## Open threads
 
 **Ready to run:**
@@ -704,7 +798,10 @@ meetings/2026-03-10-team-standup/
 
 **Project shape pages to write:**
 - [ ] Octopus-in-a-box, report agent, health tracker
-- [ ] Home automation, video creator, budget app, CLI tool
+- [ ] Home automation, budget app, CLI tool
+- [ ] Jack Video Engine — motion comic generation pipeline (text → art → voice → video)
+
+**Book edits:**
 
 **Curriculum:**
 - [ ] Design director track curriculum pages
@@ -712,7 +809,7 @@ meetings/2026-03-10-team-standup/
 - [ ] Landing page with spiral visualization + track picker
 - [ ] "Say cribbage and go" — one-prompt game builder workflow
 
-**Book edits:**
+- [ ] Rewrite "We All Invented Calculus" — add OpenClaw integration, Kai-like proliferation data, Kaijuu divergent architecture, MCP inflection point
 - [ ] Integrate flywheel material from slush pile
 - [ ] Study guide readability (Parts I+II at grade 10.7)
 - [ ] Remaining readability warnings (workspace page ~grade 9)

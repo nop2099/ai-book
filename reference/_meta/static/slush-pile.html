@@ -363,33 +363,84 @@
         </div>
       </section>
 
+      <section class="ani d2">
+        <h2>Slush Pitches</h2>
+        <p style="font-size: 0.72rem; color: var(--muted); margin-bottom: 0.8rem;">Ideas researched and ready to become guides or chapters. Full write-ups live in the worklog.</p>
+
+        <div class="note">
+          <div class="note-title">Calculus chapter rewrite</div>
+          <p>Ground "We All Invented Calculus" with data: OpenClaw (298K stars, integrated into Kai Feb 2026), 10+ independent "I built an AI DM" blog posts, 6+ MCP D&amp;D servers, Kaijuu as divergent architecture, the MCP inflection point. The thesis has receipts now.</p>
+        </div>
+
+        <div class="note">
+          <div class="note-title">Jack Video Engine</div>
+          <p>Motion comic generation pipeline: text &rarr; graphic novel script (Claude) &rarr; 4K panel art (Gemini) &rarr; cloned voices with register variants (Qwen3-TTS) &rarr; composed video (FFmpeg). ~$0.50&ndash;2.00 per finished minute. Built for Ashenfall D&amp;D campaign but the shape is generic.</p>
+        </div>
+
+        <div class="note">
+          <div class="note-title">Scheduler</div>
+          <p>Four types of scheduled work: absolute (cron), recurring (relative interval), delta (triggered by changes), event (triggered by external signals). Inspired by TaskBridge. The scheduler is the heartbeat of the operating system &mdash; every guide needs one.</p>
+        </div>
+
+        <div class="note">
+          <div class="note-title">Google Meet Mining</div>
+          <p>Extract transcripts (auto-captions or Whisper) and key screenshots (scene detection via ffmpeg) from meeting recordings. LLM summarizes decisions, actions, topics. Output lands in wall/meetings/.</p>
+        </div>
+
+        <div class="note">
+          <div class="note-title">PII Scanner &amp; History Squasher</div>
+          <p>Automated PII detection (regex + git history scan) with remediation plan (git filter-repo commands). Pre-commit hook blocks future leaks. The metric is "PII incidents per commit." The subgoal is zero.</p>
+        </div>
+
+        <div class="note">
+          <div class="note-title">Guide-Based Development</div>
+          <p>A meta-guide for making guides. Start with an existing guide as a base, write the interview first, write agent instructions with approval gates, test by running. The guide IS the super-prompt. "I never met a meta I didn't like."</p>
+        </div>
+
+        <div class="note">
+          <div class="note-title">Slush Pile as a guide</div>
+          <p>A deferred TODO list for every project, including the project of yourself (JAMES.md, HEALTH.md, MOVE.md). Low friction &gt; high structure. Compatible with flywheel, briefing, maintenance. Memory Is Files at the meta level.</p>
+        </div>
+      </section>
+
       <section class="ani d3">
         <h2>Open Threads</h2>
 
-        <div class="thread-section">Ready to run</div>
-        <div class="thread"><span class="thread-check">[ ]</span><span class="thread-text">Integrate build-book.py into build.sh</span></div>
-        <div class="thread"><span class="thread-check">[ ]</span><span class="thread-text">Verify book pages in browser (generated but not reviewed)</span></div>
+        <div class="thread-section">Completed guides</div>
+        <div class="thread"><span class="thread-check">[x]</span><span class="thread-text"><a href="flywheel.html">Flywheel</a> &mdash; five-layer friction mining with scheduling and dashboard</span></div>
+        <div class="thread"><span class="thread-check">[x]</span><span class="thread-text"><a href="daily-briefing.html">Daily Briefing</a> &mdash; wins-first morning dashboard from your own data</span></div>
+        <div class="thread"><span class="thread-check">[x]</span><span class="thread-text"><a href="maintenance.html">Maintenance</a> &mdash; ops/runbooks with green/yellow/red status dashboard</span></div>
+        <div class="thread"><span class="thread-check">[x]</span><span class="thread-text"><a href="oauth-setup.html">OAuth Setup</a> &mdash; Google Cloud credentials and the localhost trick</span></div>
+        <div class="thread"><span class="thread-check">[x]</span><span class="thread-text"><a href="devlog.html">Dev Log</a> &mdash; changelog page updated on each check-in</span></div>
+
+        <div class="thread-section">Security / analysis</div>
+        <div class="thread"><span class="thread-check">[ ]</span><span class="thread-text">Security analysis of TaskCreate/TaskUpdate/TaskList</span></div>
+        <div class="thread"><span class="thread-check">[ ]</span><span class="thread-text">Shapes-aware /todo &mdash; tasks tagged by shape, minimum-interruption capture</span></div>
+        <div class="thread"><span class="thread-check">[ ]</span><span class="thread-text">PII scanner and history squasher &mdash; pre-commit hook + git filter-repo</span></div>
 
         <div class="thread-section">Reference pages to write</div>
         <div class="thread"><span class="thread-check">[ ]</span><span class="thread-text">Terminal, package manager, Node, Python, VS Code</span></div>
         <div class="thread"><span class="thread-check">[ ]</span><span class="thread-text">Claude Code, Cursor, steering files</span></div>
         <div class="thread"><span class="thread-check">[ ]</span><span class="thread-text">Docker, API keys, hosting, AI defaults</span></div>
+        <div class="thread"><span class="thread-check">[ ]</span><span class="thread-text">Google Meet Mining &mdash; transcripts + screenshots from recordings</span></div>
+        <div class="thread"><span class="thread-check">[ ]</span><span class="thread-text">Scheduler &mdash; absolute, recurring, delta, event triggers</span></div>
+        <div class="thread"><span class="thread-check">[ ]</span><span class="thread-text">Guide-Based Development &mdash; the meta-guide</span></div>
         <div class="thread"><span class="thread-check">[ ]</span><span class="thread-text">The Roster, reimplement-don't-import</span></div>
 
         <div class="thread-section">Project shape pages to write</div>
+        <div class="thread"><span class="thread-check">[ ]</span><span class="thread-text">Jack Video Engine &mdash; motion comic generation pipeline</span></div>
         <div class="thread"><span class="thread-check">[ ]</span><span class="thread-text">Octopus-in-a-box, report agent, health tracker</span></div>
-        <div class="thread"><span class="thread-check">[ ]</span><span class="thread-text">Home automation, video creator, budget app, CLI tool</span></div>
+        <div class="thread"><span class="thread-check">[ ]</span><span class="thread-text">Home automation, budget app, CLI tool</span></div>
 
         <div class="thread-section">Curriculum</div>
-        <div class="thread"><span class="thread-check">[ ]</span><span class="thread-text">Design director track curriculum pages</span></div>
-        <div class="thread"><span class="thread-check">[ ]</span><span class="thread-text">Design builder track curriculum pages</span></div>
+        <div class="thread"><span class="thread-check">[ ]</span><span class="thread-text">Design director + builder track curriculum pages</span></div>
         <div class="thread"><span class="thread-check">[ ]</span><span class="thread-text">Landing page with spiral visualization + track picker</span></div>
         <div class="thread"><span class="thread-check">[ ]</span><span class="thread-text">"Say cribbage and go" &mdash; one-prompt game builder workflow</span></div>
 
         <div class="thread-section">Book edits</div>
+        <div class="thread"><span class="thread-check">[ ]</span><span class="thread-text">Rewrite "We All Invented Calculus" with OpenClaw + proliferation data</span></div>
         <div class="thread"><span class="thread-check">[ ]</span><span class="thread-text">Integrate flywheel material from slush pile</span></div>
         <div class="thread"><span class="thread-check">[ ]</span><span class="thread-text">Study guide readability (Parts I+II at grade 10.7)</span></div>
-        <div class="thread"><span class="thread-check">[ ]</span><span class="thread-text">Remaining readability warnings (workspace page ~grade 9)</span></div>
         <div class="thread"><span class="thread-check">[ ]</span><span class="thread-text">Add 3 missing shapes to 00-what-do-you-want-to-build.md</span></div>
 
         <div class="thread-section">On hold</div>

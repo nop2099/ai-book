@@ -1,13 +1,13 @@
 ---
 name: publish
-description: Run the full pre-publication checklist — PII scan, tests, security review, dev log, build, link check, spot-check, deploy, final PII check, git commit and push
+description: Run the full pre-publication checklist — PII scan, tests, security review, dev log, build, link check, spot-check, final PII check, deploy, git commit and push
 ---
 
 # Publish
 
 Run this checklist every time we ship. Every step runs; none are optional. If a step fails, stop and fix it before continuing.
 
-Do all content modifications (dev log, fixes, etc.) BEFORE building, deploying, and pushing. The deploy and push happen once at the end, after everything is finalized.
+Do all content modifications (dev log, fixes, etc.) BEFORE building, deploying, and pushing. Validate everything BEFORE deploying. The deploy and push happen once at the end, after everything is finalized and verified.
 
 ## 1. PII Scan (early)
 
@@ -100,22 +100,22 @@ If broken links are found, fix the source files (in `reference/_meta/static/` or
 
 ## 7. Spot-check the built site
 
-Before deploying, open a few pages locally to verify they render correctly:
+Before deploying, verify a few built pages render correctly:
 - The index page: confirm new cards appear if any were added
 - Any page that was modified this session: confirm changes are visible
 - The dev log: confirm new entries show up
 
-## 8. Deploy to shapes.exe.xyz
+## 8. PII Scan (final)
+
+Run the same PII scan from step 1 one more time. This catches anything introduced during the dev log update or other modifications made between steps 1 and now. If anything new appears, fix it and rebuild (step 5) before continuing. Nothing leaves the machine until this passes.
+
+## 9. Deploy to shapes.exe.xyz
 
 ```bash
 rsync -avz --delete reference/site/ shapes.exe.xyz:/var/www/html/
 ```
 
 Verify the deploy succeeded. If rsync fails (SSH, permissions, disk space), fix before continuing. Use `curl -s -o /dev/null -w "%{http_code}" https://shapes.exe.xyz/` to confirm 200.
-
-## 9. PII Scan (final)
-
-Run the same PII scan from step 1 one more time. This catches anything introduced during the dev log update or other modifications made between steps 1 and now. If anything new appears, fix it, rebuild (step 5), and redeploy (step 8) before continuing.
 
 ## 10. Git commit and push
 
@@ -141,7 +141,7 @@ The commit message should describe what changed and why, not just "publish." If 
  5. Build             — site builds with no errors
  6. Link check        — no broken internal hrefs in built site
  7. Spot-check        — built pages render correctly
- 8. Deploy            — rsync to shapes.exe.xyz
- 9. PII scan (final)  — one last check after all modifications
+ 8. PII scan (final)  — one last check before anything leaves the machine
+ 9. Deploy            — rsync to shapes.exe.xyz
 10. Git commit + push — named files only, descriptive message
 ```

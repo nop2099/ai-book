@@ -416,9 +416,11 @@
 
       <h2>Why this works</h2>
 
-      <p>The chatbot never sees your private data directly. It reads the FAQ &mdash; which you control, review, and publish. This is the <strong>octopus in a box</strong>: a smart, capable agent (the octopus) constrained to a defined knowledge boundary (the box). The box isn't a Docker container &mdash; it's a trust boundary you define through what files you put on the server, what domains you allowlist, and what the system prompt tells the agent to refuse.</p>
+      <p>The chatbot never sees your private data directly. It reads the FAQ &mdash; which you control, review, and publish. This is the <strong>octopus in a box</strong>: a smart, capable agent (the octopus) constrained to a defined knowledge boundary (the box). The box might be a VM, a local directory, or a container if you need one. The important thing is the trust boundary: what files you put in scope, what domains you allowlist, and what the system prompt tells the agent to refuse.</p>
 
       <p>For questions not in the FAQ, the chatbot can search allowlisted web sources (expat guides, government sites, Wikipedia). For questions it can't confidently answer, it tells the customer to contact you. For questions outside its domain (legal, medical, tax), it declines and offers a helpful search link. You decide where every line is.</p>
+
+      <p>The first version should be simpler than your instincts want. A thin server, a child process, files on disk, browser localStorage, and a gap log. The meeting that produced the Valencia chatbot kept rediscovering the same lesson: let the agent use its tools, don't build a clever scaffolding layer in front of it unless the simple version actually breaks.</p>
 
       <h2>The flywheel</h2>
 
@@ -473,15 +475,15 @@
           <li><strong>Stage 6 &mdash; Chatbot.</strong> Build a thin server that wraps the CLI agent. Architecture:
             <ul>
               <li><strong>Express.js server</strong> that receives user questions via <code>POST /api/chat</code>.</li>
-              <li><strong>CLI as backend:</strong> spawn <code>claude --print --model sonnet --max-turns 10 --allowedTools Read,Grep,Glob</code> via <code>child_process.spawn</code>. This uses Claude Code, Anthropic's own CLI tool. Do NOT pre-search the FAQ yourself &mdash; let Claude search the files directly with its own tools. That's the whole point of giving it an agent with Grep/Read/Glob. <em>Important: <code>claude --print</code> works because it's Anthropic's own tool. Piping subscription auth through third-party harnesses is <a href="https://www.anthropic.com/policies/consumer-terms">against Anthropic's TOS</a> &mdash; they actively block it and ban accounts. For anything other than Claude Code itself, use API keys.</em></li>
+              <li><strong>CLI as backend:</strong> spawn <code>claude --print --model sonnet --max-turns 10 --allowedTools Read,Grep,Glob</code> via <code>child_process.spawn</code>. Use the plain child process first. Don't start with an SDK or orchestration layer unless the simple version has already proven too weak. This uses Claude Code, Anthropic's own CLI tool. Do NOT pre-search the FAQ yourself &mdash; let Claude search the files directly with its own tools. That's the whole point of giving it an agent with Grep/Read/Glob. <em>Important: <code>claude --print</code> works because it's Anthropic's own tool. Piping subscription auth through third-party harnesses is <a href="https://www.anthropic.com/policies/consumer-terms">against Anthropic's TOS</a> &mdash; they actively block it and ban accounts. For anything other than Claude Code itself, use API keys.</em></li>
               <li><strong>System prompt</strong> piped to stdin along with the user question and conversation history.</li>
               <li><strong>MCP web fetch</strong> (optional): a domain-allowlisted web proxy that saves fetched pages as text files in <code>.cache/</code> and returns the filepath. Claude can then Grep/Read cached web pages the same way it searches corpus files. Allowlist trusted domains only (Wikipedia, official government sites, expat guides, etc). Cache 24h.</li>
-              <li><strong>Conversation history</strong> in the browser via localStorage. Server stays stateless. Each request sends the last 10 messages as context.</li>
+              <li><strong>Conversation history</strong> in the browser via localStorage. Server stays stateless. Each request sends the last 10 messages as context. This is not just convenient; it's privacy by architecture.</li>
               <li><strong>Markdown rendering</strong> in the chat UI (the agent returns markdown naturally).</li>
               <li><strong>Gap logging:</strong> log every question to <code>gaps.jsonl</code> &mdash; this is the flywheel's data source.</li>
               <li><strong>Rate limiting:</strong> in-memory, per-IP.</li>
             </ul>
-            Start on localhost. Set <code>CLAUDECODE=''</code> in the spawn env if running from inside a Claude Code session.</li>
+            Start on localhost. Set <code>CLAUDECODE=''</code> in the spawn env if running from inside a Claude Code session. Better yet, avoid agent-inside-agent setups unless you truly need them. Nested agents create port conflicts, confused auth, and messy debugging fast.</li>
           <li><strong>Stage 7 &mdash; Regeneration.</strong> Add a script so when the corpus changes, the user can re-run the pipeline: re-extract entities, re-extract issues, re-generate FAQ entries (showing diffs against the previous version for approval). One command to kick it off. Document the pipeline in a README.</li>
           <li><strong>Demo first.</strong> Everything runs on localhost. Don't set up hosting, auth, payments, or deployment until the user is happy with the demo.</li>
         </ol>
@@ -494,9 +496,11 @@
           <li><strong>Entity-first extraction</strong> &mdash; don't ask the AI to "summarize everything." Find the nouns first, then the problems, then the answers. Each step is reviewable.</li>
           <li><strong>Light approval flows</strong> &mdash; the agent does the work, you approve the output. One entity at a time, one FAQ entry at a time. You never lose control, and the agent never hallucinates unchecked.</li>
           <li><strong>CLI as backend</strong> &mdash; <code>claude --print</code> lets you use Claude Code as a backend process. This works because it's Anthropic's own tool. For third-party integrations, use API keys &mdash; Anthropic actively blocks and bans subscription auth passthrough through other tools (<a href="https://www.anthropic.com/policies/consumer-terms">TOS &sect;3.7</a>).</li>
+          <li><strong>Prefer the simple stack</strong> &mdash; a child process beats premature SDK complexity, agent tools beat homemade keyword scoring, and browser localStorage beats server-side chat persistence for an early demo.</li>
           <li><strong>Let the agent search</strong> &mdash; don't build a keyword search to pre-filter the FAQ. Give the agent Read/Grep/Glob tools and let it search your files directly. Your janky keyword scorer will always be worse than the agent's own retrieval. Tools compose.</li>
           <li><strong>File-based caching</strong> &mdash; when the agent fetches a web page, save it as a text file. Now it can Grep across cached pages the same way it searches the corpus. Everything is files.</li>
-          <li><strong>The VM is the box</strong> &mdash; no Docker needed. The server itself is the containment boundary. The agent can only touch files placed on it plus allowlisted web domains.</li>
+          <li><strong>Avoid nested-agent traps</strong> &mdash; if you can run the agent where the files are, do that. Driving one agent through another is usually friction, not leverage.</li>
+          <li><strong>The box can be simple</strong> &mdash; a VM or tiny VPS is already a box. Add Docker only if you need stricter isolation or multi-tenant boundaries.</li>
           <li><strong>The flywheel</strong> &mdash; unanswered questions are logged to <code>gaps.jsonl</code>. Review the gaps, add to the corpus, re-run the pipeline. Every question the chatbot can't answer makes the next version better.</li>
           <li><strong>Start small, start now</strong> &mdash; one markdown file, five entities, ten issues. That's a working chatbot. Ship that, then grow it.</li>
           <li><a href="book/02-working/06-memory-is-files.html"><strong>Memory is files</strong></a> &mdash; corpus, entities, issues, FAQ, system prompt, and gap log are all files on your machine. Any agent can read them, build on them, improve them.</li>

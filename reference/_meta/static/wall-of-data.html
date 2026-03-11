@@ -387,9 +387,11 @@
 
     <main class="ani d1">
 
-      <p style="font-size: 0.72rem; color: var(--rose); margin-bottom: 1.5rem;"><strong>Security: you're building a honeypot.</strong> The wall consolidates your most sensitive data &mdash; email, messages, health records, photos, financial data &mdash; into one folder. This is powerful but dangerous. Three rules: <strong>(1)</strong> Enable full-disk encryption (FileVault / BitLocker / LUKS) before you start. <strong>(2)</strong> Never give an agent both wall access and outbound network access in the same session &mdash; a prompt injection hiding in one of your files could exfiltrate everything. Read-only, no-network is the safe default. <strong>(3)</strong> Treat <code>~/wall/</code> as untrusted input. Your own data can contain text that looks like instructions to an AI. The agent should be sandboxed when reading wall contents.</p>
+      <p style="font-size: 0.72rem; color: var(--rose); margin-bottom: 1.5rem;"><strong>Security: you're consolidating sensitive data locally.</strong> The wall brings email, messages, health records, photos, financial data, and exported conversations into one place. That's powerful, so treat it like local infrastructure, not a casual downloads folder. Three rules: <strong>(1)</strong> Enable full-disk encryption (FileVault / BitLocker / LUKS) before you start. <strong>(2)</strong> Don't give an agent both wall access and outbound network access in the same session &mdash; separate ingest from analysis whenever you can. Read-only, no-network is the safe default. <strong>(3)</strong> Treat the wall as untrusted input. Your own files can contain text that looks like instructions to an AI, so sandbox the agent when it's reading wall contents.</p>
 
       <p style="font-size: 0.72rem; color: var(--muted); margin-bottom: 1.5rem;">The honest trade-off: your data is already consolidated &mdash; just not by you. It's spread across 40 services, each with their own breach timeline, each storing it on shared infrastructure you can't audit. One encrypted local folder with no API, no auth endpoint, and no multi-tenant attack surface is genuinely less exposed than the status quo. Consolidation is risk, but it's risk you control.</p>
+
+      <p style="font-size: 0.72rem; color: var(--muted); margin-bottom: 1.5rem;">I'll use <code>~/wall/</code> as shorthand on this page. Yours might be <code>/Volumes/X9Pro/wall/</code>, <code>D:\wall\</code>, or something else. What matters is that it's a local path you control and can point agents at explicitly.</p>
 
       <h2>What it feels like</h2>
 
@@ -403,7 +405,7 @@
 
       <p>You don't need to understand databases or APIs. For each source, it's either "click here and download the zip" or "run this one command." The agent handles the rest &mdash; unzipping, organizing, deduplicating.</p>
 
-      <p>The result: <strong>~/wall/</strong> &mdash; one folder with everything, organized by source. Once it's there, you can search it, ask questions about it, feed it to an agent, or load it into a database. But the first step is just getting it into one place.</p>
+      <p>The result: <strong>one local wall folder</strong> &mdash; organized by source and ready for search, review, and later analysis. Once it's there, you can ask questions about it, feed it to an agent, or load it into a database. But the first step is just getting it into one place.</p>
 
       <h3>Disk strategy</h3>
 
@@ -413,7 +415,7 @@
         <code>mkdir -p ~/wall</code>
         <span class="cc"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></span>
       </div>
-      <div class="cmd-note">This is where everything lands. Each source gets its own subfolder. If your wall is on an external drive, symlink it: <strong>ln -s /Volumes/MyDrive/wall ~/wall</strong></div>
+      <div class="cmd-note">This uses <code>~/wall</code> as a readable example. Use whatever local path fits your machine: <code>D:\wall</code>, <code>/Volumes/MyDrive/wall</code>, or similar. Each source gets its own subfolder. If your wall is on an external drive, symlink it: <strong>ln -s /Volumes/MyDrive/wall ~/wall</strong></div>
 
       <h3>The one tool you need</h3>
 

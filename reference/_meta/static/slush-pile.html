@@ -359,7 +359,7 @@
           <div class="note-title">Cross-agent conversation reading</div>
           <p>Agent A (building the reference site) reads Agent B's conversation log (a session that built Paul's chatbot) to learn what actually happened when someone followed the instructions. This is a feedback loop across agent sessions.</p>
           <p>What we found: the agent skipped the "issues" extraction step, built keyword search instead of LLM chatbot, tried API instead of CLI as backend, confused octopus-in-a-box with Docker. The correction patterns are the most valuable part &mdash; they show where instructions failed.</p>
-          <p>Broader principle: if you have multiple agents working on related problems, cross-reading their transcripts is organizational learning.</p>
+          <p>Broader principle: if you have multiple agents working on related problems, cross-reading their transcripts is organizational learning. This is one of the places where <a href="flywheel-follows-the-action.html">the flywheel follows the action</a>.</p>
         </div>
 
         <div class="note">
@@ -392,10 +392,24 @@
         </div>
 
         <div class="note">
+          <div class="note-title">As of this writing</div>
+          <p>Some claims in AI have a short half-life: model rankings, pricing, quotas, context windows, product names, which tool is best at what this month. If you write those in the simple present with no timestamp, the prose picks up a false permanence and the chapter dates faster than the idea deserves.</p>
+          <p>The classy move is restrained temporal hedging. Not <strong>currently</strong> and <strong>right now</strong> sprayed through every paragraph. One clean sentence where the instability matters: <strong>"As of this writing..."</strong> or, better, <strong>"As of March 2026..."</strong> Then pivot immediately to the durable lesson. The date belongs to the example; the principle stays in the present tense.</p>
+          <p>Rule: hedge facts, not shapes. The shape is stable. The example is not. Timestamp the volatile claim once, write the underlying pattern plainly, and the book stays honest without sounding timid or breathless.</p>
+        </div>
+
+        <div class="note">
           <div class="note-title">Running local LLMs</div>
           <p>You can run models on your own hardware. <strong>Ollama</strong> is the easiest way (<code>brew install ollama</code>, <code>ollama run llama3</code>). <strong>LM Studio</strong> is a GUI. <strong>llama.cpp</strong> is the engine under Ollama. <strong>vLLM</strong> is for production serving.</p>
           <p>Go local for: privacy-sensitive data, high-volume cheap tasks (embeddings, classification), offline environments, fine-tuning. Stay cloud for: frontier capability, tool use, long context, complex reasoning.</p>
           <p>The hybrid pattern: cloud for hard problems (reasoning, architecture), local for cheap problems (embeddings, reformatting). You can point CLI agents at a local Ollama server.</p>
+        </div>
+
+        <div class="note">
+          <div class="note-title">The server doesn't get wet</div>
+          <p>When you simulate the weather, the server doesn't get wet. This sounds obvious, but it's an important boundary to keep in view when talking about AI. A model can represent rain, predict rain, reason about rain, even help you build a better umbrella. None of that means it has been in the storm.</p>
+          <p>This is the category error behind a lot of overclaiming. The model can talk convincingly about pain, hunger, fatigue, cooking, injury, grief, child care, money stress, weather, or physical risk because language contains traces of all those things. But the traces are not the thing. The server does not get tired. The GPU does not feel the knife slip. The chatbot does not stand in the kitchen with smoke in the air.</p>
+          <p>The useful shape is: let AI handle simulation, synthesis, and planning; let reality provide the evals. The world is still the test harness. Sensors, consequences, and human bodies are how the system stays honest. Without that contact, you don't have grounded intelligence. You have a beautiful weather model running in a dry room.</p>
         </div>
 
         <div class="note">

@@ -345,6 +345,23 @@ Your choices determine the complexity. Multiplayer Settlers of Catan with expans
 
 ---
 
+## Stage 0: What If You Don't Know the Game?
+
+The guide assumes you're the domain expert. But what if you're not?
+
+One build started with: "Build a contract bridge trainer." The builder didn't know bridge. The agent didn't know bridge. Neither of them could have written a rulebook. Here's what happened instead:
+
+1. **YouTube transcript as corpus.** The builder found a "Learn Bridge in 5 Minutes" video and had the agent download the transcript. Neither of them started with expertise — they started with a five-minute video.
+2. **Confusion as requirements.** Instead of telling the agent what to build, the builder told it what confused them. "Explain 1NT better." "And why 1?" "Oh I can play from the other person's hand?" Each confusion became a feature: a richer advisor, bid-level explanations, dummy-hand guidance.
+3. **Map to what you know.** Partway through, the agent asked: "Do you know Hearts?" The entire learn panel was rewritten — from 120 lines of bridge rules to 50 lines of "you know Hearts, here are three new things." The best teaching strategy emerged mid-build from one question about what the player already knew.
+4. **The artifact taught the builder.** By the end, the builder understood bridge — not from reading about it, but from building a trainer that explained it to them. The software was a side effect of learning.
+
+This is a different loop than the rest of the guide describes. The guide says: you know the rules, you tell the agent, you correct when it's wrong. Stage 0 says: you don't know the rules, you learn alongside the agent, and your confusion is the most useful input you have.
+
+If you're building a game you don't know: find a short video or tutorial, have the agent read the transcript, and start playing immediately. Tell it what confuses you. That's the prompt.
+
+---
+
 ## Stage 1: The Rulebook
 
 The single most important thing you can do is write the rules down. Not a summary. Not "it's kind of like Uno." The actual rules, including your house rules.
@@ -787,6 +804,20 @@ The second prompt is more specific because the *intent* is different. When you'r
 But the flywheel is still there. The cribbage build is where training mode was *discovered* — asked for late, after playing a few rounds. The bridge build is where training mode was *assumed* — requested in the opening prompt, because now it's obvious that any game should teach you while you play. Both games were playable within three hours. The human spent about fifteen minutes on each, dropping in to correct what looked wrong.
 
 The flywheel doesn't just make your prompts longer. It changes what you think a game *should be*. After cribbage, a game without a training mode feels incomplete.
+
+### What a real build looks like
+
+The bridge build sounds clean in retrospect: opening prompt, agent builds, deploy. Here's what actually happened across 1,937 lines of conversation:
+
+**Layout wars (3 rounds).** The advisor panel overlapped the player's cards. First fix: repositioned as a collapsible panel. Still overlapping. Second fix: full CSS grid rewrite with the advisor in its own dedicated row. Third round: couldn't see the advisor at all — turned out to be browser caching. Three rounds of debugging to solve "the text is covering the cards." This is Stage 4, problem #4, in practice.
+
+**Learning through playing.** The builder started playing and asking beginner questions mid-build. "Explain 1NT better" became a rewrite of the advisor output. "And why 1?" revealed the agent had never explained bid levels. "Oh I can play from the other person's hand?" led to a dedicated Learn panel section about dummy. Every confusion became a feature request.
+
+**The YouTube pivot.** Midway through, the builder linked a "Learn Bridge in 5 Minutes" video. The agent pulled the transcript, produced a coverage matrix, and the builder admitted they still didn't understand trump, passes, and bonuses. Then the agent asked one question: "Do you know Hearts?" The entire Learn panel was rewritten from scratch — 120 lines replaced with 50 lines framed as "you know Hearts, here are three new things." The best pedagogical decision in the whole build came from a question, not a prompt.
+
+**Context limits.** The conversation hit Claude's context limit twice. Both times, it continued with a summary. This is normal for a real build — the conversation is longer than any single context window.
+
+**What the builder spent time on:** telling the agent what confused them, playing the game and reporting what felt wrong, linking a YouTube video. Not writing code. Not debugging logic. The corrections were about understanding, not implementation.
 
 ---
 

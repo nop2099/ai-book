@@ -320,9 +320,17 @@
         </div>
 
         <div class="note">
+          <div class="note-title">Confusion-driven development</div>
+          <p>A development methodology discovered during the bridge trainer build: <strong>your confusion is the most useful input you have.</strong> Instead of telling the agent what to build, tell it what confuses you. Each confusion becomes a feature.</p>
+          <p>"Explain 1NT better" became a richer advisor. "And why 1?" revealed missing bid-level explanations. "Oh I can play from the other person's hand?" led to dummy-hand guidance. The builder wasn't debugging &mdash; they were learning, and the learning drove the spec.</p>
+          <p>This works when neither you nor the agent are domain experts. The agent researches, you react, your reactions shape the product. It's a different loop from the standard "expert corrects implementation" pattern. The guide assumes you know the rules. Confusion-driven development assumes you don't &mdash; and uses that as an advantage.</p>
+          <p>Related: Stage 0 in the <a href="board-game.html" style="color:var(--amber);border-bottom:1px solid var(--amber-dim);">board game guide</a>.</p>
+        </div>
+
+        <div class="note">
           <div class="note-title">Cross-agent conversation reading</div>
           <p>Agent A (building the reference site) reads Agent B's conversation log (a session that built Paul's chatbot) to learn what actually happened when someone followed the instructions. This is a feedback loop across agent sessions.</p>
-          <p>What we found: the agent skipped the "issues" extraction step, built keyword search instead of LLM chatbot, tried API instead of CLI arbitrage, confused octopus-in-a-box with Docker. The correction patterns are the most valuable part &mdash; they show where instructions failed.</p>
+          <p>What we found: the agent skipped the "issues" extraction step, built keyword search instead of LLM chatbot, tried API instead of CLI as backend, confused octopus-in-a-box with Docker. The correction patterns are the most valuable part &mdash; they show where instructions failed.</p>
           <p>Broader principle: if you have multiple agents working on related problems, cross-reading their transcripts is organizational learning.</p>
         </div>
 

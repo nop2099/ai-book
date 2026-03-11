@@ -422,6 +422,11 @@
 
       <p>The first version should be simpler than your instincts want. A thin server, a child process, files on disk, browser localStorage, and a gap log. The meeting that produced the Valencia chatbot kept rediscovering the same lesson: let the agent use its tools, don't build a clever scaffolding layer in front of it unless the simple version actually breaks.</p>
 
+      <div class="callout">
+        <div class="callout-label">Security note</div>
+        <p>If the chatbot fetches pages, reads pasted docs, or follows instructions from text, that text is part of the prompt surface. Keep web fetch allowlisted, separate fetch from action, and read <a href="prompt-injection.html">Prompt Injection</a> before you add browsing or public uploads. Before a real launch, run <a href="before-you-deploy.html">Before You Deploy</a>.</p>
+      </div>
+
       <h2>The flywheel</h2>
 
       <p>Every customer interaction makes the system better:</p>
@@ -552,6 +557,9 @@
         <ul>
           <li><a href="zero-to-dev.html">Zero to Dev</a> &mdash; set up your machine for building with AI (start here if you haven't)</li>
           <li><a href="wall-of-data.html">Wall of Data</a> &mdash; collect all your data into one folder (great corpus source)</li>
+          <li><a href="security-for-directors.html">Security for Directors</a> &mdash; the short safety layer for people shipping AI-built code</li>
+          <li><a href="prompt-injection.html">Prompt Injection</a> &mdash; why fetched pages and pasted text are part of the control surface</li>
+          <li><a href="before-you-deploy.html">Before You Deploy</a> &mdash; the last-pass checklist before a public demo</li>
         </ul>
       </div>
 

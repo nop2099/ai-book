@@ -119,3 +119,5 @@ You don't need to understand git to pick a shape. You don't need a GitHub accoun
 The tools come after the decision. The setup pages in this reference exist to support what you've already decided to build — not the other way around.
 
 Start small. Start now.
+
+If the first version is going on the internet or into someone else's hands, add one more step before you ship it: read [The AI Wrote It, You Shipped It](security-for-directors.html), [Prompt Injection](prompt-injection.html), and [Before You Deploy](before-you-deploy.html).

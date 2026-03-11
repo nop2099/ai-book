@@ -387,6 +387,8 @@
 
     <main class="ani d1">
 
+      <p style="font-size: 0.72rem; color: var(--rose); margin-bottom: 1.5rem;"><strong>Security: you're building a honeypot.</strong> The wall consolidates your most sensitive data &mdash; email, messages, health records, photos, financial data &mdash; into one unencrypted folder. This is powerful but dangerous. Three rules: <strong>(1)</strong> Enable full-disk encryption (FileVault / BitLocker / LUKS) before you start. <strong>(2)</strong> Never give an agent both wall access and outbound network access in the same session &mdash; a prompt injection hiding in one of your files could exfiltrate everything. Read-only, no-network is the safe default. <strong>(3)</strong> Treat <code>~/wall/</code> as untrusted input. Your own data can contain text that looks like instructions to an AI. The agent should be sandboxed when reading wall contents.</p>
+
       <h2>What this is</h2>
 
       <p>Your data is scattered across dozens of services. Email here, photos there, chat history somewhere else, AI conversations in three different places. This page walks you (or your agent) through <strong>exporting all of it</strong> into one directory on your machine.</p>

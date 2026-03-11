@@ -109,7 +109,28 @@ Before deploying, verify a few built pages render correctly:
 
 Run the same PII scan from step 1 one more time. This catches anything introduced during the dev log update or other modifications made between steps 1 and now. If anything new appears, fix it and rebuild (step 5) before continuing. Nothing leaves the machine until this passes.
 
-## 9. Deploy to shapes.exe.xyz
+## 9. Review outstanding local changes
+
+Before deploying or committing, review the whole working tree:
+
+```bash
+git status --short
+```
+
+Do not assume every pre-existing local change is unrelated. Explicitly sort outstanding changes into three buckets:
+- **Belongs in this publish**: related, complete, validated, and should ship now. Read it, test it if needed, and include it.
+- **Important but not ready / unclear**: meaningful work that might belong in the publish, but you are not sure it is complete or intended. Stop and ask the user instead of silently omitting it.
+- **Clearly unrelated**: leave it out, but mention it in the final publish summary.
+
+Important rule: do not let meaningful local work get stranded just because it predated the current task. The publish skill must make a conscious decision about it.
+
+Examples of changes that often deserve a second look:
+- New folders like `flywheel/`, `ops/`, or other project scaffolds
+- Modified guide pages that affect the same release theme
+- Unpublished static page edits already sitting in the tree
+- Support files that the new pages depend on
+
+## 10. Deploy to shapes.exe.xyz
 
 ```bash
 rsync -avz --delete reference/site/ shapes.exe.xyz:/var/www/html/
@@ -117,7 +138,7 @@ rsync -avz --delete reference/site/ shapes.exe.xyz:/var/www/html/
 
 Verify the deploy succeeded. If rsync fails (SSH, permissions, disk space), fix before continuing. Use `curl -s -o /dev/null -w "%{http_code}" https://shapes.exe.xyz/` to confirm 200.
 
-## 10. Git commit and push
+## 11. Git commit and push
 
 Stage only the files that changed. Never `git add -A` or `git add .` — name the files explicitly.
 
@@ -131,6 +152,8 @@ git push
 
 The commit message should describe what changed and why, not just "publish." If pre-commit hooks fail, fix the issue and create a new commit (never amend).
 
+When staging, include all validated files that belong in this publish — including important local changes discovered in step 9. Do not quietly stage only the newest diff if older related work is part of the release.
+
 ## Summary
 
 ```
@@ -142,6 +165,7 @@ The commit message should describe what changed and why, not just "publish." If 
  6. Link check        — no broken internal hrefs in built site
  7. Spot-check        — built pages render correctly
  8. PII scan (final)  — one last check before anything leaves the machine
- 9. Deploy            — rsync to shapes.exe.xyz
-10. Git commit + push — named files only, descriptive message
+ 9. Review tree       — sort outstanding changes into include / ask / leave-out
+10. Deploy            — rsync to shapes.exe.xyz
+11. Git commit + push — named files only, descriptive message
 ```

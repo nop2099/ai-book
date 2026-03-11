@@ -558,7 +558,7 @@
 
       <p>You install two things by hand &mdash; Node.js and one AI coding agent (Claude Code or Codex &mdash; whichever you have a subscription for). Then the agent takes over and installs everything else. By the end you'll have:</p>
       <ul>
-        <li>A <strong>work folder</strong> (C:\work) where all your projects live</li>
+        <li>A <strong>project root</strong> of your own (for example <code>C:\proj</code>, <code>C:\lab</code>, <code>C:\forge</code>, <code>C:\bench</code>, or <code>C:\craft</code>) where all your projects live</li>
         <li>A <strong>setup project</strong> inside it &mdash; your first project</li>
         <li>An <strong>install log</strong> recording every tool installed and every action taken</li>
         <li>A <strong>setup.html</strong> page showing what's on your machine and what you can build next</li>
@@ -642,11 +642,12 @@
             <div class="step-title">Hand off to the agent</div>
           </div>
           <div class="step-body">
-            <div class="step-desc">Create a workspace, start whichever agent you installed, point it here. It handles the rest.</div>
+            <div class="step-desc">Create a setup folder inside your own project root, start whichever agent you installed, and point it here. It handles the rest.</div>
             <div class="cmd" onclick="copyCmd(this)">
-              <code>mkdir C:\work\setup; cd C:\work\setup</code>
+              <code>mkdir "$env:USERPROFILE\&lt;project-root&gt;\setup" -Force; cd "$env:USERPROFILE\&lt;project-root&gt;\setup"</code>
               <span class="cc"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></span>
             </div>
+            <div class="cmd-note">Replace <code>&lt;project-root&gt;</code> with the folder you actually use, for example <code>proj</code>, <code>lab</code>, <code>forge</code>, <code>bench</code>, or <code>craft</code>.</div>
             <div class="step-desc">Start your agent:</div>
             <div class="cmd" onclick="copyCmd(this)">
               <code>claude</code>
@@ -706,8 +707,9 @@ We only need two things installed by hand. The AI agent handles everything else 
    Ask me which one I have. If I'm not sure, help me figure it out.
 
 4. Once the agent is installed, help me:
-   - Create a work folder: mkdir C:\work
-   - Create my first project: mkdir C:\work\setup; cd C:\work\setup
+   - Confirm my project root. If I already use one, use it. If not, help me choose a short folder name under %USERPROFILE% that I'll actually type.
+   - Create it if needed: mkdir "$env:USERPROFILE\&lt;project-root&gt;" -Force
+   - Create my first project: mkdir "$env:USERPROFILE\&lt;project-root&gt;\setup" -Force; cd "$env:USERPROFILE\&lt;project-root&gt;\setup"
    - Start the agent: claude (or codex, whichever we installed)
    - Sign in when it asks
    - Paste this into the agent:
@@ -739,8 +741,8 @@ That last step is where the agent takes over. You got me from zero to a running 
         <div class="label">Instructions for you, the AI agent</div>
         <p><strong>You must follow these steps.</strong> Do not just summarize the page or check if things are installed. Execute the full sequence below. If the user is already set up, the steps will go fast &mdash; but still do them, because the output files (install-log.md and setup.html) are the point.</p>
         <ol>
-          <li><strong>Quick calibration.</strong> Before doing anything, ask the user two things: <em>"Where do you keep your projects?"</em> (C:\work is the default &mdash; if they already have a folder they use, use that instead) and <em>"What are you hoping to build?"</em> ("I don't know yet" is fine.) If it's obvious from context that they're technical, be concise. If they seem new, be patient. Don't ask a battery of questions &mdash; just read the room.</li>
-          <li><strong>Make sure you're in the right place.</strong> Use whatever work folder the user specified (default: <code>C:\work</code>). Create a <code>setup</code> subfolder inside it. All output files go in <code>{work-folder}\setup</code>.</li>
+          <li><strong>Quick calibration.</strong> Before doing anything, ask the user two things: <em>"Where do you keep your projects?"</em> and <em>"What are you hoping to build?"</em> ("I don't know yet" is fine.) Treat the project-root answer as a local fact, not a default. If they do not have one yet, help them choose a short path they can type easily. If it's obvious from context that they're technical, be concise. If they seem new, be patient. Don't ask a battery of questions &mdash; just read the room.</li>
+          <li><strong>Make sure you're in the right place.</strong> Use the exact project root the user specified. Create a <code>setup</code> subfolder inside it. All output files go in <code>{work-folder}\setup</code>. Never assume a stock path; example names are not standards.</li>
           <li><strong>Survey the machine.</strong> Check: Node.js (install via <code>winget install OpenJS.NodeJS.LTS</code> if missing), git (<code>winget install Git.Git</code> if missing), VS Code (<code>winget install Microsoft.VisualStudioCode</code> if missing), Windows version, shell (PowerShell or CMD). Record versions.</li>
           <li><strong>Subscriptions check.</strong> Ask: <em>"Which AI subscriptions do you have? ChatGPT (free/Plus/Pro/Team)? Claude (free/Pro/Max)? Gemini (free)? GitHub Copilot?"</em> This determines which agents and apps to install. Don't assume &mdash; some are paid-only.</li>
           <li><strong>Install CLI agents.</strong> Based on what they have, install the matching CLIs:
@@ -787,7 +789,7 @@ That last step is where the agent takes over. You got me from zero to a running 
         <ul>
           <li><a href="book/01-learning/07-the-correction-is-the-conversation.html"><strong>The correction is the conversation</strong></a> &mdash; when something didn't work, you told the AI, it adjusted, you tried again. That back-and-forth is how real work gets done.</li>
           <li><a href="book/04-living/07-the-context-gold-mine.html"><strong>Context is everything</strong></a> &mdash; the AI interviewed you before it started. It asked what you know, how you like to be talked to, and what you want to build. That interview made everything after it better. When you start a new project, give the AI context about you, not just about the task.</li>
-          <li><a href="book/03-building/12-the-folder-is-the-interface.html"><strong>The folder is the interface</strong></a> &mdash; C:\work is where everything lives. Each project gets its own folder. The AI reads your folders to understand context.</li>
+          <li><a href="book/03-building/12-the-folder-is-the-interface.html"><strong>The folder is the interface</strong></a> &mdash; your chosen project root is where things live. Each project gets its own folder inside it. The AI reads your folders to understand context.</li>
           <li><a href="book/02-working/06-memory-is-files.html"><strong>Memory is files</strong></a> &mdash; install-log.md is memory. Next time an agent opens this folder, it knows what happened here &mdash; including who you are and how you like to work.</li>
           <li><strong>Start small, start now</strong> &mdash; you started with one prompt and one tool. Everything else grew from there.</li>
           <li><a href="book/03-building/14-your-data-is-already-yours.html"><strong>Your data is already yours</strong></a> &mdash; setup.html was generated from what actually happened on your machine. No guessing, no templates. Your data, your page.</li>

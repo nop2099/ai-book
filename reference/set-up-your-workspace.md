@@ -9,31 +9,33 @@ platforms: [mac, windows, linux]
 
 ## What it is
 
-A workspace is a directory on your machine where your projects live. Not your home folder. Not your Desktop. Not Downloads. A deliberate place you chose, with a name that means "this is where I build things."
+A workspace is a clearly named project root inside your home directory or user profile. Not the top level of your home folder itself. Not your Desktop. Not Downloads. A deliberate place you chose, with a name that means "this is where I build things."
 
 ## Why you'd do this first
 
-Every other page in this reference assumes you have a place to put things. Git repos, project folders, config files — they all need to live somewhere. If you skip this step, you end up with projects scattered across your home directory, your Desktop, and three folders called "untitled."
+Every other page in this reference assumes you have a place to put things. Git repos, project folders, config files — they all need to live somewhere. If you skip this step, you end up with projects scattered across the top of your home directory, your Desktop, and three folders called "untitled."
 
 This takes two minutes. Do it now.
 
-## Step 1: Create ~/work
+## Step 1: Create your project root
 
 ### Mac / Linux
 
 ```bash
-mkdir -p ~/work
+mkdir -p ~/proj
 ```
 
 ### Windows (PowerShell)
 
 ```powershell
-New-Item -ItemType Directory -Force -Path "$env:USERPROFILE\work"
+New-Item -ItemType Directory -Force -Path "$env:USERPROFILE\proj"
 ```
 
-That's it. You now have a place for your stuff. Every project you build goes inside `~/work/project-name`.
+Replace `proj` with whatever short folder name you actually want: `proj`, `lab`, `forge`, `bench`, `craft`, or anything else that rolls off the tips of your fingers. The exact name is a local fact, not a standard.
 
-Why not your home directory? Because your home directory is full of invisible config files, application data, and system folders. You don't want your projects mixed in with `.zshrc` and `.config` and `Library`. Keep your work separate from your system's work.
+That's it. You now have a place for your stuff. Every project you build goes inside that folder: `~/proj/project-name` on Mac/Linux, or `$env:USERPROFILE\proj\project-name` on Windows.
+
+Why not the top of your home directory? Because your home directory is full of invisible config files, application data, and system folders. You don't want your projects mixed in with `.zshrc`, `.config`, `AppData`, or `Library`. Keep your work separate from your system's work.
 
 ## Step 2: Open a terminal
 
@@ -95,8 +97,8 @@ If you're on Arch, you know what you're doing.
 ## How to verify it worked
 
 ```bash
-# Check your workspace exists
-ls ~/work
+# Check your workspace exists (replace with your folder name)
+ls ~/proj
 
 # Check your package manager works
 brew --version      # Mac
@@ -104,11 +106,16 @@ winget --version    # Windows (in PowerShell)
 apt --version       # Linux (Debian/Ubuntu)
 ```
 
+```powershell
+# Windows: check your workspace exists (replace with your folder name)
+Get-ChildItem "$env:USERPROFILE\proj"
+```
+
 If both commands work, you're ready for everything else in this reference.
 
 ## How to prompt your AI to do it
 
-> Help me set up a development workspace. I want my projects in ~/work, not my home directory. Check if I have a package manager installed. I'm on [Mac/Windows/Linux].
+> Help me set up a development workspace. I want one clearly named project root inside my home directory, not projects scattered across it. If I already have one, use it. If not, help me choose a short folder name I'll actually type. Check if I have a package manager installed. I'm on [Mac/Windows/Linux].
 
 Or if you want the AI to handle it all:
 
@@ -116,11 +123,11 @@ Or if you want the AI to handle it all:
 
 ## What can go wrong
 
-- **"Permission denied" on mkdir**: On shared or corporate machines, your home directory might be locked down. Try creating the folder in a location you control, and tell your AI what happened.
+- **"Permission denied" on mkdir**: On shared or corporate machines, the usual spot inside your home directory or user profile might be redirected or locked down. Try creating the folder in a location you control, and tell your AI what happened.
 - **Homebrew installation hangs**: It downloads Xcode Command Line Tools, which can take 10-20 minutes on a slow connection. Let it finish.
 - **"brew: command not found" after install**: You didn't add Homebrew to your PATH. The installer printed instructions at the end — scroll up and follow them. Or paste this into your terminal: `eval "$(/opt/homebrew/bin/brew shellenv)"`
 - **winget not recognized**: Your Windows version might be too old. Update Windows or install App Installer from the Microsoft Store.
 
 ## Book connection
 
-The workspace is the foundation under everything the book describes. The steering file lives in a project folder inside `~/work`. Your board game, your data wall, your personal agent — they all start as a directory inside this workspace. Getting this right means every future "create a new project" step is just `mkdir ~/work/new-project && cd ~/work/new-project`.
+The workspace is the foundation under everything the book describes. The steering file lives in a project folder inside your chosen project root. Your board game, your data wall, your personal agent — they all start as a directory inside this workspace. Getting this right means every future "create a new project" step is just `mkdir <project-root>/new-project && cd <project-root>/new-project`. Treat that path like local configuration: tell your AI what yours is instead of inheriting someone else's example.

@@ -302,6 +302,19 @@
       </div>
 
       <div class="entry">
+        <div class="entry-date">March 11, 2026</div>
+        <div class="entry-title">Project roots as local facts</div>
+        <p>Reworked the setup and starter pages so they no longer teach <code>~/work</code> or <code>C:\work</code> as if they were defaults. The site now treats the project root as a user-specific local fact: something the agent should ask for, not inherit. Replaced the examples with short neutral names and added explicit PowerShell variants where the copy had drifted Unix-only.</p>
+        <ul>
+          <li>Setup pages now frame the project root as local configuration, not a universal standard</li>
+          <li>Replaced personal-looking path examples with neutral options: <code>proj</code>, <code>lab</code>, <code>forge</code>, <code>bench</code>, <code>craft</code></li>
+          <li>Agent instructions now say "ask where the user keeps projects" instead of assuming a stock path</li>
+          <li>Added Windows-friendly PowerShell command variants to start boxes that previously read Unix-only</li>
+          <li>Repo path examples now use placeholders instead of the author's actual clone path</li>
+        </ul>
+      </div>
+
+      <div class="entry">
         <div class="entry-date">March 10, 2026</div>
         <div class="entry-title">Principle of least surprise</div>
         <p>Dropped numeric prefixes from all URLs. <code>30-chatbot.html</code> &rarr; <code>chatbot.html</code>, <code>20-board-game.html</code> &rarr; <code>board-game.html</code>, and four more. Added <a href="sitemap.xml">sitemap.xml</a> and <a href="pages.json">pages.json</a> for machine-readable discovery. Ran a blind taste test on bronze-november &mdash; agent guessed URLs correctly on first try. Added project-level CLAUDE.md with jq steering.</p>

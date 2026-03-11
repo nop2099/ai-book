@@ -569,7 +569,7 @@
       <p>Every guide ends with a start box containing three copyable commands:</p>
 
       <ul>
-        <li><code>cd ~/work && mkdir project-name && cd project-name</code> &mdash; navigate and create the project folder.</li>
+          <li><code>cd &lt;project-root&gt; && mkdir project-name && cd project-name</code> &mdash; navigate to your own project root and create the project folder. On PowerShell, use the same pattern with your Windows path.</li>
         <li><code>claude</code> &mdash; launch the agent. (With a note: "Or use codex, gemini, or whichever agent you prefer.")</li>
         <li>The handoff: <code>Follow the instructions on this page. If anything looks unsafe or beyond what I'd reasonably want, tell me before doing it: [page URL]</code></li>
       </ul>
@@ -661,9 +661,10 @@
         <div class="label">How to start</div>
         <p>Open your terminal, navigate to the repo, and start an agent. Tell it what guide you want to build.</p>
         <div class="cmd" onclick="copyCmd(this)">
-          <code>cd ~/work/aibook</code>
+          <code>cd /path/to/aibook</code>
           <span class="cc"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></span>
         </div>
+        <div class="cmd-note">Use the actual path where you cloned the repo. PowerShell uses the same <code>cd</code> pattern with your Windows path.</div>
         <div class="cmd" onclick="copyCmd(this)">
           <code>claude</code>
           <span class="cc"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></span>

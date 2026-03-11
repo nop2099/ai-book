@@ -729,11 +729,17 @@
 
       <div class="start-box">
         <div class="label">How to start</div>
-        <p>Navigate to your work folder, create the ops folder, and hand it to an agent.</p>
+        <p>Navigate to your project root, create the ops folder, and hand it to an agent.</p>
         <div class="cmd" onclick="copyCmd(this)">
-          <code>cd ~/work && mkdir -p ops/runbooks ops/incidents</code>
+          <code>cd /path/to/your/project-root && mkdir -p ops/runbooks ops/incidents</code>
           <span class="cc"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></span>
         </div>
+        <div class="cmd-note">Mac/Linux example. Replace the path with your actual project root.</div>
+        <div class="cmd" onclick="copyCmd(this)">
+          <code>cd "$env:USERPROFILE\&lt;project-root&gt;"; mkdir ops -Force; mkdir ops\runbooks, ops\incidents -Force</code>
+          <span class="cc"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></span>
+        </div>
+        <div class="cmd-note">PowerShell variant. Replace <code>&lt;project-root&gt;</code> with the folder name you actually use.</div>
         <div class="cmd" onclick="copyCmd(this)">
           <code>claude</code>
           <span class="cc"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></span>

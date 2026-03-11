@@ -797,3 +797,11 @@ This is the correction shape from Chapter 7. The first version is never right �
 It's also the trust shape from Chapter 10. Each stage builds evidence. The engine passes tests — you trust the scoring. The tournament runs 10,000 games — you trust the rules. Trust is earned stage by stage, with evidence.
 
 And it's the maxim: make a system that will learn, but don't make it guess — tell it what you know. The RULEBOOK.md is you telling it. The corrections are you telling it more. The ML pipeline is you letting it learn from what you've told it. Every stage is the same motion: your knowledge, articulated, becoming the system's capability.
+
+---
+
+## External references
+
+- [Phaser](https://phaser.io/) — the most popular open-source HTML5 game framework. Overkill for card games, useful if your board game needs real-time rendering or physics.
+- [Boardgame.io](https://boardgame.io/) — a framework specifically for turn-based games with multiplayer. Handles state management, AI, and networking.
+- [chess-programming.org](https://www.chessprogramming.org/Main_Page) — deep reference on game tree search, evaluation functions, and AI strategy. Relevant for Stage 6.

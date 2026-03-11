@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Maintenance Status</title>
+  <style>
+    :root {
+      --bg: #0f1116;
+      --panel: #181c24;
+      --edge: #283041;
+      --text: #d7deea;
+      --muted: #8f9ab0;
+      --green: #4ecb71;
+      --amber: #e7b24a;
+      --red: #e16262;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      padding: 2rem;
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      background: var(--bg);
+      color: var(--text);
+    }
+    main {
+      max-width: 760px;
+      margin: 0 auto;
+    }
+    h1 {
+      font-size: 1.5rem;
+      margin-bottom: 0.4rem;
+    }
+    p {
+      color: var(--muted);
+      line-height: 1.7;
+      margin-bottom: 1.25rem;
+    }
+    .row {
+      display: grid;
+      grid-template-columns: 18px 220px 1fr;
+      gap: 0.75rem;
+      align-items: start;
+      padding: 0.85rem 0;
+      border-top: 1px solid var(--edge);
+    }
+    .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      margin-top: 0.35rem;
+    }
+    .green { background: var(--green); }
+    .amber { background: var(--amber); }
+    .red { background: var(--red); }
+    .name {
+      font-weight: 600;
+    }
+    .detail {
+      color: var(--muted);
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Maintenance Status</h1>
+    <p>Generated: 2026-03-11 from the first wall ETL and launch-agent pass.</p>
+
+    <div class="row">
+      <div class="dot green"></div>
+      <div class="name">Wall ETL launch agent</div>
+      <div class="detail">installed · 6h cadence · manual runs succeeding</div>
+    </div>
+
+    <div class="row">
+      <div class="dot green"></div>
+      <div class="name">Kai box (`ck`)</div>
+      <div class="detail">reachable · shell residue synced · Claude history readable</div>
+    </div>
+
+    <div class="row">
+      <div class="dot amber"></div>
+      <div class="name">Contabo nop</div>
+      <div class="detail">reachable · shell residue synced · `~/.claude/projects` permission denied</div>
+    </div>
+
+    <div class="row">
+      <div class="dot amber"></div>
+      <div class="name">Contabo root</div>
+      <div class="detail">reachable target known · root authentication currently failing</div>
+    </div>
+
+    <div class="row">
+      <div class="dot red"></div>
+      <div class="name">CT host trust</div>
+      <div class="detail">host key mismatch on `173.249.56.193` for `ct` and `ctbd`</div>
+    </div>
+
+    <div class="row">
+      <div class="dot red"></div>
+      <div class="name">DGX</div>
+      <div class="detail">timeout on latest reachability check</div>
+    </div>
+  </main>
+</body>
+</html>

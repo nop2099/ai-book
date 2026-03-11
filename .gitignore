@@ -19,3 +19,8 @@ reference/wall-of-data/
 # Build output and tooling
 reference/site/
 reference/_meta/.venv/
+
+# Local-only agent files and screenshots
+.geminiignore
+GEMINI.md
+screen-*.png

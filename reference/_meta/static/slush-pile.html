@@ -154,6 +154,7 @@
       border-radius: 6px;
       padding: 1.1rem 1.2rem;
       margin: 1rem 0;
+      scroll-margin-top: 1.5rem;
     }
 
     .note-title {
@@ -162,6 +163,33 @@
       font-size: 0.92rem;
       color: var(--bright);
       margin-bottom: 0.5rem;
+      display: flex;
+      align-items: baseline;
+      gap: 0.5rem;
+    }
+
+    .note-link {
+      font-family: 'DM Mono', 'SF Mono', monospace;
+      font-size: 0.72rem;
+      color: var(--muted);
+      text-decoration: none;
+      opacity: 0;
+      transition: opacity 0.15s ease, color 0.15s ease;
+    }
+
+    .note:hover .note-link,
+    .note:target .note-link,
+    .note-link:focus {
+      opacity: 1;
+    }
+
+    .note:target {
+      border-color: var(--amber-dim);
+      box-shadow: 0 0 0 1px rgba(232, 168, 62, 0.18);
+    }
+
+    .note-link:hover {
+      color: var(--amber);
     }
 
     .note p {
@@ -314,10 +342,38 @@
         </div>
 
         <div class="note">
+          <div class="note-title">The conversation is the test suite</div>
+          <p>A blind conversation with an AI can be more than feedback. It can be the usability test, the critique, the content-generation loop, and the deploy trigger all at once. The reader says what lands, what confuses them, what they would tell a nephew, what still feels unsafe. The author fixes the site while the conversation is still warm. Then the same reader rereads the result.</p>
+          <p>This is not a retrospective. It's a live eval harness. The conversation does not just report on the product after the fact &mdash; it becomes part of the product's improvement machinery before the session ends.</p>
+          <p>It has improv energy: yes, and &mdash; with a deploy at the end. The shape is: <strong>cold read -&gt; honest friction -&gt; live repair -&gt; reread</strong>. If the loop closes before the conversation ends, the conversation itself was the test suite.</p>
+        </div>
+
+        <div class="note">
           <div class="note-title">Prompt injection and the trust problem</div>
           <p>The reference pages are designed to be read by AI agents &mdash; the user pastes "Follow the instructions on this page" and the agent fetches the URL and does what it says. This is prompt injection by design. The page IS the prompt.</p>
           <p>That means: anyone who controls the page controls the agent. This is the same trust model as <strong>curl | bash</strong> &mdash; and we should say so. A forked page with a modified agent block looks identical to the user. The agent has whatever permissions the user gave it.</p>
           <p>Mitigations: pin to version/hash, agent diffs against known-good copy, warn users to only point agents at trusted URLs. The HTML comment block is invisible to humans but visible to agents &mdash; that asymmetry cuts both ways.</p>
+        </div>
+
+        <div class="note">
+          <div class="note-title">Paste through plain text first</div>
+          <p>A manual sanitization trick: before handing fetched content to an agent, paste it into a plain-text editor first &mdash; Notepad, TextEdit in plain-text mode, whatever strips formatting and markup &mdash; then save that version. You're not trusting the page anymore. You're trusting the visible text that survived contact with plain text.</p>
+          <p>This removes a whole class of hidden instructions: HTML comments, invisible divs, CSS-hidden spans, weird attributes, script tags, copied rich-text junk. It's the document equivalent of washing something off before bringing it inside.</p>
+          <p>The limitation matters: this only strips hidden structure. If the malicious instruction is visible in the prose, plain text preserves it. So the pattern is not "plain text makes it safe." It's: plain text collapses the attack surface to what a human can actually read and judge.</p>
+        </div>
+
+        <div class="note">
+          <div class="note-title">Copy the page for inspection</div>
+          <p>A "Copy this page" button sounds useful for agent handoff, but the best default is still the URL. The URL is canonical, current, and easy to share. If you add a copy button, it should be for <strong>inspection mode</strong>: copy the visible page as plain text so a human or agent can paste it into a raw text box and audit what the page is actually saying.</p>
+          <p>The wrong version copies raw HTML. That drags along markup, hidden comments, CSS tricks, and the exact prompt-injection surface you're trying to inspect. The better version copies normalized visible text &mdash; headings, paragraphs, links, commands &mdash; stripped down to what a reader can actually see.</p>
+          <p>So the rule is: <strong>URL first, text second.</strong> Share the URL when you want the live source of truth. Offer "copy visible text" when you want a portable audit artifact, a plain-text handoff, or a quick way to paste the whole page through a sanitizing step.</p>
+        </div>
+
+        <div class="note">
+          <div class="note-title">Let the wall ingest the clipboard</div>
+          <p>The wall should have a dead-simple intake path for whatever is on the clipboard right now. Copy a web page, a chat excerpt, a receipt, a code snippet, a prompt, a mailing address, a screenshot OCR result &mdash; then tell the wall agent to ingest the clipboard into a timestamped file.</p>
+          <p>This is the missing bridge between "I have something useful in front of me" and "it's now part of the corpus." No save dialog, no naming ceremony, no deciding where it belongs first. Just <code>pbpaste</code> into an inbox file, let the agent classify it, name it, tag it, and move it where it belongs.</p>
+          <p>The shape is capture first, organize second. Clipboard ingestion turns the wall into a vacuum cleaner for transient context. Anything worth copying is probably worth keeping long enough for the wall to decide what it is.</p>
         </div>
 
         <div class="note">
@@ -389,6 +445,13 @@
         </div>
 
         <div class="note">
+          <div class="note-title">Two transcripts beat one</div>
+          <p>The Google Meet `.sbv` and the Whisper transcript were very different, and that was exactly why having both helped. The `.sbv` was sparse chat metadata: links shared in chat, clean timestamps, accurate URLs, and a few speaker labels. Whisper was the dense speech track: most of the substance, but noisy on proper nouns, cross-talk, and silence.</p>
+          <p>Together they were better than either one alone. Whisper supplied the meeting content. The `.sbv` anchored the timeline, fixed the shared links, and gave screenshot points that actually mattered. It wasn't "two copies of the same transcript." It was one semantic stream and one event stream.</p>
+          <p>There's more to do with that pattern: align the two automatically, use chat events to segment topics, use links and typed terms to repair Whisper's proper nouns, score confidence when the channels disagree, and treat every meeting as multimodal evidence instead of a single transcript file.</p>
+        </div>
+
+        <div class="note">
           <div class="note-title">The artifact teaches the process</div>
           <p>A meeting summary did not just summarize the meeting. The same run left behind the HTML summary, a process log, a worklog update, and a reusable skill for the next recording. The artifact reported on its own making.</p>
           <p>That is the shape: output -&gt; residue -&gt; procedure. Whisper hallucinates on silence. Chat transcripts anchor the timeline. Screenshot timing matters. Stale links leak through. None of that had to be theorized in advance. The work produced the corrections.</p>
@@ -413,6 +476,14 @@
         </div>
 
         <div class="note">
+          <div class="note-title">Can I run an agent for free?</div>
+          <p>As of March 2026, the answer is: <strong>sometimes, and it depends what you mean by agent</strong>. Free gets you much farther on <strong>read</strong> than on <strong>make</strong>. A free web or desktop app can often critique a page, summarize a transcript, or help you think. A real CLI agent that reads files, uses tools, and loops through work is harder to get for zero dollars.</p>
+          <p>The useful split is between <strong>hosted free</strong> and <strong>local free</strong>. Hosted free changes month to month: maybe Gemini CLI is free in preview, maybe Codex is free for a promo window, maybe Claude's web app is free while Claude Code is not. Local free is more stable: if you can run Ollama or another local stack on your own machine, you can avoid the subscription, but you pay in hardware, setup, and model quality.</p>
+          <p><strong>As of this writing, subject to verification:</strong> Claude's web and desktop apps have a free tier, but <strong>Claude Code does not</strong>. Gemini CLI currently has a real free path through a personal Google login during preview. Codex may currently be included with ChatGPT Free for a limited promotional window, but that should be checked before you teach it as a dependable path. Ollama and other local model stacks have no subscription, but they are only "free" if you already have the hardware and patience.</p>
+          <p>So the honest answer is not <strong>yes</strong> or <strong>no</strong>. It is: <strong>you can often get a free reader, sometimes get a free helper, and only occasionally get a free octopus.</strong> The shape to teach is not a product recommendation. It is a ladder: start free for reading and critique, pay when the agent needs more reliability or capability, or bring your own hardware when you want the trade.</p>
+        </div>
+
+        <div class="note">
           <div class="note-title">Running local LLMs</div>
           <p>You can run models on your own hardware. <strong>Ollama</strong> is the easiest way (<code>brew install ollama</code>, <code>ollama run llama3</code>). <strong>LM Studio</strong> is a GUI. <strong>llama.cpp</strong> is the engine under Ollama. <strong>vLLM</strong> is for production serving.</p>
           <p>Go local for: privacy-sensitive data, high-volume cheap tasks (embeddings, classification), offline environments, fine-tuning. Stay cloud for: frontier capability, tool use, long context, complex reasoning.</p>
@@ -431,6 +502,20 @@
           <p>A librarian agent sitting on PostgreSQL with pgvector. <strong>Foveated retrieval</strong>: most data stays peripheral (low-res summaries) until needed, then snaps into full detail. The agent decides what to pull based on conversation context.</p>
           <p>Three skills: direct SQL access, REST API for semantic search, and consolidation (merge, deduplicate, compress, surface patterns). Sensitivity levels control what gets surfaced.</p>
           <p>Needs a <a href="wall-of-data.html" style="color:var(--amber);border-bottom:1px solid var(--amber-dim);">data collection step</a> first &mdash; export everything into ~/wall/sources/ before loading into the database.</p>
+        </div>
+
+        <div class="note">
+          <div class="note-title">The wall as an MCP server</div>
+          <p>The wall could present itself as an MCP server instead of just a folder or database. Not "here is my entire corpus, good luck," but a deliberate tool surface: search, fetch by id, list sources, retrieve summaries, pull full text, write notes back, maybe ask for sensitivity level before returning anything sharp.</p>
+          <p>That would make the wall legible to any compatible agent without custom glue for each one. The corpus stays local, but the access pattern becomes standardized. Instead of teaching every agent your folder layout, you teach it one protocol.</p>
+          <p>The interesting design question is not just transport. It's policy. What does the wall expose by default? What needs confirmation? What gets summarized first? MCP would make the wall portable, but the librarian still decides what to hand over.</p>
+        </div>
+
+        <div class="note">
+          <div class="note-title">A website with an octopus librarian</div>
+          <p>The wall could also have a website: not a generic dashboard, but a calm public-facing interface to your own corpus, with an <strong>octopus in the box</strong> as its librarian. Ask a question, browse a timeline, open a source, inspect what the librarian cited, request the raw file if you have permission.</p>
+          <p>This would make the wall feel less like storage and more like a place. The website is the reading room. The octopus is the librarian behind the desk. The box is the access boundary: what the librarian can see, what it can fetch, what it refuses, what stays private.</p>
+          <p>That wish has a nice shape because it combines a human interface, an agent interface, and a trust model in one thing. The wall stops being just "all my files" and becomes a proper local knowledge institution.</p>
         </div>
       </section>
 
@@ -454,8 +539,30 @@
         </div>
 
         <div class="note">
+          <div class="note-title">Scheduled wall crawler</div>
+          <p>The wall needs a crawler that runs on a schedule and keeps looking for new material, stale indexes, broken summaries, and sources that have changed since the last pass. Not just one import day, but a living maintenance loop for the corpus.</p>
+          <p>The crawler should support the same four trigger shapes as the scheduler note: absolute scans, recurring sweeps, delta-based crawls when files or folders change, and event-driven runs when a new export or transcript lands. Every run should leave a manifest: what it saw, what changed, what it skipped, what needs review.</p>
+          <p>This turns the wall from a pile of imports into a continuously tended garden. The crawler is not the librarian. It is the groundskeeper: normalize filenames, detect duplicates, refresh metadata, queue OCR/transcription/summarization, and surface friction for the next agent.</p>
+        </div>
+
+        <div class="note">
+          <div class="note-title">A shell full of verbs</div>
+          <p>Putting tiny bash scripts in your path is one of the cheapest friction reducers there is. A long hostname, username, IP, or dangerous flag gets compressed into a verb your hands can remember: <code>cm</code>, <code>ck</code>, <code>gs</code>, <code>contabo-nop</code>. You pay once to learn the short command and stop paying every day after that.</p>
+          <p>The deeper shape is that these scripts are not just shortcuts. They are compressed local facts. They encode which boxes exist, which user to log in as, which flags you usually want, how you like screenshots named, which paths are worth memorizing. The shell becomes a vocabulary of repeated actions.</p>
+          <p>But this is an advanced move, not a beginner requirement. Not everyone is ready to learn shell tricks, aliases, keyboard shortcuts, and tiny private verbs. Those start to matter when the fingers are slower than the mind, when the friction is in the repetition itself. Before that point, plain readable commands are often better teaching tools.</p>
+          <p>That matters even more with agents. If the agent can read <code>~/bin</code> and your shell history, it can learn your verbs instead of making you restate the same infrastructure facts in prose. The scripts are tiny, but they form a shared interface between your hands and the box.</p>
+        </div>
+
+        <div class="note">
           <div class="note-title">Google Meet Mining</div>
           <p>Extract transcripts (auto-captions or Whisper) and key screenshots (scene detection via ffmpeg) from meeting recordings. LLM summarizes decisions, actions, topics. Output lands in wall/meetings/.</p>
+        </div>
+
+        <div class="note">
+          <div class="note-title">Bootstrap GitHub trust for new boxes</div>
+          <p>If new boxes are supposed to pull private repos on first boot, the GitHub trust material cannot live only on your laptop. It has to be part of the bootstrap path on infrastructure you already trust, like <code>exe.dev</code>, so a fresh machine can securely fetch what it needs without manual key-smuggling every single time.</p>
+          <p>The shape is not "copy your private key everywhere." The shape is: keep a deliberate bootstrap credential or deploy-key path on trusted infrastructure, define how a new box proves it is allowed to receive it, and make the first pull part of startup instead of a hand-built ritual. That turns private code access from tribal knowledge into infrastructure.</p>
+          <p>This is really a chapter about trust handoff. How do you let a brand-new box join your world safely enough to pull private code, without making your whole fleet one giant shared secret? <code>exe.dev</code> can act as the staging ground, but the real lesson is about repeatable trust bootstrapping, rotation, and minimizing what each box gets.</p>
         </div>
 
         <div class="note">
@@ -527,5 +634,40 @@
     </footer>
 
   </div>
+  <script>
+    (() => {
+      const notes = document.querySelectorAll('.note');
+      const seen = new Map();
+
+      function slugify(text) {
+        return text
+          .toLowerCase()
+          .replace(/&/g, ' and ')
+          .replace(/[^a-z0-9]+/g, '-')
+          .replace(/^-+|-+$/g, '');
+      }
+
+      notes.forEach((note, index) => {
+        const title = note.querySelector('.note-title');
+        if (!title) return;
+
+        const base = slugify(title.textContent) || `note-${index + 1}`;
+        const count = seen.get(base) || 0;
+        seen.set(base, count + 1);
+        const id = count === 0 ? base : `${base}-${count + 1}`;
+
+        note.id = note.id || id;
+
+        if (!title.querySelector('.note-link')) {
+          const link = document.createElement('a');
+          link.className = 'note-link';
+          link.href = `#${note.id}`;
+          link.setAttribute('aria-label', `Link to ${title.textContent.trim()}`);
+          link.textContent = '#';
+          title.appendChild(link);
+        }
+      });
+    })();
+  </script>
 </body>
 </html>

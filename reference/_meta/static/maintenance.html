@@ -581,6 +581,10 @@
           <span class="source-how">One file per incident. What broke, when, how it was fixed, time to resolution.</span>
         </div>
         <div class="source">
+          <span class="source-name">proposals/</span>
+          <span class="source-how">One file per proposed maintenance change. Each proposal includes the fix and the lesson it teaches.</span>
+        </div>
+        <div class="source">
           <span class="source-name">schedule.md</span>
           <span class="source-how">Check cadence for each system. Managed by the maintenance agent itself.</span>
         </div>
@@ -688,9 +692,9 @@
           <li><strong>Set up the schedule.</strong> Create <code>ops/schedule.md</code>. Critical systems: daily. Important: weekly. Nice-to-have: monthly. Suggest automation &mdash; a cron job that runs health checks and generates the status dashboard. If the user has a <a href="daily-briefing.html">daily briefing</a>, connect the status output to it.</li>
           <li><strong>Start the changelog.</strong> Create <code>ops/changelog.md</code>. Log today as the first entry: "Maintenance system initialized." Going forward, any change to any tracked system gets an entry.</li>
           <li><strong>Connect to other systems.</strong> If the user has a <a href="flywheel.html">flywheel</a>, set up the observation bridge: red checks that can't be auto-fixed write to <code>flywheel/observations/</code>. If they have a daily briefing, feed the status dashboard into it. If they have neither, the maintenance system works standalone.</li>
-          <li><strong>Self-assess.</strong> Review the maintenance system's own performance. Are health checks producing false positives? Are runbooks accurate? Are any systems missing from the inventory? Write self-improvement proposals to <code>ops/</code> and log observations to the flywheel if one exists.</li>
+          <li><strong>Self-assess.</strong> Review the maintenance system's own performance. Are health checks producing false positives? Are runbooks accurate? Are any systems missing from the inventory? Write self-improvement proposals to <code>ops/proposals/</code> and log observations to the flywheel if one exists. Every proposal should include a <strong>lesson</strong>: what this failure taught you that future systems should inherit.</li>
         </ol>
-        <p><strong>Key rules:</strong> Health checks must be testable right now &mdash; run each one and show the result. Runbooks are scripts, not essays &mdash; an agent should be able to follow them mechanically. Don't touch production systems without explicit approval. If a check requires SSH or elevated access, confirm access before attempting. The maintenance system starts simple (inventory + checks) and grows (runbooks + schedule + automation). Don't overwhelm the user with ten runbooks on day one &mdash; start with the critical systems and expand.</p>
+        <p><strong>Key rules:</strong> Health checks must be testable right now &mdash; run each one and show the result. Runbooks are scripts, not essays &mdash; an agent should be able to follow them mechanically. Don't touch production systems without explicit approval. If a check requires SSH or elevated access, confirm access before attempting. The maintenance system starts simple (inventory + checks) and grows (runbooks + schedule + automation). Don't overwhelm the user with ten runbooks on day one &mdash; start with the critical systems and expand. Every maintenance proposal should have a lesson in it &mdash; not just what to change, but what this incident teaches about how to build or operate better next time.</p>
       </div>
 
       <hr>
@@ -731,12 +735,12 @@
         <div class="label">How to start</div>
         <p>Navigate to your project root, create the ops folder, and hand it to an agent.</p>
         <div class="cmd" onclick="copyCmd(this)">
-          <code>cd /path/to/your/project-root && mkdir -p ops/runbooks ops/incidents</code>
+          <code>cd /path/to/your/project-root && mkdir -p ops/runbooks ops/incidents ops/proposals</code>
           <span class="cc"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></span>
         </div>
         <div class="cmd-note">Mac/Linux example. Replace the path with your actual project root.</div>
         <div class="cmd" onclick="copyCmd(this)">
-          <code>cd "$env:USERPROFILE\&lt;project-root&gt;"; mkdir ops -Force; mkdir ops\runbooks, ops\incidents -Force</code>
+          <code>cd "$env:USERPROFILE\&lt;project-root&gt;"; mkdir ops -Force; mkdir ops\runbooks, ops\incidents, ops\proposals -Force</code>
           <span class="cc"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></span>
         </div>
         <div class="cmd-note">PowerShell variant. Replace <code>&lt;project-root&gt;</code> with the folder name you actually use.</div>

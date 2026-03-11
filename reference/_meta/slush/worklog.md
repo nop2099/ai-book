@@ -1142,3 +1142,15 @@ The agent got 404s every time, then self-corrected by re-reading the HTML. But t
 - The Flywheel — agent-generated 404s are signal about your information architecture
 
 **The deeper point:** "Correct" and "unsurprising" are different things. Your links can be correct (the HTML has the right hrefs) while your URL scheme is surprising (no one would guess `chatbot.html`). In a world where half your visitors are agents that infer before they parse, unsurprising beats correct.
+
+**Translation is free**
+
+TypeScript to Python, JavaScript to Klingon — that's a check, check, check. Translation between languages, frameworks, and paradigms is effectively free now. An agent rewrites a Flask app as Express, ports a React component to Svelte, converts a bash script to PowerShell. The fidelity isn't always perfect but the cost rounds to zero.
+
+The implication: any proof of concept is a proof of concept for anything else. If you built it in Python and someone needs it in Rust, the shape transfers. The prototype proves the shape works — the language it's wearing is a costume, not a commitment. Stop gating "can we build this?" on "do we know that stack?" The answer is always yes now.
+
+This also means: pick whatever language gets you to the working prototype fastest. Optimize the stack later. The translation cost is negligible compared to the cost of not having a working thing to look at.
+
+The line: **"The language it's wearing is a costume, not a commitment."**
+
+Where this fits: this is a shape — it belongs near the flywheel discussion, or in the board game guide (where cribbage was TypeScript and bridge was Python, same shape, different costumes). It also connects to the calculus chapter: independent invention isn't just people reinventing the same thing, it's the same shape wearing different language costumes. The observation that translation is free is WHY we all invented calculus — the shape is what matters, the implementation is interchangeable.

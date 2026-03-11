@@ -1,8 +1,14 @@
 ## Introduction
 
-This is a textbook about shapes.
+I once had a teacher who let us use a "cheating sheet" on tests. One index card, both sides, write whatever you want. The trick was: making the sheet was the studying. You had to decide what mattered, compress a semester into a few square inches. By the time you sat down, you didn't need the card. The writing had already done the work.
 
-Not geometric shapes. Behavioral shapes — the universal patterns that emerge when humans work with AI. Patterns that show up whether you're a programmer or a poet, whether you're building an agent or just trying to fix your sleep. They're the things that happen reliably enough that you can name them, teach them, and watch for them.
+I never stopped making cheating sheets. I kept one in a Google Doc for years — a personal log where I'd dump whatever was confusing me. Symptoms and medications when I didn't understand my own body. Contractor quotes and tile measurements when I didn't know how to renovate a kitchen. Interview prep when I didn't know Go. The pattern was always the same: I'm confused, I write it down, the writing is the understanding.
+
+Then the documentation started talking back.
+
+These are 48 things I noticed when it did.
+
+This is a textbook about shapes. Not geometric shapes. Behavioral shapes — the universal patterns that emerge when humans work with AI. Patterns that show up whether you're a programmer or a poet, whether you're building an agent or just trying to fix your sleep. They're the things that happen reliably enough that you can name them, teach them, and watch for them.
 
 The shapes in this book come from two years of building, breaking, and rebuilding AI systems. They come from conversations — thousands of them, across multiple tools, with multiple people. They come from projects that shipped and projects that didn't. They come from getting things wrong, noticing why, and trying again.
 

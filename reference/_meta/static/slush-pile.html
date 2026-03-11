@@ -300,6 +300,20 @@
         <h2>Notes &amp; Patterns</h2>
 
         <div class="note">
+          <div class="note-title">The cheating sheet</div>
+          <p>A single file where you write down every command, trick, or pattern you had to look up twice. Not organized. Not pretty. Just append to the top with a date, like a journal for your muscle memory. At work it grows fast because every day surfaces new friction. At home it's sparser but the shape is the same.</p>
+          <p>This predates AI. It predates steering files. It's the original <code>CLAUDE.md</code> &mdash; except the audience was future-you, not an agent. The fact that it looks like going backwards is the tell that it's fundamental. Steering files didn't invent this pattern. They inherited it from the cheating sheet you've been keeping in a Google Doc since forever.</p>
+          <p>The upgrade: put it where an agent can read it. Now the thing that remembers your shortcuts also has hands. <strong>"How do I do that rclone thing again?"</strong> stops being a question you ask the sheet and starts being a question the sheet answers for you.</p>
+        </div>
+
+        <div class="note">
+          <div class="note-title">Blind taste test</div>
+          <p>Spin up a fresh VM. Give an agent your URL and nothing else. Ask it to read everything and tell you what's wrong. <strong>Don't tell it you're the author.</strong> You get honest feedback because the agent has no relationship to protect and no context to be polite about.</p>
+          <p>Then reveal yourself and feed context &mdash; the backstory, the builds it can't see, the decisions behind the design. Watch the assessment change. The gap between "cold read" and "informed read" shows you exactly what your site fails to communicate. Your best ideas aren't wrong &mdash; they're invisible.</p>
+          <p>The pattern works for anything with an audience: documentation, products, portfolios, pitch decks. If a stranger can't see the point, the point isn't on the page.</p>
+        </div>
+
+        <div class="note">
           <div class="note-title">Prompt injection and the trust problem</div>
           <p>The reference pages are designed to be read by AI agents &mdash; the user pastes "Follow the instructions on this page" and the agent fetches the URL and does what it says. This is prompt injection by design. The page IS the prompt.</p>
           <p>That means: anyone who controls the page controls the agent. This is the same trust model as <strong>curl | bash</strong> &mdash; and we should say so. A forked page with a modified agent block looks identical to the user. The agent has whatever permissions the user gave it.</p>
@@ -328,6 +342,20 @@
         </div>
 
         <div class="note">
+          <div class="note-title">Translation is free</div>
+          <p>TypeScript to Python, JavaScript to Klingon &mdash; that's a check, check, check. Translation between languages, frameworks, and paradigms is effectively free now. An agent rewrites a Flask app as Express, ports a React component to Svelte, converts a bash script to PowerShell. The fidelity isn't always perfect but the cost rounds to zero.</p>
+          <p>The implication: <strong>any proof of concept is a proof of concept for anything else.</strong> If you built it in Python and someone needs it in Rust, the shape transfers. The prototype proves the shape works &mdash; the language it's wearing is a costume, not a commitment. Stop gating "can we build this?" on "do we know that stack?" The answer is always yes now.</p>
+          <p>This also means: pick whatever language gets you to the working prototype fastest. Optimize the stack later. The translation cost is negligible compared to the cost of not having a working thing to look at.</p>
+        </div>
+
+        <div class="note">
+          <div class="note-title">Push the prompt, not the agent</div>
+          <p>Agents are worse at remote work than local work. SSH is a lossy channel &mdash; JSON over SSH sucks, tool calls time out, file reads get truncated, and the agent can't see what's actually on the box the way it can when it's sitting in the directory.</p>
+          <p>The pattern that works: <strong>write a file to the remote machine, then restart the agent locally on that box.</strong> Instead of driving a remote session from here, you push context (a prompt, a file, a corpus) and let a local agent pick it up fresh. The agent runs where the files are. You're a courier, not a puppeteer.</p>
+          <p>This is how the blind taste test worked &mdash; write a file to bronze-november via SSH, then tell the local agent "read ~/that-file.md." The file transfer is simple and reliable. The agent work happens locally where everything is fast and native. Trying to do both at once through an SSH tunnel is fighting the grain.</p>
+        </div>
+
+        <div class="note">
           <div class="note-title">Cross-agent conversation reading</div>
           <p>Agent A (building the reference site) reads Agent B's conversation log (a session that built Paul's chatbot) to learn what actually happened when someone followed the instructions. This is a feedback loop across agent sessions.</p>
           <p>What we found: the agent skipped the "issues" extraction step, built keyword search instead of LLM chatbot, tried API instead of CLI as backend, confused octopus-in-a-box with Docker. The correction patterns are the most valuable part &mdash; they show where instructions failed.</p>
@@ -344,6 +372,13 @@
           <div class="note-title">Voice casting with register variants</div>
           <p>Casting works better with <strong>register variants</strong> &mdash; shouting, normal, and whisper versions of each voice. When the script calls for intensity changes, switch registers rather than making one voice sample do everything. The transitions aren't seamless but they're expressive enough.</p>
           <p>Services: ElevenLabs, Play.ht, Coqui, Bark. A VTuber face + cast voice with register variants = full agent identity without deepfake concerns.</p>
+        </div>
+
+        <div class="note">
+          <div class="note-title">Voice palette from one recording session</div>
+          <p>Write a script that deliberately hits every register &mdash; joy, anger, whisper, shout, sarcasm, tenderness, urgency, calm narration, laughter, exhaustion. Speak it yourself. STT segments it into labeled clips, each tagged with the emotion. Clone each segment separately. You end up with a <strong>palette</strong> of graded clones that are all you, but in different modes.</p>
+          <p>When the script calls for a whispered line or a shouted one, pick from your own graded clones instead of hoping TTS gets the inflection right from text markup. You perform once, and the engine performs as you forever after.</p>
+          <p>The pipeline: record &rarr; STT segments &rarr; emotion tags (from the script or sentiment analysis on the audio) &rarr; clone each segment &rarr; grade on a spectrum. One afternoon of recording, unlimited future use. If you have days where your voice is stronger than others, you bank it on a good day. The clones don't get tired.</p>
         </div>
 
         <div class="note">

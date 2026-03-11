@@ -283,11 +283,12 @@
 
     <header class="hero ani">
       <h1>Shapes of Intelligence</h1>
-      <p class="tagline">Reference companion &mdash; environment setup, project guides, and the full book</p>
+      <p class="tagline">A folder, some files, and an agent that can touch them. That's the whole thing.</p>
       <div class="howto">
-        <strong>How to use this:</strong> Read a page yourself, or paste it into your AI agent:
+        <strong>The idea:</strong> ChatGPT in a browser is a head in a box &mdash; smart, but no hands. An agent with file access is an octopus &mdash; it can read, write, search, build, and fix. The gap between those two is surprisingly small: a directory, a few text files, and an LLM with permission to act. Everything on this site &mdash; the guides, the book, the tools &mdash; is built on that.
+        <span style="display: block; margin-top: 0.6rem;"><strong>How to use this:</strong> Read a page yourself, or paste it into your AI agent:
         <em>"Read this page and help me get set up."</em>
-        Each page works both ways &mdash; human-readable and agent-parseable.
+        Each page works both ways &mdash; human-readable and agent-parseable.</span>
         <span style="display: block; margin-top: 0.5rem; font-size: 0.72rem; color: var(--muted);">This site was built with the tools it describes. <a href="devlog.html">See the dev log</a> for how.</span>
         <span style="display: block; margin-top: 0.3rem; font-size: 0.72rem; color: var(--muted);"><strong style="color: var(--rose);">Trust model:</strong> Pasting a URL into an agent is like <code style="font-size: 0.68rem;">curl | bash</code> &mdash; you're trusting this site to give your agent safe instructions. The source is auditable at <a href="https://github.com/nop2099/ai-book">GitHub</a>. Content hashes are at <a href="hashes.json">hashes.json</a>. Read the page yourself before handing it to an agent if you're not sure.</span>
       </div>
@@ -296,6 +297,11 @@
     <div class="card-group ani d1">
       <div class="section-label">The Book</div>
       <div class="book-cards">
+        <a href="the-cheating-sheet.html" class="book-card">
+          <span class="card-accent" style="background: var(--rose);"></span>
+          <span class="card-title">The Cheating Sheet</span>
+          <span class="card-desc">I document my way out of confusion. I always have. AI just made the documentation talk back. Start here.</span>
+        </a>
         <a href="whats-the-fuss.html" class="book-card">
           <span class="card-accent" style="background: var(--blue);"></span>
           <span class="card-title">What's All the Fuss About?</span>
@@ -364,6 +370,12 @@
           <span class="card-title">Guide-Based Development</span>
           <span class="card-desc">The guide that builds guides. Paste this page into an agent and it builds the next one.</span>
           <span class="card-tag">meta-guide</span>
+        </a>
+        <a href="slush-pile.html" class="card">
+          <span class="card-accent" style="background: var(--rose);"></span>
+          <span class="card-title">Slush Pile</span>
+          <span class="card-desc">Unsolved problems, open questions, and patterns still forming. The most honest page on the site.</span>
+          <span class="card-tag">thinking out loud</span>
         </a>
       </div>
     </div>
@@ -453,12 +465,6 @@
           <span class="card-title">Dev Log</span>
           <span class="card-desc">What changed and why. Updated with each check-in.</span>
           <span class="card-tag">changelog</span>
-        </a>
-        <a href="slush-pile.html" class="card">
-          <span class="card-accent" style="background: var(--amber);"></span>
-          <span class="card-title">Slush Pile</span>
-          <span class="card-desc">Unsolved problems, open questions, and patterns still forming. The most honest page on the site.</span>
-          <span class="card-tag">thinking out loud</span>
         </a>
       </div>
     </div>

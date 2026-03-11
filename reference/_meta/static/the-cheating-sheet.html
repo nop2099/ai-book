@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Cheating Sheet — Shapes of Intelligence</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,700;1,9..144,300&display=swap');
+
+    :root {
+      --void: #0a0a10;
+      --deep: #0f0f1a;
+      --surface: #161625;
+      --raised: #1e1e32;
+      --edge: #2a2a44;
+      --muted: #8888aa;
+      --text: #d0d0e2;
+      --bright: #eeeef5;
+      --white: #f5f5ff;
+      --amber: #e8a83e;
+      --amber-dim: #c4882a;
+      --teal: #4ecdc4;
+      --rose: #e85577;
+      --blue: #5588dd;
+      --purple: #9977dd;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'DM Mono', 'SF Mono', monospace;
+      background: var(--void);
+      color: var(--text);
+      line-height: 1.7;
+      min-height: 100vh;
+    }
+    a { color: var(--amber); text-decoration: none; }
+    a:visited { color: var(--amber); }
+    a:hover { color: var(--text); }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 9999;
+    }
+
+    .shell {
+      max-width: 640px;
+      margin: 0 auto;
+      padding: 3rem 1.5rem 4rem;
+    }
+
+    .masthead {
+      padding: 1.5rem 0 2rem;
+      border-bottom: 1px solid var(--edge);
+      margin-bottom: 2.5rem;
+      position: relative;
+    }
+
+    .masthead::after {
+      content: '';
+      position: absolute;
+      bottom: -1px;
+      left: 0;
+      width: 60px;
+      height: 1px;
+      background: var(--amber);
+    }
+
+    .breadcrumb {
+      font-size: 0.65rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 0.8rem;
+    }
+
+    .masthead h1 {
+      font-family: 'Fraunces', serif;
+      font-weight: 300;
+      font-size: 2.2rem;
+      color: var(--white);
+      letter-spacing: -0.02em;
+      margin-bottom: 0.4rem;
+    }
+
+    .masthead .sub {
+      color: var(--muted);
+      font-size: 0.75rem;
+      letter-spacing: 0.03em;
+      line-height: 1.7;
+    }
+
+    main p {
+      margin: 0 0 1.2rem;
+      font-size: 0.82rem;
+      line-height: 1.85;
+    }
+
+    main p strong { color: var(--bright); }
+
+    .section-title {
+      font-family: 'Fraunces', serif;
+      font-weight: 500;
+      font-size: 1.1rem;
+      color: var(--white);
+      margin: 2.5rem 0 1rem;
+      padding-bottom: 0.3rem;
+      border-bottom: 1px solid var(--edge);
+    }
+
+    .example {
+      background: var(--deep);
+      border: 1px solid var(--edge);
+      border-radius: 6px;
+      padding: 1rem 1.2rem;
+      margin: 1.2rem 0;
+      font-size: 0.78rem;
+      line-height: 1.8;
+    }
+
+    .example .label {
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 0.5rem;
+    }
+
+    .example p { margin: 0 0 0.6rem; font-size: 0.78rem; }
+    .example p:last-child { margin-bottom: 0; }
+
+    .pull {
+      font-family: 'Fraunces', serif;
+      font-size: 1.15rem;
+      font-weight: 300;
+      color: var(--white);
+      line-height: 1.6;
+      margin: 2rem 0;
+      padding-left: 1.2rem;
+      border-left: 2px solid var(--amber);
+    }
+
+    footer {
+      margin-top: 3rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--edge);
+      font-size: 0.62rem;
+      color: var(--muted);
+      letter-spacing: 0.03em;
+    }
+
+    footer a {
+      color: var(--muted);
+      border-bottom: 1px solid var(--edge);
+      transition: color 0.2s, border-color 0.2s;
+    }
+
+    footer a:hover {
+      color: var(--amber);
+      border-color: var(--amber-dim);
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .ani { animation: fadeUp 0.4s ease-out both; }
+    .d1 { animation-delay: 0.05s; }
+    .d2 { animation-delay: 0.15s; }
+    .d3 { animation-delay: 0.25s; }
+
+    @media (max-width: 600px) {
+      .shell { padding: 1.5rem 1rem 3rem; }
+      .masthead h1 { font-size: 1.6rem; }
+    }
+  </style>
+</head>
+<body>
+  <div class="shell">
+
+    <header class="masthead ani">
+      <div class="breadcrumb"><a href="index.html">Shapes of Intelligence</a></div>
+      <h1>The Cheating Sheet</h1>
+      <p class="sub">I document my way out of confusion. I always have. AI just made the documentation talk back.</p>
+    </header>
+
+    <main>
+      <section class="ani d1">
+        <p>I once had a teacher who let us use a "cheating sheet" on tests. One index card, both sides, write whatever you want. The constraint was the size &mdash; it had to be small.</p>
+
+        <p>The trick was: <strong>making the sheet was the studying.</strong> You had to decide what mattered. You had to compress a semester into a few square inches. By the time you sat down for the test, you didn't need the card. The act of writing it had already done the work.</p>
+
+        <p>I never stopped making cheating sheets. I just stopped calling them that.</p>
+
+        <div class="section-title">The pattern</div>
+
+        <p>I'm confused about something. I write it down. The writing is the understanding. The artifact &mdash; the file, the doc, the note &mdash; isn't the point. It's the residue of having thought it through.</p>
+
+        <p>This is the same move every time, across every domain:</p>
+
+        <div class="example">
+          <div class="label">Health</div>
+          <p>I didn't understand my own symptoms. So I tracked them &mdash; inflammation, medication, sleep, exercise, cheese &mdash; in a Google Doc. "What is this thing that is triggering these episodes of pain?" The doc didn't cure anything. Writing it down made the patterns visible. Cheese was the answer.</p>
+        </div>
+
+        <div class="example">
+          <div class="label">A kitchen renovation</div>
+          <p>I didn't know tile, electrical, plumbing, or countertops. So I wrote texts to contractors full of questions, kept a running doc of every quote and measurement, and had ChatGPT conversations about floor leveling. I documented my way through a remodel.</p>
+        </div>
+
+        <div class="example">
+          <div class="label">Bridge</div>
+          <p>I didn't know bridge. I told an AI agent what confused me. Each confusion became a feature. "What's a trick?" became the trick-tracking UI. "Why 1NT?" became the bid explanation panel. I documented my way into knowing bridge &mdash; and ended up with a <a href="board-game.html">working game</a>.</p>
+        </div>
+
+        <div class="example">
+          <div class="label">Job interviews</div>
+          <p>I didn't know Go well enough. So I wrote a cheat sheet &mdash; types, data structures, syntax. I documented my way into a language.</p>
+        </div>
+
+        <div class="example">
+          <div class="label">This book</div>
+          <p>I didn't know how to explain what I'd learned about AI. I wrote 48 short observations. Each one was me working out what I thought by writing it down. The book is the cheating sheet for two years of building.</p>
+        </div>
+
+        <div class="section-title">What changed</div>
+
+        <p>The pattern is ancient. The cheating sheet predates AI. It predates computers. It's an index card in your pocket.</p>
+
+        <p>What changed is that now the documentation talks back.</p>
+
+        <p>The personal journal: you write "I'm feeling confused today," and the entry sits there. Maybe you notice the pattern months later. Maybe you don't.</p>
+
+        <p>The <a href="slush-pile.html">slush pile</a>: you say "make a note about translation being free," and within minutes it's expanded, connected to three other ideas, and sitting on a page where the next agent can read it.</p>
+
+        <p>The cheating sheet: you write <code>gh repo create reponame --private</code> so you don't have to look it up again. Now put that file where an agent can read it, and <strong>"how do I do that rclone thing again?"</strong> stops being a question you ask the sheet. It's a question the sheet answers for you.</p>
+
+        <div class="pull">The speed changed. The thinking didn't. I was always documenting my way out of confusion. The confusion just resolves faster now because the document has hands.</div>
+
+        <div class="section-title">The shape</div>
+
+        <p>ChatGPT in a browser is a head in a box &mdash; smart, but no hands. It can think with you, but you do all the work. You copy-paste its output and act on it yourself.</p>
+
+        <p>An agent with file access is an octopus &mdash; it can read, write, search, build, and fix. You say "fix this" and it fixes it. The intelligence has reach.</p>
+
+        <p>The gap between those two is smaller than you'd think:</p>
+
+        <div class="example">
+          <p>&bull; A folder</p>
+          <p>&bull; Some files</p>
+          <p>&bull; An agent that can read and write them</p>
+        </div>
+
+        <p>That's it. No database, no cloud platform, no deployment pipeline. Just a directory and an LLM with permission to act. From that, you get the <a href="chatbot.html">chatbot</a>, the <a href="flywheel.html">flywheel</a>, the <a href="daily-briefing.html">daily briefing</a>, the <a href="wall-of-data.html">wall of data</a> &mdash; all of it is just folders and files with an agent that has permission to touch them.</p>
+
+        <p>Every guide on this site is a cheating sheet for a specific kind of confusion. The board game guide is for "I want to build a game but I don't know how." The chatbot guide is for "I have messy knowledge and I want to make it useful." The wall of data is for "my life is scattered across 40 services and I can't find anything."</p>
+
+        <p>You read them or you paste them into an agent. Either way, they work the same way the index card worked: the constraint is the size. The act of compressing the problem into a guide is what makes the guide work. And now the guide can act on what it knows.</p>
+
+        <p><strong>I'm a simple soul. I document my way out of confusion.</strong> Everything on this site is a version of that.</p>
+      </section>
+    </main>
+
+    <footer class="ani d3">
+      <p><em>Shapes of Intelligence</em> by James Wilson &mdash; <a href="index.html">Home</a> &middot; <a href="https://github.com/nop2099/ai-book">GitHub</a></p>
+    </footer>
+
+  </div>
+</body>
+</html>

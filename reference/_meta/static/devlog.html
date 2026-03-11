@@ -230,6 +230,19 @@
 
       <div class="entry">
         <div class="entry-date">March 10, 2026</div>
+        <div class="entry-title">Principle of least surprise</div>
+        <p>Dropped numeric prefixes from all URLs. <code>30-chatbot.html</code> &rarr; <code>chatbot.html</code>, <code>20-board-game.html</code> &rarr; <code>board-game.html</code>, and four more. Added <a href="sitemap.xml">sitemap.xml</a> and <a href="pages.json">pages.json</a> for machine-readable discovery. Ran a blind taste test on bronze-november &mdash; agent guessed URLs correctly on first try. Added project-level CLAUDE.md with jq steering.</p>
+        <ul>
+          <li>Renamed 6 files to drop numeric prefixes (principle of least surprise for agents)</li>
+          <li>Updated all internal links across 9 source files</li>
+          <li>Generated <code>sitemap.xml</code> (74 URLs) and <code>pages.json</code> (agent-readable manifest)</li>
+          <li>Blind taste test: 3/3 guessed URLs returned 200 (was 0/3 before rename)</li>
+          <li>Slush entry: principle of least surprise &mdash; "unsurprising beats correct"</li>
+        </ul>
+      </div>
+
+      <div class="entry">
+        <div class="entry-date">March 10, 2026</div>
         <div class="entry-title">Blind taste test, Linux quickstart, and deploy friction</div>
         <p>Ran a blind taste test &mdash; spun up a fresh exe.dev VM, pretended to be a stranger, had Claude cold-read the site. Found real gaps: no Linux quickstart, buried navigation, missing book preview, ambiguous dev log. Fixed them all. Added link checker to <code>/publish</code> skill.</p>
         <ul>
@@ -291,8 +304,8 @@
           <li><strong>~10am&ndash;2pm:</strong> Vic improv screenplay with "wall of data" concept</li>
           <li><strong>~2:50pm:</strong> Reference site started &mdash; decided on static site, modular reference pages. Built scaffold with 9 project shapes, workspace/SSH/GitHub pages</li>
           <li><strong>~2:55pm:</strong> Memory Viewer prototyped (shelved) &mdash; foveated retrieval from Postgres, "fibers of attention" concept</li>
-          <li><strong>~4pm:</strong> <a href="20-board-game.html">Board Game</a> guide &mdash; full staged guide with network visibility as core multiplayer principle</li>
-          <li><a href="30-chatbot.html">30-Minute Chatbot</a>, <a href="wall-of-data.html">Wall of Data</a>, <a href="zero-to-dev.html">Zero to Dev</a> (Mac + Windows), <a href="vic-and-sam.html">Vic and Sam screenplay</a></li>
+          <li><strong>~4pm:</strong> <a href="board-game.html">Board Game</a> guide &mdash; full staged guide with network visibility as core multiplayer principle</li>
+          <li><a href="chatbot.html">30-Minute Chatbot</a>, <a href="wall-of-data.html">Wall of Data</a>, <a href="zero-to-dev.html">Zero to Dev</a> (Mac + Windows), <a href="vic-and-sam.html">Vic and Sam screenplay</a></li>
           <li><strong>~6pm:</strong> Readability tooling &mdash; check-readability.py (textstat), analyze-chapters.py, <a href="chapter-dashboard.html">chapter dashboard</a>. Average grade across book: 6.9</li>
           <li><strong>~6:30pm:</strong> Book on website &mdash; build-book.py compiles 48 chapters to HTML with prev/next nav</li>
           <li><strong>~7pm:</strong> Spiral curriculum concept &mdash; Wonder &rarr; Try &rarr; Break &rarr; Know cycle, builder track vs director track</li>

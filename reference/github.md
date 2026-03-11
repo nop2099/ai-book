@@ -91,7 +91,7 @@ This connects your terminal to your GitHub account. After this, `gh` commands ju
 
 ### Step 6: Set up SSH keys
 
-See [SSH Keys](04-ssh-keys.html). You need this for `git push` to work without passwords.
+See [SSH Keys](ssh-keys.html). You need this for `git push` to work without passwords.
 
 ## Core concepts (the minimum)
 
@@ -167,7 +167,7 @@ For ongoing work:
 ## What can go wrong
 
 - **"fatal: not a git repository"** — You're not in a folder that's been initialized with `git init` or cloned from GitHub.
-- **"Permission denied (publickey)"** — SSH keys aren't set up. See [SSH Keys](04-ssh-keys.html).
+- **"Permission denied (publickey)"** — SSH keys aren't set up. See [SSH Keys](ssh-keys.html).
 - **"Updates were rejected because the remote contains work"** — Someone (or you, from another machine) pushed changes you don't have. Run `git pull` first.
 - **Accidentally committed a secret** — If you push an API key or password, it's in the git history forever (even if you delete the file). Rotate the key immediately and add a `.gitignore` to prevent it next time.
 - **"detached HEAD"** — You checked out a specific commit instead of a branch. Run `git checkout main` to get back to normal.

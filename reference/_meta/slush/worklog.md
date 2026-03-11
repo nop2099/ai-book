@@ -104,7 +104,7 @@ This flips the dynamic. Instead of blind execution, the agent becomes a second p
 
 Most frontier models already have this instinct — they resist obviously dangerous instructions. But they're trained to be helpful, which means they lean toward compliance. An explicit invitation to be skeptical counterweights that. It says: "I want you to think before you act, and I won't be annoyed if you push back."
 
-Implemented: the handoff prompt on zero-to-dev.html and 30-chatbot.html now reads: "Follow the instructions on this page. If anything looks unsafe or beyond what I'd reasonably want, tell me before doing it."
+Implemented: the handoff prompt on zero-to-dev.html and chatbot.html now reads: "Follow the instructions on this page. If anything looks unsafe or beyond what I'd reasonably want, tell me before doing it."
 
 The .md transparency point matters. If the whole ecosystem moved to "agents read markdown files" instead of "agents fetch HTML pages," the injection surface shrinks a lot. You can still hide stuff in markdown (zero-width characters, excessive whitespace, misleading headers) but it's much harder than HTML.
 
@@ -451,7 +451,7 @@ Guide-based development means: when you want to build something, you don't start
 
 *The meta-guide would teach:*
 
-1. **Pick an existing guide as a base.** Don't start from scratch. Copy the HTML structure from wall-of-data.html or 30-chatbot.html. The CSS, the layout, the section types (masthead, intro, agent-block, patterns, start-box) are already proven. You're writing content, not a website.
+1. **Pick an existing guide as a base.** Don't start from scratch. Copy the HTML structure from wall-of-data.html or chatbot.html. The CSS, the layout, the section types (masthead, intro, agent-block, patterns, start-box) are already proven. You're writing content, not a website.
 
 2. **Write the interview first.** Every guide starts with the agent interviewing the user. What are they building? What do they have already? What do they want to end up with? The interview section shapes everything that follows. If you can't write the interview questions, you don't understand the guide yet.
 
@@ -925,7 +925,7 @@ This is the same observe-orient-decide-act (OODA) loop, but split across two sys
 - [ ] Integrate flywheel material from slush pile
 - [ ] Study guide readability (Parts I+II at grade 10.7)
 - [ ] Remaining readability warnings (workspace page ~grade 9)
-- [ ] Add 3 missing shapes to 00-what-do-you-want-to-build.md
+- [ ] Add 3 missing shapes to what-do-you-want-to-build.md
 
 **On hold:**
 - [ ] Memory Viewer — connect to real Octopus API
@@ -955,7 +955,7 @@ Your conversation history isn't just on your laptop. Every exe.dev VM you've eve
 
 The bronze-november box had a single conversation — someone (you, pretending to be a stranger) asking Claude to assess shapes.exe.xyz cold. The conversation revealed:
 - The site reads well to a fresh agent ("the writing voice is strong, grade 7 readability")
-- Broken links: `chatbot.html` and `board-game.html` 404 because the actual files use numbered prefixes (`30-chatbot.html`, `20-board-game.html`)
+- Broken links: `chatbot.html` and `board-game.html` 404 because the actual files use numbered prefixes (`chatbot.html`, `board-game.html`)
 - Missing Linux quickstart — the exe.dev audience gets no unified onramp
 - The "What Do You Want to Build?" page is buried at the bottom of the project list, should be first
 - OAuth guide needs a "you probably don't need this yet" signal
@@ -1047,7 +1047,7 @@ Spin up a fresh box. No context, no history, no CLAUDE.md, no prior conversation
 - Dev log started March 7 — for a 48-chapter book, looks like it appeared from nowhere
 - The 15-minute ratio in the dev log was ambiguous ("you did not build Bridge in 15 minutes")
 - Book link on homepage gave zero preview of what the chapters cover
-- The agent hallucinated broken links twice (said `chatbot.html` 404s when the actual link was `30-chatbot.html` and correct) — a useful reminder that agent feedback needs verification
+- The agent hallucinated broken links twice (said `chatbot.html` 404s when the actual link was `chatbot.html` and correct) — a useful reminder that agent feedback needs verification
 
 **The shape:**
 1. Get a clean machine (exe.dev VM, friend's laptop, classroom terminal)
@@ -1086,7 +1086,7 @@ The blind taste test surfaced a category of bug that manual review misses: **str
 
 After build, before spot-check, crawl every HTML file in the site output. Extract all `href` attributes that point to local files (not external URLs, not anchors). Verify each target file exists. Report any that don't. This catches:
 - References to pages that haven't been written yet (index.html linking to a guide that's still in the slush pile)
-- Renamed files (the numbered prefix problem — `30-chatbot.html` exists but someone links to `chatbot.html`)
+- Renamed files (the numbered prefix problem — `chatbot.html` exists but someone links to `chatbot.html`)
 - Deleted pages that are still referenced from other pages
 - Typos in filenames
 
@@ -1109,3 +1109,36 @@ After build, before spot-check, crawl every HTML file in the site output. Extrac
 - Solved Problems Stay Solved — the link checker is a solved problem, encoded in the skill
 - The Steering File — /publish IS a steering file for the deploy process
 - Maintenance — link checking is a health check for the site
+
+---
+
+### Principle of Least Surprise — URL Design for Agents and Humans
+
+**Shape:** When an AI agent lands on your site, it reads the index, extracts what it thinks the URLs are, and fetches them. It does NOT always parse the actual `href` attributes. It *guesses* based on page titles, link text, and common URL conventions. If your URL scheme surprises it, you get 404s — not because your links are broken, but because the agent's mental model of your site doesn't match reality.
+
+**The evidence:** Two separate blind taste tests on bronze-november. Both times, the agent:
+1. Tried clean directory paths (`/guides/chatbot`, `/manuscript`) — we serve flat files at root
+2. Dropped numeric prefixes (`chatbot.html` instead of `chatbot.html`) — the prefixes exist for sort ordering but are invisible to someone guessing
+3. Invented prefixes (`the-landscape.html` instead of `landscape.html`)
+
+The agent got 404s every time, then self-corrected by re-reading the HTML. But the first impression was "this site is broken."
+
+**The principle of least surprise says:** Your URLs should be what someone would guess without reading your HTML. That means:
+- No numeric prefixes in public URLs (`chatbot.html` not `chatbot.html`)
+- No surprising omissions (`the-landscape` vs `landscape` — pick one convention and be consistent)
+- Flat files at root is fine, but the filenames should be the obvious slug of the page title
+- If you need sort ordering, do it in the index page's HTML, not in the filename
+
+**The plan:**
+1. **Rename files to drop numeric prefixes.** `chatbot.html` → `chatbot.html`, `board-game.html` → `board-game.html`, `what-do-you-want-to-build.html` → `what-do-you-want-to-build.html`. Update all internal links.
+2. **Audit for naming consistency.** Every filename should be the obvious kebab-case slug of the page title. No `the-` prefixes unless the title actually starts with "The."
+3. **Consider a sitemap or link manifest.** A `sitemap.xml` or even a JSON manifest at `/pages.json` gives agents a machine-readable index instead of forcing them to parse HTML.
+4. **Test with a fresh agent.** After renaming, do another blind taste test. If the agent guesses URLs correctly on the first try, the surprise is gone.
+
+**What this connects to:**
+- The Blind Taste Test — this is what the taste test revealed
+- Deploy Friction — 404s are friction, even if the links are technically correct on the page
+- Fix Your Papercuts — naming is a papercut for every visitor, human or AI
+- The Flywheel — agent-generated 404s are signal about your information architecture
+
+**The deeper point:** "Correct" and "unsurprising" are different things. Your links can be correct (the HTML has the right hrefs) while your URL scheme is surprising (no one would guess `chatbot.html`). In a world where half your visitors are agents that infer before they parse, unsurprising beats correct.

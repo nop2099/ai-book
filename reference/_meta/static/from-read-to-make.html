@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>From Read to Make — Shapes of Intelligence</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,700;1,9..144,300&display=swap');
+
+    :root {
+      --void: #0a0a10;
+      --deep: #0f0f1a;
+      --surface: #161625;
+      --raised: #1e1e32;
+      --edge: #2a2a44;
+      --muted: #8888aa;
+      --text: #d0d0e2;
+      --bright: #eeeef5;
+      --white: #f5f5ff;
+      --amber: #e8a83e;
+      --amber-dim: #c4882a;
+      --teal: #4ecdc4;
+      --rose: #e85577;
+      --blue: #5588dd;
+      --purple: #9977dd;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'DM Mono', 'SF Mono', monospace;
+      background: var(--void);
+      color: var(--text);
+      line-height: 1.7;
+      min-height: 100vh;
+    }
+    a { color: var(--amber); text-decoration: none; }
+    a:visited { color: var(--amber); }
+    a:hover { color: var(--text); }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 9999;
+    }
+
+    .shell {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 3rem 1.5rem 4rem;
+    }
+
+    .masthead {
+      padding: 1.5rem 0 2rem;
+      border-bottom: 1px solid var(--edge);
+      margin-bottom: 2.5rem;
+      position: relative;
+    }
+
+    .masthead::after {
+      content: '';
+      position: absolute;
+      bottom: -1px;
+      left: 0;
+      width: 60px;
+      height: 1px;
+      background: var(--amber);
+    }
+
+    .breadcrumb {
+      font-size: 0.65rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 0.8rem;
+    }
+
+    .breadcrumb a {
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .breadcrumb a:hover { color: var(--amber); }
+
+    .masthead h1 {
+      font-family: 'Fraunces', serif;
+      font-weight: 300;
+      font-size: 2rem;
+      color: var(--white);
+      letter-spacing: -0.01em;
+    }
+
+    .masthead .sub {
+      color: var(--muted);
+      font-size: 0.75rem;
+      margin-top: 0.4rem;
+      letter-spacing: 0.03em;
+      line-height: 1.8;
+      max-width: 58ch;
+    }
+
+    h2 {
+      font-family: 'Fraunces', serif;
+      font-weight: 500;
+      font-size: 1.05rem;
+      color: var(--bright);
+      margin: 2.2rem 0 0.6rem;
+    }
+
+    h2:first-of-type { margin-top: 0; }
+
+    p {
+      font-size: 0.78rem;
+      margin-bottom: 0.8rem;
+      line-height: 1.8;
+    }
+
+    strong { color: var(--bright); }
+    em { color: var(--amber); font-style: normal; }
+
+    .pull {
+      font-family: 'Fraunces', serif;
+      font-size: 1.15rem;
+      font-weight: 300;
+      color: var(--white);
+      line-height: 1.6;
+      margin: 2rem 0;
+      padding-left: 1.2rem;
+      border-left: 2px solid var(--amber);
+    }
+
+    .stage {
+      background: var(--deep);
+      border: 1px solid var(--edge);
+      border-radius: 6px;
+      padding: 1rem 1.2rem;
+      margin: 1rem 0;
+    }
+
+    .stage-num {
+      font-size: 0.6rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--amber);
+      margin-bottom: 0.35rem;
+    }
+
+    .stage-title {
+      font-family: 'Fraunces', serif;
+      font-size: 1rem;
+      color: var(--bright);
+      margin-bottom: 0.45rem;
+    }
+
+    .stage p {
+      font-size: 0.74rem;
+      margin-bottom: 0.55rem;
+      line-height: 1.8;
+    }
+
+    ul {
+      list-style: none;
+      margin: 0.6rem 0 0;
+      padding: 0;
+    }
+
+    ul li {
+      font-size: 0.74rem;
+      padding: 0.2rem 0 0.2rem 1.2rem;
+      position: relative;
+      line-height: 1.8;
+    }
+
+    ul li::before {
+      content: '\2013';
+      position: absolute;
+      left: 0;
+      color: var(--muted);
+    }
+
+    .mini {
+      background: var(--surface);
+      border: 1px solid var(--edge);
+      border-radius: 4px;
+      padding: 0.9rem 1rem;
+      margin: 1rem 0;
+    }
+
+    .mini p {
+      font-size: 0.72rem;
+      margin-bottom: 0.45rem;
+    }
+
+    footer {
+      margin-top: 3rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--edge);
+      font-size: 0.62rem;
+      color: var(--muted);
+      letter-spacing: 0.03em;
+    }
+
+    footer a {
+      color: var(--muted);
+      border-bottom: 1px solid var(--edge);
+      transition: color 0.2s, border-color 0.2s;
+    }
+
+    footer a:hover {
+      color: var(--amber);
+      border-color: var(--amber-dim);
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .ani { animation: fadeUp 0.4s ease-out both; }
+    .d1 { animation-delay: 0.05s; }
+    .d2 { animation-delay: 0.15s; }
+
+    @media (max-width: 600px) {
+      .shell { padding: 1.5rem 1rem 3rem; }
+      .masthead h1 { font-size: 1.6rem; }
+    }
+  </style>
+</head>
+<body>
+  <div class="shell">
+
+    <header class="masthead ani">
+      <div class="breadcrumb">
+        <a href="index.html">Shapes of Intelligence</a> / Curriculum
+      </div>
+      <h1>From Read to Make</h1>
+      <p class="sub">A simple curriculum for moving from head in a box to octopus in a box.</p>
+    </header>
+
+    <main class="ani d1">
+      <p>Most people first meet AI as a <strong>head in a box</strong>: a chat window that can answer questions, explain concepts, and produce text on command. That's already useful. But it still leaves the human doing the carrying. You ask, it answers, you do the work.</p>
+
+      <p>The real transition happens when the system gets <strong>hands</strong>. An agent can read a folder, inspect files, run commands, write code, and fix things in place. That's the move to <strong>octopus in a box</strong>. Not intelligence as conversation. Intelligence as reach.</p>
+
+      <div class="pull">My mentoring is about helping people cross that boundary: from read to make.</div>
+
+      <p>This site is the curriculum for that crossing. Not a pile of articles. A path.</p>
+
+      <h2>The path</h2>
+
+      <div class="stage">
+        <div class="stage-num">Stage 1</div>
+        <div class="stage-title">Read</div>
+        <p>First, replace hype and vague fascination with a working picture of what changed. The goal here is not mastery. It's orientation.</p>
+        <ul>
+          <li><a href="whats-the-fuss.html">What's All the Fuss About?</a> &mdash; the plain-English onramp</li>
+          <li><a href="the-cheating-sheet.html">The Cheating Sheet</a> &mdash; the thesis: documents with hands</li>
+          <li><a href="book/01-learning/02-learn-by-building.html">Learn by Building</a> &mdash; why making clarifies faster than studying</li>
+        </ul>
+      </div>
+
+      <div class="stage">
+        <div class="stage-num">Stage 2</div>
+        <div class="stage-title">Touch</div>
+        <p>Next, get the tool out of the browser and onto your machine. This is where the system stops being a clever answer box and starts being able to act on files.</p>
+        <ul>
+          <li><a href="zero-to-dev.html">Zero to Developer (Mac)</a>, <a href="zero-to-dev-windows.html">Windows</a>, or <a href="zero-to-dev-linux.html">Linux</a> &mdash; the fastest way to get an agent with hands</li>
+          <li><a href="set-up-your-workspace.html">Set Up Your Workspace</a> &mdash; the folder becomes the interface</li>
+          <li><a href="github.html">GitHub</a> and <a href="ssh-keys.html">SSH Keys</a> &mdash; the minimum infrastructure for real work</li>
+        </ul>
+      </div>
+
+      <div class="stage">
+        <div class="stage-num">Stage 3</div>
+        <div class="stage-title">Make</div>
+        <p>Then pick one project shape and ship something. The point is not to become an AI expert. The point is to make one real thing with the new interface.</p>
+        <ul>
+          <li><a href="what-do-you-want-to-build.html">What Do You Want to Build?</a> &mdash; choose the first shape</li>
+          <li><a href="board-game.html">Board Game</a> &mdash; build from rules you already know</li>
+          <li><a href="chatbot.html">Chatbot</a> &mdash; turn messy knowledge into a system that answers</li>
+          <li><a href="wall-of-data.html">Wall of Data</a> &mdash; gather your own context into one place</li>
+        </ul>
+      </div>
+
+      <div class="mini">
+        <p><strong>After the crossing:</strong> once you've made one thing, the work gets more interesting.</p>
+        <p><a href="flywheel.html">Flywheel</a> turns the residue of your work into process improvement. <a href="daily-briefing.html">Daily Briefing</a> turns your own data into a morning dashboard. <a href="guide-based-dev.html">Guide-Based Development</a> turns your mentoring into repeatable pages the next agent can follow.</p>
+      </div>
+
+      <h2>What this curriculum is really teaching</h2>
+
+      <p>On the surface, it looks like setup instructions, project guides, and a book. Underneath, it's teaching a narrower thing: how to move from <strong>reading about intelligence</strong> to <strong>working with intelligence that can make things</strong>.</p>
+
+      <p>Read gives you the model. Touch gives the model hands. Make gives you evidence that the whole thing is real.</p>
+
+      <p>If you only stay in the read stage, AI remains news. If you cross into make, it becomes part of your practice.</p>
+
+      <h2>How to use the site</h2>
+
+      <ul>
+        <li>If you're curious but skeptical, start with <a href="whats-the-fuss.html">What's All the Fuss About?</a>.</li>
+        <li>If the thesis is still fuzzy, read <a href="the-cheating-sheet.html">The Cheating Sheet</a>.</li>
+        <li>If you're ready to get hands, do <a href="zero-to-dev.html">Zero to Developer</a> on your platform.</li>
+        <li>If you want the first real build, go to <a href="what-do-you-want-to-build.html">What Do You Want to Build?</a> and pick one shape.</li>
+      </ul>
+
+      <p>This is the heart of the mentoring. The site just makes the path repeatable.</p>
+    </main>
+
+    <footer class="ani d2">
+      <p>Part of <a href="index.html">Shapes of Intelligence</a> &mdash; a companion reference for the book.</p>
+      <p><a href="https://github.com/nop2099/ai-book">GitHub</a></p>
+    </footer>
+
+  </div>
+</body>
+</html>

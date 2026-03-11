@@ -102,6 +102,76 @@
     .hero .howto strong { color: var(--bright); }
     .hero .howto em { color: var(--amber); font-style: normal; }
 
+    .path-block {
+      margin: 1.5rem 0 2.5rem;
+    }
+
+    .path-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+    }
+
+    .path-card {
+      background: var(--deep);
+      border-radius: 4px;
+      padding: 1rem;
+      border: 1px solid var(--edge);
+    }
+
+    .path-step {
+      font-size: 0.55rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--amber);
+      margin-bottom: 0.35rem;
+    }
+
+    .path-title {
+      font-family: 'Fraunces', serif;
+      font-size: 1rem;
+      color: var(--bright);
+      margin-bottom: 0.4rem;
+    }
+
+    .path-card p {
+      font-size: 0.7rem;
+      color: var(--muted);
+      line-height: 1.7;
+      margin-bottom: 0.45rem;
+    }
+
+    .path-links {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .path-links li {
+      font-size: 0.68rem;
+      line-height: 1.7;
+      padding: 0.1rem 0 0.1rem 0.9rem;
+      position: relative;
+    }
+
+    .path-links li::before {
+      content: '\2192';
+      position: absolute;
+      left: 0;
+      color: var(--muted);
+    }
+
+    .path-note {
+      margin-top: 0.8rem;
+      font-size: 0.7rem;
+      color: var(--muted);
+      line-height: 1.8;
+      background: var(--deep);
+      border: 1px solid var(--edge);
+      border-radius: 4px;
+      padding: 0.8rem 1rem;
+    }
+
     /* ── Section headers ── */
     .section-label {
       font-size: 0.6rem;
@@ -261,6 +331,8 @@
       .hero h1 { font-size: 3.2rem; }
       .hero .tagline { font-size: 0.98rem; }
       .hero .howto { font-size: 0.9rem; }
+      .path-card p, .path-links li, .path-note { font-size: 0.82rem; }
+      .path-title { font-size: 1.15rem; }
       .section-label { font-size: 0.72rem; }
       .card-title { font-size: 1.1rem; }
       .card-desc { font-size: 0.82rem; }
@@ -272,6 +344,7 @@
     @media (max-width: 600px) {
       .shell { padding: 1.5rem 1rem 3rem; }
       .hero h1 { font-size: 1.8rem; }
+      .path-grid { grid-template-columns: 1fr; }
       .book-cards { grid-template-columns: 1fr; }
       .card { flex-wrap: wrap; gap: 0.3rem; }
       .card-tag { margin-left: 0; }
@@ -283,10 +356,10 @@
 
     <header class="hero ani">
       <h1>Shapes of Intelligence</h1>
-      <p class="tagline">A folder, some files, and an agent that can touch them. That's the whole thing.</p>
+      <p class="tagline">From head in a box to octopus in a box. From read to make.</p>
       <div class="howto">
-        <strong>The idea:</strong> ChatGPT in a browser is a head in a box &mdash; smart, but no hands. An agent with file access is an octopus &mdash; it can read, write, search, build, and fix. The gap between those two is surprisingly small: a directory, a few text files, and an LLM with permission to act. Everything on this site &mdash; the guides, the book, the tools &mdash; is built on that.
-        <span style="display: block; margin-top: 0.6rem;"><strong>How to use this:</strong> Read a page yourself, or paste it into your AI agent:
+        <strong>The mission:</strong> Most people first meet AI as a head in a box &mdash; a chat window that can answer, explain, and generate. The transition that matters is getting to an octopus in a box &mdash; an agent that can read a folder, touch files, and help make real things. This site is the curriculum for crossing that gap.
+        <span style="display: block; margin-top: 0.6rem;"><strong>How to use this:</strong> Start with the path below, or paste any page into your AI agent:
         <em>"Read this page and help me get set up."</em>
         Each page works both ways &mdash; human-readable and agent-parseable.</span>
         <span style="display: block; margin-top: 0.5rem; font-size: 0.72rem; color: var(--muted);">This site was built with the tools it describes. <a href="devlog.html">See the dev log</a> for how.</span>
@@ -294,18 +367,52 @@
       </div>
     </header>
 
-    <div class="card-group ani d1">
+    <div class="path-block ani d1">
+      <div class="section-label">Curriculum</div>
+      <div class="path-grid">
+        <div class="path-card">
+          <div class="path-step">Stage 1</div>
+          <div class="path-title">Read</div>
+          <p>Replace hype with a usable mental model.</p>
+          <ul class="path-links">
+            <li><a href="whats-the-fuss.html">What's All the Fuss?</a></li>
+            <li><a href="the-cheating-sheet.html">The Cheating Sheet</a></li>
+          </ul>
+        </div>
+        <div class="path-card">
+          <div class="path-step">Stage 2</div>
+          <div class="path-title">Touch</div>
+          <p>Get the tool out of the browser and onto your machine.</p>
+          <ul class="path-links">
+            <li><a href="from-read-to-make.html">From Read to Make</a></li>
+            <li><a href="zero-to-dev.html">Zero to Dev</a></li>
+          </ul>
+        </div>
+        <div class="path-card">
+          <div class="path-step">Stage 3</div>
+          <div class="path-title">Make</div>
+          <p>Pick one shape and ship one real thing.</p>
+          <ul class="path-links">
+            <li><a href="what-do-you-want-to-build.html">What Do You Want to Build?</a></li>
+            <li><a href="board-game.html">Board Game</a> or <a href="chatbot.html">Chatbot</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="path-note">Once you've made one thing, <a href="flywheel.html">Flywheel</a>, <a href="daily-briefing.html">Daily Briefing</a>, and <a href="guide-based-dev.html">Guide-Based Development</a> turn the work into a compounding practice.</div>
+    </div>
+
+    <div class="card-group ani d2">
       <div class="section-label">The Book</div>
       <div class="book-cards">
         <a href="the-cheating-sheet.html" class="book-card">
           <span class="card-accent" style="background: var(--rose);"></span>
           <span class="card-title">The Cheating Sheet</span>
-          <span class="card-desc">I document my way out of confusion. I always have. AI just made the documentation talk back. Start here.</span>
+          <span class="card-desc">The thesis page. Why documents with hands change learning, work, and making.</span>
         </a>
         <a href="whats-the-fuss.html" class="book-card">
           <span class="card-accent" style="background: var(--blue);"></span>
           <span class="card-title">What's All the Fuss About?</span>
-          <span class="card-desc">New to AI? Five-minute orientation. No terminal required.</span>
+          <span class="card-desc">The first onramp if AI still feels like news, hype, or distant future.</span>
         </a>
         <a href="book/index.html" class="book-card">
           <span class="card-accent" style="background: var(--amber);"></span>
@@ -320,25 +427,31 @@
       </div>
     </div>
 
-    <div class="card-group ani d2">
+    <div class="card-group ani d3">
       <div class="section-label">Project Guides</div>
       <div class="cards">
+        <a href="from-read-to-make.html" class="card">
+          <span class="card-accent" style="background: var(--blue);"></span>
+          <span class="card-title">From Read to Make</span>
+          <span class="card-desc">The curriculum page: head in a box to octopus in a box, step by step.</span>
+          <span class="card-tag">curriculum</span>
+        </a>
         <a href="what-do-you-want-to-build.html" class="card">
           <span class="card-accent" style="background: var(--blue);"></span>
           <span class="card-title">What Do You Want to Build?</span>
-          <span class="card-desc">Pick a project shape that matches your ambition.</span>
+          <span class="card-desc">The first making decision. Pick a project shape that matches your ambition.</span>
           <span class="card-tag">start here</span>
         </a>
         <a href="chatbot.html" class="card">
           <span class="card-accent" style="background: var(--teal);"></span>
           <span class="card-title">Chatbot</span>
-          <span class="card-desc">Turn messy knowledge into a public FAQ and a chatbot that answers from it.</span>
+          <span class="card-desc">A first real build: turn messy knowledge into a system that answers from it.</span>
           <span class="card-tag">full guide</span>
         </a>
         <a href="board-game.html" class="card">
           <span class="card-accent" style="background: var(--teal);"></span>
           <span class="card-title">Board Game</span>
-          <span class="card-desc">Turn a physical board game into a digital one &mdash; rules to AI opponents to deployment.</span>
+          <span class="card-desc">A first real build if you already know the rules: from game night to working software.</span>
           <span class="card-tag">full guide</span>
         </a>
         <a href="wall-of-data.html" class="card">
@@ -350,13 +463,13 @@
         <a href="flywheel.html" class="card">
           <span class="card-accent" style="background: var(--teal);"></span>
           <span class="card-title">Flywheel</span>
-          <span class="card-desc">Mine your own conversations for repeated friction. Fix the papercuts. Do it again.</span>
+          <span class="card-desc">Once you're making things, mine the work for friction and improve the process.</span>
           <span class="card-tag">full guide</span>
         </a>
         <a href="daily-briefing.html" class="card">
           <span class="card-accent" style="background: var(--teal);"></span>
           <span class="card-title">Daily Briefing</span>
-          <span class="card-desc">Wake up to a file that tells you what happened, what matters, and what's next.</span>
+          <span class="card-desc">Once the system has context, wake up to a file that tells you what matters next.</span>
           <span class="card-tag">full guide</span>
         </a>
         <a href="maintenance.html" class="card">
@@ -368,7 +481,7 @@
         <a href="guide-based-dev.html" class="card">
           <span class="card-accent" style="background: var(--amber);"></span>
           <span class="card-title">Guide-Based Development</span>
-          <span class="card-desc">The guide that builds guides. Paste this page into an agent and it builds the next one.</span>
+          <span class="card-desc">Turn one good mentoring session into a repeatable guide the next agent can follow.</span>
           <span class="card-tag">meta-guide</span>
         </a>
         <a href="flywheel-follows-the-action.html" class="card">
@@ -386,25 +499,25 @@
       </div>
     </div>
 
-    <div class="card-group ani d3">
+    <div class="card-group ani d4">
       <div class="section-label">Environment Setup</div>
       <div class="cards">
         <a href="zero-to-dev.html" class="card">
           <span class="card-accent" style="background: var(--amber);"></span>
           <span class="card-title">Zero to Developer (Mac)</span>
-          <span class="card-desc">Brand new Mac to building with AI &mdash; two installs, then the agent takes over.</span>
+          <span class="card-desc">Cross from browser chat to an agent with hands on your Mac in about 15 minutes.</span>
           <span class="card-tag">start here</span>
         </a>
         <a href="zero-to-dev-windows.html" class="card">
           <span class="card-accent" style="background: var(--amber);"></span>
           <span class="card-title">Zero to Developer (Windows)</span>
-          <span class="card-desc">Same pipeline for Windows &mdash; Node.js + Codex CLI, then hand off.</span>
+          <span class="card-desc">The same crossing on Windows: install the toolchain, then hand work to the agent.</span>
           <span class="card-tag">start here</span>
         </a>
         <a href="zero-to-dev-linux.html" class="card">
           <span class="card-accent" style="background: var(--amber);"></span>
           <span class="card-title">Zero to Developer (Linux)</span>
-          <span class="card-desc">apt, npm, and a terminal &mdash; you're probably almost there.</span>
+          <span class="card-desc">If you're on Linux, you're probably close. This gets the octopus into the box.</span>
           <span class="card-tag">start here</span>
         </a>
         <a href="get-set-up.html" class="card">
@@ -446,7 +559,7 @@
       </div>
     </div>
 
-    <div class="card-group ani d4">
+    <div class="card-group ani d5">
       <div class="section-label">Extras</div>
       <div class="cards">
         <a href="vic-and-sam.html" class="card">

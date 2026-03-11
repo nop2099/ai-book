@@ -413,6 +413,8 @@
 
       <p style="font-size: 0.72rem; color: var(--amber); margin-bottom: 1.5rem;"><strong>You probably don't need this yet.</strong> If you're just getting started with the book or setting up your dev environment, skip this page. Come back when a project guide (like <a href="wall-of-data.html">Wall of Data</a> or <a href="daily-briefing.html">Daily Briefing</a>) tells you it needs Google API access. You'll know when you need it.</p>
 
+      <p style="font-size: 0.72rem; color: var(--rose); margin-bottom: 1.5rem;"><strong>Security warning.</strong> This guide creates OAuth credentials that can access your Google account &mdash; email, calendar, drive, everything you enable. Store credentials in a <code>creds/</code> folder, add <code>creds/</code> to <code>.gitignore</code>, and verify with <code>git status</code> before every commit. If you push credentials to a public repo, anyone can use them. Treat <code>client_secret*.json</code> and <code>token*.json</code> like passwords.</p>
+
       <h2>Why you need this</h2>
 
       <p>You own your data. But to access it programmatically, you need credentials &mdash; an OAuth client that proves you're you. Google (and others) require this even for your own data. Without credentials, you can't write scripts, use CLI tools, or connect MCP servers to your personal accounts.</p>

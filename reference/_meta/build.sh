@@ -125,6 +125,50 @@ else:
   fi
 fi
 
+# ── 5. Generate sitemap, pages.json, and hashes ──
+echo "Generating sitemap, pages.json, and hashes..."
+python3 -c "
+import os, re, json, hashlib
+
+site_dir = '$SITE_DIR'
+urls, pages, hashes = [], [], {}
+
+for root, dirs, files in os.walk(site_dir):
+    for f in files:
+        if not f.endswith('.html'): continue
+        fpath = os.path.join(root, f)
+        rel = os.path.relpath(fpath, site_dir)
+        with open(fpath, 'rb') as fh:
+            content = fh.read()
+        sha = hashlib.sha256(content).hexdigest()
+        hashes[rel] = sha
+        urls.append('https://shapes.exe.xyz/' + rel)
+        with open(fpath) as fh:
+            text = fh.read()
+        tm = re.search(r'<title>([^<]+)</title>', text)
+        title = tm.group(1).strip() if tm else f
+        title = re.sub(r'\s*[—–-]\s*Shapes of Intelligence$', '', title)
+        pages.append({'path': rel, 'title': title, 'url': 'https://shapes.exe.xyz/' + rel})
+
+urls.sort(); pages.sort(key=lambda p: p['path'])
+
+# sitemap.xml
+lines = ['<?xml version=\"1.0\" encoding=\"UTF-8\"?>','<urlset xmlns=\"http://www.sitemaps.org/schemas/sitemap/0.9\">']
+for u in urls: lines.append(f'  <url><loc>{u}</loc></url>')
+lines.append('</urlset>')
+with open(os.path.join(site_dir, 'sitemap.xml'), 'w') as f: f.write('\n'.join(lines) + '\n')
+
+# pages.json
+with open(os.path.join(site_dir, 'pages.json'), 'w') as f: json.dump(pages, f, indent=2)
+
+# hashes.json
+with open(os.path.join(site_dir, 'hashes.json'), 'w') as f: json.dump(hashes, f, indent=2, sort_keys=True)
+
+print(f'  sitemap.xml: {len(urls)} URLs')
+print(f'  pages.json: {len(pages)} pages')
+print(f'  hashes.json: {len(hashes)} hashes')
+"
+
 echo ""
 echo "Site built at: $SITE_DIR/"
 echo "Pages: $(find "$SITE_DIR" -name '*.html' | wc -l | tr -d ' ')"

@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>What's All the Fuss About? — Shapes of Intelligence</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,700;1,9..144,300&display=swap');
+
+    :root {
+      --void: #0a0a10;
+      --deep: #0f0f1a;
+      --surface: #161625;
+      --raised: #1e1e32;
+      --edge: #2a2a44;
+      --muted: #8888aa;
+      --text: #d0d0e2;
+      --bright: #eeeef5;
+      --white: #f5f5ff;
+      --amber: #e8a83e;
+      --amber-dim: #c4882a;
+      --teal: #4ecdc4;
+      --rose: #e85577;
+      --blue: #5588dd;
+      --purple: #9977dd;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'DM Mono', 'SF Mono', monospace;
+      background: var(--void);
+      color: var(--text);
+      line-height: 1.7;
+      min-height: 100vh;
+    }
+    a { color: var(--amber); text-decoration: none; }
+    a:visited { color: var(--amber); }
+    a:hover { color: var(--text); }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 9999;
+    }
+
+    .shell {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 3rem 1.5rem 4rem;
+    }
+
+    .masthead {
+      padding: 1.5rem 0 2rem;
+      border-bottom: 1px solid var(--edge);
+      margin-bottom: 2.5rem;
+      position: relative;
+    }
+
+    .masthead::after {
+      content: '';
+      position: absolute;
+      bottom: -1px;
+      left: 0;
+      width: 60px;
+      height: 1px;
+      background: var(--amber);
+    }
+
+    .breadcrumb {
+      font-size: 0.65rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 0.8rem;
+    }
+
+    .breadcrumb a {
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .breadcrumb a:hover { color: var(--amber); }
+
+    .masthead h1 {
+      font-family: 'Fraunces', serif;
+      font-weight: 300;
+      font-size: 2rem;
+      color: var(--white);
+      letter-spacing: -0.01em;
+    }
+
+    .masthead .sub {
+      color: var(--muted);
+      font-size: 0.75rem;
+      margin-top: 0.4rem;
+      letter-spacing: 0.03em;
+      line-height: 1.8;
+      max-width: 55ch;
+    }
+
+    /* ── Section headers ── */
+    h2 {
+      font-family: 'Fraunces', serif;
+      font-weight: 500;
+      font-size: 1.05rem;
+      color: var(--bright);
+      margin: 2.2rem 0 0.8rem;
+      padding-bottom: 0.4rem;
+      border-bottom: 1px solid var(--edge);
+    }
+
+    h2:first-of-type { margin-top: 0; }
+
+    /* ── Prose sections ── */
+    .prose p {
+      font-size: 0.76rem;
+      color: var(--text);
+      line-height: 1.9;
+      margin-bottom: 0.9rem;
+    }
+
+    .prose strong {
+      color: var(--bright);
+      font-weight: 500;
+    }
+
+    .prose em {
+      color: var(--muted);
+      font-style: italic;
+    }
+
+    /* ── Link lists ── */
+    .links {
+      list-style: none;
+      padding: 0;
+      margin: 0.6rem 0 0;
+    }
+
+    .links li {
+      padding: 0.5rem 0.8rem;
+      border-radius: 4px;
+      font-size: 0.74rem;
+      line-height: 1.8;
+      transition: background 0.15s;
+    }
+
+    .links li:hover {
+      background: var(--deep);
+    }
+
+    .links li a {
+      color: var(--amber);
+    }
+
+    .links .link-note {
+      color: var(--muted);
+      font-size: 0.66rem;
+      display: block;
+      margin-top: 0.1rem;
+    }
+
+    /* ── Numbered options ── */
+    .options {
+      list-style: none;
+      padding: 0;
+      margin: 0.6rem 0 0;
+      counter-reset: option;
+    }
+
+    .options li {
+      counter-increment: option;
+      padding: 0.6rem 0.8rem 0.6rem 2.2rem;
+      border-radius: 4px;
+      font-size: 0.74rem;
+      line-height: 1.8;
+      position: relative;
+      transition: background 0.15s;
+    }
+
+    .options li:hover {
+      background: var(--deep);
+    }
+
+    .options li::before {
+      content: counter(option) ".";
+      position: absolute;
+      left: 0.8rem;
+      color: var(--amber);
+      font-weight: 500;
+    }
+
+    footer {
+      margin-top: 3rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--edge);
+      font-size: 0.62rem;
+      color: var(--muted);
+    }
+
+    footer a {
+      color: var(--muted);
+      text-decoration: none;
+      border-bottom: 1px solid var(--edge);
+      transition: color 0.2s, border-color 0.2s;
+    }
+
+    footer a:hover { color: var(--amber); border-color: var(--amber-dim); }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .ani { animation: fadeUp 0.4s ease-out both; }
+    .d1 { animation-delay: 0.05s; }
+    .d2 { animation-delay: 0.1s; }
+
+    @media (min-height: 1000px) and (max-width: 800px) {
+      .shell { max-width: 92vw; padding: 2rem 4vw 3rem; }
+      .masthead h1 { font-size: 2.8rem; }
+      .masthead .sub { font-size: 0.95rem; }
+      .breadcrumb { font-size: 0.78rem; }
+      h2 { font-size: 1.3rem; }
+      .prose p { font-size: 0.95rem; }
+      .links li { font-size: 0.92rem; }
+      .links .link-note { font-size: 0.82rem; }
+      .options li { font-size: 0.92rem; }
+      footer { font-size: 0.75rem; }
+    }
+
+    @media (max-width: 600px) {
+      .shell { padding: 1.5rem 1rem 3rem; }
+      .masthead h1 { font-size: 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+  <div class="shell">
+
+    <header class="masthead ani">
+      <div class="breadcrumb">
+        <a href="index.html">Shapes of Intelligence</a> / Start Here
+      </div>
+      <h1>What's All the Fuss About?</h1>
+      <p class="sub">A five-minute orientation for the curious. No terminal required.</p>
+    </header>
+
+    <main class="prose ani d1">
+
+      <h2>What happened</h2>
+
+      <p>In 2022 and 2023, AI systems crossed a capability threshold. They went from "impressive demos" to "useful daily tools." The key shift: they can now read, write, and reason about text well enough to do real work. Not perfectly, but usefully.</p>
+
+      <p>You may have heard people talk about ChatGPT, or Claude, or Gemini. These are all examples of the same underlying technology. The names don't matter much. What matters is that a new kind of tool showed up, and it's not going away.</p>
+
+      <h2>What they actually are</h2>
+
+      <p>They're called <strong>large language models</strong>. They were trained on enormous amounts of text from the internet &mdash; books, articles, code, conversations, documentation. They learned to predict what comes next, word by word.</p>
+
+      <p>That sounds simple, and in a sense it is. But the emergent capabilities are surprising: they can write code, analyze documents, explain concepts, draft emails, debug problems, translate languages, summarize research, and carry on nuanced conversations about almost anything.</p>
+
+      <p>They don't "understand" the way you do. There's a real philosophical debate about what's happening inside them. But the practical difference between what they produce and what a knowledgeable person would produce is shrinking fast.</p>
+
+      <h2>What changed</h2>
+
+      <p>Three things converged at roughly the same time.</p>
+
+      <p><strong>The models got good enough to be useful, not just impressive.</strong> Earlier AI could do party tricks. The current generation can do your taxes, review a contract, or help you write a quarterly report. The gap between "demo" and "daily tool" closed.</p>
+
+      <p><strong>Companies made them accessible.</strong> You can talk to them in plain English through a chat interface or a terminal. No programming required to start. You type a question, you get an answer. The barrier to entry dropped to zero.</p>
+
+      <p><strong>They got fast and cheap enough to use all day, every day.</strong> What cost hundreds of dollars per conversation in 2020 now costs fractions of a cent. Speed went from minutes per response to seconds. This made casual, exploratory use possible.</p>
+
+      <h2>What people are doing with them</h2>
+
+      <p>Not just chatbots. That's the first thing people see, but it's the tip of the iceberg.</p>
+
+      <p>People are writing code with AI pair programmers &mdash; describing what they want in English and watching the code appear. They're building personal dashboards that read their email and calendar. They're creating chatbots trained on their own documents. They're automating repetitive work that used to eat hours. They're learning new skills faster by having a patient tutor that never gets annoyed and never judges a question.</p>
+
+      <p>The book this site accompanies documents one person's year of doing all of these things. Forty-eight short chapters on what worked, what didn't, and what it felt like to go from knowing nothing about programming to building real tools.</p>
+
+      <h2>What they're bad at</h2>
+
+      <p>Honesty requires this section.</p>
+
+      <p>They <strong>hallucinate</strong> &mdash; they confidently state things that aren't true. They'll invent citations, fabricate statistics, and present fiction as fact with the same calm tone they use for everything else. You have to check their work.</p>
+
+      <p>They have <strong>no memory</strong> between conversations unless you build it in. Every new chat starts from zero. They don't know what you told them yesterday.</p>
+
+      <p>They <strong>can't access the internet or your files</strong> unless you explicitly give them tools to do so. They don't know what's in your inbox or what happened in the news this morning unless someone set that up.</p>
+
+      <p>They're <strong>expensive to run at scale</strong>. Cheap per conversation, yes. But if you want to process a million documents or serve a million users, the costs add up fast.</p>
+
+      <p>And they raise <strong>real questions</strong> about jobs, creativity, authorship, and truth. These questions are not resolved. Anyone who tells you they have all the answers is selling something.</p>
+
+      <h2>Where to go from here</h2>
+
+      <p>You have options. None of them require urgency.</p>
+
+      <ul class="options">
+        <li><strong>Read the book.</strong> Forty-eight short chapters on learning, working, building, and living with AI. Written for someone who started from scratch. <a href="book/01-learning/01-ai-rewards-curiosity.html">Start with chapter one &rarr;</a></li>
+        <li><strong>Try it.</strong> The Zero to Dev guides walk you through getting one AI agent running on your computer in about fifteen minutes. Pick your platform: <a href="zero-to-dev.html">Mac</a>, <a href="zero-to-dev-windows.html">Windows</a>, or <a href="zero-to-dev-linux.html">Linux</a>.</li>
+        <li><strong>Just watch.</strong> Keep reading articles, watching demos, following the news. No rush. The tools will still be here next month, and they'll probably be better by then.</li>
+      </ul>
+
+      <h2>Patterns at work</h2>
+
+      <p>Two chapters from the book that are relevant if you're just starting to think about this:</p>
+
+      <ul class="links">
+        <li>
+          <a href="book/01-learning/01-ai-rewards-curiosity.html">AI Rewards Curiosity</a>
+          <span class="link-note">Why the people getting the most out of AI aren't the most technical &mdash; they're the most curious.</span>
+        </li>
+        <li>
+          <a href="book/01-learning/02-learn-by-building.html">Learn by Building</a>
+          <span class="link-note">The case for making something real as the fastest path to understanding.</span>
+        </li>
+      </ul>
+
+      <h2>Related guides</h2>
+
+      <ul class="links">
+        <li><a href="zero-to-dev.html">Zero to Dev (Mac)</a> <span class="link-note">Get an AI agent running on macOS in 15 minutes.</span></li>
+        <li><a href="zero-to-dev-linux.html">Zero to Dev (Linux)</a> <span class="link-note">Same thing, for Linux.</span></li>
+        <li><a href="zero-to-dev-windows.html">Zero to Dev (Windows)</a> <span class="link-note">Same thing, for Windows.</span></li>
+        <li><a href="terminology.html">Terminology</a> <span class="link-note">Key terms defined simply. If someone says a word you don't recognize, it's probably here.</span></li>
+      </ul>
+
+      <h2>Further reading</h2>
+
+      <p>Three good pieces if you want to go deeper, all written for a general audience:</p>
+
+      <ul class="links">
+        <li>
+          <a href="https://www.understandingai.org/p/large-language-models-explained-with">Large Language Models, Explained</a>
+          <span class="link-note">Timothy B. Lee &mdash; the best plain-English explainer of how LLMs actually work.</span>
+        </li>
+        <li>
+          <a href="https://www.oneusefulthing.org/p/what-just-happened">What Just Happened</a>
+          <span class="link-note">Ethan Mollick &mdash; an academic's take on why this moment matters.</span>
+        </li>
+        <li>
+          <a href="https://waitbutwhy.com/2015/01/artificial-intelligence-revolution-1.html">The AI Revolution: The Road to Superintelligence</a>
+          <span class="link-note">Wait But Why &mdash; long but accessible. Good for understanding the bigger arc.</span>
+        </li>
+      </ul>
+
+    </main>
+
+    <footer class="ani d2">
+      <p>Part of <a href="index.html">Shapes of Intelligence</a> &mdash; a companion reference for the book.</p>
+      <p><a href="https://github.com/nop2099/ai-book">GitHub</a></p>
+    </footer>
+
+  </div>
+</body>
+</html>

@@ -230,6 +230,20 @@
 
       <div class="entry">
         <div class="entry-date">March 10, 2026</div>
+        <div class="entry-title">Blind taste test round 3: fixing what's actually wrong</div>
+        <p>Third blind taste test on bronze-november surfaced real gaps. Fixed them all: MIT license, external references on every guide, stronger OAuth security warning, a "What's All the Fuss About?" onramp for beginners, SHA256 hashes for content verification, and honest framing ("observations" not "chapters"). Build script now auto-generates sitemap.xml, pages.json, and hashes.json.</p>
+        <ul>
+          <li><a href="whats-the-fuss.html">What's All the Fuss About?</a> &mdash; new page for people who haven't started yet</li>
+          <li>External references on every guide (Diátaxis, Google SRE, PARA, rclone, OpenClaw, etc.)</li>
+          <li>OAuth security warning upgraded from amber "skip this" to rose "these are like passwords"</li>
+          <li>MIT LICENSE added to repo</li>
+          <li>Build script generates sitemap.xml, pages.json, and hashes.json automatically</li>
+          <li>Book framing: "48 chapters" &rarr; "48 short observations" (honest about the format)</li>
+        </ul>
+      </div>
+
+      <div class="entry">
+        <div class="entry-date">March 10, 2026</div>
         <div class="entry-title">Principle of least surprise</div>
         <p>Dropped numeric prefixes from all URLs. <code>30-chatbot.html</code> &rarr; <code>chatbot.html</code>, <code>20-board-game.html</code> &rarr; <code>board-game.html</code>, and four more. Added <a href="sitemap.xml">sitemap.xml</a> and <a href="pages.json">pages.json</a> for machine-readable discovery. Ran a blind taste test on bronze-november &mdash; agent guessed URLs correctly on first try. Added project-level CLAUDE.md with jq steering.</p>
         <ul>

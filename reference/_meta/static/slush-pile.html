@@ -398,6 +398,13 @@
         </div>
 
         <div class="note">
+          <div class="note-title">Ask it to explain what it's building</div>
+          <p>One of the best steering moves is to ask the agent to explain the thing while it is making it. Not just at the end, and not only when something breaks. Mid-build explanations force the agent to surface its model of the system: what this file is for, why this approach was chosen, what assumption it is making, what remains unclear.</p>
+          <p>This does two useful things at once. It catches drift early, because a bad explanation often reveals a bad build before the bug fully lands. And it turns the build into a lesson, which matters if the point is not just to get a working artifact but to understand the shape well enough to own it afterward.</p>
+          <p>The pattern is especially strong for learners: <strong>build, then explain; explain, then steer.</strong> If the explanation is muddy, the design is probably muddy too. If the explanation is crisp, you now have documentation, teaching material, and a better chance of noticing when the agent has wandered off the path.</p>
+        </div>
+
+        <div class="note">
           <div class="note-title">Translation is free</div>
           <p>TypeScript to Python, JavaScript to Klingon &mdash; that's a check, check, check. Translation between languages, frameworks, and paradigms is effectively free now. An agent rewrites a Flask app as Express, ports a React component to Svelte, converts a bash script to PowerShell. The fidelity isn't always perfect but the cost rounds to zero.</p>
           <p>The implication: <strong>any proof of concept is a proof of concept for anything else.</strong> If you built it in Python and someone needs it in Rust, the shape transfers. The prototype proves the shape works &mdash; the language it's wearing is a costume, not a commitment. Stop gating "can we build this?" on "do we know that stack?" The answer is always yes now.</p>
@@ -416,6 +423,13 @@
           <p>Agent A (building the reference site) reads Agent B's conversation log (a session that built Paul's chatbot) to learn what actually happened when someone followed the instructions. This is a feedback loop across agent sessions.</p>
           <p>What we found: the agent skipped the "issues" extraction step, built keyword search instead of LLM chatbot, tried API instead of CLI as backend, confused octopus-in-a-box with Docker. The correction patterns are the most valuable part &mdash; they show where instructions failed.</p>
           <p>Broader principle: if you have multiple agents working on related problems, cross-reading their transcripts is organizational learning. This is one of the places where <a href="flywheel-follows-the-action.html">the flywheel follows the action</a>.</p>
+        </div>
+
+        <div class="note">
+          <div class="note-title">When the agents become interchangeable</div>
+          <p>Right now, different agents still have a feel. One is terse, one is chatty, one is better at shell work, one is weirder, one is more cautious. But if the models keep getting stronger, the differences may stop being obvious to ordinary users. The agents may all start to feel smart enough, fast enough, and competent enough that the personality layer stops carrying much of the distinction.</p>
+          <p>When that happens, the competition moves down a layer. Not "which model feels smarter?" but: what files can it read, what tools can it use, what skills auto-engage, what memory does it inherit, what world can it touch, what trust boundary does it respect, what corpus does it sit on top of? The box matters more than the voice.</p>
+          <p>That would be a big shift for the book because it strengthens the folder-and-skill thesis. If the minds become hard to tell apart, then the durable advantage is not the mind alone. It is the environment, the muscle memory, the flywheel, the data wall, and the habits wrapped around it. The octopus starts to matter more than which particular octopus it is.</p>
         </div>
 
         <div class="note">

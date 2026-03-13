@@ -449,7 +449,7 @@
 
     <header class="masthead ani">
       <div class="breadcrumb">
-        <a href="index.html">Shapes of Intelligence</a> / Project Guide
+        <a href="/">Shapes of Intelligence</a> / Project Guide
       </div>
       <h1>Maintenance</h1>
       <p class="sub">Keep the lights on. What matters, how to check it, how to fix it, when to check it, what changed.</p>
@@ -461,9 +461,9 @@
 
       <p>You run things. A website, a database, a cron job, a server, some API keys, a few subscriptions, maybe a rental property. Each one can break. Most of the time they don't. But when they do, you want a runbook &mdash; not a troubleshooting session.</p>
 
-      <p>This is not the <a href="flywheel.html">flywheel</a>. The flywheel <em>discovers</em> friction you didn't know about. This guide handles friction you already know about &mdash; known systems, known failure modes, known fixes. The flywheel is R&amp;D. This is operations.</p>
+      <p>This is not the <a href="flywheel">flywheel</a>. The flywheel <em>discovers</em> friction you didn't know about. This guide handles friction you already know about &mdash; known systems, known failure modes, known fixes. The flywheel is R&amp;D. This is operations.</p>
 
-      <p>The maintenance guide is a ranked inventory of everything you depend on, with a health check for each one, a runbook for when it breaks, and a schedule that makes sure you actually look. The output is a status dashboard: <strong style="color: var(--green);">green</strong>, <strong style="color: var(--amber);">yellow</strong>, <strong style="color: var(--rose);">red</strong>. If everything's green, you never see it. If something's yellow, it shows up in the <a href="daily-briefing.html">daily briefing</a>. If something's red, it wakes you up.</p>
+      <p>The maintenance guide is a ranked inventory of everything you depend on, with a health check for each one, a runbook for when it breaks, and a schedule that makes sure you actually look. The output is a status dashboard: <strong style="color: var(--green);">green</strong>, <strong style="color: var(--amber);">yellow</strong>, <strong style="color: var(--rose);">red</strong>. If everything's green, you never see it. If something's yellow, it shows up in the <a href="daily-briefing">daily briefing</a>. If something's red, it wakes you up.</p>
 
       <hr>
 
@@ -689,9 +689,9 @@
           <li><strong>Run the first status check.</strong> Execute every health check. Generate <code>ops/status.html</code> with green/yellow/red results. This is your baseline. If anything is already yellow or red, flag it. <strong>Show the dashboard to the user.</strong></li>
           <li><strong>Write runbooks.</strong> For each critical and important system, ask: "What goes wrong with this?" Write one runbook per failure mode to <code>ops/runbooks/</code>. Each runbook has: symptom (how you'd notice), diagnosis (commands to run), fix (steps to resolve), escalation (what to do if the fix doesn't work). <strong>Review each runbook.</strong></li>
           <li><strong>Build the expirations list.</strong> Scan for anything with a deadline: SSL certs, domain renewals, API key expirations, subscription renewals, contracts. Write to <code>ops/expirations.md</code> sorted by date. Highlight anything within 30 days.</li>
-          <li><strong>Set up the schedule.</strong> Create <code>ops/schedule.md</code>. Critical systems: daily. Important: weekly. Nice-to-have: monthly. Suggest automation &mdash; a cron job that runs health checks and generates the status dashboard. If the user has a <a href="daily-briefing.html">daily briefing</a>, connect the status output to it.</li>
+          <li><strong>Set up the schedule.</strong> Create <code>ops/schedule.md</code>. Critical systems: daily. Important: weekly. Nice-to-have: monthly. Suggest automation &mdash; a cron job that runs health checks and generates the status dashboard. If the user has a <a href="daily-briefing">daily briefing</a>, connect the status output to it.</li>
           <li><strong>Start the changelog.</strong> Create <code>ops/changelog.md</code>. Log today as the first entry: "Maintenance system initialized." Going forward, any change to any tracked system gets an entry.</li>
-          <li><strong>Connect to other systems.</strong> If the user has a <a href="flywheel.html">flywheel</a>, set up the observation bridge: red checks that can't be auto-fixed write to <code>flywheel/observations/</code>. If they have a daily briefing, feed the status dashboard into it. If they have neither, the maintenance system works standalone.</li>
+          <li><strong>Connect to other systems.</strong> If the user has a <a href="flywheel">flywheel</a>, set up the observation bridge: red checks that can't be auto-fixed write to <code>flywheel/observations/</code>. If they have a daily briefing, feed the status dashboard into it. If they have neither, the maintenance system works standalone.</li>
           <li><strong>Self-assess.</strong> Review the maintenance system's own performance. Are health checks producing false positives? Are runbooks accurate? Are any systems missing from the inventory? Write self-improvement proposals to <code>ops/proposals/</code> and log observations to the flywheel if one exists. Every proposal should include a <strong>lesson</strong>: what this failure taught you that future systems should inherit.</li>
         </ol>
         <p><strong>Key rules:</strong> Health checks must be testable right now &mdash; run each one and show the result. Runbooks are scripts, not essays &mdash; an agent should be able to follow them mechanically. Don't touch production systems without explicit approval. If a check requires SSH or elevated access, confirm access before attempting. The maintenance system starts simple (inventory + checks) and grows (runbooks + schedule + automation). Don't overwhelm the user with ten runbooks on day one &mdash; start with the critical systems and expand. Every maintenance proposal should have a lesson in it &mdash; not just what to change, but what this incident teaches about how to build or operate better next time.</p>
@@ -702,22 +702,22 @@
       <div class="patterns">
         <div class="label">Patterns at work</div>
         <ul>
-          <li><a href="book/02-working/03-fix-your-papercuts.html"><strong>Fix Your Papercuts</strong></a> &mdash; maintenance prevents known papercuts from recurring. The runbook is a papercut fix, written down permanently.</li>
-          <li><a href="book/02-working/07-solved-problems-stay-solved.html"><strong>Solved Problems Stay Solved</strong></a> &mdash; each runbook is a solved problem. You debug it once, write it down, never debug it again.</li>
-          <li><a href="book/04-living/02-dont-ask-me-to-track-it.html"><strong>Don't Ask Me to Track It</strong></a> &mdash; automated checks instead of manual monitoring. The system watches itself.</li>
-          <li><a href="book/03-building/13-the-steering-file.html"><strong>The Steering File</strong></a> &mdash; the inventory is a steering file for operations. It tells the agent what to care about.</li>
-          <li><a href="book/02-working/06-memory-is-files.html"><strong>Memory Is Files</strong></a> &mdash; the changelog is memory. Incident reports are memory. The maintenance system remembers what broke and how it was fixed.</li>
-          <li><a href="book/03-building/12-the-folder-is-the-interface.html"><strong>The Folder Is the Interface</strong></a> &mdash; systems communicate by writing files to each other's folders. The protocol is markdown in the right place.</li>
+          <li><a href="book/fix-your-papercuts"><strong>Fix Your Papercuts</strong></a> &mdash; maintenance prevents known papercuts from recurring. The runbook is a papercut fix, written down permanently.</li>
+          <li><a href="book/solved-problems-stay-solved"><strong>Solved Problems Stay Solved</strong></a> &mdash; each runbook is a solved problem. You debug it once, write it down, never debug it again.</li>
+          <li><a href="book/dont-ask-me-to-track-it"><strong>Don't Ask Me to Track It</strong></a> &mdash; automated checks instead of manual monitoring. The system watches itself.</li>
+          <li><a href="book/the-steering-file"><strong>The Steering File</strong></a> &mdash; the inventory is a steering file for operations. It tells the agent what to care about.</li>
+          <li><a href="book/memory-is-files"><strong>Memory Is Files</strong></a> &mdash; the changelog is memory. Incident reports are memory. The maintenance system remembers what broke and how it was fixed.</li>
+          <li><a href="book/the-folder-is-the-interface"><strong>The Folder Is the Interface</strong></a> &mdash; systems communicate by writing files to each other's folders. The protocol is markdown in the right place.</li>
         </ul>
       </div>
 
       <div class="patterns">
         <div class="label">Related guides</div>
         <ul>
-          <li><a href="flywheel.html">Flywheel</a> &mdash; discovers new friction; graduates findings into maintenance when they become permanent ops</li>
-          <li><a href="daily-briefing.html">Daily Briefing</a> &mdash; surfaces maintenance alerts in the morning briefing</li>
-          <li><a href="wall-of-data.html">Wall of Data</a> &mdash; the infrastructure that collects data from the systems you maintain</li>
-          <li><a href="zero-to-dev.html">Zero to Dev</a> &mdash; start here if you haven't set up yet</li>
+          <li><a href="flywheel">Flywheel</a> &mdash; discovers new friction; graduates findings into maintenance when they become permanent ops</li>
+          <li><a href="daily-briefing">Daily Briefing</a> &mdash; surfaces maintenance alerts in the morning briefing</li>
+          <li><a href="wall-of-data">Wall of Data</a> &mdash; the infrastructure that collects data from the systems you maintain</li>
+          <li><a href="zero-to-dev">Zero to Dev</a> &mdash; start here if you haven't set up yet</li>
         </ul>
       </div>
 
@@ -758,7 +758,7 @@
     </main>
 
     <footer class="ani d2">
-      <p>Part of <a href="index.html">Shapes of Intelligence</a> &mdash; a companion reference for the book.</p>
+      <p>Part of <a href="/">Shapes of Intelligence</a> &mdash; a companion reference for the book.</p>
       <p><a href="https://github.com/nop2099/ai-book">GitHub</a></p>
     </footer>
 

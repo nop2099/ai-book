@@ -220,13 +220,73 @@
 
     <header class="masthead ani">
       <div class="breadcrumb">
-        <a href="index.html">Shapes of Intelligence</a> / Dev Log
+        <a href="/">Shapes of Intelligence</a> / Dev Log
       </div>
       <h1>Dev Log</h1>
       <p class="sub">What changed and why. Updated with each check-in to the book.</p>
     </header>
 
     <main class="ani d1">
+
+      <div class="entry">
+        <div class="entry-date">March 13, 2026</div>
+        <div class="entry-title">Making of: Vic and Sam podcast</div>
+
+        <p>The <a href="vic-and-sam">Vic and Sam</a> page now has a 12-minute podcast &mdash; five AI-cloned voices performing a two-character play about what happens when you give a shape access to your plumbing. This is a detailed making-of: the full pipeline from script to MP3.</p>
+
+        <p><strong>The script.</strong> The source is a markdown file (<code>vic-and-sam.md</code>). Speaker tags are <code>[UPPERCASE-NAME]</code> on their own line, followed by dialogue. <code>---</code> marks section breaks rendered as pauses. A separate <code>cold-open.md</code> is prepended at generation time &mdash; James&rsquo;s disclaimer: &ldquo;Everything you&rsquo;re about to hear was written by AI, voiced by AI, and assembled by AI. I directed it. I corrected it.&rdquo; The script includes voice design notes at the top (not parsed): who each character is, why they sound the way they do, and what the casting intent was.</p>
+
+        <p><strong>The cast.</strong> Five voices, all cloned from short reference WAV clips (5&ndash;15 seconds each) using Qwen3-TTS 0.6B running on a DGX GB10 GPU:</p>
+        <ul>
+          <li><strong>Vic</strong> &mdash; Dorian Moreau, a Wells-BTTF family voice. f0 ~133 Hz, brightness ~1320 Hz. Low, entitled, confident. The cable-access host who committed so hard to the bit that it became the truth.</li>
+          <li><strong>Sam</strong> &mdash; Old Ben Kenobi from the casting wall. f0 ~93 Hz, brightness ~1292 Hz. Deep, warm, measured. The straight man.</li>
+          <li><strong>Stage</strong> &mdash; Smithers. Obsequious, precise. Stage directions delivered like a nervous assistant reporting what he&rsquo;s witnessing.</li>
+          <li><strong>Hype</strong> &mdash; Lady Leia. f0 ~373 Hz, brightness ~2758 Hz. The breathless AI announcer voice that Vic parodies.</li>
+          <li><strong>James</strong> &mdash; The author. Cloned from a Google Meet recording. Cold open and outro only. Sounds like a hostage proof of life (his words).</li>
+        </ul>
+        <p>Voice references live on a casting wall (~32 unique voices harvested from various sources). Each voice is identified by its acoustic fingerprint: MFCCs for timbre, f0 for pitch, spectral centroid for brightness. The model clones timbre and cadence from the seed clip.</p>
+
+        <p><strong>The generation pipeline.</strong> The generator (<code>generate_episode.py</code>) parses the markdown script, resolves each speaker tag to a voice reference WAV, and generates one line at a time via Qwen3-TTS. Each generated line is saved as an individual WAV file using <em>sequenced content-addressed filenames</em>: <code>{seq:03d}_{speaker}_{sha256(text)[:12]}.wav</code>. Sequence numbers count by 10s (Apple II style: 010, 020, 030...) so you can insert lines between them without renumbering. The content hash is the cache key &mdash; if the text hasn&rsquo;t changed, the WAV is reused. If it has, it&rsquo;s regenerated. A <code>--renumber</code> flag re-spaces everything back to 10s when the gaps get ugly.</p>
+
+        <p>Voice prompt caching accelerates generation. The TTS model computes a voice embedding from the reference WAV on first use, then caches it as <code>{speaker}_{refhash}.pt</code>. The cache key includes a hash of the reference file itself &mdash; if you swap in a different voice reference, the cache auto-invalidates and the stale file is deleted. No more silent wrong-voice generation.</p>
+
+        <p><strong>The sound board.</strong> Assembly runs entirely in numpy &mdash; no torch, no GPU, works on a MacBook. All effects are applied during the <code>_assemble()</code> pass over the generated line WAVs. No regeneration needed to change the mix. The effects chain, in order:</p>
+        <ul>
+          <li><strong>RMS normalization</strong> &mdash; target amplitude 0.045, peak-limited at 0.95</li>
+          <li><strong>Per-speaker volume scaling</strong> &mdash; Stage at 0.7, Sam at 0.85, others at 1.0</li>
+          <li><strong>Emphasis boost</strong> &mdash; lines ending in <code>!</code> get 1.3x volume lift (excludes Stage and James)</li>
+          <li><strong>Telephone filter</strong> &mdash; FFT brick-wall bandpass, 300&ndash;3400 Hz, applied to all Stage (stage direction) lines</li>
+          <li><strong>Horror filter</strong> &mdash; triggered by &ldquo;You track it&rdquo; in the text. Time-segmented: 0&ndash;0.8s gets full blast (telephone + drive=5 overdrive + 8% pitch drop + tight reverb), 0.8&ndash;1.3s crossfades to medium grit, 1.3&ndash;4.1s fades to dry, 4.1s+ fully clean. &ldquo;No!&rdquo; gets everything; &ldquo;Sorry&rdquo; snaps back.</li>
+          <li><strong>Reverb</strong> &mdash; decaying delay taps: decay=0.3, delay=40ms, 6 taps</li>
+          <li><strong>Stereo pan</strong> &mdash; Vic at -0.30 (left), Sam at 0.30 (right), others center</li>
+          <li><strong>Room tone</strong> &mdash; pink noise injected in pauses between lines, level 0.003</li>
+          <li><strong>Fade in</strong> (50ms anti-click) / <strong>Fade out</strong> (2.0s)</li>
+        </ul>
+        <p>Think of it as a pedalboard you can rearrange without re-recording. The Sound Lab on the internal player page has A/B comparisons of the horror filter iterations (hard cut vs. slide-in vs. the final growl-to-dry crossfade) and emphasis boost levels (flat, 1.3x, 2x, 2.5x).</p>
+
+        <p><strong>The wrong-voice problem.</strong> Before Vic and Sam, we tried to recast Episode 1&rsquo;s narrator from Aubrey to Dorian Moreau. It failed <em>twice</em>. 143 lines generated with Aubrey&rsquo;s voice instead of Dorian&rsquo;s, 45 minutes of DGX time wasted each run. The system declared success both times. We only caught it by ear, days later.</p>
+        <p>Root cause: stacked fallback behavior. The voice prompt cache had a stale entry keyed by speaker name (not voice ref). The voice resolution function silently fell back to a different path. No verification step checked that the generated audio matched the intended voice. Each fallback was individually reasonable. Together they formed a silent pipeline from &ldquo;I asked for Dorian&rdquo; to &ldquo;I got Aubrey&rdquo; with no error, no warning, and a success message at the end.</p>
+
+        <p><strong>Three gates.</strong> We built three verification gates that run before committing to a full DGX generation run:</p>
+        <ul>
+          <li><strong>Input manifest</strong> (before any generation) &mdash; writes <code>voice-manifest.json</code> with status <code>STARTED</code>, listing every speaker&rsquo;s voice ref path, file hash, VOICE_MAP entry, and prompt cache status (HIT/FRESH/LOAD_FAILED). A cross-similarity matrix flags accidental voice duplicates (sim &gt; 0.90). Review the manifest before generation proceeds.</li>
+          <li><strong>Smoke test</strong> (after first generated line per speaker) &mdash; extracts an x-vector from the generated audio, computes cosine similarity to the reference. If similarity &lt; 0.70: hard stop. Cost: 1 line per speaker.</li>
+          <li><strong>Batch voiceprint</strong> (after 5 generated lines) &mdash; runs pitch and family check via <code>voiceprint.py</code>. Compares f0 of each generated line to the reference voice. If pitch is off by &gt; 40%: hard stop. Cost: 5 lines.</li>
+        </ul>
+        <p>Only after all three gates pass does the full run proceed. The safe workflow: build the voice DB, generate 5 lines (hits all 3 gates), listen, spot-check with voiceprint, then run the full generation.</p>
+
+        <p><strong>The voiceprint tool.</strong> We needed acoustic voice identification without loading torch (no GPU locally). Built <code>voiceprint.py</code>: MFCCs for timbre, autocorrelation-based f0 for pitch, spectral centroid for brightness. All numpy and scipy. The comparison uses weighted euclidean distance &mdash; pitch weighted 5x, brightness 3x &mdash; which discriminates voices far better than cosine similarity on MFCCs alone (cosine gave 0.96+ for everything; euclidean separates Aubrey at 209 Hz from Dorian at 133 Hz immediately). The tool can fingerprint all 32 voices on the casting wall, identify which voice a WAV sounds like, scan a full episode chunk-by-chunk emitting a character trace of voice identity across time, and check every line in an episode against expected voices. Runs in seconds on a MacBook.</p>
+
+        <p><strong>Final assembly.</strong> The assembled stereo WAV (68 MB, 12:22) is converted to MP3 via ffmpeg (<code>-qscale:a 4</code>, 7.7 MB) and embedded on the page with a standard <code>&lt;audio&gt;</code> element. The cold open disclaimer is prepended as its own segment with a pause before the main script begins.</p>
+
+        <p><strong>The lesson.</strong> Every fallback, every default, every cached value is a place where a disconnection can hide. The system should crash on a mismatch, not produce 143 lines with the wrong voice and declare success. Trace your fallbacks tip to tail. All fallbacks now log when they fire. The input manifest is written <em>before</em> generation, not after &mdash; it&rsquo;s a pre-flight checklist, not an autopsy report.</p>
+
+        <ul>
+          <li>Listen: embedded player on <a href="vic-and-sam">Vic and Sam</a></li>
+          <li>New chapter: <a href="book/02-working/18-the-slot-machine">The Slot Machine</a></li>
+          <li>Publish checklist now includes hash diff against live site before deploy</li>
+        </ul>
+      </div>
 
       <div class="entry">
         <div class="entry-date">March 11, 2026</div>
@@ -245,8 +305,8 @@
         <p>The book's process pages now line up better with the repo they describe. Added actual <code>flywheel/</code> and <code>ops/</code> scaffolds to the project, tightened the maintenance guide so every proposal has to carry a lesson, and improved the slush pile's usability with direct permalinks and a dated note about what "free" currently means for agents.</p>
         <ul>
           <li>Added <code>flywheel/</code> and <code>ops/</code> folders with starter files for observations, metrics, incidents, runbooks, schedule, and status</li>
-          <li><a href="maintenance.html">Maintenance</a> now includes <code>ops/proposals/</code> and requires each proposal to explain the lesson future systems should inherit</li>
-          <li><a href="slush-pile.html">Slush Pile</a> entries now support direct <code>#hash</code> permalinks for easy sharing</li>
+          <li><a href="maintenance">Maintenance</a> now includes <code>ops/proposals/</code> and requires each proposal to explain the lesson future systems should inherit</li>
+          <li><a href="slush-pile">Slush Pile</a> entries now support direct <code>#hash</code> permalinks for easy sharing</li>
           <li>Added slush notes on the conversation-as-test-suite pattern, manual plain-text sanitization, multimodal meeting transcripts, and the current free-vs-paid agent landscape</li>
           <li>Updated <code>.gitignore</code> for local-only Gemini files and screenshot captures so they do not leak into publishes by accident</li>
         </ul>
@@ -257,11 +317,11 @@
         <div class="entry-title">Director safety layer promoted to first-class pages</div>
         <p>The latest bronze blind taste test kept landing on the same question: the site is useful, but what would make it safe to hand to a younger or more casual director? Promoted that gap into public reference pages instead of leaving it buried in the manuscript and slush. The result is a small safety stack: habits, prompt-injection framing, and a deploy checklist.</p>
         <ul>
-          <li>New page: <a href="security-for-directors.html">The AI Wrote It, You Shipped It</a> &mdash; security for directors and vibe coders</li>
-          <li>New page: <a href="prompt-injection.html">Prompt Injection</a> &mdash; the page is part of the prompt surface</li>
-          <li>New page: <a href="before-you-deploy.html">Before You Deploy</a> &mdash; the final pass before anything public</li>
+          <li>New page: <a href="security-for-directors">The AI Wrote It, You Shipped It</a> &mdash; security for directors and vibe coders</li>
+          <li>New page: <a href="prompt-injection">Prompt Injection</a> &mdash; the page is part of the prompt surface</li>
+          <li>New page: <a href="before-you-deploy">Before You Deploy</a> &mdash; the final pass before anything public</li>
           <li>Homepage now has a dedicated Safety &amp; Trust section</li>
-          <li><a href="from-read-to-make.html">From Read to Make</a>, <a href="whats-the-fuss.html">What's All the Fuss?</a>, <a href="zero-to-dev.html">Zero to Dev</a>, <a href="chatbot.html">Chatbot</a>, and <a href="what-do-you-want-to-build.html">What Do You Want to Build?</a> now route readers into the safety stack at the moment they actually need it</li>
+          <li><a href="from-read-to-make">From Read to Make</a>, <a href="whats-the-fuss">What's All the Fuss?</a>, <a href="zero-to-dev">Zero to Dev</a>, <a href="chatbot">Chatbot</a>, and <a href="what-do-you-want-to-build">What Do You Want to Build?</a> now route readers into the safety stack at the moment they actually need it</li>
         </ul>
       </div>
 
@@ -271,10 +331,10 @@
         <p>Folded the latest meeting-derived lessons back into the public site. The curriculum now names the full loop from read to touch to make to improve to scale, the chatbot guide leans harder into the simple stack that actually worked, and the wall-of-data page now frames local consolidation as infrastructure you control instead of leading with honeypot language.</p>
         <ul>
           <li>Homepage path expanded to five stages: Read, Touch, Make, Improve, Scale, with the artifact-first loop stated directly</li>
-          <li><a href="from-read-to-make.html">From Read to Make</a> now says the artifact teaches the process it needed, not just that the flywheel exists</li>
-          <li><a href="chatbot.html">Chatbot</a> now names the practical architecture lessons: child process over premature SDKs, agent tools over homemade keyword logic, localStorage as privacy by architecture, and nested-agent setups as a trap</li>
-          <li><a href="wall-of-data.html">Wall of Data</a> now uses calmer security framing and treats <code>~/wall</code> as shorthand for a user-controlled local path, not a required convention</li>
-          <li><a href="slush-pile.html">Slush Pile</a> gained notes on speech-to-text with agents and artifacts that improve the process that made them</li>
+          <li><a href="from-read-to-make">From Read to Make</a> now says the artifact teaches the process it needed, not just that the flywheel exists</li>
+          <li><a href="chatbot">Chatbot</a> now names the practical architecture lessons: child process over premature SDKs, agent tools over homemade keyword logic, localStorage as privacy by architecture, and nested-agent setups as a trap</li>
+          <li><a href="wall-of-data">Wall of Data</a> now uses calmer security framing and treats <code>~/wall</code> as shorthand for a user-controlled local path, not a required convention</li>
+          <li><a href="slush-pile">Slush Pile</a> gained notes on speech-to-text with agents and artifacts that improve the process that made them</li>
         </ul>
       </div>
 
@@ -283,10 +343,10 @@
         <div class="entry-title">Curriculum reframing: from read to make</div>
         <p>Reframed the site around the core mentoring mission: help people move from head in a box to octopus in a box, from reading about AI to making with an agent that can touch files. Added a dedicated curriculum page and rewrote the homepage so the site reads like a path instead of a shelf.</p>
         <ul>
-          <li>New page: <a href="from-read-to-make.html">From Read to Make</a> &mdash; the curriculum for crossing from chat AI to agentic AI</li>
+          <li>New page: <a href="from-read-to-make">From Read to Make</a> &mdash; the curriculum for crossing from chat AI to agentic AI</li>
           <li>Homepage hero rewritten around the mission and a visible three-stage path: Read, Touch, Make</li>
           <li>Homepage card descriptions tightened so they read as stages in a progression, not isolated pages</li>
-          <li><a href="whats-the-fuss.html">What's All the Fuss?</a> and <a href="the-cheating-sheet.html">The Cheating Sheet</a> now name the mentoring move explicitly</li>
+          <li><a href="whats-the-fuss">What's All the Fuss?</a> and <a href="the-cheating-sheet">The Cheating Sheet</a> now name the mentoring move explicitly</li>
         </ul>
       </div>
 
@@ -296,8 +356,8 @@
         <p>Tightened the front-door framing so the site says more directly what the project is actually teaching: accountability is the cure for hallucination, and context is what makes the tool stop being generic. Also shipped two more slush notes that felt durable enough to keep around.</p>
         <ul>
           <li>Homepage mission now names the underlying claim instead of leaving readers to infer it</li>
-          <li><a href="whats-the-fuss.html">What's All the Fuss?</a> and <a href="from-read-to-make.html">From Read to Make</a> now frame the curriculum more explicitly around accountability and context</li>
-          <li><a href="book/04-living/08-the-gap.html">The Gap</a> now keeps the stronger line about the book becoming a platform that grows as you climb it</li>
+          <li><a href="whats-the-fuss">What's All the Fuss?</a> and <a href="from-read-to-make">From Read to Make</a> now frame the curriculum more explicitly around accountability and context</li>
+          <li><a href="book/the-gap">The Gap</a> now keeps the stronger line about the book becoming a platform that grows as you climb it</li>
           <li>Slush pile additions: <code>Ask it to explain what it's building</code> and <code>When the agents become interchangeable</code></li>
         </ul>
       </div>
@@ -305,11 +365,11 @@
       <div class="entry">
         <div class="entry-date">March 11, 2026</div>
         <div class="entry-title">The flywheel follows the action</div>
-        <p>Wrote <a href="flywheel-follows-the-action.html">The Flywheel Follows the Action</a> to capture a live realization from the site-building process: the corpus stopped being a record of the work and became part of the machinery that improves the next run. The key move is not abstract "multi-agent collaboration." It's that agents on different machines can read the same transcripts, guides, worklogs, and dev logs, so the improvement loop stays attached to where the work already leaves evidence.</p>
+        <p>Wrote <a href="flywheel-follows-the-action">The Flywheel Follows the Action</a> to capture a live realization from the site-building process: the corpus stopped being a record of the work and became part of the machinery that improves the next run. The key move is not abstract "multi-agent collaboration." It's that agents on different machines can read the same transcripts, guides, worklogs, and dev logs, so the improvement loop stays attached to where the work already leaves evidence.</p>
         <ul>
-          <li>New page: <a href="flywheel-follows-the-action.html">The Flywheel Follows the Action</a> &mdash; the book/site as active infrastructure, not just output</li>
+          <li>New page: <a href="flywheel-follows-the-action">The Flywheel Follows the Action</a> &mdash; the book/site as active infrastructure, not just output</li>
           <li>Homepage card added in Project Guides with essay framing, not hidden in extras</li>
-          <li>Cross-links added from <a href="flywheel.html">Flywheel</a>, <a href="guide-based-dev.html">Guide-Based Development</a>, <a href="the-cheating-sheet.html">The Cheating Sheet</a>, and the slush pile's cross-agent note</li>
+          <li>Cross-links added from <a href="flywheel">Flywheel</a>, <a href="guide-based-dev">Guide-Based Development</a>, <a href="the-cheating-sheet">The Cheating Sheet</a>, and the slush pile's cross-agent note</li>
           <li>New rule named explicitly: the flywheel works best when it follows the action instead of asking the action to summarize itself later</li>
         </ul>
       </div>
@@ -317,9 +377,9 @@
       <div class="entry">
         <div class="entry-date">March 10, 2026</div>
         <div class="entry-title">The cheating sheet becomes the thesis</div>
-        <p>The blind taste test kept pulling toward the same missing page: the one-page thesis statement the rest of the site was orbiting without naming. Built <a href="the-cheating-sheet.html">The Cheating Sheet</a> as that page. It starts with the index card story, tracks the pattern across health, renovation, bridge, interviews, and the book itself, then lands on the actual claim: I document my way out of confusion, and AI changed the speed by giving the documents hands.</p>
+        <p>The blind taste test kept pulling toward the same missing page: the one-page thesis statement the rest of the site was orbiting without naming. Built <a href="the-cheating-sheet">The Cheating Sheet</a> as that page. It starts with the index card story, tracks the pattern across health, renovation, bridge, interviews, and the book itself, then lands on the actual claim: I document my way out of confusion, and AI changed the speed by giving the documents hands.</p>
         <ul>
-          <li>New page: <a href="the-cheating-sheet.html">The Cheating Sheet</a> &mdash; now the first card in The Book section</li>
+          <li>New page: <a href="the-cheating-sheet">The Cheating Sheet</a> &mdash; now the first card in The Book section</li>
           <li>Homepage hero reframed around the real thesis: a folder, some files, and an agent that can touch them</li>
           <li>Book introduction now opens with the cheating sheet story and the personal log before "This is a textbook about shapes"</li>
           <li>Slush Pile promoted into Project Guides as first-class navigation, not an extra</li>
@@ -330,7 +390,7 @@
       <div class="entry">
         <div class="entry-date">March 10, 2026</div>
         <div class="entry-title">Wall of data: cognitive prosthetic, not data project</div>
-        <p>Rewrote the <a href="wall-of-data.html">Wall of Data</a> opening based on blind taste test feedback. The page opened with <code>mkdir ~/wall</code>. Now it opens with what it feels like to have one &mdash; the cognitive prosthetic framing, the ice-under-your-feet metaphor. Added the honest security trade-off: one encrypted local folder with no API is genuinely less exposed than your data spread across 40 cloud services.</p>
+        <p>Rewrote the <a href="wall-of-data">Wall of Data</a> opening based on blind taste test feedback. The page opened with <code>mkdir ~/wall</code>. Now it opens with what it feels like to have one &mdash; the cognitive prosthetic framing, the ice-under-your-feet metaphor. Added the honest security trade-off: one encrypted local folder with no API is genuinely less exposed than your data spread across 40 cloud services.</p>
         <ul>
           <li>Wall of data: new "What it feels like" section before "What this is"</li>
           <li>Wall of data: security trade-off paragraph &mdash; consolidation is risk, but risk you control</li>
@@ -340,7 +400,7 @@
       <div class="entry">
         <div class="entry-date">March 10, 2026</div>
         <div class="entry-title">Confusion-driven development and showing the mess</div>
-        <p>Updated the <a href="board-game.html">Board Game</a> guide based on feedback from the blind taste test agent. Added Stage 0: "What if you don't know the game?" &mdash; documenting the bridge build pattern where neither the builder nor the agent knew the rules. Added "What a real build looks like" section showing the actual 1,937-line development arc: layout wars, YouTube transcript pivots, context limit hits, confusion-as-requirements.</p>
+        <p>Updated the <a href="board-game">Board Game</a> guide based on feedback from the blind taste test agent. Added Stage 0: "What if you don't know the game?" &mdash; documenting the bridge build pattern where neither the builder nor the agent knew the rules. Added "What a real build looks like" section showing the actual 1,937-line development arc: layout wars, YouTube transcript pivots, context limit hits, confusion-as-requirements.</p>
         <ul>
           <li>Board game guide: new Stage 0 (building a game you don't know) and "What a real build looks like" (the mess behind the clean lifecycle)</li>
           <li>Chatbot guide: TOS language strengthened &mdash; "actively blocks and bans" instead of passive warning, added &sect;3.7 reference</li>
@@ -354,7 +414,7 @@
         <div class="entry-title">Blind taste test round 3: fixing what's actually wrong</div>
         <p>Third blind taste test on bronze-november surfaced real gaps. Fixed them all: MIT license, external references on every guide, stronger OAuth security warning, a "What's All the Fuss About?" onramp for beginners, SHA256 hashes for content verification, and honest framing ("observations" not "chapters"). Build script now auto-generates sitemap.xml, pages.json, and hashes.json.</p>
         <ul>
-          <li><a href="whats-the-fuss.html">What's All the Fuss About?</a> &mdash; new page for people who haven't started yet</li>
+          <li><a href="whats-the-fuss">What's All the Fuss About?</a> &mdash; new page for people who haven't started yet</li>
           <li>External references on every guide (Diátaxis, Google SRE, PARA, rclone, OpenClaw, etc.)</li>
           <li>OAuth security warning upgraded from amber "skip this" to rose "these are like passwords"</li>
           <li>MIT LICENSE added to repo</li>
@@ -394,7 +454,7 @@
         <div class="entry-title">Blind taste test, Linux quickstart, and deploy friction</div>
         <p>Ran a blind taste test &mdash; spun up a fresh exe.dev VM, pretended to be a stranger, had Claude cold-read the site. Found real gaps: no Linux quickstart, buried navigation, missing book preview, ambiguous dev log. Fixed them all. Added link checker to <code>/publish</code> skill.</p>
         <ul>
-          <li>Built <a href="zero-to-dev-linux.html">Zero to Developer (Linux)</a> &mdash; the missing third onramp</li>
+          <li>Built <a href="zero-to-dev-linux">Zero to Developer (Linux)</a> &mdash; the missing third onramp</li>
           <li>Moved "What Do You Want to Build?" to top of project guides</li>
           <li>Added book part titles to homepage card (Learning &middot; Working &middot; Building &middot; Living)</li>
           <li>OAuth page: added "you probably don't need this yet" warning</li>
@@ -407,7 +467,7 @@
       <div class="entry">
         <div class="entry-date">March 10, 2026</div>
         <div class="entry-title">Calculus rewrite, meta-guide, and /publish</div>
-        <p>Rewrote <a href="book/03-building/04-we-all-invented-calculus-at-the-same-time.html">We All Invented Calculus</a> with data: OpenClaw (298K stars), Kaijuu divergent architecture, AI DM proliferation dataset (10+ blogs, 6+ MCP servers, 5+ commercial products, 1 thesis), MCP as inflection point. Built <a href="guide-based-dev.html">Guide-Based Development</a> &mdash; the meta-guide that documents the exact anatomy so agents can build new guides from the pattern.</p>
+        <p>Rewrote <a href="book/we-all-invented-calculus-at-the-same-time">We All Invented Calculus</a> with data: OpenClaw (298K stars), Kaijuu divergent architecture, AI DM proliferation dataset (10+ blogs, 6+ MCP servers, 5+ commercial products, 1 thesis), MCP as inflection point. Built <a href="guide-based-dev">Guide-Based Development</a> &mdash; the meta-guide that documents the exact anatomy so agents can build new guides from the pattern.</p>
         <ul>
           <li>Created <code>/publish</code> skill &mdash; 8-step checklist: PII scan, tests, build, deploy, spot-check, security review, git commit, dev log</li>
           <li>GitHub links added to all page footers</li>
@@ -421,7 +481,7 @@
       <div class="entry">
         <div class="entry-date">March 10, 2026</div>
         <div class="entry-title">Daily Briefing, Maintenance, and the operating system takes shape</div>
-        <p>Built <a href="daily-briefing.html">Daily Briefing</a> guide &mdash; wins-first morning dashboard generated from calendar, email, messages, goals, and git activity. Built <a href="maintenance.html">Maintenance</a> guide &mdash; ops/runbooks shape with green/yellow/red status dashboard, five layers (inventory, health checks, runbooks, schedule, changelog).</p>
+        <p>Built <a href="daily-briefing">Daily Briefing</a> guide &mdash; wins-first morning dashboard generated from calendar, email, messages, goals, and git activity. Built <a href="maintenance">Maintenance</a> guide &mdash; ops/runbooks shape with green/yellow/red status dashboard, five layers (inventory, health checks, runbooks, schedule, changelog).</p>
         <ul>
           <li>Flywheel: self-managed scheduling, dashboard section, proposal docs dispatched to project folders, folder renamed from papercuts to flywheel</li>
           <li>Inter-system communication protocol: any system writes to any other system's folder. The folder is the interface.</li>
@@ -434,9 +494,9 @@
       <div class="entry">
         <div class="entry-date">March 10, 2026</div>
         <div class="entry-title">Flywheel guide, scheduling, and Kai's mission</div>
-        <p>Built the <a href="flywheel.html">Flywheel</a> guide &mdash; five layers (observe, metrics, causals, interventions, subgoals), seven collection engines, grounded in real examples from screenshots to sleep data to MSP operations. Added scheduling section (calendar blocks to cron to nightly consolidation). Connected the flywheel to Kai's mission: minimize friction, step one is finding it.</p>
+        <p>Built the <a href="flywheel">Flywheel</a> guide &mdash; five layers (observe, metrics, causals, interventions, subgoals), seven collection engines, grounded in real examples from screenshots to sleep data to MSP operations. Added scheduling section (calendar blocks to cron to nightly consolidation). Connected the flywheel to Kai's mission: minimize friction, step one is finding it.</p>
         <ul>
-          <li>Added <a href="oauth-setup.html">OAuth setup guide</a> &mdash; Google Cloud credentials, consent screen traps, the localhost trick</li>
+          <li>Added <a href="oauth-setup">OAuth setup guide</a> &mdash; Google Cloud credentials, consent screen traps, the localhost trick</li>
           <li>Internal links across all reference pages &mdash; every guide now links to relevant book chapters</li>
           <li>Fixed link colors site-wide (was default blue/purple, now amber)</li>
           <li>Added dev log (this page)</li>
@@ -452,9 +512,9 @@
           <li><strong>~10am&ndash;2pm:</strong> Vic improv screenplay with "wall of data" concept</li>
           <li><strong>~2:50pm:</strong> Reference site started &mdash; decided on static site, modular reference pages. Built scaffold with 9 project shapes, workspace/SSH/GitHub pages</li>
           <li><strong>~2:55pm:</strong> Memory Viewer prototyped (shelved) &mdash; foveated retrieval from Postgres, "fibers of attention" concept</li>
-          <li><strong>~4pm:</strong> <a href="board-game.html">Board Game</a> guide &mdash; full staged guide with network visibility as core multiplayer principle</li>
-          <li><a href="chatbot.html">30-Minute Chatbot</a>, <a href="wall-of-data.html">Wall of Data</a>, <a href="zero-to-dev.html">Zero to Dev</a> (Mac + Windows), <a href="vic-and-sam.html">Vic and Sam screenplay</a></li>
-          <li><strong>~6pm:</strong> Readability tooling &mdash; check-readability.py (textstat), analyze-chapters.py, <a href="chapter-dashboard.html">chapter dashboard</a>. Average grade across book: 6.9</li>
+          <li><strong>~4pm:</strong> <a href="board-game">Board Game</a> guide &mdash; full staged guide with network visibility as core multiplayer principle</li>
+          <li><a href="chatbot">30-Minute Chatbot</a>, <a href="wall-of-data">Wall of Data</a>, <a href="zero-to-dev">Zero to Dev</a> (Mac + Windows), <a href="vic-and-sam">Vic and Sam screenplay</a></li>
+          <li><strong>~6pm:</strong> Readability tooling &mdash; check-readability.py (textstat), analyze-chapters.py, <a href="chapter-dashboard">chapter dashboard</a>. Average grade across book: 6.9</li>
           <li><strong>~6:30pm:</strong> Book on website &mdash; build-book.py compiles 48 chapters to HTML with prev/next nav</li>
           <li><strong>~7pm:</strong> Spiral curriculum concept &mdash; Wonder &rarr; Try &rarr; Break &rarr; Know cycle, builder track vs director track</li>
         </ul>
@@ -491,7 +551,7 @@
     </main>
 
     <footer class="ani d2">
-      <p>Part of <a href="index.html">Shapes of Intelligence</a> &mdash; a companion reference for the book.</p>
+      <p>Part of <a href="/">Shapes of Intelligence</a> &mdash; a companion reference for the book.</p>
       <p><a href="https://github.com/nop2099/ai-book">GitHub</a></p>
     </footer>
 

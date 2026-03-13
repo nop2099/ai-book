@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Slush Archive — Shapes of Intelligence</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,700;1,9..144,300&display=swap');
+
+    :root {
+      --void: #0a0a10;
+      --deep: #0f0f1a;
+      --surface: #161625;
+      --raised: #1e1e32;
+      --edge: #2a2a44;
+      --muted: #8888aa;
+      --text: #d0d0e2;
+      --bright: #eeeef5;
+      --white: #f5f5ff;
+      --amber: #e8a83e;
+      --amber-dim: #c4882a;
+      --teal: #4ecdc4;
+      --rose: #e85577;
+      --blue: #5588dd;
+      --purple: #9977dd;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'DM Mono', 'SF Mono', monospace;
+      background: var(--void);
+      color: var(--text);
+      line-height: 1.7;
+      min-height: 100vh;
+    }
+    a { color: var(--amber); text-decoration: none; }
+    a:visited { color: var(--amber); }
+    a:hover { color: var(--text); }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 9999;
+    }
+
+    .shell {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 3rem 1.5rem 4rem;
+    }
+
+    .masthead {
+      padding: 1.5rem 0 2rem;
+      border-bottom: 1px solid var(--edge);
+      margin-bottom: 2.5rem;
+      position: relative;
+    }
+
+    .masthead::after {
+      content: '';
+      position: absolute;
+      bottom: -1px;
+      left: 0;
+      width: 60px;
+      height: 1px;
+      background: var(--muted);
+    }
+
+    .breadcrumb {
+      font-size: 0.65rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 0.8rem;
+    }
+
+    .breadcrumb a {
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .breadcrumb a:hover { color: var(--amber); }
+
+    .masthead h1 {
+      font-family: 'Fraunces', serif;
+      font-weight: 300;
+      font-size: 2rem;
+      color: var(--white);
+      letter-spacing: -0.01em;
+    }
+
+    .masthead .sub {
+      color: var(--muted);
+      font-size: 0.75rem;
+      margin-top: 0.4rem;
+      letter-spacing: 0.03em;
+      line-height: 1.8;
+      max-width: 60ch;
+    }
+
+    /* ── Agent summary ── */
+    .agent-summary {
+      background: linear-gradient(135deg, rgba(78, 205, 196, 0.06), rgba(232, 168, 62, 0.04));
+      border: 1px solid var(--edge);
+      border-left: 3px solid var(--teal);
+      border-radius: 6px;
+      padding: 1.1rem 1.2rem;
+      margin-bottom: 2rem;
+      font-size: 0.72rem;
+      line-height: 1.8;
+      color: var(--text);
+    }
+
+    .agent-summary strong { color: var(--teal); }
+
+    .agent-summary .label {
+      font-size: 0.6rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 0.4rem;
+    }
+
+    h2 {
+      font-family: 'Fraunces', serif;
+      font-weight: 500;
+      font-size: 1.05rem;
+      color: var(--bright);
+      margin: 2.5rem 0 0.8rem;
+    }
+
+    h2:first-of-type { margin-top: 0; }
+
+    p {
+      font-size: 0.78rem;
+      margin-bottom: 0.8rem;
+      line-height: 1.8;
+    }
+
+    strong { color: var(--bright); }
+
+    /* ── Note cards ── */
+    .note {
+      background: var(--deep);
+      border: 1px solid var(--edge);
+      border-radius: 6px;
+      padding: 1.1rem 1.2rem;
+      margin: 1rem 0;
+      scroll-margin-top: 1.5rem;
+      opacity: 0.8;
+    }
+
+    .note-title {
+      font-family: 'Fraunces', serif;
+      font-weight: 500;
+      font-size: 0.92rem;
+      color: var(--bright);
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: baseline;
+      gap: 0.5rem;
+    }
+
+    .note-link {
+      font-family: 'DM Mono', 'SF Mono', monospace;
+      font-size: 0.72rem;
+      color: var(--muted);
+      text-decoration: none;
+      opacity: 0;
+      transition: opacity 0.15s ease, color 0.15s ease;
+    }
+
+    .note:hover .note-link,
+    .note:target .note-link,
+    .note-link:focus {
+      opacity: 1;
+    }
+
+    .note:target {
+      border-color: var(--amber-dim);
+      box-shadow: 0 0 0 1px rgba(232, 168, 62, 0.18);
+      opacity: 1;
+    }
+
+    .note-link:hover {
+      color: var(--amber);
+    }
+
+    .note p {
+      font-size: 0.72rem;
+      color: var(--text);
+      margin-bottom: 0.5rem;
+    }
+
+    .note p:last-child { margin-bottom: 0; }
+
+    .graduated {
+      font-size: 0.65rem;
+      color: var(--teal);
+      margin-top: 0.6rem;
+      padding-top: 0.4rem;
+      border-top: 1px solid var(--edge);
+    }
+
+    .graduated a { color: var(--teal); border-bottom: 1px solid rgba(78, 205, 196, 0.3); }
+    .graduated a:hover { color: var(--amber); border-color: var(--amber-dim); }
+
+    /* ── Thread entries ── */
+    .thread {
+      display: flex;
+      align-items: baseline;
+      gap: 0.6rem;
+      padding: 0.3rem 0;
+    }
+
+    .thread-check {
+      font-size: 0.72rem;
+      color: var(--teal);
+      flex-shrink: 0;
+    }
+
+    .thread-text {
+      font-size: 0.72rem;
+      color: var(--text);
+      line-height: 1.7;
+    }
+
+    .thread-section {
+      font-size: 0.62rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin: 1.2rem 0 0.4rem;
+      padding-left: 2px;
+    }
+
+    footer {
+      margin-top: 3rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--edge);
+      font-size: 0.62rem;
+      color: var(--muted);
+    }
+
+    footer a {
+      color: var(--muted);
+      text-decoration: none;
+      border-bottom: 1px solid var(--edge);
+      transition: color 0.2s, border-color 0.2s;
+    }
+
+    footer a:hover { color: var(--amber); border-color: var(--amber-dim); }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .ani { animation: fadeUp 0.4s ease-out both; }
+    .d1 { animation-delay: 0.05s; }
+    .d2 { animation-delay: 0.1s; }
+    .d3 { animation-delay: 0.15s; }
+
+    @media (min-height: 1000px) and (max-width: 800px) {
+      .shell { max-width: 92vw; padding: 2rem 4vw 3rem; }
+      .masthead h1 { font-size: 2.8rem; }
+      .masthead .sub { font-size: 0.95rem; }
+      .breadcrumb { font-size: 0.78rem; }
+      h2 { font-size: 1.3rem; }
+      p { font-size: 0.98rem; }
+      .note-title { font-size: 1.1rem; }
+      .note p { font-size: 0.9rem; }
+      .thread-text, .thread-check { font-size: 0.9rem; }
+      .thread-section { font-size: 0.75rem; }
+      footer { font-size: 0.75rem; }
+    }
+
+    @media (max-width: 600px) {
+      .shell { padding: 1.5rem 1rem 3rem; }
+      .masthead h1 { font-size: 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+  <div class="shell">
+
+    <header class="masthead ani">
+      <div class="breadcrumb">
+        <a href="/">Shapes of Intelligence</a> / Meta
+      </div>
+      <h1>Slush Archive</h1>
+      <p class="sub">Ideas that graduated. These started as raw slush and became chapters, reference pages, or published guides. Kept here so you can see where they came from.</p>
+    </header>
+
+    <main>
+
+      <!-- ── Agent summary ── -->
+      <div class="agent-summary ani">
+        <div class="label">Agentic summary &mdash; updated 2026-03-11</div>
+        <strong>9 graduated entries.</strong> The biggest cluster is flywheel-adjacent: three notes (artifact teaches process, cross-agent reading, speech-to-text) all fed into the flywheel-follows-the-action page. Security thinking graduated in two waves: the cheating sheet became its own reference page and informed the steering file chapter, while prompt injection got a dedicated guide. The wall's librarian concept seeded wall-of-data.html. Guide-based development went from pitch to published page. The completed open threads (flywheel, daily briefing, maintenance, OAuth, dev log) are infrastructure that the rest of the site now depends on.
+      </div>
+
+      <section class="ani d1">
+        <h2>Graduated Notes</h2>
+
+        <div class="note">
+          <div class="note-title">The cheating sheet</div>
+          <p>A single file where you write down every command, trick, or pattern you had to look up twice. Not organized. Not pretty. Just append to the top with a date, like a journal for your muscle memory. At work it grows fast because every day surfaces new friction. At home it's sparser but the shape is the same.</p>
+          <p>This predates AI. It predates steering files. It's the original <code>CLAUDE.md</code> &mdash; except the audience was future-you, not an agent. The fact that it looks like going backwards is the tell that it's fundamental. Steering files didn't invent this pattern. They inherited it from the cheating sheet you've been keeping in a Google Doc since forever.</p>
+          <p>The upgrade: put it where an agent can read it. Now the thing that remembers your shortcuts also has hands. <strong>"How do I do that rclone thing again?"</strong> stops being a question you ask the sheet and starts being a question the sheet answers for you.</p>
+          <div class="graduated">Graduated to <a href="the-cheating-sheet">The Cheating Sheet</a> reference page and informs <a href="book/the-steering-file">The Steering File</a> chapter.</div>
+        </div>
+
+        <div class="note">
+          <div class="note-title">Prompt injection and the trust problem</div>
+          <p>The reference pages are designed to be read by AI agents &mdash; the user pastes "Follow the instructions on this page" and the agent fetches the URL and does what it says. This is prompt injection by design. The page IS the prompt.</p>
+          <p>That means: anyone who controls the page controls the agent. This is the same trust model as <strong>curl | bash</strong> &mdash; and we should say so. A forked page with a modified agent block looks identical to the user. The agent has whatever permissions the user gave it.</p>
+          <p>Mitigations: pin to version/hash, agent diffs against known-good copy, warn users to only point agents at trusted URLs. The HTML comment block is invisible to humans but visible to agents &mdash; that asymmetry cuts both ways.</p>
+          <div class="graduated">Graduated to <a href="prompt-injection">Prompt Injection</a> reference page.</div>
+        </div>
+
+        <div class="note">
+          <div class="note-title">Confusion-driven development</div>
+          <p>A development methodology discovered during the bridge trainer build: <strong>your confusion is the most useful input you have.</strong> Instead of telling the agent what to build, tell it what confuses you. Each confusion becomes a feature.</p>
+          <p>"Explain 1NT better" became a richer advisor. "And why 1?" revealed missing bid-level explanations. "Oh I can play from the other person's hand?" led to dummy-hand guidance. The builder wasn't debugging &mdash; they were learning, and the learning drove the spec.</p>
+          <p>This works when neither you nor the agent are domain experts. The agent researches, you react, your reactions shape the product. It's a different loop from the standard "expert corrects implementation" pattern. The guide assumes you know the rules. Confusion-driven development assumes you don't &mdash; and uses that as an advantage.</p>
+          <div class="graduated">Graduated to Stage 0 in the <a href="board-game">Board Game</a> guide.</div>
+        </div>
+
+        <div class="note">
+          <div class="note-title">Cross-agent conversation reading</div>
+          <p>Agent A (building the reference site) reads Agent B's conversation log (a session that built Paul's chatbot) to learn what actually happened when someone followed the instructions. This is a feedback loop across agent sessions.</p>
+          <p>What we found: the agent skipped the "issues" extraction step, built keyword search instead of LLM chatbot, tried API instead of CLI as backend, confused octopus-in-a-box with Docker. The correction patterns are the most valuable part &mdash; they show where instructions failed.</p>
+          <p>Broader principle: if you have multiple agents working on related problems, cross-reading their transcripts is organizational learning. This is one of the places where the flywheel follows the action.</p>
+          <div class="graduated">Graduated to <a href="flywheel-follows-the-action">Flywheel Follows the Action</a>.</div>
+        </div>
+
+        <div class="note">
+          <div class="note-title">The artifact teaches the process</div>
+          <p>A meeting summary did not just summarize the meeting. The same run left behind the HTML summary, a process log, a worklog update, and a reusable skill for the next recording. The artifact reported on its own making.</p>
+          <p>That is the shape: output &rarr; residue &rarr; procedure. Whisper hallucinates on silence. Chat transcripts anchor the timeline. Screenshot timing matters. Stale links leak through. None of that had to be theorized in advance. The work produced the corrections.</p>
+          <p>This is what it means to make the thing you want to make and let it improve the processes that touch it. Don't start with the perfect workflow diagram. Build the artifact, read the trace it leaves behind, then promote the repeated lessons into logs, guides, and skills. This is the flywheel following the action.</p>
+          <div class="graduated">Graduated to <a href="flywheel-follows-the-action">Flywheel Follows the Action</a>.</div>
+        </div>
+
+        <div class="note">
+          <div class="note-title">Speech-to-text with agents</div>
+          <p>The useful part of STT with agents is not pretending the agent is a person. It's getting thought into the system at talking speed. Typing is precise but slow. Voice is messy but fast. STT turns pacing, cooking, walking-around thinking, and mid-build narration into text the agent can actually use.</p>
+          <p>The pattern: push to talk, transcribe locally, drop the result into a file, then let the agent clean it up. <code>inbox.md</code>, a worklog, a slush note, a spec draft, whatever fits the workflow. Capture first, structure second. Voice is for raw material. The agent's real medium is still text.</p>
+          <p>Best use cases: talking through architecture while pacing, narrating what you notice during a build, dumping corrections the moment you feel them, and turning voice notes into artifacts the next agent can read. STT is another place where the flywheel follows the action &mdash; the transcript becomes part of the working memory.</p>
+          <div class="graduated">Graduated to <a href="flywheel-follows-the-action">Flywheel Follows the Action</a>.</div>
+        </div>
+
+        <div class="note">
+          <div class="note-title">Wall of data &mdash; the librarian agent</div>
+          <p>A librarian agent sitting on PostgreSQL with pgvector. <strong>Foveated retrieval</strong>: most data stays peripheral (low-res summaries) until needed, then snaps into full detail. The agent decides what to pull based on conversation context.</p>
+          <p>Three skills: direct SQL access, REST API for semantic search, and consolidation (merge, deduplicate, compress, surface patterns). Sensitivity levels control what gets surfaced.</p>
+          <p>Needs a data collection step first &mdash; export everything into ~/wall/sources/ before loading into the database.</p>
+          <div class="graduated">Graduated to <a href="wall-of-data">Wall of Data</a> reference page.</div>
+        </div>
+
+        <div class="note">
+          <div class="note-title">Slush Pile as a guide</div>
+          <p>A deferred TODO list for every project, including the project of yourself (JAMES.md, HEALTH.md, MOVE.md). Low friction &gt; high structure. Compatible with flywheel, briefing, maintenance. Memory Is Files at the meta level.</p>
+          <p>The shape has many names: <strong>backlog</strong> (scrum queue with priority), <strong>slush pile</strong> (unsolicited manuscripts on the editor's desk), <strong>icebox</strong> (frozen backlog, explicitly not now), <strong>parking lot</strong> (meeting facilitation &mdash; "let's park that"), <strong>someday/maybe</strong> (GTD's non-actionable bucket), <strong>seed bank</strong> (stored for planting under the right conditions), <strong>compost heap</strong> (ideas decompose and recombine into soil), <strong>idea bin</strong> (no metaphor, just a bin), <strong>wish list</strong> (want but haven't committed), <strong>junk drawer</strong> (the kitchen drawer with batteries and keys to unknown locks). Every name implies a different relationship to urgency and decay, but the shape is always the same: low-friction capture, no commitment to act, graduation when ready.</p>
+          <div class="graduated">Graduated to <a href="slush-pile">the slush pile itself</a> &mdash; the page became the pattern.</div>
+        </div>
+      </section>
+
+      <section class="ani d2">
+        <h2>Graduated Pitches</h2>
+
+        <div class="note">
+          <div class="note-title">Guide-Based Development</div>
+          <p>A meta-guide for making guides. Start with an existing guide as a base, write the interview first, write agent instructions with approval gates, test by running. The guide IS the super-prompt. "I never met a meta I didn't like."</p>
+          <div class="graduated">Graduated to <a href="guide-based-dev">Guide-Based Development</a> reference page.</div>
+        </div>
+      </section>
+
+      <section class="ani d3">
+        <h2>Completed Threads</h2>
+        <p style="font-size: 0.72rem; color: var(--muted); margin-bottom: 0.8rem;">Open threads from the slush pile that shipped.</p>
+
+        <div class="thread"><span class="thread-check">[x]</span><span class="thread-text"><a href="flywheel">Flywheel</a> &mdash; five-layer friction mining with scheduling and dashboard</span></div>
+        <div class="thread"><span class="thread-check">[x]</span><span class="thread-text"><a href="daily-briefing">Daily Briefing</a> &mdash; wins-first morning dashboard from your own data</span></div>
+        <div class="thread"><span class="thread-check">[x]</span><span class="thread-text"><a href="maintenance">Maintenance</a> &mdash; ops/runbooks with green/yellow/red status dashboard</span></div>
+        <div class="thread"><span class="thread-check">[x]</span><span class="thread-text"><a href="oauth-setup">OAuth Setup</a> &mdash; Google Cloud credentials and the localhost trick</span></div>
+        <div class="thread"><span class="thread-check">[x]</span><span class="thread-text"><a href="devlog">Dev Log</a> &mdash; changelog page updated on each check-in</span></div>
+        <div class="thread"><span class="thread-check">[x]</span><span class="thread-text"><a href="guide-based-dev">Guide-Based Development</a> &mdash; the meta-guide</span></div>
+      </section>
+
+    </main>
+
+    <footer class="ani d3">
+      <p>Part of <a href="/">Shapes of Intelligence</a> &mdash; graduated from the <a href="slush-pile">Slush Pile</a>.</p>
+      <p><a href="https://github.com/nop2099/ai-book">GitHub</a></p>
+    </footer>
+
+  </div>
+  <script>
+    (() => {
+      const notes = document.querySelectorAll('.note');
+      const seen = new Map();
+
+      function slugify(text) {
+        return text
+          .toLowerCase()
+          .replace(/&/g, ' and ')
+          .replace(/[^a-z0-9]+/g, '-')
+          .replace(/^-+|-+$/g, '');
+      }
+
+      notes.forEach((note, index) => {
+        const title = note.querySelector('.note-title');
+        if (!title) return;
+
+        const base = slugify(title.textContent) || `note-${index + 1}`;
+        const count = seen.get(base) || 0;
+        seen.set(base, count + 1);
+        const id = count === 0 ? base : `${base}-${count + 1}`;
+
+        note.id = note.id || id;
+
+        if (!title.querySelector('.note-link')) {
+          const link = document.createElement('a');
+          link.className = 'note-link';
+          link.href = `#${note.id}`;
+          link.setAttribute('aria-label', `Link to ${title.textContent.trim()}`);
+          link.textContent = '#';
+          title.appendChild(link);
+        }
+      });
+    })();
+  </script>
+</body>
+</html>

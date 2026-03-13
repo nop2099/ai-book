@@ -66,6 +66,17 @@ def slug(filename):
     return os.path.splitext(filename)[0]
 
 
+def short_slug(s):
+    """Strip leading number prefix from a slug: '06-memory-is-files' -> 'memory-is-files'."""
+    import re
+    return re.sub(r'^[0-9]+[a-z]*-', '', s)
+
+
+def chapter_route(ch_slug):
+    """Canonical public route for a chapter."""
+    return f"/book/{short_slug(ch_slug)}"
+
+
 CHAPTER_TEMPLATE = """\
 <!DOCTYPE html>
 <html lang="en">
@@ -200,7 +211,7 @@ CHAPTER_TEMPLATE = """\
 </head>
 <body>
   <nav>
-    <a href="../index.html">Shapes of Intelligence</a>
+    <a href="/book/">Shapes of Intelligence</a>
     <div class="nav-arrows">
       {prev_link}
       {next_link}
@@ -256,12 +267,12 @@ def build():
 
         if i > 0:
             pp, _, _, pt, _, ps = all_chapters[i - 1]
-            prev_link = f'<a href="../{pp}/{ps}.html">&larr; prev</a>'
-            prev_nav = f'<a href="../{pp}/{ps}.html">&larr; {pt}</a>'
+            prev_link = f'<a href="{chapter_route(ps)}">&larr; prev</a>'
+            prev_nav = f'<a href="{chapter_route(ps)}">&larr; {pt}</a>'
         if i < len(all_chapters) - 1:
             np, _, _, nt, _, ns = all_chapters[i + 1]
-            next_link = f'<a href="../{np}/{ns}.html">next &rarr;</a>'
-            next_nav = f'<a class="next" href="../{np}/{ns}.html">{nt} &rarr;</a>'
+            next_link = f'<a href="{chapter_route(ns)}">next &rarr;</a>'
+            next_nav = f'<a class="next" href="{chapter_route(ns)}">{nt} &rarr;</a>'
 
         html = CHAPTER_TEMPLATE.format(
             title=title,
@@ -303,7 +314,7 @@ def build_toc(all_chapters):
 
         ch_num += 1
         word_count = len(md_text.split())
-        parts_html += f'  <li><a href="{part}/{ch_slug}.html"><span class="toc-num">{ch_num}</span>{title}</a><span class="toc-words">{word_count}w</span></li>\n'
+        parts_html += f'  <li><a href="{chapter_route(ch_slug)}"><span class="toc-num">{ch_num}</span>{title}</a><span class="toc-words">{word_count}w</span></li>\n'
 
     parts_html += "</ul></div>\n"
 
@@ -424,13 +435,13 @@ def build_toc(all_chapters):
   <p class="byline">The patterns nobody teaches you about working with AI</p>
   <div class="meta">
     James Wilson &middot; {len(all_chapters)} chapters &middot; {total_words:,} words &middot;
-    <a href="full.html">read full text</a>
+    <a href="/book/full">read full text</a>
   </div>
   {parts_html}
   <div class="links">
-    <a href="../index.html">&larr; Reference site</a>
-    <a href="../chapter-dashboard.html">Chapter dashboard</a>
-    <a href="full.html">Full text</a>
+    <a href="/">&larr; Reference site</a>
+    <a href="/chapter-dashboard">Chapter dashboard</a>
+    <a href="/book/full">Full text</a>
   </div>
 </body>
 </html>
@@ -534,9 +545,9 @@ def build_full(all_chapters):
 </head>
 <body>
   <nav>
-    <a href="index.html">&larr; Table of Contents</a> &middot;
-    <a href="../index.html">Reference</a> &middot;
-    <a href="../chapter-dashboard.html">Dashboard</a>
+    <a href="/book/">&larr; Table of Contents</a> &middot;
+    <a href="/">Reference</a> &middot;
+    <a href="/chapter-dashboard">Dashboard</a>
   </nav>
   {body}
 </body>

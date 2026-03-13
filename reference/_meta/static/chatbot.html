@@ -384,7 +384,7 @@
 
     <header class="masthead ani">
       <div class="breadcrumb">
-        <a href="index.html">Shapes of Intelligence</a> / Project Guides
+        <a href="/">Shapes of Intelligence</a> / Project Guides
       </div>
       <h1>Build a Chatbot</h1>
       <p class="sub">Turn what you already know into a chatbot that answers questions for your customers.</p>
@@ -424,7 +424,7 @@
 
       <div class="callout">
         <div class="callout-label">Security note</div>
-        <p>If the chatbot fetches pages, reads pasted docs, or follows instructions from text, that text is part of the prompt surface. Keep web fetch allowlisted, separate fetch from action, and read <a href="prompt-injection.html">Prompt Injection</a> before you add browsing or public uploads. Before a real launch, run <a href="before-you-deploy.html">Before You Deploy</a>.</p>
+        <p>If the chatbot fetches pages, reads pasted docs, or follows instructions from text, that text is part of the prompt surface. Keep web fetch allowlisted, separate fetch from action, and read <a href="prompt-injection">Prompt Injection</a> before you add browsing or public uploads. Before a real launch, run <a href="before-you-deploy">Before You Deploy</a>.</p>
       </div>
 
       <h2>The flywheel</h2>
@@ -480,7 +480,7 @@
           <li><strong>Stage 6 &mdash; Chatbot.</strong> Build a thin server that wraps the CLI agent. Architecture:
             <ul>
               <li><strong>Express.js server</strong> that receives user questions via <code>POST /api/chat</code>.</li>
-              <li><strong>CLI as backend:</strong> spawn <code>claude --print --model sonnet --max-turns 10 --allowedTools Read,Grep,Glob</code> via <code>child_process.spawn</code>. Use the plain child process first. Don't start with an SDK or orchestration layer unless the simple version has already proven too weak. This uses Claude Code, Anthropic's own CLI tool. Do NOT pre-search the FAQ yourself &mdash; let Claude search the files directly with its own tools. That's the whole point of giving it an agent with Grep/Read/Glob. <em>Important: <code>claude --print</code> works because it's Anthropic's own tool. Piping subscription auth through third-party harnesses is <a href="https://www.anthropic.com/policies/consumer-terms">against Anthropic's TOS</a> &mdash; they actively block it and ban accounts. For anything other than Claude Code itself, use API keys.</em></li>
+              <li><strong>CLI as backend:</strong> spawn <code>claude --print --model sonnet --max-turns 10 --allowedTools Read,Grep,Glob</code> via <code>child_process.spawn</code>. Use the plain child process first. Don't start with an SDK or orchestration layer unless the simple version has already proven too weak. This uses Claude Code, Anthropic's own CLI tool. Do NOT pre-search the FAQ yourself &mdash; let Claude search the files directly with its own tools. That's the whole point of giving it an agent with Grep/Read/Glob. <em>Important: <code>claude --print</code> works because it's Anthropic's own tool. Piping subscription auth through third-party harnesses is <a href="https://www.anthropic.com/legal/consumer-terms">against Anthropic's TOS</a> &mdash; they actively block it and ban accounts. For anything other than Claude Code itself, use API keys.</em></li>
               <li><strong>System prompt</strong> piped to stdin along with the user question and conversation history.</li>
               <li><strong>MCP web fetch</strong> (optional): a domain-allowlisted web proxy that saves fetched pages as text files in <code>.cache/</code> and returns the filepath. Claude can then Grep/Read cached web pages the same way it searches corpus files. Allowlist trusted domains only (Wikipedia, official government sites, expat guides, etc). Cache 24h.</li>
               <li><strong>Conversation history</strong> in the browser via localStorage. Server stays stateless. Each request sends the last 10 messages as context. This is not just convenient; it's privacy by architecture.</li>
@@ -497,10 +497,10 @@
       <div class="patterns">
         <div class="label">Patterns at work</div>
         <ul>
-          <li><a href="book/03-building/08-the-octopus-in-the-box.html"><strong>Octopus in a box</strong></a> &mdash; the chatbot is a contained agent. It only sees the FAQ and the system prompt. It never touches your raw corpus or private data. The box is the boundary you define in the system prompt &mdash; not a Docker container, a trust boundary.</li>
+          <li><a href="book/the-octopus-in-the-box"><strong>Octopus in a box</strong></a> &mdash; the chatbot is a contained agent. It only sees the FAQ and the system prompt. It never touches your raw corpus or private data. The box is the boundary you define in the system prompt &mdash; not a Docker container, a trust boundary.</li>
           <li><strong>Entity-first extraction</strong> &mdash; don't ask the AI to "summarize everything." Find the nouns first, then the problems, then the answers. Each step is reviewable.</li>
           <li><strong>Light approval flows</strong> &mdash; the agent does the work, you approve the output. One entity at a time, one FAQ entry at a time. You never lose control, and the agent never hallucinates unchecked.</li>
-          <li><strong>CLI as backend</strong> &mdash; <code>claude --print</code> lets you use Claude Code as a backend process. This works because it's Anthropic's own tool. For third-party integrations, use API keys &mdash; Anthropic actively blocks and bans subscription auth passthrough through other tools (<a href="https://www.anthropic.com/policies/consumer-terms">TOS &sect;3.7</a>).</li>
+          <li><strong>CLI as backend</strong> &mdash; <code>claude --print</code> lets you use Claude Code as a backend process. This works because it's Anthropic's own tool. For third-party integrations, use API keys &mdash; Anthropic actively blocks and bans subscription auth passthrough through other tools (<a href="https://www.anthropic.com/legal/consumer-terms">TOS &sect;3.7</a>).</li>
           <li><strong>Prefer the simple stack</strong> &mdash; a child process beats premature SDK complexity, agent tools beat homemade keyword scoring, and browser localStorage beats server-side chat persistence for an early demo.</li>
           <li><strong>Let the agent search</strong> &mdash; don't build a keyword search to pre-filter the FAQ. Give the agent Read/Grep/Glob tools and let it search your files directly. Your janky keyword scorer will always be worse than the agent's own retrieval. Tools compose.</li>
           <li><strong>File-based caching</strong> &mdash; when the agent fetches a web page, save it as a text file. Now it can Grep across cached pages the same way it searches the corpus. Everything is files.</li>
@@ -508,7 +508,7 @@
           <li><strong>The box can be simple</strong> &mdash; a VM or tiny VPS is already a box. Add Docker only if you need stricter isolation or multi-tenant boundaries.</li>
           <li><strong>The flywheel</strong> &mdash; unanswered questions are logged to <code>gaps.jsonl</code>. Review the gaps, add to the corpus, re-run the pipeline. Every question the chatbot can't answer makes the next version better.</li>
           <li><strong>Start small, start now</strong> &mdash; one markdown file, five entities, ten issues. That's a working chatbot. Ship that, then grow it.</li>
-          <li><a href="book/02-working/06-memory-is-files.html"><strong>Memory is files</strong></a> &mdash; corpus, entities, issues, FAQ, system prompt, and gap log are all files on your machine. Any agent can read them, build on them, improve them.</li>
+          <li><a href="book/memory-is-files"><strong>Memory is files</strong></a> &mdash; corpus, entities, issues, FAQ, system prompt, and gap log are all files on your machine. Any agent can read them, build on them, improve them.</li>
         </ul>
       </div>
 
@@ -543,23 +543,23 @@
       <div class="patterns">
         <div class="label">Related chapters</div>
         <ul>
-          <li><a href="book/03-building/08-the-octopus-in-the-box.html">The Octopus in the Box</a> &mdash; containment boundaries and trust design</li>
-          <li><a href="book/02-working/06-memory-is-files.html">Memory Is Files</a> &mdash; why corpus, FAQ, and gap log are all just files</li>
-          <li><a href="book/03-building/12-the-folder-is-the-interface.html">The Folder Is the Interface</a> &mdash; how folder structure shapes what the agent sees</li>
-          <li><a href="book/02-working/13-the-tests-are-for-you.html">The Tests Are for You</a> &mdash; light approval flows and human-in-the-loop review</li>
-          <li><a href="book/03-building/09-skills-are-the-muscles-we-train.html">Skills Are the Muscles We Train</a> &mdash; turning the chatbot pipeline into a repeatable skill</li>
-          <li><a href="book/03-building/14-your-data-is-already-yours.html">Your Data Is Already Yours</a> &mdash; building a corpus from data you already have</li>
+          <li><a href="book/the-octopus-in-the-box">The Octopus in the Box</a> &mdash; containment boundaries and trust design</li>
+          <li><a href="book/memory-is-files">Memory Is Files</a> &mdash; why corpus, FAQ, and gap log are all just files</li>
+          <li><a href="book/the-folder-is-the-interface">The Folder Is the Interface</a> &mdash; how folder structure shapes what the agent sees</li>
+          <li><a href="book/the-tests-are-for-you">The Tests Are for You</a> &mdash; light approval flows and human-in-the-loop review</li>
+          <li><a href="book/skills-are-the-muscles-we-train">Skills Are the Muscles We Train</a> &mdash; turning the chatbot pipeline into a repeatable skill</li>
+          <li><a href="book/your-data-is-already-yours">Your Data Is Already Yours</a> &mdash; building a corpus from data you already have</li>
         </ul>
       </div>
 
       <div class="patterns">
         <div class="label">Related guides</div>
         <ul>
-          <li><a href="zero-to-dev.html">Zero to Dev</a> &mdash; set up your machine for building with AI (start here if you haven't)</li>
-          <li><a href="wall-of-data.html">Wall of Data</a> &mdash; collect all your data into one folder (great corpus source)</li>
-          <li><a href="security-for-directors.html">Security for Directors</a> &mdash; the short safety layer for people shipping AI-built code</li>
-          <li><a href="prompt-injection.html">Prompt Injection</a> &mdash; why fetched pages and pasted text are part of the control surface</li>
-          <li><a href="before-you-deploy.html">Before You Deploy</a> &mdash; the last-pass checklist before a public demo</li>
+          <li><a href="zero-to-dev">Zero to Dev</a> &mdash; set up your machine for building with AI (start here if you haven't)</li>
+          <li><a href="wall-of-data">Wall of Data</a> &mdash; collect all your data into one folder (great corpus source)</li>
+          <li><a href="security-for-directors">Security for Directors</a> &mdash; the short safety layer for people shipping AI-built code</li>
+          <li><a href="prompt-injection">Prompt Injection</a> &mdash; why fetched pages and pasted text are part of the control surface</li>
+          <li><a href="before-you-deploy">Before You Deploy</a> &mdash; the last-pass checklist before a public demo</li>
         </ul>
       </div>
 
@@ -575,7 +575,7 @@
     </main>
 
     <footer class="ani d2">
-      <p>Part of <a href="index.html">Shapes of Intelligence</a> &mdash; a companion reference for the book.</p>
+      <p>Part of <a href="/">Shapes of Intelligence</a> &mdash; a companion reference for the book.</p>
       <p><a href="https://github.com/nop2099/ai-book">GitHub</a></p>
     </footer>
 

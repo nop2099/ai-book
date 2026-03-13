@@ -1,0 +1,275 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,700;1,9..144,300;1,9..144,500&display=swap');
+
+:root {
+  --void: #0a0a10;
+  --deep: #0f0f1a;
+  --surface: #161625;
+  --raised: #1e1e32;
+  --edge: #2a2a44;
+  --muted: #7a7a9a;
+  --text: #c8c8dd;
+  --bright: #e8e8f0;
+  --white: #f5f5ff;
+  --amber: #e8a83e;
+  --amber-dim: #c4882a;
+  --teal: #4ecdc4;
+  --rose: #e85577;
+  --vic: #e8a83e;
+  --sam: #4ecdc4;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'DM Mono', 'SF Mono', monospace;
+  background: var(--void);
+  color: var(--text);
+  line-height: 1.8;
+  min-height: 100vh;
+}
+
+a { color: var(--amber); text-decoration: none; }
+a:visited { color: var(--amber); }
+a:hover { color: var(--text); }
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 9999;
+}
+
+.shell {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 3rem 1.5rem 4rem;
+}
+
+@media (min-height: 1000px) and (max-width: 800px) {
+  .shell { max-width: 92vw; padding: 2rem 4vw 3rem; }
+  .masthead h1 { font-size: 2.8rem; }
+  .masthead .sub { font-size: 0.92rem; }
+  .breadcrumb { font-size: 0.78rem; }
+  .stage { font-size: 1.1rem; }
+  .dialogue { font-size: 1.05rem; }
+  .speaker { font-size: 0.8rem; }
+  .line { padding-left: 1.3rem; margin: 1rem 0; }
+  .line::before { width: 4px; }
+  .page-break { font-size: 0.72rem; margin: 2rem 0 1.5rem; }
+  .fin { font-size: 1.3rem; }
+  footer { font-size: 0.75rem; }
+}
+
+.masthead {
+  padding: 1.5rem 0 2rem;
+  border-bottom: 1px solid var(--edge);
+  margin-bottom: 2.5rem;
+  position: relative;
+}
+
+.masthead::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  width: 60px;
+  height: 1px;
+  background: var(--amber);
+}
+
+.breadcrumb {
+  font-size: 0.65rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 0.8rem;
+}
+
+.breadcrumb a {
+  color: var(--muted);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.breadcrumb a:hover { color: var(--amber); }
+
+.masthead h1 {
+  font-family: 'Fraunces', serif;
+  font-weight: 300;
+  font-size: 2rem;
+  color: var(--white);
+  letter-spacing: -0.01em;
+  font-style: italic;
+}
+
+.masthead .sub {
+  color: var(--muted);
+  font-size: 0.72rem;
+  margin-top: 0.4rem;
+  letter-spacing: 0.03em;
+}
+
+.orientation {
+  margin: -0.5rem 0 2.4rem;
+  padding: 1rem 1.1rem;
+  border: 1px solid var(--edge);
+  border-left: 3px solid var(--teal);
+  border-radius: 8px;
+  background: linear-gradient(135deg, rgba(78, 205, 196, 0.08), rgba(232, 168, 62, 0.05));
+}
+
+.orientation-label {
+  font-size: 0.6rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 0.35rem;
+}
+
+.orientation p,
+.orientation li {
+  font-size: 0.76rem;
+  color: var(--bright);
+}
+
+.orientation p + p,
+.orientation p + ul,
+.orientation ul + p {
+  margin-top: 0.7rem;
+}
+
+.orientation ul {
+  padding-left: 1rem;
+}
+
+.orientation li + li {
+  margin-top: 0.35rem;
+}
+
+.orientation strong {
+  color: var(--white);
+}
+
+.orientation-links a + a::before {
+  content: " / ";
+  color: var(--muted);
+}
+
+.page-break {
+  text-align: center;
+  color: var(--muted);
+  font-size: 0.6rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  margin: 2.5rem 0 2rem;
+  position: relative;
+}
+
+.page-break::before,
+.page-break::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  width: calc(50% - 3rem);
+  height: 1px;
+  background: var(--edge);
+}
+
+.page-break::before { left: 0; }
+.page-break::after { right: 0; }
+
+.stage {
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-weight: 500;
+  font-size: 0.88rem;
+  color: var(--muted);
+  margin: 1.5rem 0 0.6rem;
+  line-height: 1.7;
+}
+
+.line {
+  margin: 0.8rem 0;
+  padding-left: 1rem;
+  position: relative;
+}
+
+.line::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.4rem;
+  width: 3px;
+  height: calc(100% - 0.4rem);
+  border-radius: 2px;
+}
+
+.line.vic::before { background: var(--vic); opacity: 0.5; }
+.line.sam::before { background: var(--sam); opacity: 0.5; }
+
+.speaker {
+  font-size: 0.65rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-weight: 500;
+  display: block;
+  margin-bottom: 0.15rem;
+}
+
+.line.vic .speaker { color: var(--vic); }
+.line.sam .speaker { color: var(--sam); }
+
+.dialogue {
+  font-size: 0.82rem;
+  color: var(--bright);
+  line-height: 1.8;
+}
+
+.dialogue em {
+  font-family: 'Fraunces', serif;
+  color: var(--text);
+}
+
+.fin {
+  text-align: center;
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-size: 1.1rem;
+  color: var(--muted);
+  margin: 3rem 0 1rem;
+}
+
+footer {
+  margin-top: 3rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--edge);
+  font-size: 0.62rem;
+  color: var(--muted);
+  letter-spacing: 0.03em;
+}
+
+footer a {
+  color: var(--muted);
+  text-decoration: none;
+  border-bottom: 1px solid var(--edge);
+  transition: color 0.2s, border-color 0.2s;
+}
+
+footer a:hover {
+  color: var(--amber);
+  border-color: var(--amber-dim);
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.ani { animation: fadeUp 0.4s ease-out both; }
+
+@media (max-width: 600px) {
+  .shell { padding: 1.5rem 1rem 3rem; }
+  .masthead h1 { font-size: 1.5rem; }
+}

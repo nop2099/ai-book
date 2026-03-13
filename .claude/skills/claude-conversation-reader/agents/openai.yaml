@@ -1,0 +1,4 @@
+interface:
+  display_name: "Claude Conversation Reader"
+  short_description: "Find, tail, and summarize Claude JSONL sessions."
+  default_prompt: "Read the latest Claude conversation for this project, pull the recent user turns, and summarize what is happening."

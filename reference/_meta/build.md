@@ -26,5 +26,5 @@ Before publishing, an AI agent reads every page and checks:
 
 ## Local preview
 ```bash
-cd site && python3 -m http.server 8000
+python3 reference/_meta/serve-prod-twin.py reference/site --port 8000
 ```

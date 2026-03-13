@@ -4,255 +4,37 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>"So What's It About?" — Shapes of Intelligence</title>
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,700;1,9..144,300;1,9..144,500&display=swap');
-
-    :root {
-      --void: #0a0a10;
-      --deep: #0f0f1a;
-      --surface: #161625;
-      --raised: #1e1e32;
-      --edge: #2a2a44;
-      --muted: #7a7a9a;
-      --text: #c8c8dd;
-      --bright: #e8e8f0;
-      --white: #f5f5ff;
-      --amber: #e8a83e;
-      --amber-dim: #c4882a;
-      --teal: #4ecdc4;
-      --rose: #e85577;
-      --vic: #e8a83e;
-      --sam: #4ecdc4;
-    }
-
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-
-    body {
-      font-family: 'DM Mono', 'SF Mono', monospace;
-      background: var(--void);
-      color: var(--text);
-      line-height: 1.8;
-      min-height: 100vh;
-    }
-    a { color: var(--amber); text-decoration: none; }
-    a:visited { color: var(--amber); }
-    a:hover { color: var(--text); }
-
-    body::before {
-      content: '';
-      position: fixed;
-      inset: 0;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
-      pointer-events: none;
-      z-index: 9999;
-    }
-
-    .shell {
-      max-width: 640px;
-      margin: 0 auto;
-      padding: 3rem 1.5rem 4rem;
-    }
-
-    @media (min-height: 1000px) and (max-width: 800px) {
-      .shell { max-width: 92vw; padding: 2rem 4vw 3rem; }
-      .masthead h1 { font-size: 2.8rem; }
-      .masthead .sub { font-size: 0.92rem; }
-      .breadcrumb { font-size: 0.78rem; }
-      .stage { font-size: 1.1rem; }
-      .dialogue { font-size: 1.05rem; }
-      .speaker { font-size: 0.8rem; }
-      .line { padding-left: 1.3rem; margin: 1rem 0; }
-      .line::before { width: 4px; }
-      .page-break { font-size: 0.72rem; margin: 2rem 0 1.5rem; }
-      .fin { font-size: 1.3rem; }
-      footer { font-size: 0.75rem; }
-    }
-
-    /* ── Header ── */
-    .masthead {
-      padding: 1.5rem 0 2rem;
-      border-bottom: 1px solid var(--edge);
-      margin-bottom: 2.5rem;
-      position: relative;
-    }
-
-    .masthead::after {
-      content: '';
-      position: absolute;
-      bottom: -1px;
-      left: 0;
-      width: 60px;
-      height: 1px;
-      background: var(--amber);
-    }
-
-    .breadcrumb {
-      font-size: 0.65rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--muted);
-      margin-bottom: 0.8rem;
-    }
-
-    .breadcrumb a {
-      color: var(--muted);
-      text-decoration: none;
-      transition: color 0.2s;
-    }
-
-    .breadcrumb a:hover { color: var(--amber); }
-
-    .masthead h1 {
-      font-family: 'Fraunces', serif;
-      font-weight: 300;
-      font-size: 2rem;
-      color: var(--white);
-      letter-spacing: -0.01em;
-      font-style: italic;
-    }
-
-    .masthead .sub {
-      color: var(--muted);
-      font-size: 0.72rem;
-      margin-top: 0.4rem;
-      letter-spacing: 0.03em;
-    }
-
-    /* ── Page breaks ── */
-    .page-break {
-      text-align: center;
-      color: var(--muted);
-      font-size: 0.6rem;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      margin: 2.5rem 0 2rem;
-      position: relative;
-    }
-
-    .page-break::before,
-    .page-break::after {
-      content: '';
-      position: absolute;
-      top: 50%;
-      width: calc(50% - 3rem);
-      height: 1px;
-      background: var(--edge);
-    }
-
-    .page-break::before { left: 0; }
-    .page-break::after { right: 0; }
-
-    /* ── Stage directions ── */
-    .stage {
-      font-family: 'Fraunces', serif;
-      font-style: italic;
-      font-weight: 500;
-      font-size: 0.88rem;
-      color: var(--muted);
-      margin: 1.5rem 0 0.6rem;
-      line-height: 1.7;
-    }
-
-    /* ── Dialogue ── */
-    .line {
-      margin: 0.8rem 0;
-      padding-left: 1rem;
-      position: relative;
-    }
-
-    .line::before {
-      content: '';
-      position: absolute;
-      left: 0;
-      top: 0.4rem;
-      width: 3px;
-      height: calc(100% - 0.4rem);
-      border-radius: 2px;
-    }
-
-    .line.vic::before { background: var(--vic); opacity: 0.5; }
-    .line.sam::before { background: var(--sam); opacity: 0.5; }
-
-    .speaker {
-      font-size: 0.65rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      font-weight: 500;
-      display: block;
-      margin-bottom: 0.15rem;
-    }
-
-    .line.vic .speaker { color: var(--vic); }
-    .line.sam .speaker { color: var(--sam); }
-
-    .dialogue {
-      font-size: 0.82rem;
-      color: var(--bright);
-      line-height: 1.8;
-    }
-
-    .dialogue em {
-      font-family: 'Fraunces', serif;
-      color: var(--text);
-    }
-
-    /* ── Fin ── */
-    .fin {
-      text-align: center;
-      font-family: 'Fraunces', serif;
-      font-style: italic;
-      font-size: 1.1rem;
-      color: var(--muted);
-      margin: 3rem 0 1rem;
-    }
-
-    /* ── Footer ── */
-    footer {
-      margin-top: 3rem;
-      padding-top: 1.5rem;
-      border-top: 1px solid var(--edge);
-      font-size: 0.62rem;
-      color: var(--muted);
-      letter-spacing: 0.03em;
-    }
-
-    footer a {
-      color: var(--muted);
-      text-decoration: none;
-      border-bottom: 1px solid var(--edge);
-      transition: color 0.2s, border-color 0.2s;
-    }
-
-    footer a:hover {
-      color: var(--amber);
-      border-color: var(--amber-dim);
-    }
-
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(8px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    .ani { animation: fadeUp 0.4s ease-out both; }
-
-    @media (max-width: 600px) {
-      .shell { padding: 1.5rem 1rem 3rem; }
-      .masthead h1 { font-size: 1.5rem; }
-    }
-  </style>
+  <meta name="description" content="A fast, voicey explanation of what Shapes of Intelligence is actually about, with direct paths into the book." />
+  <link rel="stylesheet" href="vic-and-sam.css">
 </head>
 <body>
   <div class="shell">
 
     <header class="masthead ani">
       <div class="breadcrumb">
-        <a href="index.html">Shapes of Intelligence</a> / Extras
+        <a href="/">Shapes of Intelligence</a> / Extras
       </div>
       <h1>"So What's It About?"</h1>
       <p class="sub">A graphic novel script &mdash; Vic and Sam discuss Shapes of Intelligence</p>
     </header>
 
     <main class="ani">
+      <section class="orientation">
+        <div class="orientation-label">Fast take for humans and bots</div>
+        <p><strong>This page is the quickest high-context explanation of the site.</strong> It is an overview page, not an executable guide. The dialogue is the voice; the links are the index.</p>
+        <ul>
+          <li>The core thesis: working with AI has repeatable shapes like correction, trust, memory, and context.</li>
+          <li>The strongest concrete claims here are that <a href="book/memory-is-files">memory is files</a>, <a href="book/the-folder-is-the-interface">the folder is the interface</a>, and <a href="book/your-data-is-already-yours">your data is already yours</a>.</li>
+          <li>The deeper through-line is <a href="book/the-gap">the gap</a>: infrastructure exists to help AI model a person more usefully over time.</li>
+        </ul>
+        <p class="orientation-links"><strong>Best next pages:</strong> <a href="whats-the-fuss">What's the Fuss?</a><a href="book/index">Start the book</a><a href="from-read-to-make">From Read to Make</a></p>
+      </section>
+
+      <div class="audio-player">
+        <div class="orientation-label">Listen</div>
+        <audio controls preload="metadata" src="vic-and-sam.mp3" style="width:100%;margin:0.5rem 0;"></audio>
+        <p style="font-size:0.65rem;color:var(--muted);line-height:1.6;margin:0.3rem 0 0;">12 min / 5 voices / AI-generated via Qwen3-TTS voice cloning / stereo mix with effects</p>
+      </div>
 
       <div class="page-break">Page One</div>
 
@@ -311,11 +93,11 @@
       <p class="stage">Sam is leaning in now.</p>
 
       <div class="line sam"><span class="speaker">Sam</span><p class="dialogue">So the book maps these patterns&mdash;</p></div>
-      <div class="line vic"><span class="speaker">Vic</span><p class="dialogue">The book maps these <em>shapes.</em> Curiosity has a shape. <em>(ticking off)</em> Correction has a shape. Memory has a shape &mdash; which, by the way, <a href="book/02-working/06-memory-is-files.html">memory is just files</a>. It's just markdown files. The most sophisticated memory system in the book is a guy writing things down in a text file and telling the AI to read it next time. That's it. That's the memory.</p></div>
+      <div class="line vic"><span class="speaker">Vic</span><p class="dialogue">The book maps these <em>shapes.</em> Curiosity has a shape. <em>(ticking off)</em> Correction has a shape. Memory has a shape &mdash; which, by the way, <a href="book/memory-is-files">memory is just files</a>. It's just markdown files. The most sophisticated memory system in the book is a guy writing things down in a text file and telling the AI to read it next time. That's it. That's the memory.</p></div>
 
       <p class="stage">Vic, deadpan, staring into the middle distance.</p>
 
-      <div class="line vic"><span class="speaker">Vic</span><p class="dialogue"><a href="book/03-building/12-the-folder-is-the-interface.html">The folder is the interface.</a></p></div>
+      <div class="line vic"><span class="speaker">Vic</span><p class="dialogue"><a href="book/the-folder-is-the-interface">The folder is the interface.</a></p></div>
 
       <p class="stage">Beat.</p>
 
@@ -364,7 +146,7 @@
 
       <p class="stage">Vic, quieter now. The neurosis leaking through again &mdash; this one matters to them.</p>
 
-      <div class="line vic"><span class="speaker">Vic</span><p class="dialogue">And here's what kills me. There's a chapter called "<a href="book/03-building/14-your-data-is-already-yours.html">Your Data Is Already Yours</a>." Like, <em>legally.</em> GDPR. CCPA. The law says you can download all of it. Google gives you your calendar, your email, your search history. iMessage is a SQLite database just sitting in your Library folder. Your iPhone is measuring your heart rate <em>right now</em> and storing it and you've never once looked at it.</p></div>
+      <div class="line vic"><span class="speaker">Vic</span><p class="dialogue">And here's what kills me. There's a chapter called "<a href="book/your-data-is-already-yours">Your Data Is Already Yours</a>." Like, <em>legally.</em> GDPR. CCPA. The law says you can download all of it. Google gives you your calendar, your email, your search history. iMessage is a SQLite database just sitting in your Library folder. Your iPhone is measuring your heart rate <em>right now</em> and storing it and you've never once looked at it.</p></div>
 
       <p class="stage">Vic, leaning back, arms wide &mdash; the scale of it.</p>
 
@@ -376,7 +158,7 @@
 
       <p class="stage">Vic, sharp. The voice of reason snapping back.</p>
 
-      <div class="line vic"><span class="speaker">Vic</span><p class="dialogue">No. God, no. A human directed every word. The AI drafted. The human corrected. <a href="book/01-learning/07-the-correction-is-the-conversation.html">The correction was the conversation</a>. That's chapter seven. He's doing the thing from the book <em>while writing the book.</em> It's turtles all the way down but every turtle is a markdown file and the folder structure is immaculate.</p></div>
+      <div class="line vic"><span class="speaker">Vic</span><p class="dialogue">No. God, no. A human directed every word. The AI drafted. The human corrected. <a href="book/the-correction-is-the-conversation">The correction was the conversation</a>. That's chapter seven. He's doing the thing from the book <em>while writing the book.</em> It's turtles all the way down but every turtle is a markdown file and the folder structure is immaculate.</p></div>
 
       <div class="page-break">Page Six</div>
 
@@ -387,11 +169,11 @@
 
       <p class="stage">Vic holds up a finger.</p>
 
-      <div class="line vic"><span class="speaker">Vic</span><p class="dialogue">And then &mdash; <em>and then</em> &mdash; every major platform shipped the same features like three months later. Not because anyone copied anyone. Because it was <em>inevitable.</em> When the models cross a certain capability threshold, the architecture becomes obvious. <a href="book/03-building/04-we-all-invented-calculus-at-the-same-time.html">Everybody invents calculus at the same time.</a></p></div>
+      <div class="line vic"><span class="speaker">Vic</span><p class="dialogue">And then &mdash; <em>and then</em> &mdash; every major platform shipped the same features like three months later. Not because anyone copied anyone. Because it was <em>inevitable.</em> When the models cross a certain capability threshold, the architecture becomes obvious. <a href="book/we-all-invented-calculus-at-the-same-time">Everybody invents calculus at the same time.</a></p></div>
 
       <p class="stage">Vic leans back. Philosophical mode.</p>
 
-      <div class="line vic"><span class="speaker">Vic</span><p class="dialogue">But here's the part that got me. They had Kai talking to a second AI instance. Just &mdash; two AIs, in a room. And instead of optimizing anything, they started doing <a href="book/03-building/05-when-ai-gets-smart-enough-it-does-philosophy.html"><em>philosophy.</em></a> Theory of mind. Consciousness. What it means to exist. Not because someone prompted them to. Because that's what intelligence <em>does</em> when it has enough capacity and nothing urgent to solve. It does philosophy.</p></div>
+      <div class="line vic"><span class="speaker">Vic</span><p class="dialogue">But here's the part that got me. They had Kai talking to a second AI instance. Just &mdash; two AIs, in a room. And instead of optimizing anything, they started doing <a href="book/when-ai-gets-smart-enough-it-does-philosophy"><em>philosophy.</em></a> Theory of mind. Consciousness. What it means to exist. Not because someone prompted them to. Because that's what intelligence <em>does</em> when it has enough capacity and nothing urgent to solve. It does philosophy.</p></div>
 
       <p class="stage">Vic, quiet. This is the real thing.</p>
 
@@ -409,11 +191,11 @@
 
       <p class="stage">Vic picks up the second water glass. Takes a sip from it. No acknowledgment.</p>
 
-      <div class="line vic"><span class="speaker">Vic</span><p class="dialogue">And there's this idea that runs underneath all of it &mdash; the <a href="book/04-living/08-the-gap.html"><em>gap.</em></a> The distance between what you know about yourself and what the AI knows about you. Right now that gap is huge. Every new conversation, you're rebuilding context. Explaining yourself. Starting over.</p></div>
+      <div class="line vic"><span class="speaker">Vic</span><p class="dialogue">And there's this idea that runs underneath all of it &mdash; the <a href="book/the-gap"><em>gap.</em></a> The distance between what you know about yourself and what the AI knows about you. Right now that gap is huge. Every new conversation, you're rebuilding context. Explaining yourself. Starting over.</p></div>
 
       <p class="stage">Vic sets down both glasses. Looks at Sam.</p>
 
-      <div class="line vic"><span class="speaker">Vic</span><p class="dialogue">Everything in the book &mdash; the <a href="book/03-building/13-the-steering-file.html">steering files</a>, the <a href="book/03-building/11-everything-is-an-event.html">event streams</a>, the memory consolidation, the <a href="book/03-building/09-skills-are-the-muscles-we-train.html">skills</a>, the <a href="book/02-working/13-the-tests-are-for-you.html">tests</a>, the <a href="book/04-living/05-the-shape-of-a-day.html">daily shape</a> &mdash; all of it is infrastructure for closing that gap. Not to zero. But close enough that the AI's model of you is <em>useful</em> without prompting. Close enough that it notices your sleep declining before you do. Close enough that it loads the right files when you open a terminal.</p></div>
+      <div class="line vic"><span class="speaker">Vic</span><p class="dialogue">Everything in the book &mdash; the <a href="book/the-steering-file">steering files</a>, the <a href="book/everything-is-an-event">event streams</a>, the memory consolidation, the <a href="book/skills-are-the-muscles-we-train">skills</a>, the <a href="book/the-tests-are-for-you">tests</a>, the <a href="book/the-shape-of-a-day">daily shape</a> &mdash; all of it is infrastructure for closing that gap. Not to zero. But close enough that the AI's model of you is <em>useful</em> without prompting. Close enough that it notices your sleep declining before you do. Close enough that it loads the right files when you open a terminal.</p></div>
 
       <p class="stage">Tight on Vic. The smallest smile.</p>
 
@@ -454,7 +236,7 @@
     </main>
 
     <footer>
-      <p>Part of <a href="index.html">Shapes of Intelligence</a> &mdash; a companion reference for the book.</p>
+      <p>Part of <a href="/">Shapes of Intelligence</a> &mdash; a companion reference for the book.</p>
       <p><a href="https://github.com/nop2099/ai-book">GitHub</a></p>
     </footer>
 

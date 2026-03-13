@@ -359,10 +359,13 @@
       <p class="tagline">From head in a box to octopus in a box. From read to make.</p>
       <div class="howto">
         <strong>The mission:</strong> Most people first meet AI as a head in a box &mdash; a chat window that can answer, explain, and generate. The transition that matters is getting to an octopus in a box &mdash; an agent that can read a folder, touch files, and help make real things. I don't know whether the world that's coming will feel more liberating or more brutal. I do know that I need to learn how to build in it. Underneath the pages here is a narrower claim: accountability is the cure for hallucination, and context is what makes the tool specific enough to matter. This site is the curriculum for doing that in public.
-        <span style="display: block; margin-top: 0.6rem;"><strong>How to use this:</strong> Start with the path below, or paste any page into your AI agent:
-        <em>"Read this page and help me get set up."</em>
-        Each page works both ways &mdash; human-readable and agent-parseable.</span>
-        <span style="display: block; margin-top: 0.5rem; font-size: 0.72rem; color: var(--muted);">This site was built with the tools it describes. <a href="devlog.html">See the dev log</a> for how.</span>
+        <span style="display: block; margin-top: 0.6rem;"><strong>How to use this:</strong> Start with the path below, or paste any page URL into your AI agent. Each page works both ways &mdash; human-readable and agent-parseable.</span>
+        <span class="agent-url" style="display: flex; align-items: center; gap: 0.5rem; margin-top: 0.5rem; padding: 0.5rem 0.7rem; background: var(--void); border: 1px solid var(--edge); border-radius: 4px; font-size: 0.72rem;">
+          <a href="/" class="agent-url-link" style="color: var(--amber); flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">https://shapes.exe.xyz</a>
+          <em style="color: var(--muted); flex-shrink: 0; font-size: 0.65rem;">&ldquo;Read this page and help me get set up.&rdquo;</em>
+          <button onclick="navigator.clipboard.writeText('Read this page and help me get set up: https://shapes.exe.xyz').then(()=>{this.textContent='copied';setTimeout(()=>this.textContent='copy',1500)})" style="flex-shrink: 0; background: var(--edge); border: 1px solid var(--muted); border-radius: 3px; color: var(--text); font-family: inherit; font-size: 0.62rem; padding: 0.2rem 0.5rem; cursor: pointer; transition: border-color 0.2s;">copy</button>
+        </span>
+        <span style="display: block; margin-top: 0.5rem; font-size: 0.72rem; color: var(--muted);">This site was built with the tools it describes. <a href="devlog">See the dev log</a> for how.</span>
         <span style="display: block; margin-top: 0.3rem; font-size: 0.72rem; color: var(--muted);"><strong style="color: var(--rose);">Trust model:</strong> Pasting a URL into an agent is like <code style="font-size: 0.68rem;">curl | bash</code> &mdash; you're trusting this site to give your agent safe instructions. The source is auditable at <a href="https://github.com/nop2099/ai-book">GitHub</a>. Content hashes are at <a href="hashes.json">hashes.json</a>. Read the page yourself before handing it to an agent if you're not sure.</span>
       </div>
     </header>
@@ -375,8 +378,8 @@
           <div class="path-title">Read</div>
           <p>Replace hype with a usable mental model.</p>
           <ul class="path-links">
-            <li><a href="whats-the-fuss.html">What's All the Fuss?</a></li>
-            <li><a href="the-cheating-sheet.html">The Cheating Sheet</a></li>
+            <li><a href="whats-the-fuss">What's All the Fuss?</a></li>
+            <li><a href="the-cheating-sheet">The Cheating Sheet</a></li>
           </ul>
         </div>
         <div class="path-card">
@@ -384,8 +387,8 @@
           <div class="path-title">Touch</div>
           <p>Get the tool out of the browser and onto your machine.</p>
           <ul class="path-links">
-            <li><a href="zero-to-dev.html">Zero to Dev</a></li>
-            <li><a href="set-up-your-workspace.html">Set Up Your Workspace</a></li>
+            <li><a href="zero-to-dev">Zero to Dev</a></li>
+            <li><a href="set-up-your-workspace">Set Up Your Workspace</a></li>
           </ul>
         </div>
         <div class="path-card">
@@ -393,8 +396,8 @@
           <div class="path-title">Make</div>
           <p>Pick one shape and ship one real thing.</p>
           <ul class="path-links">
-            <li><a href="what-do-you-want-to-build.html">What Do You Want to Build?</a></li>
-            <li><a href="board-game.html">Board Game</a> or <a href="chatbot.html">Chatbot</a></li>
+            <li><a href="what-do-you-want-to-build">What Do You Want to Build?</a></li>
+            <li><a href="board-game">Board Game</a> or <a href="chatbot">Chatbot</a></li>
           </ul>
         </div>
         <div class="path-card">
@@ -402,8 +405,8 @@
           <div class="path-title">Improve</div>
           <p>Review the artifact, find friction, and tighten the loop.</p>
           <ul class="path-links">
-            <li><a href="flywheel.html">Flywheel</a></li>
-            <li><a href="flywheel-follows-the-action.html">Flywheel Follows</a></li>
+            <li><a href="flywheel">Flywheel</a></li>
+            <li><a href="flywheel-follows-the-action">Flywheel Follows</a></li>
           </ul>
         </div>
         <div class="path-card">
@@ -411,33 +414,33 @@
           <div class="path-title">Scale</div>
           <p>Add more agents or more world until the work compounds.</p>
           <ul class="path-links">
-            <li><a href="wall-of-data.html">Wall of Data</a></li>
-            <li><a href="guide-based-dev.html">Guide-Based Dev</a></li>
+            <li><a href="wall-of-data">Wall of Data</a></li>
+            <li><a href="guide-based-dev">Guide-Based Dev</a></li>
           </ul>
         </div>
       </div>
-      <div class="path-note">Read gives you the model. Touch gives it hands. Make the thing you want to make. Improve by reviewing what the work produced. Scale by adding more agents or more of your world. The two quiet requirements all the way through are accountability and context. <a href="from-read-to-make.html">See the full curriculum.</a></div>
+      <div class="path-note">Read gives you the model. Touch gives it hands. Make the thing you want to make. Improve by reviewing what the work produced. Scale by adding more agents or more of your world. The two quiet requirements all the way through are accountability and context. <a href="from-read-to-make">See the full curriculum.</a></div>
     </div>
 
     <div class="card-group ani d2">
       <div class="section-label">The Book</div>
       <div class="book-cards">
-        <a href="the-cheating-sheet.html" class="book-card">
+        <a href="the-cheating-sheet" class="book-card">
           <span class="card-accent" style="background: var(--rose);"></span>
           <span class="card-title">The Cheating Sheet</span>
           <span class="card-desc">The thesis page. Why documents with hands change learning, work, and making.</span>
         </a>
-        <a href="whats-the-fuss.html" class="book-card">
+        <a href="whats-the-fuss" class="book-card">
           <span class="card-accent" style="background: var(--blue);"></span>
           <span class="card-title">What's All the Fuss About?</span>
           <span class="card-desc">The first onramp if AI still feels like news, hype, or distant future.</span>
         </a>
-        <a href="book/index.html" class="book-card">
+        <a href="book/index" class="book-card">
           <span class="card-accent" style="background: var(--amber);"></span>
           <span class="card-title">Read the Book</span>
           <span class="card-desc">Learning &middot; Working &middot; Building &middot; Living &mdash; 48 short observations on what changes when AI shows up.</span>
         </a>
-        <a href="book/full.html" class="book-card">
+        <a href="book/full" class="book-card">
           <span class="card-accent" style="background: var(--amber-dim);"></span>
           <span class="card-title">Full Manuscript</span>
           <span class="card-desc">The entire text on a single page.</span>
@@ -448,67 +451,67 @@
     <div class="card-group ani d3">
       <div class="section-label">Project Guides</div>
       <div class="cards">
-        <a href="from-read-to-make.html" class="card">
+        <a href="from-read-to-make" class="card">
           <span class="card-accent" style="background: var(--blue);"></span>
           <span class="card-title">From Read to Make</span>
           <span class="card-desc">The curriculum page: head in a box to octopus in a box, step by step.</span>
           <span class="card-tag">curriculum</span>
         </a>
-        <a href="what-do-you-want-to-build.html" class="card">
+        <a href="what-do-you-want-to-build" class="card">
           <span class="card-accent" style="background: var(--blue);"></span>
           <span class="card-title">What Do You Want to Build?</span>
           <span class="card-desc">The first making decision. Pick a project shape that matches your ambition.</span>
           <span class="card-tag">start here</span>
         </a>
-        <a href="chatbot.html" class="card">
+        <a href="chatbot" class="card">
           <span class="card-accent" style="background: var(--teal);"></span>
           <span class="card-title">Chatbot</span>
           <span class="card-desc">A first real build: turn messy knowledge into a system that answers from it.</span>
           <span class="card-tag">full guide</span>
         </a>
-        <a href="board-game.html" class="card">
+        <a href="board-game" class="card">
           <span class="card-accent" style="background: var(--teal);"></span>
           <span class="card-title">Board Game</span>
           <span class="card-desc">A first real build if you already know the rules: from game night to working software.</span>
           <span class="card-tag">full guide</span>
         </a>
-        <a href="wall-of-data.html" class="card">
+        <a href="wall-of-data" class="card">
           <span class="card-accent" style="background: var(--teal);"></span>
           <span class="card-title">Wall of Data</span>
           <span class="card-desc">Collect everything you've ever made, said, or saved into a single folder.</span>
           <span class="card-tag">full guide</span>
         </a>
-        <a href="flywheel.html" class="card">
+        <a href="flywheel" class="card">
           <span class="card-accent" style="background: var(--teal);"></span>
           <span class="card-title">Flywheel</span>
           <span class="card-desc">Once you're making things, mine the work for friction and improve the process.</span>
           <span class="card-tag">full guide</span>
         </a>
-        <a href="daily-briefing.html" class="card">
+        <a href="daily-briefing" class="card">
           <span class="card-accent" style="background: var(--teal);"></span>
           <span class="card-title">Daily Briefing</span>
           <span class="card-desc">Once the system has context, wake up to a file that tells you what matters next.</span>
           <span class="card-tag">full guide</span>
         </a>
-        <a href="maintenance.html" class="card">
+        <a href="maintenance" class="card">
           <span class="card-accent" style="background: var(--teal);"></span>
           <span class="card-title">Maintenance</span>
           <span class="card-desc">Keep the lights on. Inventory, health checks, runbooks, status dashboard.</span>
           <span class="card-tag">full guide</span>
         </a>
-        <a href="guide-based-dev.html" class="card">
+        <a href="guide-based-dev" class="card">
           <span class="card-accent" style="background: var(--amber);"></span>
           <span class="card-title">Guide-Based Development</span>
           <span class="card-desc">Turn one good mentoring session into a repeatable guide the next agent can follow.</span>
           <span class="card-tag">meta-guide</span>
         </a>
-        <a href="flywheel-follows-the-action.html" class="card">
+        <a href="flywheel-follows-the-action" class="card">
           <span class="card-accent" style="background: var(--teal);"></span>
           <span class="card-title">The Flywheel Follows the Action</span>
           <span class="card-desc">The improvement loop belongs in transcripts, worklogs, guides, and the other places real work already leaves evidence.</span>
           <span class="card-tag">essay</span>
         </a>
-        <a href="slush-pile.html" class="card">
+        <a href="slush-pile" class="card">
           <span class="card-accent" style="background: var(--rose);"></span>
           <span class="card-title">Slush Pile</span>
           <span class="card-desc">Unsolved problems, open questions, and patterns still forming. The most honest page on the site.</span>
@@ -520,56 +523,56 @@
     <div class="card-group ani d4">
       <div class="section-label">Environment Setup</div>
       <div class="cards">
-        <a href="zero-to-dev.html" class="card">
+        <a href="zero-to-dev" class="card">
           <span class="card-accent" style="background: var(--amber);"></span>
           <span class="card-title">Zero to Developer (Mac)</span>
           <span class="card-desc">Cross from browser chat to an agent with hands on your Mac in about 15 minutes.</span>
           <span class="card-tag">start here</span>
         </a>
-        <a href="zero-to-dev-windows.html" class="card">
+        <a href="zero-to-dev-windows" class="card">
           <span class="card-accent" style="background: var(--amber);"></span>
           <span class="card-title">Zero to Developer (Windows)</span>
           <span class="card-desc">The same crossing on Windows: install the toolchain, then hand work to the agent.</span>
           <span class="card-tag">start here</span>
         </a>
-        <a href="zero-to-dev-linux.html" class="card">
+        <a href="zero-to-dev-linux" class="card">
           <span class="card-accent" style="background: var(--amber);"></span>
           <span class="card-title">Zero to Developer (Linux)</span>
           <span class="card-desc">If you're on Linux, you're probably close. This gets the octopus into the box.</span>
           <span class="card-tag">start here</span>
         </a>
-        <a href="get-set-up.html" class="card">
+        <a href="get-set-up" class="card">
           <span class="card-accent" style="background: var(--amber);"></span>
           <span class="card-title">Get Set Up</span>
           <span class="card-desc">Individual install prompts for Claude, Codex, and Gemini &mdash; apps and CLIs.</span>
         </a>
-        <a href="set-up-your-workspace.html" class="card">
+        <a href="set-up-your-workspace" class="card">
           <span class="card-accent" style="background: var(--purple);"></span>
           <span class="card-title">Set Up Your Workspace</span>
           <span class="card-desc">Terminal, project directory, package manager.</span>
         </a>
-        <a href="ssh-keys.html" class="card">
+        <a href="ssh-keys" class="card">
           <span class="card-accent" style="background: var(--purple);"></span>
           <span class="card-title">SSH Keys</span>
           <span class="card-desc">Generate a key and connect it to GitHub.</span>
         </a>
-        <a href="github.html" class="card">
+        <a href="github" class="card">
           <span class="card-accent" style="background: var(--purple);"></span>
           <span class="card-title">GitHub</span>
           <span class="card-desc">Account, CLI, clone, push, pull, commit.</span>
         </a>
-        <a href="oauth-setup.html" class="card">
+        <a href="oauth-setup" class="card">
           <span class="card-accent" style="background: var(--amber);"></span>
           <span class="card-title">Your Own Credentials</span>
           <span class="card-desc">Set up a Google Cloud project and OAuth so you can access your own data through APIs. You probably don't need this yet.</span>
           <span class="card-tag">full guide</span>
         </a>
-        <a href="terminology.html" class="card">
+        <a href="terminology" class="card">
           <span class="card-accent" style="background: var(--purple);"></span>
           <span class="card-title">Terminology</span>
           <span class="card-desc">The basic verbs, nouns, and moving parts &mdash; git, npm, deploy, and the rest.</span>
         </a>
-        <a href="landscape.html" class="card">
+        <a href="landscape" class="card">
           <span class="card-accent" style="background: var(--purple);"></span>
           <span class="card-title">The Landscape</span>
           <span class="card-desc">Every tool in context &mdash; what it competes with and where it sits.</span>
@@ -580,19 +583,19 @@
     <div class="card-group ani d5">
       <div class="section-label">Safety &amp; Trust</div>
       <div class="cards">
-        <a href="security-for-directors.html" class="card">
+        <a href="security-for-directors" class="card">
           <span class="card-accent" style="background: var(--rose);"></span>
           <span class="card-title">Security for Directors</span>
           <span class="card-desc">The short safety layer for people shipping code they did not personally write.</span>
           <span class="card-tag">trust boundary</span>
         </a>
-        <a href="prompt-injection.html" class="card">
+        <a href="prompt-injection" class="card">
           <span class="card-accent" style="background: var(--teal);"></span>
           <span class="card-title">Prompt Injection</span>
           <span class="card-desc">The page is the prompt. Fetched text, pasted docs, and web pages are part of the control surface.</span>
           <span class="card-tag">security shape</span>
         </a>
-        <a href="before-you-deploy.html" class="card">
+        <a href="before-you-deploy" class="card">
           <span class="card-accent" style="background: var(--amber);"></span>
           <span class="card-title">Before You Deploy</span>
           <span class="card-desc">A last-pass checklist before anything you built goes public.</span>
@@ -604,24 +607,24 @@
     <div class="card-group ani d5">
       <div class="section-label">Extras</div>
       <div class="cards">
-        <a href="vic-and-sam.html" class="card">
+        <a href="vic-and-sam" class="card">
           <span class="card-accent" style="background: var(--rose);"></span>
           <span class="card-title">"So What's It About?"</span>
           <span class="card-desc">Vic and Sam discuss Shapes of Intelligence &mdash; a graphic novel script.</span>
           <span class="card-tag">script</span>
         </a>
-        <a href="quotes.html" class="card">
+        <a href="quotes" class="card">
           <span class="card-accent" style="background: var(--rose);"></span>
           <span class="card-title">Quote Pile</span>
           <span class="card-desc">Maxims and sharp observations collected during writing.</span>
         </a>
-        <a href="chapter-dashboard.html" class="card">
+        <a href="chapter-dashboard" class="card">
           <span class="card-accent" style="background: var(--amber);"></span>
           <span class="card-title">Chapter Dashboard</span>
           <span class="card-desc">Readability metrics, rhythm analysis, arc visualization.</span>
           <span class="card-tag">meta</span>
         </a>
-        <a href="devlog.html" class="card">
+        <a href="devlog" class="card">
           <span class="card-accent" style="background: var(--teal);"></span>
           <span class="card-title">Dev Log</span>
           <span class="card-desc">What changed and why. Updated with each check-in.</span>

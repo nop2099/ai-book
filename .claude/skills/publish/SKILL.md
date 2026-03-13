@@ -1,6 +1,6 @@
 ---
 name: publish
-description: Run the full pre-publication checklist — PII scan, tests, security review, dev log, build, link check, spot-check, final PII check, deploy, git commit and push
+description: Run the full pre-publication checklist — PII scan, tests, security review, dev log, build, link check, hash diff, spot-check, final PII check, deploy, git commit and push
 ---
 
 # Publish
@@ -9,7 +9,7 @@ Run this checklist every time we ship. Every step runs; none are optional. If a 
 
 Do all content modifications (dev log, fixes, etc.) BEFORE building, deploying, and pushing. Validate everything BEFORE deploying. The deploy and push happen once at the end, after everything is finalized and verified.
 
-## 1. PII Scan (early)
+## PII Scan (early)
 
 Scan the working tree for credentials, secrets, and personal data. Block the publish if anything is found.
 
@@ -32,9 +32,9 @@ Known acceptable matches:
 - The PII Scanner slush entry in `worklog.md` describes these patterns — that's documentation, not a leak.
 - Example/placeholder credentials in documentation are fine if they're clearly fake.
 
-If real credentials are found: remove them, add the file or directory to `.gitignore` if needed, and restart from step 1.
+If real credentials are found: remove them, add the file or directory to `.gitignore` if needed, and restart from the top.
 
-## 2. Run tests
+## Run tests
 
 ```bash
 cd reference/_meta && .venv/bin/python3 analyze-chapters.py > /dev/null
@@ -42,7 +42,7 @@ cd reference/_meta && .venv/bin/python3 analyze-chapters.py > /dev/null
 
 If `analyze-chapters.py` errors out, fix before continuing. Check for any new readability warnings (grade > 12).
 
-## 3. Security review
+## Security review
 
 Scan for common vulnerabilities in any code that changed this session:
 - **XSS**: User-controlled content rendered without escaping? Template injection?
@@ -53,7 +53,7 @@ Scan for common vulnerabilities in any code that changed this session:
 
 Quick scan, not a full audit. Flag anything suspicious and fix it before continuing.
 
-## 4. Update the dev log
+## Update the dev log
 
 If this publish includes meaningful changes (new pages, major content updates, new features), add an entry to `reference/_meta/static/devlog.html` with:
 - Today's date
@@ -63,15 +63,15 @@ If this publish includes meaningful changes (new pages, major content updates, n
 
 Skip this step if the changes are trivial (typo fixes, minor tweaks).
 
-## 5. Build the site
+## Build the site
 
 ```bash
 bash reference/_meta/build.sh
 ```
 
-The build must succeed with zero errors. Check the page count — it should match or exceed the previous build. If pages are missing, investigate before deploying.
+The build must succeed with zero errors. The build now includes the route/link validator and a prod-twin HTTP check that serves the built site locally with the same slug rewrites and `try_files` behavior as production. Check the page count — it should match or exceed the previous build. If pages are missing, investigate before deploying.
 
-## 6. Link check
+## Link check
 
 Crawl the built site for broken internal links. For every HTML file in `reference/site/`, extract all `href` attributes that point to local files (not `http://`, `https://`, `mailto:`, or `#` anchors). Verify each target file exists in `reference/site/`.
 
@@ -98,18 +98,61 @@ if not broken: print('All links OK')
 
 If broken links are found, fix the source files (in `reference/_meta/static/` or markdown sources), rebuild, and recheck before continuing. Common causes: numbered file prefixes (`30-chatbot.html` vs `chatbot.html`), renamed pages, missing pages that are referenced but not yet written.
 
-## 7. Spot-check the built site
+If the prod-twin HTTP check fails during the build, treat that as a deploy blocker too. It means the files exist on disk but the local server behavior does not match production.
+
+## Hash diff against live site
+
+Compare the built `hashes.json` against the live site to see exactly what will change on deploy. This catches surprises — pages you didn't intend to change, pages that went missing, or assets you forgot to include.
+
+```bash
+python3 -c "
+import json, subprocess
+with open('reference/site/hashes.json') as f:
+    local = json.load(f)
+live_raw = subprocess.check_output(['curl', '-s', 'https://shapes.exe.xyz/hashes.json']).decode()
+live = json.loads(live_raw)
+
+added = sorted(set(local) - set(live))
+removed = sorted(set(live) - set(local))
+changed = sorted(k for k in set(local) & set(live) if local[k] != live[k])
+unchanged = len(set(local) & set(live)) - len(changed)
+
+print(f'Unchanged: {unchanged}')
+print(f'Changed:   {len(changed)}')
+print(f'New:       {len(added)}')
+print(f'Removed:   {len(removed)}')
+if added:
+    print('\nNEW:')
+    for f in added: print(f'  + {f}')
+if changed:
+    print('\nCHANGED:')
+    for f in changed: print(f'  ~ {f}')
+if removed:
+    print('\nREMOVED:')
+    for f in removed: print(f'  - {f}')
+"
+```
+
+Note: `hashes.json` only tracks HTML files. For non-HTML assets (MP3s, images, CSS), also run a dry-run rsync to see the full picture:
+
+```bash
+rsync -avzn --delete reference/site/ shapes.exe.xyz:/var/www/html/ 2>&1 | grep -v '^$'
+```
+
+Review the diff. Every changed, added, or removed file should be intentional. If something unexpected shows up, investigate before deploying. If pages were removed, confirm that was deliberate (not a build bug that dropped a page).
+
+## Spot-check the built site
 
 Before deploying, verify a few built pages render correctly:
 - The index page: confirm new cards appear if any were added
 - Any page that was modified this session: confirm changes are visible
 - The dev log: confirm new entries show up
 
-## 8. PII Scan (final)
+## PII Scan (final)
 
-Run the same PII scan from step 1 one more time. This catches anything introduced during the dev log update or other modifications made between steps 1 and now. If anything new appears, fix it and rebuild (step 5) before continuing. Nothing leaves the machine until this passes.
+Run the same PII scan from the top one more time. This catches anything introduced during the dev log update or other modifications made between the early scan and now. If anything new appears, fix it and rebuild before continuing. Nothing leaves the machine until this passes.
 
-## 9. Review outstanding local changes
+## Review outstanding local changes
 
 Before deploying or committing, review the whole working tree:
 
@@ -130,7 +173,7 @@ Examples of changes that often deserve a second look:
 - Unpublished static page edits already sitting in the tree
 - Support files that the new pages depend on
 
-## 10. Deploy to shapes.exe.xyz
+## Deploy to shapes.exe.xyz
 
 ```bash
 rsync -avz --delete reference/site/ shapes.exe.xyz:/var/www/html/
@@ -138,7 +181,7 @@ rsync -avz --delete reference/site/ shapes.exe.xyz:/var/www/html/
 
 Verify the deploy succeeded. If rsync fails (SSH, permissions, disk space), fix before continuing. Use `curl -s -o /dev/null -w "%{http_code}" https://shapes.exe.xyz/` to confirm 200.
 
-## 11. Git commit and push
+## Git commit and push
 
 Stage only the files that changed. Never `git add -A` or `git add .` — name the files explicitly.
 
@@ -152,20 +195,19 @@ git push
 
 The commit message should describe what changed and why, not just "publish." If pre-commit hooks fail, fix the issue and create a new commit (never amend).
 
-When staging, include all validated files that belong in this publish — including important local changes discovered in step 9. Do not quietly stage only the newest diff if older related work is part of the release.
+When staging, include all validated files that belong in this publish — including important local changes discovered during the review step. Do not quietly stage only the newest diff if older related work is part of the release.
 
 ## Summary
 
-```
- 1. PII scan (early)  — no credentials in tracked files
- 2. Tests             — readability analysis passes
- 3. Security review   — no XSS, injection, or exposed internals
- 4. Dev log           — entry for meaningful changes
- 5. Build             — site builds with no errors
- 6. Link check        — no broken internal hrefs in built site
- 7. Spot-check        — built pages render correctly
- 8. PII scan (final)  — one last check before anything leaves the machine
- 9. Review tree       — sort outstanding changes into include / ask / leave-out
-10. Deploy            — rsync to shapes.exe.xyz
-11. Git commit + push — named files only, descriptive message
-```
+- **PII scan (early)** — no credentials in tracked files
+- **Tests** — readability analysis passes
+- **Security review** — no XSS, injection, or exposed internals
+- **Dev log** — entry for meaningful changes
+- **Build** — site builds with no errors and passes prod-twin HTTP check
+- **Link check** — no broken internal hrefs in built site
+- **Hash diff** — compare built hashes.json + rsync dry-run against live site
+- **Spot-check** — built pages render correctly
+- **PII scan (final)** — one last check before anything leaves the machine
+- **Review tree** — sort outstanding changes into include / ask / leave-out
+- **Deploy** — rsync to shapes.exe.xyz
+- **Git commit + push** — named files only, descriptive message

@@ -1,0 +1,14 @@
+User-agent: *
+Allow: /
+
+Disallow: /hashes.json
+Disallow: /pages.json
+Disallow: /chapter-metrics.json
+Disallow: /slug-map.conf
+
+Disallow: /book/header
+Disallow: /book/footer
+Disallow: /book/00-front-matter/header.html
+Disallow: /book/00-front-matter/footer.html
+
+Sitemap: https://shapes.exe.xyz/sitemap.xml

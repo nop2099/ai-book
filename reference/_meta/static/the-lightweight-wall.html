@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Lightweight Wall — Shapes of Intelligence</title>
+  <meta name="description" content="One prompt, fifteen minutes, and every future conversation starts from context instead of zero. Build an operator brief that tells coding assistants who you are and how you work." />
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,700;1,9..144,300&display=swap');
+
+    :root {
+      --void: #0a0a10;
+      --deep: #0f0f1a;
+      --surface: #161625;
+      --raised: #1e1e32;
+      --edge: #2a2a44;
+      --muted: #8888aa;
+      --text: #d0d0e2;
+      --bright: #eeeef5;
+      --white: #f5f5ff;
+      --amber: #e8a83e;
+      --amber-dim: #c4882a;
+      --teal: #4ecdc4;
+      --rose: #e85577;
+      --blue: #5588dd;
+      --purple: #9977dd;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'DM Mono', 'SF Mono', monospace;
+      background: var(--void);
+      color: var(--text);
+      line-height: 1.7;
+      min-height: 100vh;
+    }
+    a { color: var(--amber); text-decoration: none; }
+    a:visited { color: var(--amber); }
+    a:hover { color: var(--text); }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 9999;
+    }
+
+    .shell {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 3rem 1.5rem 4rem;
+    }
+
+    .masthead {
+      padding: 1.5rem 0 2rem;
+      border-bottom: 1px solid var(--edge);
+      margin-bottom: 2.5rem;
+      position: relative;
+    }
+
+    .masthead::after {
+      content: '';
+      position: absolute;
+      bottom: -1px;
+      left: 0;
+      width: 60px;
+      height: 1px;
+      background: var(--amber);
+    }
+
+    .breadcrumb {
+      font-size: 0.65rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 0.8rem;
+    }
+
+    .breadcrumb a {
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .breadcrumb a:hover { color: var(--amber); }
+
+    .masthead h1 {
+      font-family: 'Fraunces', serif;
+      font-weight: 300;
+      font-size: 2rem;
+      color: var(--white);
+      letter-spacing: -0.01em;
+    }
+
+    .masthead .sub {
+      color: var(--muted);
+      font-size: 0.75rem;
+      margin-top: 0.4rem;
+      letter-spacing: 0.03em;
+      line-height: 1.8;
+      max-width: 55ch;
+    }
+
+    h2 {
+      font-family: 'Fraunces', serif;
+      font-weight: 500;
+      font-size: 1.05rem;
+      color: var(--bright);
+      margin: 2.2rem 0 0.6rem;
+    }
+
+    h2:first-of-type { margin-top: 0; }
+
+    h3 {
+      font-family: 'Fraunces', serif;
+      font-weight: 500;
+      font-size: 0.88rem;
+      color: var(--text);
+      margin: 1.5rem 0 0.5rem;
+    }
+
+    p {
+      font-size: 0.78rem;
+      margin-bottom: 0.8rem;
+      line-height: 1.8;
+    }
+
+    strong { color: var(--bright); }
+    em { color: var(--amber); font-style: normal; }
+
+    ul {
+      list-style: none;
+      margin: 0.6rem 0 1rem 0;
+      padding: 0;
+    }
+
+    ul li {
+      font-size: 0.78rem;
+      padding: 0.2rem 0 0.2rem 1.2rem;
+      position: relative;
+      line-height: 1.8;
+    }
+
+    ul li::before {
+      content: '\2013';
+      position: absolute;
+      left: 0;
+      color: var(--muted);
+    }
+
+    hr {
+      border: none;
+      border-top: 1px solid var(--edge);
+      margin: 2rem 0;
+    }
+
+    .prompt-block {
+      background: var(--surface);
+      border: 1px solid var(--edge);
+      border-left: 3px solid var(--amber);
+      border-radius: 4px;
+      padding: 1.2rem 1.4rem;
+      margin: 1.5rem 0;
+      font-size: 0.75rem;
+      line-height: 1.9;
+      position: relative;
+      cursor: pointer;
+      transition: border-color 0.2s;
+    }
+
+    .prompt-block:hover { border-color: var(--amber); }
+
+    .prompt-block .copy-hint {
+      position: absolute;
+      top: 0.6rem;
+      right: 0.8rem;
+      font-size: 0.58rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      opacity: 0.5;
+      transition: opacity 0.2s;
+    }
+
+    .prompt-block:hover .copy-hint { opacity: 1; }
+    .prompt-block.copied .copy-hint { color: var(--amber); opacity: 1; }
+
+    .results-block {
+      background: var(--deep);
+      border: 1px solid var(--edge);
+      border-left: 3px solid var(--teal);
+      border-radius: 4px;
+      padding: 1rem 1.2rem;
+      margin: 1.5rem 0;
+      font-size: 0.75rem;
+      line-height: 1.8;
+    }
+
+    .results-block .label {
+      font-size: 0.58rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--teal);
+      margin-bottom: 0.5rem;
+    }
+
+    .file-tree {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.72rem;
+      color: var(--bright);
+      line-height: 2;
+      margin: 0.5rem 0;
+      padding-left: 0.5rem;
+    }
+
+    .file-tree .dir { color: var(--amber); }
+    .file-tree .desc { color: var(--muted); font-size: 0.65rem; }
+
+    .patterns {
+      background: var(--deep);
+      border: 1px solid var(--edge);
+      border-radius: 6px;
+      padding: 1rem 1.2rem;
+      margin: 1.5rem 0;
+    }
+
+    .patterns .label {
+      font-size: 0.6rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--purple);
+      margin-bottom: 0.5rem;
+    }
+
+    .patterns p { font-size: 0.72rem; }
+
+    footer {
+      margin-top: 3rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--edge);
+      font-size: 0.62rem;
+      color: var(--muted);
+    }
+
+    footer a {
+      color: var(--muted);
+      text-decoration: none;
+      border-bottom: 1px solid var(--edge);
+      transition: color 0.2s, border-color 0.2s;
+    }
+
+    footer a:hover { color: var(--amber); border-color: var(--amber-dim); }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .ani { animation: fadeUp 0.4s ease-out both; }
+    .d1 { animation-delay: 0.05s; }
+    .d2 { animation-delay: 0.1s; }
+
+    @media (min-height: 1000px) and (max-width: 800px) {
+      .shell { max-width: 92vw; padding: 2rem 4vw 3rem; }
+      .masthead h1 { font-size: 2.8rem; }
+      .masthead .sub { font-size: 0.95rem; }
+      .breadcrumb { font-size: 0.78rem; }
+      h2 { font-size: 1.3rem; }
+      h3 { font-size: 1.1rem; }
+      p, ul li { font-size: 0.98rem; }
+      .prompt-block { font-size: 0.92rem; }
+      .results-block { font-size: 0.92rem; }
+      .file-tree { font-size: 0.88rem; }
+      footer { font-size: 0.75rem; }
+    }
+
+    @media (max-width: 600px) {
+      .shell { padding: 1.5rem 1rem 3rem; }
+      .masthead h1 { font-size: 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+  <div class="shell">
+
+    <header class="masthead ani">
+      <div class="breadcrumb">
+        <a href="/">Shapes of Intelligence</a> / Project Guide
+      </div>
+      <h1>The Lightweight Wall</h1>
+      <p class="sub">One prompt, fifteen minutes, and every future conversation starts from context instead of zero.</p>
+    </header>
+
+    <main class="ani d1">
+
+      <h2>What this is</h2>
+
+      <p>A coding assistant that knows nothing about you starts every conversation cold. You explain your setup, your preferences, your file layout &mdash; every time. The lightweight wall fixes this in one shot.</p>
+
+      <p>You paste a prompt into a coding assistant &mdash; not a chatbot, an agent with file access, like <strong>Claude Code</strong> or <strong>Codex CLI</strong>. It looks around your machine, asks you a few questions, and writes a short operator brief: who you are, how you work, where the important stuff lives. About a hundred and sixty lines of prose.</p>
+
+      <p>Every future assistant reads it first. The result feels like a new coworker who already read the manual.</p>
+
+      <h2>The prompt</h2>
+
+      <p>Copy this. Paste it into a coding assistant with file access. It does the rest.</p>
+
+      <div class="prompt-block" id="prompt" onclick="copyPrompt()">
+        <span class="copy-hint">click to copy</span>
+        Ask me a few questions first, including where I want this saved, recommending ~/me as the default because it is easy for both me and future coding assistants like Claude Code and Codex to find, then inspect this machine and create a sanitized context folder with HOW-I-WORK.md, MACHINE-MAP.md, STEWARDSHIP.md, and WORKLOG.md that explain how I operate, which tools, apps, commands, automations, remote machines, and workflows I actually use, where the important action and data are, what changes over time, what the storage and mount friction is, what future assistants should assume, and what you did to build or refresh this context, using local evidence, relative paths, and host aliases, clearly separating fact from inference and saying "unclear" when needed, without including PII, secrets, raw personal filenames, document titles, email addresses, IPs, account IDs, or document contents, then add short pointers to these files from my active steering files, include lightweight stewardship notes so future assistants can keep them current, and finish by walking me through what you created step by step and how I should use it.
+      </div>
+
+      <p>That's it. Twenty lines when formatted. The agent inspects your machine, asks its questions, and builds the files. You review them, edit anything that's wrong, and you're done.</p>
+
+      <hr>
+
+      <h2>What it creates</h2>
+
+      <div class="file-tree">
+        <span class="dir">~/me/</span><br>
+        &ensp;&ensp;HOW-I-WORK.md <span class="desc">&mdash; your operating style, tools, workflows, preferences</span><br>
+        &ensp;&ensp;MACHINE-MAP.md <span class="desc">&mdash; where things live, mounts, remote machines, friction points</span><br>
+        &ensp;&ensp;STEWARDSHIP.md <span class="desc">&mdash; how to refresh it, what to check, sanitization rules</span><br>
+        &ensp;&ensp;WORKLOG.md <span class="desc">&mdash; what was done, when, by which assistant</span>
+      </div>
+
+      <p>The stewardship file is what makes it last. Without it, the files rot &mdash; they describe a version of you that no longer exists. The stewardship notes tell future assistants how to keep the brief current.</p>
+
+      <h2>What it does not include</h2>
+
+      <p>The prompt explicitly forbids: PII, secrets, raw personal filenames, document titles, email addresses, IPs, account IDs, and document contents. The brief describes <em>how you work</em>, not <em>what you're working on</em>. It separates fact from inference and marks guesses as "unclear."</p>
+
+      <p>This is not a data collection project. No exports, no databases, no disk encryption warnings. It's a text file and a folder that an octopus can read.</p>
+
+      <hr>
+
+      <h2>How we tested it</h2>
+
+      <div class="results-block">
+        <div class="label">Blind taste test &mdash; 6 runs</div>
+        <p>Six runs. Deleted everything between runs. Fresh agent each time. Scored on a 20-point rubric: discoverability, artifact shape, how-I-work quality, machine-map quality, sanitization, fact vs inference, steering integration, stewardship, worklog, and skills.</p>
+        <ul>
+          <li><strong>Best run scored 13 out of 20.</strong> Created four clean files. Mapped the machine accurately. Found external drives, remote boxes, session state. Marked guesses as inferred. Didn't leak a single secret.</li>
+          <li>Common weaknesses: saving to the wrong directory (~/work/me instead of ~/me), stating inferences as facts, missing the worklog, creating markdown notes instead of real skill artifacts.</li>
+          <li>The rubric is in the book. The test is repeatable. Run it on your own machine and see what score you get.</li>
+        </ul>
+      </div>
+
+      <hr>
+
+      <h2>What happens after</h2>
+
+      <p>You'll know it worked the first time an assistant does something useful without you explaining yourself. Sets up a project the way you like. Knows where your photos are. Knows you keep data separate from code. <em>"Oh. It already knows."</em></p>
+
+      <p>The lightweight wall gets you eighty percent of the value for one percent of the cost. Most people only need this. If you want the other twenty percent &mdash; every email, every photo, every conversation you've ever had, searchable and queryable &mdash; that's the <a href="wall-of-data">full wall of data</a>.</p>
+
+      <div class="patterns">
+        <div class="label">Related chapters</div>
+        <ul>
+          <li><a href="book/the-folder-is-the-interface">The Folder Is the Interface</a> &mdash; why ~/me works: agents read your folder structure as their first prompt</li>
+          <li><a href="book/memory-is-files">Memory Is Files</a> &mdash; the most sophisticated memory system is a person writing things down in a text file</li>
+          <li><a href="book/the-steering-file">The Steering File</a> &mdash; the pointer files that tell assistants where to look</li>
+          <li><a href="book/your-data-is-already-yours">Your Data Is Already Yours</a> &mdash; why you own all of this and always have</li>
+        </ul>
+      </div>
+
+      <div class="patterns">
+        <div class="label">Related pages</div>
+        <ul>
+          <li><a href="wall-of-data">Wall of Data</a> &mdash; the full data collection project (if you want the other twenty percent)</li>
+          <li><a href="the-file-that-knows-you">Vic and Sam: "The File That Knows You"</a> &mdash; the episode where Vic tries this prompt and explains the octopus metaphor</li>
+        </ul>
+      </div>
+
+    </main>
+
+    <footer class="ani d2">
+      <p>Part of <a href="/">Shapes of Intelligence</a> &mdash; a companion reference for the book.</p>
+      <p><a href="https://github.com/nop2099/ai-book">GitHub</a></p>
+    </footer>
+
+  </div>
+
+  <script>
+    function copyPrompt() {
+      const el = document.getElementById('prompt');
+      const text = el.textContent.replace('click to copy', '').trim();
+      navigator.clipboard.writeText(text).then(() => {
+        el.classList.add('copied');
+        el.querySelector('.copy-hint').textContent = 'copied';
+        setTimeout(() => {
+          el.classList.remove('copied');
+          el.querySelector('.copy-hint').textContent = 'click to copy';
+        }, 2000);
+      });
+    }
+  </script>
+</body>
+</html>

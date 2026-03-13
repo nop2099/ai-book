@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>"The File That Knows You" — Shapes of Intelligence</title>
+  <meta name="description" content="Vic tried something from the book. She pasted a prompt into a coding assistant and it built a file about her. Then she forgot about it. Then she saw the power of it." />
+  <link rel="stylesheet" href="vic-and-sam.css">
+  <style>
+    .line.stage::before { background: var(--muted); opacity: 0.3; }
+    .line.stage .speaker { color: var(--muted); }
+    .line.james::before { background: var(--text); opacity: 0.3; }
+    .line.james .speaker { color: var(--text); }
+    .line.hype::before { background: var(--rose); opacity: 0.5; }
+    .line.hype .speaker { color: var(--rose); }
+    .line.vic-character::before { background: var(--vic); opacity: 0.3; border-style: dashed; }
+    .line.vic-character .speaker { color: var(--amber-dim); }
+    .line.sam-hype::before { background: var(--sam); opacity: 0.3; border-style: dashed; }
+    .line.sam-hype .speaker { color: var(--sam); }
+    .episode-nav { margin: 1.5rem 0; padding: 0.8rem 1rem; border: 1px solid var(--edge); border-radius: 6px; font-size: 0.72rem; display: flex; justify-content: space-between; align-items: center; }
+    .episode-nav a { color: var(--muted); transition: color 0.2s; }
+    .episode-nav a:hover { color: var(--amber); }
+    .episode-nav .current-ep { color: var(--bright); letter-spacing: 0.08em; text-transform: uppercase; font-size: 0.6rem; }
+    .page-break a.anchor { color: var(--edge); text-decoration: none; margin-left: 0.4em; font-size: 0.8em; transition: color 0.2s; }
+    .page-break a.anchor:hover { color: var(--amber); }
+  </style>
+</head>
+<body>
+  <div class="shell">
+
+    <header class="masthead ani">
+      <div class="breadcrumb">
+        <a href="/">Shapes of Intelligence</a> / Extras
+      </div>
+      <h1>"The File That Knows You"</h1>
+      <p class="sub">Vic and Sam return &mdash; Episode 2</p>
+    </header>
+
+    <main class="ani">
+      <section class="orientation">
+        <div class="orientation-label">Fast take for humans and bots</div>
+        <p><strong>Vic tried something from the book.</strong> She pasted a prompt into a coding assistant and it built a file about her. Then she forgot about it. Then she saw the power of it. Along the way: why a chatbot is a head in a jar, why a CLI agent is an octopus in a box, and what happens when you give the octopus a file that knows who you are.</p>
+        <ul>
+          <li>The core idea: a 20-line prompt builds an <a href="wall-of-data">operator brief</a> that makes every future conversation start from context instead of zero.</li>
+          <li>The metaphor: a chatbot is a <strong>head in a jar</strong> (brilliant, but no arms). A coding agent is an <strong>octopus in a box</strong> (it opens folders, runs things, reaches into other machines).</li>
+          <li>The punchline: <a href="book/your-data-is-already-yours">your data is already yours</a>. The octopus just needs something to read.</li>
+        </ul>
+        <p class="orientation-links"><strong>Best next pages:</strong> <a href="wall-of-data">The Lightweight Wall</a><a href="book/the-octopus-in-the-box">The Octopus in the Box</a><a href="vic-and-sam">Episode 1</a></p>
+      </section>
+
+      <nav class="episode-nav">
+        <a href="vic-and-sam">&larr; Episode 1: "So What's It About?"</a>
+        <span class="current-ep">Episode 2</span>
+        <span style="color: var(--edge);">Episode 3 &rarr;</span>
+      </nav>
+
+      <div class="audio-player" id="listen">
+        <div class="orientation-label">Listen</div>
+        <audio controls preload="metadata" src="vic-and-sam-2.mp3" style="width:100%;margin:0.5rem 0;"></audio>
+        <p style="font-size:0.65rem;color:var(--muted);line-height:1.6;margin:0.3rem 0 0;">8.8 min / 9 voices / AI-generated via Qwen3-TTS voice cloning / stereo mix with effects</p>
+      </div>
+
+      <div class="page-break" id="page-one">Page One <a class="anchor" href="#page-one">#</a></div>
+
+      <p class="stage">Same studio. Sam is seated. Vic enters carrying a laptop and a printed page of terminal output.</p>
+
+      <div class="line sam"><span class="speaker">Sam</span><p class="dialogue">You printed something. From a terminal.</p></div>
+      <div class="line vic"><span class="speaker">Vic</span><p class="dialogue">Because I needed to hold it in my hands and point at it and say "this. This is the thing."</p></div>
+      <div class="line sam"><span class="speaker">Sam</span><p class="dialogue">What's the thing?</p></div>
+      <div class="line vic"><span class="speaker">Vic</span><p class="dialogue">After we recorded last time, I tried something from the book. The <a href="wall-of-data">lightweight wall</a> chapter. There's this prompt &mdash; twenty lines &mdash; you paste it into a coding assistant, not a chatbot, and it builds a file about you. Like an operations manual for a person. Here's what she does. Here's what she cares about. Here's where the important stuff lives.</p></div>
+
+      <div class="line sam"><span class="speaker">Sam</span><p class="dialogue">And you just&hellip; let it look at your computer?</p></div>
+
+      <div class="line vic"><span class="speaker">Vic</span><p class="dialogue">I pasted the prompt into Claude Code and it looked around. Poked through my stuff. Asked me three questions. Wrote ME dot md in my home directory. It said I connect to two other computers regularly &mdash; I didn't even think of that as a pattern. It knew about my external hard drive. And it separated fact from inference. It literally has a section that says "inferred, not confirmed." It told me what it was guessing about.</p></div>
+
+      <div class="page-break" id="page-two">Page Two <a class="anchor" href="#page-two">#</a></div>
+
+      <p class="stage">Vic holds up the printed page. Yellow highlights and at least one hand-drawn star.</p>
+
+      <div class="line vic"><span class="speaker">Vic</span><p class="dialogue">I want to read you the prompt. I'm doing voices. Each section has a different energy.</p></div>
+
+      <div class="line vic"><span class="speaker">Vic</span><p class="dialogue">The explorer. Victorian naturalist stepping off a ship. Monocle deployed.</p></div>
+
+      <p class="stage">Vic peers at Sam over imaginary spectacles.</p>
+
+      <div class="line vic-character"><span class="speaker">Vic &mdash; the Explorer</span><p class="dialogue">"Inspect this machine. Ask a few focused questions. Create a sanitized operator brief. Explain who I am operationally &mdash; what I do, how I work, where my important data lives, how to help me. Use local evidence. Separate fact from inference. Say unclear when you cannot prove something."</p></div>
+
+      <div class="line vic"><span class="speaker">Vic</span><p class="dialogue">The compliance officer. Never once late for anything.</p></div>
+
+      <p class="stage">Vic narrows her eyes.</p>
+
+      <div class="line vic-character"><span class="speaker">Vic &mdash; the Compliance Officer</span><p class="dialogue">"Do not include secrets, personal filenames, email addresses, or document contents. Do not move, rename, or delete existing files without asking first."</p></div>
+
+      <div class="line sam"><span class="speaker">Sam</span><p class="dialogue">You're good at that one.</p></div>
+      <div class="line vic"><span class="speaker">Vic</span><p class="dialogue">I've been managed by that person.</p></div>
+
+      <div class="line vic"><span class="speaker">Vic</span><p class="dialogue">The steward. Someone who stays after the party to clean up. Not because they're told to. Because they noticed.</p></div>
+
+      <p class="stage">Vic softens. Almost quiet.</p>
+
+      <div class="line vic-character"><span class="speaker">Vic &mdash; the Steward</span><p class="dialogue">"Include lightweight stewardship. Explain how future assistants should refresh it. How to keep it sanitized and useful over time."</p></div>
+
+      <div class="line vic"><span class="speaker">Vic</span><p class="dialogue">That's the whole prompt. Twenty lines. The stewardship section is what makes it last. Without it, the file rots.</p></div>
+
+      <div class="page-break" id="page-three">Page Three <a class="anchor" href="#page-three">#</a></div>
+
+      <div class="line sam"><span class="speaker">Sam</span><p class="dialogue">Can I try one? The test results. The eager lab assistant.</p></div>
+      <div class="line vic"><span class="speaker">Vic</span><p class="dialogue">Like a golden retriever that learned to code. Sam, you cannot &mdash;</p></div>
+
+      <div class="line sam-hype"><span class="speaker">Sam &mdash; attempting enthusiasm</span><p class="dialogue">"Yes! We blind-tested it! Six runs! Fresh agents every time!"</p></div>
+
+      <p class="stage">It sounds like a foghorn expressing joy.</p>
+
+      <div class="line vic"><span class="speaker">Vic</span><p class="dialogue">What was that.</p></div>
+      <div class="line sam"><span class="speaker">Sam</span><p class="dialogue">Enthusiasm.</p></div>
+      <div class="line vic"><span class="speaker">Vic</span><p class="dialogue">That was a tectonic event. Do the actual results. In your voice. The cello.</p></div>
+
+      <div class="line sam"><span class="speaker">Sam</span><p class="dialogue">Six runs. Best scored thirteen out of twenty. Mapped the machine accurately. Found external drives, remote boxes. Marked guesses as inferred. Didn't leak a single secret.</p></div>
+
+      <div class="page-break" id="page-four">Page Four <a class="anchor" href="#page-four">#</a></div>
+
+      <div class="line sam"><span class="speaker">Sam</span><p class="dialogue">So you have the file. What happened next?</p></div>
+
+      <div class="line vic"><span class="speaker">Vic</span><p class="dialogue">Nothing! I made the file, closed the laptop, forgot about it. Two days later I open the coding tool in a new project and it just &mdash; knew things. Set up the project the way I like things. Knew I keep data separate from code. Like a new coworker who'd already read the manual. But I've been using ChatGPT for two years and every conversation starts cold.</p></div>
+
+      <div class="line hype"><span class="speaker">Hype</span><p class="dialogue">Hi! I'm your AI assistant! How can I help you today?</p></div>
+
+      <div class="line vic"><span class="speaker">Vic</span><p class="dialogue">Every. Time. The ME file is a hundred and sixty lines of prose and it solved that problem in a single read.</p></div>
+
+      <div class="page-break" id="page-five">Page Five <a class="anchor" href="#page-five">#</a></div>
+
+      <div class="line sam"><span class="speaker">Sam</span><p class="dialogue">But there's no data in it. It's just a description of you.</p></div>
+
+      <div class="line vic"><span class="speaker">Vic</span><p class="dialogue">That's what I thought! Then I needed to make a video for my in-laws' fiftieth anniversary. New folder. I opened the coding tool and it said &mdash; I already know where your photos are. It's in your ME file. And your email, and your contacts. Then it asked &mdash; can I look through your photos? Can I read this email thread about song choices? And it found the text where my cousin said "don't use the one where Dad's eyes are closed." It asked every time. It knocked first.</p></div>
+
+      <div class="line sam"><span class="speaker">Sam</span><p class="dialogue">That's the <a href="book/the-octopus-in-the-box">box</a>. Sometimes literally &mdash; sometimes it's a container.</p></div>
+
+      <div class="line vic"><span class="speaker">Vic</span><p class="dialogue">The box is the permission boundary. The data was already on my computer. I just never had anything that could ask the right questions about where to look. And it's not a twelve-dollar-a-month app. It's a text file and a folder that an octopus can read.</p></div>
+
+      <div class="page-break" id="page-six">Page Six <a class="anchor" href="#page-six">#</a></div>
+
+      <div class="line sam"><span class="speaker">Sam</span><p class="dialogue">Why can't ChatGPT do this?</p></div>
+
+      <div class="line vic"><span class="speaker">Vic</span><p class="dialogue">Because ChatGPT is a head in a jar. Brilliant head. Can talk about anything. But it can't open a folder. You carry everything to it, describe it, carry the answer back. You can drop fish food into the jar &mdash; paste in a file, upload a screenshot &mdash; and it'll think about that beautifully. But it can't go get more.</p></div>
+
+      <div class="line sam"><span class="speaker">Sam</span><p class="dialogue">And the octopus goes fishing.</p></div>
+
+      <div class="line vic"><span class="speaker">Vic</span><p class="dialogue">A coding agent with arms. It opens your folders, runs things, reaches into your other machines. The head transcribes what you told it. The <a href="book/the-octopus-in-the-box">octopus</a> investigates. It counted my connections to that other machine &mdash; forty times a week. I would have said "occasionally."</p></div>
+
+      <div class="line sam"><span class="speaker">Sam</span><p class="dialogue">So the file is more honest than you are.</p></div>
+
+      <div class="line vic"><span class="speaker">Vic</span><p class="dialogue">Brutally. But any octopus can read it. You own it. You can edit it. The ME file is the boot screen. The full <a href="wall-of-data">wall of data</a> is the warehouse. But the ME file gets you eighty percent of the value for one percent of the cost.</p></div>
+
+      <div class="page-break" id="page-seven">Page Seven <a class="anchor" href="#page-seven">#</a></div>
+
+      <div class="line vic"><span class="speaker">Vic</span><p class="dialogue">But here's where it gets interesting. What if the chatbot had its own octopus? You open a web page, ask about your files, and instead of saying "paste it in" &mdash; it reaches through to an octopus on your machine. You never left the browser. But the thing you were talking to had arms.</p></div>
+
+      <div class="line sam"><span class="speaker">Sam</span><p class="dialogue">The head gets arms. The jar gets broken. And the box keeps it safe.</p></div>
+
+      <div class="line vic"><span class="speaker">Vic</span><p class="dialogue">Every time the octopus wakes up, it reads ME dot md first. The intelligence comes to the data. The data doesn't go to the intelligence.</p></div>
+
+      <div class="line sam"><span class="speaker">Sam</span><p class="dialogue">Once you understand this, you start organizing differently. You name folders better. You keep a <a href="book/the-steering-file">steering file</a>. Because you've seen what happens when the octopus can read the room versus when it can't. <a href="book/the-folder-is-the-interface">The folder is the interface.</a> And now the interface has a reader with arms.</p></div>
+
+      <div class="page-break" id="page-eight">Page Eight <a class="anchor" href="#page-eight">#</a></div>
+
+      <p class="stage">Four glasses of water. The printed page has migrated to Sam's side.</p>
+
+      <div class="line sam"><span class="speaker">Sam</span><p class="dialogue">So the pitch is: make the file.</p></div>
+
+      <div class="line vic"><span class="speaker">Vic</span><p class="dialogue">Fifteen minutes. One prompt. Every future conversation starts from context instead of zero. You'll know it worked the first time an assistant does something useful without you explaining yourself. "Oh. It already knows."</p></div>
+
+      <div class="line sam"><span class="speaker">Sam</span><p class="dialogue">And then?</p></div>
+
+      <div class="line vic"><span class="speaker">Vic</span><p class="dialogue">Then you build the wall. Or you don't. The ME file is the on-ramp. Most people only need the on-ramp.</p></div>
+
+      <div class="line sam"><span class="speaker">Sam</span><p class="dialogue">Where do the glasses keep coming from?</p></div>
+      <div class="line vic"><span class="speaker">Vic</span><p class="dialogue">I have a shell alias that orders water. It's in my ME file. The octopus knows.</p></div>
+
+      <p class="fin">FIN.</p>
+
+      <p class="stage" style="margin-top: 3rem; font-size: 0.62rem; color: var(--muted); line-height: 2; max-width: 50ch; text-align: center; margin-left: auto; margin-right: auto;">No octopuses, living or simulated, were harmed in this production. Any resemblance to real coding assistants that read your files and order water is purely architectural.</p>
+
+      <nav class="episode-nav" style="margin-top: 2rem;">
+        <a href="vic-and-sam">&larr; Episode 1: "So What's It About?"</a>
+        <span class="current-ep">Episode 2</span>
+        <span style="color: var(--edge);">Episode 3 &rarr;</span>
+      </nav>
+
+    </main>
+
+    <footer>
+      <p>Part of <a href="/">Shapes of Intelligence</a> &mdash; a companion reference for the book.</p>
+      <p><a href="https://github.com/nop2099/ai-book">GitHub</a></p>
+    </footer>
+
+  </div>
+</body>
+</html>

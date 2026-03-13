@@ -67,6 +67,58 @@ All effects run in numpy during `_assemble()`. No regeneration needed to change 
 
 ## Phase 1: Script
 
+### Pre-production verification
+
+Run this checklist before generating audio. Every step runs; none are optional. If a step fails, fix it before proceeding to generation. Once audio is generated, dialogue fixes cost GPU hours.
+
+**Parse integrity** — verify the script parses cleanly:
+- All speaker tags match `[UPPERCASE-NAME]` and are known in `VOICE_MAP`
+- No orphaned text (lines outside any speaker tag)
+- No empty voice lines (speaker tag with no text before next tag or break)
+- No double section breaks (`---` followed immediately by `---`)
+- Section breaks have voiced content on both sides
+
+**Line lengths** — TTS quality degrades on long runs:
+- Hard limit: 120 words per line. Fail the check if exceeded.
+- Warn at 60 words. Lines over 60 words should be reviewed — consider splitting at a natural breath point.
+- Character voices (VIC-EXPLORER, VIC-COMPLIANCE, VIC-STEWARD, HYPE, etc.) should be shorter — under 40 words. These voices can't sustain long passages.
+
+**Speaker balance** — verify the episode's dynamics:
+- Count lines and words per speaker
+- The lead voice should carry the majority
+- Supporting voices should have enough lines to establish character but not dominate
+- Warn if any speaker has only 1 line (except HYPE or cold-open JAMES, which are cameos)
+
+**Voice map coverage** — every speaker in the script must have a mapping in `VOICE_MAP` in `generate_episode.py`. Report any unmapped speakers as a hard stop.
+
+**Word count and duration estimate** — sanity-check episode length:
+- Dialogue episodes: estimate at ~150 wpm (faster than narration)
+- Narration episodes: estimate at ~130 wpm
+- Add section breaks × 2s for pause time
+- Flag if under 5 minutes (too short) or over 20 minutes (long for a podcast episode)
+
+**PII scan** — scan the script markdown for:
+- Email addresses, phone numbers, real full names that shouldn't be in the audio
+- Internal hostnames, IPs, file paths with real usernames
+- API keys, tokens, secrets (even in dialogue — they'll be spoken aloud)
+- Known acceptable: the words "secrets," "email," "PII" used in dialogue *about* privacy are fine
+
+**Fact-check against source material** — for scripts that reference book chapters:
+- Verify specific numbers (chapter counts, test scores, percentages) against the actual chapters in `chapters/`
+- Verify named people, anecdotes, and quotes appear in the cited chapter
+- Verify structural claims (part names, chapter titles) against the directory structure
+- Flag claims that appear only in the script and not in any chapter — these may be audiobook-original (fine) or hallucinated (not fine)
+
+**Editorial review** — read for production readiness:
+- **Voice consistency**: Does each character sound like themselves across lines? Compare against previous episodes if this is a returning cast.
+- **Tone**: Flag lines that break character into marketing copy, feature explanations, or voiceover mode. Dialogue should sound like people talking, not a pitch deck.
+- **Character voice splits**: Verify that lines tagged with a character voice (e.g., VIC-STEWARD) contain *only* that character's dialogue. If the speaker breaks character mid-line, it needs to be split into two segments with separate tags.
+- **Stage directions**: Should add texture or comedy, not just describe blocking. Compare against the episode's tone.
+
+**Sample generation** — write a `{episode}-sample.md` with one line per voice. All speakers, representative lines. Generate this first (cheap) to verify all voices resolve and sound right before the full run.
+
+### Script format
+
 Scripts live in `audiobook/` as markdown files. Format:
 
 ```markdown
@@ -105,6 +157,7 @@ The cold open is parsed and prepended as segments before the main script, with a
 | `rich.md` | Ep 1: Shapes for Rich | NARRATOR, SHAPE, SHAPE-CLOSE, SHAPE-WARN | Generated (Dorian recast complete) |
 | `vic-and-sam.md` | Ep 3: Vic and Sam | VIC, SAM, STAGE, JAMES, HYPE | Generated, full stereo mix |
 | `wall-of-data.md` | Ep 2: The Lightweight Wall | 11 voices | Script written, not generated |
+| `vic-and-sam-2.md` | Ep 4: The File That Knows You | VIC, VIC-EXPLORER, VIC-COMPLIANCE, VIC-STEWARD, SAM, SAM-HYPE, STAGE, JAMES, HYPE | Generated, full stereo mix, webpage published |
 | `cold-open.md` | Reusable disclaimer | JAMES | Generated |
 
 ## Phase 2: Voices
@@ -174,6 +227,8 @@ python3 generate_episode.py script.md               # Full run (gates already pa
 
 Every fallback, every default, every cached value is a place where a disconnection can hide. The system should crash on a mismatch, not produce 143 lines with the wrong voice and declare success. All fallbacks now log when they fire. The input manifest is written before generation, not after — it's a pre-flight checklist, not an autopsy report.
 
+**Known API drift:** The `qwen_tts` library renamed `x_vector` to `ref_spk_embedding` between versions. The `get_xvector()` helper in `generate_episode.py` tries both field names and crashes with a clear message if neither exists. If the DGX qwen_tts version changes again, this is the first thing to check.
+
 ## Phase 3: Generate
 
 ### Multi-episode generator
@@ -194,12 +249,86 @@ Assembly-only requires only `numpy` and `soundfile` (no torch). Generation requi
 
 ## Phase 4: Verify
 
-### Whisper transcription check
+### Dead air check
 
-Run a whisper pass after assembly to check for missing or garbled lines:
+TTS sometimes generates silence gaps or spurious pops/clicks after the voice stops. These compound in the mix — a 3s dead tail on one line plus a 2s section break = 5s of nothing. Check both individual lines and the assembled mix.
+
+**Per-line check (run on all generated WAVs):**
 
 ```bash
-whisper output/vic-and-sam/vic-and-sam.wav --model tiny --language en --output_format json --word_timestamps True
+cd audiobook && .venv/bin/python3 -c "
+import soundfile as sf
+import numpy as np
+import os, sys
+
+lines_dir = sys.argv[1]
+for f in sorted(os.listdir(lines_dir)):
+    if not f.endswith('.wav'): continue
+    audio, sr = sf.read(os.path.join(lines_dir, f))
+    total = len(audio) / sr
+    # Windowed RMS scan (0.25s windows)
+    window = int(0.25 * sr)
+    last_signal = 0
+    for start in range(0, len(audio) - window + 1, window):
+        rms = np.sqrt(np.mean(audio[start:start+window]**2))
+        if rms >= 0.005:
+            last_signal = (start + window) / sr
+    dead = total - last_signal
+    if dead > 0.5:
+        print(f'DEAD AIR: {f} — {dead:.1f}s silence at end (total {total:.1f}s, voice ends ~{last_signal:.1f}s)')
+" output/EPISODE/lines/
+```
+
+**Assembled mix check (find silence gaps > 1s):**
+
+```bash
+cd audiobook && .venv/bin/python3 -c "
+import soundfile as sf
+import numpy as np
+import sys
+
+audio, sr = sf.read(sys.argv[1])
+mono = audio.mean(axis=1) if audio.ndim > 1 else audio
+window = int(0.5 * sr)
+in_silence = False
+silence_start = 0
+for start in range(0, len(mono) - window + 1, window):
+    rms = np.sqrt(np.mean(mono[start:start+window]**2))
+    if rms < 0.003:
+        if not in_silence:
+            silence_start = start / sr
+            in_silence = True
+    else:
+        if in_silence:
+            dur = start / sr - silence_start
+            if dur > 1.5:
+                print(f'GAP: {silence_start:.1f}s - {start/sr:.1f}s ({dur:.1f}s)')
+            in_silence = False
+if in_silence:
+    dur = len(mono)/sr - silence_start
+    if dur > 1.5:
+        print(f'GAP: {silence_start:.1f}s - {len(mono)/sr:.1f}s ({dur:.1f}s)')
+" output/EPISODE/EPISODE.wav
+```
+
+Expected section breaks are 2.0s — anything over 3s is suspect. Dead air in lines is handled automatically by `trim_trailing_silence()` in the assembly, but always verify.
+
+**Root cause:** TTS models sometimes generate silence gaps or pops after the voice content ends. The `trim_trailing_silence()` function in `generate_episode.py` detects the longest silence gap in the back half of each line and trims there. It uses windowed RMS (not per-sample peaks) to ignore isolated clicks.
+
+### Whisper transcription check
+
+Whisper with word timestamps is the clearest way to find dead air — it maps silence gaps to transcript gaps. A line where the last word ends at 9.5s but the WAV runs to 12.8s is immediately visible.
+
+```bash
+whisper output/EPISODE/lines/040_vic_*.wav --model tiny --language en --output_format json --word_timestamps True
+```
+
+Look for: large gaps between the last word's `end` timestamp and the file duration. Also catches garbled or missing words.
+
+For the assembled mix:
+
+```bash
+whisper output/EPISODE/EPISODE.wav --model tiny --language en --output_format json --word_timestamps True
 ```
 
 Short lines ("Correct.", "A shape.", "Did you —") may show as PARTIAL/MISSING due to matching threshold — verify by listening. The telephone filter on stage directions makes whisper transcription rougher but the content is present.
@@ -233,8 +362,10 @@ python3 voiceprint.py check vic-and-sam.md --cold-open cold-open.md
 
 **Known limitations:**
 - Short lines (< 2s) produce unreliable pitch estimates. "A shape." or "That's —" may show false pitch failures.
-- Telephone-filtered lines (STAGE) have no pitch reference in the DB since smithers_clone isn't on the wall.
+- Telephone-filtered lines (STAGE) have no pitch reference in the DB since smithers_clone isn't on the wall. STAGE always shows `pitch=?` and family mismatch — this is expected.
 - Voice cloning output matches the voice *family* (e.g. wells-bttf) more than the exact reference file. This is expected — the model produces a voice in the same neighborhood, not a copy.
+- JAMES family matches vary (james_test_intro, james_meet_c, wells-bttf/arthur) because all James refs are the same person. These are not failures.
+- Cross-similarity warnings fire heavily when an episode has 9+ voices from a small cast pool (e.g. Vic and Sam 2 fires 30+ warnings). These are all intentional — the cast voices are related by design. Review the manifest but don't block on similarity warnings for known casts.
 
 **Key acoustic stats for the current cast:**
 
@@ -288,6 +419,34 @@ rsync -avz nop@dgx.mahi-tilapia.ts.net:~/audiobook/output/ audiobook/output/
 ## Player Page
 
 `audiobook/output/player-v2.html` — dark theme, episodes at top, test slices in collapsible Sound Lab sections.
+
+## Phase 5: Publish
+
+### Web page
+
+Each episode gets a standalone HTML page in `reference/_meta/static/`. The page uses the same CSS as the first Vic and Sam episode (`vic-and-sam.css`) and follows the graphic-novel-script format:
+
+- **Orientation block** at top (teal-bordered, fast summary for humans and bots, book links)
+- **Audio player** with MP3 (convert from WAV: `ffmpeg -i episode.wav -codec:a libmp3lame -b:a 192k episode.mp3`)
+- **Script as dialogue** using `.line.vic`, `.line.sam`, `.stage` CSS classes
+- **Page breaks** between sections (`<div class="page-break">Page N</div>`)
+- **Book cross-links** inline where the dialogue references chapters
+- **Episode navigation** at top and bottom linking to adjacent episodes
+- **Disclaimer** in the style of the episode (ep 1: comedians, ep 2: octopuses)
+
+For character voices (Vic doing impressions, Sam attempting enthusiasm), use inline `<style>` for episode-specific CSS classes rather than modifying the shared stylesheet.
+
+**Cross-linking checklist:**
+- Add forward link from previous episode to new one
+- Add backward link from new episode to previous one
+- Link chapter references in dialogue to `book/chapter-slug`
+- Update the orientation block's "Best next pages" to point to relevant chapters
+
+### MP3 and assets
+
+- WAV → MP3 at 192k for the site
+- MP3 goes in `reference/_meta/static/` alongside the HTML
+- The build script copies static assets to `reference/site/`
 
 ## Voice Casting Wall
 

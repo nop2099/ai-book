@@ -50,3 +50,5 @@ Collected as we go. Some from James, some from conversations, some from the work
 "A guide is a map of a shape."
 
 "I never met a meta I didn't like."
+
+"That is one of the least stupid public explanations of agent safety I've seen." — ChatGPT, about Shapes of Intelligence (relayed by Aaron Hayes, March 2026)

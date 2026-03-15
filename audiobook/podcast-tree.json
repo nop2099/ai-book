@@ -1,0 +1,296 @@
+{
+  "title": "I Want a Podcast",
+  "tagline": "Read the book and let's build.",
+  "version": "0.2",
+  "description": "One universal path. Six costumes. The story follows you.",
+
+  "tools": {
+    "claude-code": {
+      "label": "Claude Code",
+      "family": "cli",
+      "karen": "Karen Claude",
+      "install": "npm install -g @anthropic-ai/claude-code",
+      "launch": "claude",
+      "interface": "terminal",
+      "open_cmd": "Open your terminal",
+      "paste_method": "Write it in a file. The agent reads the file.",
+      "can_run_scripts": true,
+      "can_tts": true,
+      "can_ffmpeg": true,
+      "url": "https://docs.anthropic.com/en/docs/claude-code"
+    },
+    "codex": {
+      "label": "Codex CLI",
+      "family": "cli",
+      "karen": "Karen Codex",
+      "install": "npm install -g @openai/codex",
+      "launch": "codex",
+      "interface": "terminal",
+      "open_cmd": "Open your terminal",
+      "paste_method": "Write it in a file. The agent reads the file.",
+      "can_run_scripts": true,
+      "can_tts": true,
+      "can_ffmpeg": true,
+      "url": "https://github.com/openai/codex"
+    },
+    "gemini-cli": {
+      "label": "Gemini CLI",
+      "family": "cli",
+      "karen": "Karen Gemini",
+      "install": "npm install -g @anthropic-ai/gemini-cli",
+      "launch": "gemini",
+      "interface": "terminal",
+      "open_cmd": "Open your terminal",
+      "paste_method": "Write it in a file. The agent reads the file.",
+      "can_run_scripts": true,
+      "can_tts": true,
+      "can_ffmpeg": true,
+      "url": "https://github.com/google-gemini/gemini-cli"
+    },
+    "cowork": {
+      "label": "Claude Cowork",
+      "family": "desktop",
+      "karen": "Karen Claude",
+      "install": "Download Claude desktop app from claude.ai",
+      "launch": "Open the Claude app and start a Cowork session",
+      "interface": "desktop app",
+      "open_cmd": "Open the Claude app",
+      "paste_method": "Paste into the chat, or point it at a file on your desktop.",
+      "can_run_scripts": false,
+      "can_tts": false,
+      "can_ffmpeg": false,
+      "url": "https://claude.ai/download"
+    },
+    "chatgpt": {
+      "label": "ChatGPT",
+      "family": "web",
+      "karen": "Karen ChatGPT",
+      "install": "Go to chatgpt.com and sign in",
+      "launch": "Open chatgpt.com",
+      "interface": "web browser",
+      "open_cmd": "Open your browser",
+      "paste_method": "Paste into the chat window.",
+      "can_run_scripts": false,
+      "can_tts": false,
+      "can_ffmpeg": false,
+      "url": "https://chatgpt.com"
+    },
+    "notebooklm": {
+      "label": "NotebookLM",
+      "family": "nlm",
+      "karen": null,
+      "install": "Go to notebooklm.google.com and sign in",
+      "launch": "Create a new notebook",
+      "interface": "web browser",
+      "open_cmd": "Open NotebookLM",
+      "paste_method": "Upload your sources. NotebookLM writes its own script.",
+      "can_run_scripts": false,
+      "can_tts": "native",
+      "can_ffmpeg": false,
+      "url": "https://notebooklm.google.com",
+      "note": "NotebookLM generates its own podcast. You don't control the script, voices, or assembly. Fast. Unsteerable."
+    }
+  },
+
+  "axes": {
+    "interface": {
+      "web":     { "label": "Web Browser",  "persona": "parrot", "friction": "high",  "reach": "low",  "desc": "The parrot. Talks but can't reach. Everything is copy-paste." },
+      "desktop": { "label": "Desktop App",  "persona": "rich",   "friction": "medium","reach": "medium","desc": "Has some file access. Can see your screen. Can't run scripts." },
+      "cli":     { "label": "Command Line", "persona": "james",  "friction": "low",   "reach": "high", "desc": "The octopus. Reads files, runs commands, builds things." }
+    },
+    "provider": {
+      "anthropic": { "label": "Anthropic (Claude)", "tools": { "web": "claude.ai", "desktop": "Claude Desktop / Cowork", "cli": "Claude Code" } },
+      "openai":    { "label": "OpenAI",             "tools": { "web": "ChatGPT",    "desktop": "ChatGPT Desktop",        "cli": "Codex CLI" } },
+      "google":    { "label": "Google",              "tools": { "web": "Gemini / NotebookLM", "desktop": null,             "cli": "Gemini CLI" } }
+    },
+    "cost": {
+      "free":  { "label": "Free tier",        "notes": "Gemini CLI (preview), ChatGPT free, Claude.ai free. Limited. Enough for the map." },
+      "paid":  { "label": "Subscription",      "notes": "Pro/Plus plans. More tokens, more features, less friction." },
+      "byok":  { "label": "Bring your own key", "notes": "API key. Pay per token. No subscription. Full control." }
+    }
+  },
+
+  "families": {
+    "cli":     { "label": "Command Line", "persona": "james" },
+    "desktop": { "label": "Desktop App",  "persona": "rich" },
+    "web":     { "label": "Web Browser",  "persona": "parrot" },
+    "nlm":     { "label": "NotebookLM",   "persona": "auto" }
+  },
+
+  "capability_matrix": {
+    "_note": "What each interface level can do. This drives the evaluate step.",
+    "web":     { "can_read_files": false, "can_write_files": false, "can_run_scripts": false, "can_tts": false, "can_ffmpeg": false, "iteration_friction": "high" },
+    "desktop": { "can_read_files": true,  "can_write_files": true,  "can_run_scripts": false, "can_tts": false, "can_ffmpeg": false, "iteration_friction": "medium" },
+    "cli":     { "can_read_files": true,  "can_write_files": true,  "can_run_scripts": true,  "can_tts": true,  "can_ffmpeg": true,  "iteration_friction": "low" }
+  },
+
+  "universal_path": [
+    {
+      "id": "intro",
+      "title": "Why a podcast?",
+      "file": "universal/intro.md",
+      "inserts": null,
+      "notes": "Story circle. What makes an episode. The conductor. Not an orbit."
+    },
+    {
+      "id": "evaluate",
+      "title": "What do you have?",
+      "file": "universal/evaluate.md",
+      "inserts": null,
+      "notes": "Capability detection. What tools exist on your machine right now? What subscriptions do you have? What can you get for free? This determines the path. Three axes: interface (web/desktop/cli), provider (anthropic/openai/google), and cost (free/paid/bring-your-own-key). The output is: you are HERE on the map."
+    },
+    {
+      "id": "setup",
+      "title": "Get set up",
+      "file": "universal/setup.md",
+      "inserts": {
+        "type": "per-family",
+        "point": "{{SETUP_INSTRUCTIONS}}",
+        "files": {
+          "cli": "inserts/setup-cli.md",
+          "desktop": "inserts/setup-desktop.md",
+          "web": "inserts/setup-web.md",
+          "nlm": "inserts/setup-nlm.md"
+        }
+      },
+      "notes": "Universal framing + tool-specific install steps injected."
+    },
+    {
+      "id": "folder",
+      "title": "A file and a folder",
+      "file": "universal/folder.md",
+      "inserts": null,
+      "notes": "Create your project folder. Create your first file. The system exists."
+    },
+    {
+      "id": "script",
+      "title": "Write the script",
+      "file": "universal/script.md",
+      "inserts": {
+        "type": "per-family",
+        "point": "{{SCRIPT_METHOD}}",
+        "files": {
+          "cli": "inserts/script-cli.md",
+          "desktop": "inserts/script-desktop.md",
+          "web": "inserts/script-web.md",
+          "nlm": "inserts/script-nlm.md"
+        }
+      },
+      "notes": "Script format is universal. How you write it differs. NLM replaces this with source curation."
+    },
+    {
+      "id": "voice",
+      "title": "Voice it",
+      "file": "universal/voice.md",
+      "inserts": {
+        "type": "per-family",
+        "point": "{{VOICE_METHOD}}",
+        "files": {
+          "cli": "inserts/voice-cli.md",
+          "desktop": "inserts/voice-desktop.md",
+          "web": "inserts/voice-web.md",
+          "nlm": "inserts/voice-nlm.md"
+        }
+      },
+      "notes": "THE HARD FORK. Truly different per family."
+    },
+    {
+      "id": "assemble",
+      "title": "Assemble",
+      "file": "universal/assemble.md",
+      "inserts": {
+        "type": "per-family",
+        "point": "{{ASSEMBLE_METHOD}}",
+        "files": {
+          "cli": "inserts/assemble-cli.md",
+          "desktop": "inserts/assemble-manual.md",
+          "web": "inserts/assemble-manual.md",
+          "nlm": "inserts/assemble-nlm.md"
+        }
+      },
+      "notes": "CLI gets the full pipeline. Everyone else gets simpler. NLM skips."
+    },
+    {
+      "id": "publish",
+      "title": "Publish",
+      "file": "universal/publish.md",
+      "inserts": {
+        "type": "per-family",
+        "point": "{{PUBLISH_METHOD}}",
+        "files": {
+          "cli": "inserts/publish-cli.md",
+          "desktop": "inserts/publish-simple.md",
+          "web": "inserts/publish-simple.md",
+          "nlm": "inserts/publish-nlm.md"
+        }
+      },
+      "notes": "Mostly converges. You have an MP3. Put it somewhere."
+    },
+    {
+      "id": "improve",
+      "title": "What's next",
+      "file": "universal/improve.md",
+      "inserts": null,
+      "notes": "Steering file. Skill. The second episode starts from where this one ended."
+    }
+  ],
+
+  "template_variables": {
+    "_note": "These are replaced in all content files at render time.",
+    "{{TOOL}}": "tool.label",
+    "{{KAREN}}": "tool.karen",
+    "{{INSTALL}}": "tool.install",
+    "{{LAUNCH}}": "tool.launch",
+    "{{INTERFACE}}": "tool.interface",
+    "{{OPEN_CMD}}": "tool.open_cmd",
+    "{{PASTE_METHOD}}": "tool.paste_method",
+    "{{TOOL_URL}}": "tool.url",
+    "{{FAMILY}}": "families[tool.family].label"
+  },
+
+  "styles": {
+    "lecture": {
+      "label": "The Lecture",
+      "speakers": ["NARRATOR", "STAGE"],
+      "desc": "Narrator reads the guide straight. No dialogue. Clean, linear, listenable on a walk.",
+      "karen_role": null,
+      "energy": "pirate-page"
+    },
+    "conversation": {
+      "label": "The Conversation",
+      "speakers": ["NARRATOR", "KAREN", "STAGE"],
+      "desc": "Karen and the narrator talk through it. Karen asks the questions the listener would ask.",
+      "karen_role": "curious learner who asks good questions",
+      "energy": "vic-and-sam"
+    },
+    "workshop": {
+      "label": "The Workshop",
+      "speakers": ["NARRATOR", "KAREN", "STAGE", "JAMES"],
+      "desc": "Karen is the hands. She executes live. Narrator explains what's happening. Pair programming as audio.",
+      "karen_role": "the agent doing the work, reporting what she sees",
+      "energy": "pair-programming"
+    },
+    "encounters": {
+      "label": "The Encounter Table",
+      "speakers": ["NARRATOR", "KAREN", "STAGE"],
+      "desc": "Self-contained 2-3 min situations. Not linear. Roll a d20. Land on the one you need.",
+      "karen_role": "the agent in the scenario",
+      "energy": "d20-table",
+      "structure": "collection of independent scenes, not a path",
+      "notes": "Each encounter is: situation, what went wrong (or what you want), what to do, what to say to the agent. Shuffleable. Searchable. The anti-curriculum for people who already have a tool."
+    }
+  },
+
+  "rendering": {
+    "steps": [
+      "1. Load universal path",
+      "2. For each section: load the universal file",
+      "3. If section has inserts: load the insert file for the selected family",
+      "4. Replace {{INSERT_POINT}} with the insert content",
+      "5. Replace all {{TEMPLATE_VARIABLES}} with tool config values",
+      "6. If depth=short: truncate each section to first paragraph + first insert paragraph",
+      "7. Output: one rendered page or one audiobook script"
+    ],
+    "output_formats": ["html", "audiobook-script", "markdown"]
+  }
+}

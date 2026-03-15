@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0"
+  xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd"
+  xmlns:content="http://purl.org/rss/1.0/modules/content/"
+  xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>I Want a Podcast</title>
+    <link>https://shapes.exe.xyz/i-want-a-podcast</link>
+    <atom:link href="https://shapes.exe.xyz/feed.xml" rel="self" type="application/rss+xml"/>
+    <language>en-us</language>
+    <description>It's a podcast about wanting a podcast. You say what you want. An AI builds it. You push back when it's wrong. By the end you have the thing AND you understand why it works. Then you teach someone else with one sentence: "I want a podcast." That's the name, the pilot, the format, and the prompt. Four things. One sentence. From Shapes of Intelligence by James Wilson.</description>
+    <itunes:author>James Wilson</itunes:author>
+    <itunes:owner>
+      <itunes:name>James Wilson</itunes:name>
+    </itunes:owner>
+    <itunes:image href="https://shapes.exe.xyz/apple-touch-icon.png"/>
+    <itunes:category text="Technology"/>
+    <itunes:category text="Education">
+      <itunes:category text="How To"/>
+    </itunes:category>
+    <itunes:explicit>false</itunes:explicit>
+    <itunes:type>episodic</itunes:type>
+
+    <item>
+      <title>Part 1: The Build</title>
+      <description>Rich says "I want a podcast." Four words. By the end he has an encrypted podcast on his phone and he can explain why it's secure. Seven voices — the octopus (CLI agent), the crab (desktop agent), the parrot (web chat), the error robot, and the stage narrator. 35 minutes. Dry mix. All voices are macOS text-to-speech. The security thread is the spine. The blind taste test is the frame.</description>
+      <enclosure url="https://shapes.exe.xyz/i-want-a-podcast-1.mp3" length="41952044" type="audio/mpeg"/>
+      <guid isPermaLink="false">i-want-a-podcast-1-2026-03-15</guid>
+      <pubDate>Sat, 15 Mar 2026 06:00:00 +0000</pubDate>
+      <itunes:duration>2100</itunes:duration>
+      <itunes:episode>1</itunes:episode>
+      <itunes:title>Part 1: The Build</itunes:title>
+      <itunes:summary>Rich says "I want a podcast." The octopus builds it. The parrot watches. The crab nudges permissions. The error voice shows up when things break. By the end: encrypted filenames, password-protected hosting, and a sentence to teach someone else.</itunes:summary>
+      <link>https://shapes.exe.xyz/i-want-a-podcast</link>
+    </item>
+
+    <item>
+      <title>Part 2: What You Built</title>
+      <description>Rich extends his podcast — Gmail connectors, shared baking spreadsheets with approval gates, scheduling, content redaction, voice cloning, prompt injection through cookies, and a postscript where a senior enterprise architect looks at what Rich built and says "that's a complete system architecture." 35 minutes. The same seven voices. The technology is thirty years old. The ability to assemble it with a conversation is six months old.</description>
+      <enclosure url="https://shapes.exe.xyz/i-want-a-podcast-2.mp3" length="42548684" type="audio/mpeg"/>
+      <guid isPermaLink="false">i-want-a-podcast-2-2026-03-15</guid>
+      <pubDate>Sat, 15 Mar 2026 06:01:00 +0000</pubDate>
+      <itunes:duration>2130</itunes:duration>
+      <itunes:episode>2</itunes:episode>
+      <itunes:title>Part 2: What You Built</itunes:title>
+      <itunes:summary>Email, calendar, spreadsheets, scheduling, redaction, voice cloning, prompt injection, and what a TOGAF architect sees when he looks at a baking podcast. The parrot got glasses for the cloud. The crab admits she's an octopus in a costume. OpenClaw is an octopus in a harness. Thanks for listening.</itunes:summary>
+      <link>https://shapes.exe.xyz/i-want-a-podcast</link>
+    </item>
+
+  </channel>
+</rss>

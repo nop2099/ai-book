@@ -243,6 +243,68 @@ python3 generate_episode.py vic-and-sam.md --renumber          # Re-space to 10s
 
 Assembly-only requires only `numpy` and `soundfile` (no torch). Generation requires torch + qwen_tts.
 
+### Draft mode (local TTS)
+
+Render full episodes locally using macOS `say` and `espeak-ng` instead of Qwen3-TTS on the DGX. No GPU required — entire episodes render in ~1-2 minutes.
+
+```bash
+python3 generate_episode.py script.md --draft
+```
+
+**How it works:**
+- `DRAFT_VOICE_MAP` in `generate_episode.py` maps each speaker to a `(voice_spec, engine)` tuple, where engine is `"say"` (macOS TTS) or `"espeak"` (espeak-ng)
+- Output goes to `output/{episode}-draft/`, separate from real renders
+- Uses the same content-addressed line cache as production — re-runs skip cached lines
+- Same assembly pipeline with all effects (reverb, pan, telephone filter, horror filter, etc.)
+
+**Voice casting philosophy:**
+- 6 macOS natural voices (Daniel, Karen, Moira, Rishi, Samantha, Tessa) cover the main cast
+- espeak-ng robot voices (Fred, etc.) cover error voices, roll call, and one-off characters
+- Draft voices are the preferred production voices — they render in 2 minutes vs 45 minutes for cloned voices. Faster iteration means more corrections means better output. The "worse" voice produces better episodes because you can afford to re-render ten times.
+- The best voice is the one that lets you iterate.
+
+**Dry mix mode:**
+- `--dry` flag skips all effects: no reverb, no telephone filter, no stereo pan, no room tone, no emphasis boost
+- Just normalized voices, silence between lines, fade in/out
+- Use for scripts where the voices carry the show without effects (workbook-style episodes, dramatizations)
+
+**TTS pronunciation guide:**
+- Use sip test pronunciation pages to audition spellings (see `output/pronunciation/`)
+- Known winners from testing: Co-Work (hyphenated), f-f-mpeg (dashes), A.E.S. (dots), H.T.M.L. (dots), T-T-S (dashes), C.L.I. (dots)
+- MP3 and MP4 are fine as-is — Daniel says them correctly in context
+- URL is fine as-is
+- Netlify, Homebrew, Xcode, Ollama, ChatGPT all pronounce correctly without modification
+- Build a pronunciation audition page when unsure — generate multiple spellings, listen, pick
+- Future: add "copy state" button to pronunciation pages that puts picks in clipboard
+
+**Multi-voice dramatization format:**
+- For workbook/dramatization episodes, use character voices in first person (RICH, OCTOPUS, PARROT, CRAB, ERROR)
+- STAGE as connective tissue — transitions between chapters, reflective commentary, knows how the story ends
+- Headlines can be folded into STAGE: "Now let's talk about security. Making it secure." instead of a separate HEADLINE voice
+- Each character should introduce themselves with their macOS voice name at the top
+- The ERROR voice (Fred) introduces itself with a sample error and another character reacts
+
+**Current workbook cast (I Want a Podcast):**
+
+| Speaker | macOS Voice | Role |
+|---|---|---|
+| JAMES | Daniel | Author |
+| RICH | Rishi | The user |
+| OCTOPUS | Tessa | Claude Code CLI |
+| PARROT | Karen | ChatGPT free web (near-sighted) |
+| CRAB | Moira | Claude Co-Work / sandboxed (in a shell) |
+| STAGE | Samantha | Transitions, reflections, omniscient |
+| ERROR | Fred | Error messages, robot |
+
+**Hybrid real/draft rendering:**
+- `DRAFT_USE_REAL` lists speakers whose real Qwen3-TTS renders already exist. Those lines get copied from the real output dir instead of re-rendering with draft voices (currently: CHARLOTTE).
+
+**Render speed:**
+- espeak-ng: 0.003-0.007x realtime
+- macOS say: 0.012-0.068x realtime
+
+**Purpose:** iterate on scripts locally without DGX access. Hear the full mix, timing, and effects with placeholder voices before committing GPU time.
+
 ### Local venv
 
 `audiobook/.venv` has numpy, soundfile, and scipy for local assembly and voice analysis. Torch is only on DGX.
@@ -442,11 +504,32 @@ For character voices (Vic doing impressions, Sam attempting enthusiasm), use inl
 - Link chapter references in dialogue to `book/chapter-slug`
 - Update the orientation block's "Best next pages" to point to relevant chapters
 
-### MP3 and assets
+### Public episodes
 
 - WAV → MP3 at 192k for the site
-- MP3 goes in `reference/_meta/static/` alongside the HTML
-- The build script copies static assets to `reference/site/`
+- MP3 goes in `reference/site/` alongside the HTML page
+- Public pages go directly in `reference/site/` (e.g. `i-want-a-podcast.html`)
+- Add to site index (`reference/site/index.html`) with a card in the appropriate section
+- Deploy: `rsync -avz --delete --exclude='rich/' --exclude='alex/' reference/site/ shapes.exe.xyz:/var/www/html/`
+- **IMPORTANT**: `--delete` will wipe private portal dirs unless excluded
+
+### Private portals (mentoring episodes)
+
+- Private episodes deploy to their own path: `/rich/`, `/alex/`, etc.
+- Each portal is in `audiobook/output/{name}-portal/` with its own `index.html`, MP3s, and viewer pages
+- Protected by nginx basic auth (htpasswd file in the portal dir)
+- Deploy separately: `rsync -avz audiobook/output/rich-portal/ shapes.exe.xyz:/var/www/html/rich/`
+- Rich portal: username `rich`, password `supernatural`
+- Portal landing page: LCARS-themed, reverse chronological, download buttons, transcript links, sidebar with public episode links
+- Always add new private paths to the public deploy `--exclude` list and to the MEMORY.md deploy notes
+
+### Viewer pages
+
+- Two styles: LCARS-themed (private portals) or site-themed (public)
+- Audio player at top, full transcript below
+- Color-coded by speaker with CSS classes matching the cast
+- Include download button for the MP3
+- Private viewers: no password gate (nginx handles auth for the whole path)
 
 ## Voice Casting Wall
 
@@ -456,3 +539,44 @@ Key directories:
 - `~/w9/wall/` — harvest refs
 - `~/w9/wall/cast/` — 15 SW-medieval cast clips
 - `~/w9/wall/wells-bttf/` — 7 Wells-BTTF cast clips
+
+## Audio Analysis Tools
+
+### Voice Fingerprinting (`voiceprint.py`)
+
+See the [Voice fingerprinting section](#voice-fingerprinting-voiceprintpy) above for full usage and acoustic stats. The voice fingerprint database and scatter visualization are also rendered on the wall of voices page at `reference/_meta/static/wall-of-voices.html`.
+
+### Adding a New Voice to the Wall
+
+- Obtain a reference clip: 10-30 seconds of clean speech, mono, 16-48kHz WAV
+- Place the WAV in the appropriate wall directory:
+  - `~/w9/wall/cast/` for character voices (named `{character}_{register}.wav`)
+  - `~/w9/wall/wells-bttf/` for Wells-BTTF session voices
+  - `~/w9/wall/` for standalone/harvest voices
+- Run `python3 voiceprint.py --build-db` to add to the fingerprint database (`voice-db.json`)
+- Add the speaker tag and WAV path to `VOICE_MAP` in `generate_episode.py`
+- Add to `VOLUME_SCALE` in `generate_episode.py` if non-default volume needed
+- Generate a test line: `python3 generate_episode.py sample.md --batch 1`
+- Verify with `python3 voiceprint.py identify output/sample/lines/*.wav`
+- Update the wall of voices page at `reference/_meta/static/wall-of-voices.html`
+
+### Wall of Voices Page
+
+The complete voice catalog lives at `reference/_meta/static/wall-of-voices.html`. It includes:
+- Scatter chart of all voices (pitch vs brightness, color-coded by family)
+- Voice cards with acoustic stats (f0, spectral centroid, RMS, duration)
+- Role mappings (which podcast character uses which voice)
+- Duplicate detection results
+- New voice entry process documentation
+
+### Current Voice Inventory (33 voices)
+
+**Families:**
+- **Star Wars medieval** (`cast/`): 15 registers across 4 characters — Old Ben Kenobi, Lady Leia, Ser Vaydar, Hann of Soloh, Luc Skywalden, Charlotte
+- **Wells-BTTF** (`wells-bttf/`): 7 voices — Dorian Moreau, Arthur, Dean Griffin, Eliza, Narrator, The Traveller, Young Herbert
+- **James**: 5 variants — reference (90s composite), 3 Meet segments, test intro
+- **Standalone**: Aubrey, harvest clips, meet sample
+
+**Known duplicates:**
+- `ser_vaydar_whisper_harvest` == `cast/ser_vaydar_whisper` (identical file)
+- `aubrey` exists in both `~/w9/wall/` and `audiobook/voices/` (synced copy, not a problem)

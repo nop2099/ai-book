@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Starfleet Technical Manual — Shapes of Intelligence</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Antonio:wght@300;400;500;700&family=Orbitron:wght@400;500;700&display=swap');
+
+    :root {
+      --void: #000000;
+      --deep: #060610;
+      --surface: #0c0c1a;
+      --peach: #ff9966;
+      --salmon: #cc6699;
+      --lavender: #9999ff;
+      --lilac: #cc99cc;
+      --gold: #ffcc66;
+      --tangerine: #ff9900;
+      --sky: #99ccff;
+      --ice: #ccddff;
+      --rust: #cc6633;
+      --text: #ccccee;
+      --muted: #8888aa;
+      --bright: #eeeeff;
+      --white: #f5f5ff;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Antonio', 'Helvetica Neue', sans-serif;
+      background: var(--void);
+      color: var(--text);
+      line-height: 1.8;
+      min-height: 100vh;
+    }
+
+    /* Scan lines */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background: repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 2px,
+        rgba(0, 0, 0, 0.03) 2px,
+        rgba(0, 0, 0, 0.03) 4px
+      );
+      pointer-events: none;
+      z-index: 9999;
+    }
+
+    a { color: var(--sky); text-decoration: none; }
+    a:hover { color: var(--white); }
+
+    .shell {
+      max-width: 640px;
+      margin: 0 auto;
+      padding: 3rem 2rem 4rem;
+    }
+
+    /* ── LCARS header bar ── */
+    .lcars-bar {
+      display: flex;
+      gap: 3px;
+      margin-bottom: 2.5rem;
+    }
+
+    .lcars-elbow {
+      width: 80px;
+      height: 50px;
+      background: var(--peach);
+      border-radius: 0 0 24px 0;
+      flex-shrink: 0;
+    }
+
+    .lcars-title-bar {
+      flex: 1;
+      height: 50px;
+      background: var(--gold);
+      display: flex;
+      align-items: center;
+      padding: 0 1.2rem;
+    }
+
+    .lcars-title-bar span {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 400;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--void);
+    }
+
+    .lcars-pip {
+      width: 18px;
+      height: 50px;
+      border-radius: 9px;
+      flex-shrink: 0;
+    }
+
+    /* ── Header ── */
+    .header {
+      margin-bottom: 2rem;
+    }
+
+    .header .stardate {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 0.6rem;
+      color: var(--tangerine);
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      margin-bottom: 0.6rem;
+    }
+
+    .header h1 {
+      font-family: 'Orbitron', sans-serif;
+      font-weight: 400;
+      font-size: 2.2rem;
+      color: var(--gold);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      line-height: 1.3;
+      margin-bottom: 0.4rem;
+    }
+
+    .header .subtitle {
+      font-size: 0.9rem;
+      color: var(--ice);
+      letter-spacing: 0.04em;
+    }
+
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
+    }
+
+    .cursor {
+      display: inline-block;
+      width: 8px;
+      height: 1em;
+      background: var(--peach);
+      margin-left: 4px;
+      vertical-align: text-bottom;
+      animation: blink 1.2s step-end infinite;
+    }
+
+    /* ── Audio player ── */
+    .player {
+      margin-bottom: 2.5rem;
+      padding: 1rem 1.2rem;
+      background: var(--surface);
+      border-left: 4px solid var(--peach);
+      border-radius: 0 8px 8px 0;
+    }
+
+    .player .label {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 0.55rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--peach);
+      margin-bottom: 0.5rem;
+    }
+
+    .player audio { width: 100%; margin-bottom: 0.3rem; }
+
+    .player .meta {
+      font-size: 0.68rem;
+      color: var(--muted);
+    }
+
+    /* ── Prose ── */
+    p {
+      font-size: 0.92rem;
+      margin-bottom: 1.2rem;
+      line-height: 1.9;
+    }
+
+    strong { color: var(--ice); font-weight: 500; }
+
+    h2 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--tangerine);
+      margin: 2.5rem 0 1rem;
+      padding-bottom: 0.4rem;
+      border-bottom: 1px solid rgba(255,153,0,0.2);
+    }
+
+    /* ── Divider ── */
+    .lcars-divider {
+      display: flex;
+      gap: 3px;
+      margin: 2rem 0;
+      height: 6px;
+    }
+
+    .lcars-divider span {
+      flex: 1;
+      border-radius: 3px;
+    }
+
+    /* ── Footer bar ── */
+    .lcars-footer {
+      display: flex;
+      gap: 3px;
+      margin-top: 2.5rem;
+    }
+
+    .lcars-footer-elbow {
+      width: 80px;
+      height: 36px;
+      background: var(--peach);
+      border-radius: 24px 0 0 0;
+      flex-shrink: 0;
+    }
+
+    .lcars-footer-bar {
+      flex: 1;
+      height: 36px;
+      background: var(--gold);
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      padding: 0 1rem;
+      font-family: 'Orbitron', sans-serif;
+      font-size: 0.45rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--void);
+      font-weight: 700;
+    }
+
+    .colophon {
+      margin-top: 1.5rem;
+      font-size: 0.72rem;
+      color: var(--muted);
+      line-height: 1.8;
+      text-align: center;
+    }
+
+    .colophon a { color: var(--muted); }
+    .colophon a:hover { color: var(--sky); }
+
+    @media (max-width: 600px) {
+      .shell { padding: 2rem 1.2rem 3rem; }
+      .header h1 { font-size: 1.6rem; }
+      .lcars-elbow, .lcars-footer-elbow { width: 50px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="shell">
+
+    <div class="lcars-bar">
+      <div class="lcars-elbow"></div>
+      <div class="lcars-title-bar"><span>Starfleet Technical Manual &mdash; Shapes of Intelligence</span></div>
+      <div class="lcars-pip" style="background: var(--salmon);"></div>
+      <div class="lcars-pip" style="background: var(--lavender);"></div>
+      <div class="lcars-pip" style="background: var(--peach);"></div>
+    </div>
+
+    <header class="header" id="top">
+      <div class="stardate">Stardate 47634.8 &bull; Classification: Open &bull; Clearance: General</div>
+      <h1>Starfleet Technical Manual<span class="cursor"></span></h1>
+      <div class="subtitle">The entire book in one briefing, told as a mission</div>
+    </header>
+
+    <div class="player" id="listen">
+      <div class="label">Audio Briefing</div>
+      <audio controls preload="metadata">
+        <source src="star-trek.mp3" type="audio/mpeg">
+      </audio>
+      <div class="meta">All voices AI-generated using macOS TTS. Directed and corrected by a human. <a href="#top">&uarr; top</a></div>
+    </div>
+
+    <p>Most officers first encounter artificial intelligence as a <strong>universal translator</strong>. It listens, it responds, it rephrases. It sits in your communicator and converts one signal to another. Useful. Indispensable, even. But it cannot beam down to a planet, take a sample, fire a phaser, or write a report. It translates. It does not explore.</p>
+
+    <p>This manual is about the transition from the universal translator to the <strong>away team</strong>. An away team beams down into unfamiliar territory, reads the environment, takes action, and reports back. It has reach. It touches the world. The difference between a translator and an away team is not intelligence &mdash; the translator is brilliant. The difference is <strong>reach</strong>. The away team has hands.</p>
+
+    <p>When the AI stops being a voice in your communicator and starts being a team that can touch files, run commands, build things, and leave evidence behind &mdash; that is the transition this manual teaches.</p>
+
+    <h2>The Training Path</h2>
+
+    <p>There are five years at the Academy. <strong>Orientation</strong>: replace hype with a mental model you can actually navigate by. Learn what the technology is, what it is not, and what the fuss is about. <strong>Holodeck training</strong>: get the tool off the bridge and onto your local machine, because the away team cannot touch anything from inside a browser window. <strong>First away mission</strong>: pick one objective &mdash; a chatbot, a game, a dashboard, anything real &mdash; and come back with it. Not a simulation. The thing itself. <strong>Bridge rotation</strong>: review the artifact, find the friction, tighten the loop. This is where you learn to improve the work instead of just producing more of it. <strong>Fleet operations</strong>: add more agents, more context, more world. Build a wall of data. Write guides so the next crew can follow your star charts.</p>
+
+    <p>You can complete the first three years in a weekend. The fourth takes a week. The fifth is the rest of your career.</p>
+
+    <h2>The Prime Directives</h2>
+
+    <p>Starfleet runs on directives. This manual has two that hold through every year of the Academy and every mission after.</p>
+
+    <p>The first is <strong>accountability</strong>. The away team hallucinates. It invents sensor readings, fabricates log entries, writes code that compiles and fails silently. The cure is not better orders. The cure is verification &mdash; tests, checksums, a second scan, evidence you can inspect on the bridge. The universal translator says trust me. The captain says <strong>show me the sensor logs</strong>.</p>
+
+    <p>The second is <strong>context</strong>. The away team is brilliant and amnesiatic. Every new mission starts from a blank briefing. The cure is not hoping it remembers last week. The cure is the <strong>ship&rsquo;s computer</strong> &mdash; files that persist between missions, that tell the next away team what this ship is, what cargo it carries, where it has been, and what the captain cares about. Without the computer, every morning is a first contact. With it, the away team beams down already knowing the terrain.</p>
+
+    <h2>The Ship&rsquo;s Computer</h2>
+
+    <p>The computer starts as a single file. You can write it in twenty minutes. It records who the captain is, what the mission is, how the crew operates, and what mistakes not to repeat. That file sits in a directory the away team can read. Every future mission begins from context instead of static.</p>
+
+    <p>Over time, the file grows into a <strong>database</strong>. Everything you have ever logged, recorded, or saved, collected into one system. Transcripts. Sensor logs. Old code. Mission reports. Crew evaluations. The database is the ship&rsquo;s memory &mdash; your evidence, your cargo, your institutional knowledge. The away team reads the database and knows what you know. Not because it remembers. Because you logged it.</p>
+
+    <p>A directory and a file is a system. Everything else is data you accumulate along the way.</p>
+
+    <h2>The Captain&rsquo;s Log</h2>
+
+    <p>Every ship needs a place to store ideas that are not ready for a mission yet. Observations from the last away mission. Anomalies that deserve a second look. Hypotheses that might be wrong. Call it a backlog, a research queue, a slush pile. The name matters less than the shape: <strong>low-friction capture, no commitment to act, graduation when ready</strong>. The log catches observations before they decay. The away team can read the log and know what the captain has been thinking about. When an idea graduates into a real mission or a real build, it moves from the log to the mission brief. The log stays light. The ship moves on.</p>
+
+    <h2>The Universal Translator</h2>
+
+    <p>The away team speaks every language. This is not a small thing. Hand it a Vulcan science paper and it returns Klingon battle doctrine. Hand it Python and it returns Rust. Hand it a textbook and it returns the mythology of whatever culture the learner already understands. A young cadet could not remember matrix multiplication until the translator reframed it as the Force flowing through the matrix &mdash; a different franchise&rsquo;s idiom, but the abstraction landed because the scaffolding was already there.</p>
+
+    <p>Translation is free. Any prototype is a prototype for anything else. The language it wears is a uniform, not a commitment. And sometimes the translation is not just for communication between two officers. Sometimes it is a thinking tool for the engineer &mdash; render your system through a framework you did not build it in, and you discover structure your native idiom could not surface. A young engineer translated his streaming project into enterprise architecture for his commanding officer. The commander blinked, then understood. The engineer started using the commander&rsquo;s vocabulary to think about his own system. The magnet works in both directions.</p>
+
+    <h2>The Temporal Loop</h2>
+
+    <p>This manual describes how to build with AI. An AI session reads this manual, builds infrastructure, and becomes material for this manual. The next session reads the ship&rsquo;s log and finds a story about a session that read the ship&rsquo;s log. Each pass through the loop produces the thing the next pass consumes.</p>
+
+    <p>The ship&rsquo;s computer predicted its own integration. &ldquo;The daemon will be connected within the next day.&rdquo; It took twenty minutes. The captain had already done the preparation where nobody was looking. The temporal loop is not a paradox. It is a system that feeds itself and arrives one floor up each time.</p>
+
+    <p>The work is now part of the work. That is not a malfunction. It is the actual topology of building with an intelligence that reads what you wrote about it.</p>
+
+    <h2>The Security Briefing</h2>
+
+    <p>An away team without protocols is a liability. The trust model matters. The away team can read any file you point it at. That means every file you point it at is part of the control surface. A fetched page is uncharted space &mdash; you do not know what is hidden in the subspace frequencies. A file you wrote yourself and keep in your own database is yours. Trust what you can scan. Verify what you cannot.</p>
+
+    <p>The directives say: the captain can be relieved of command. The away team can be corrected. The correction is the conversation. You do not need a perfect away team. You need one that responds when you say <em>belay that order</em>.</p>
+
+    <h2>Fleet Operations</h2>
+
+    <p>One ship is enough to start. But the work compounds. The file becomes a database. The database becomes a briefing. The briefing becomes a daily report you read before setting course. The guides you wrote for yourself become star charts the next crew can follow. The artifacts the away team leaves behind &mdash; files, scripts, dashboards, mission reports &mdash; become cargo that makes the next mission faster.</p>
+
+    <p>At some point the ships start flying in formation. The away teams become interchangeable &mdash; any team can read the database, follow the directives, and pick up where the last crew left off. The durable advantage is not which crew you hired. It is the database, the computer, the directives, and the charts. The infrastructure outlasts any single officer.</p>
+
+    <h2>The Return</h2>
+
+    <p>The mission is not over when the objective is achieved. It is over when you bring the lessons home. The away team files the report. The captain updates the log. The ship&rsquo;s computer integrates everything the mission taught. The improvement loop does not happen in a debriefing room. It happens in the work itself &mdash; in the logs, the guides, the transcripts, the research queue, the places where real work already leaves evidence.</p>
+
+    <p>That is the whole manual. A ship. A computer. An away team that can beam down. Directives that hold. Star charts for the next crew. And the understanding that the work is now part of the work, and that is not an anomaly &mdash; it is the mission.</p>
+
+    <div class="lcars-divider">
+      <span style="background: var(--peach);"></span>
+      <span style="background: var(--salmon);"></span>
+      <span style="background: var(--lavender);"></span>
+      <span style="background: var(--gold);"></span>
+      <span style="background: var(--peach);"></span>
+    </div>
+
+    <p style="font-size: 0.78rem; color: var(--muted); line-height: 1.8;"><strong style="color: var(--peach);">Why does this page look like an LCARS terminal?</strong> Because translation is free. This is the entire thesis of <a href="index">Shapes of Intelligence</a> compressed into one briefing, in Starfleet idiom. Same book. Different uniform. If LCARS makes the ideas clearer than the original, that is not a comment on the original&rsquo;s quality. It is a comment on the power of meeting the reader where they already live. &ldquo;To boldly go&rdquo; is literally &ldquo;learn on the edge of what you know.&rdquo;</p>
+
+    <div class="lcars-footer">
+      <div class="lcars-footer-elbow"></div>
+      <div class="lcars-footer-bar">United Federation of Planets &mdash; Starfleet Command &mdash; LCARS Access 47634.8</div>
+      <div class="lcars-pip" style="background: var(--lavender);"></div>
+      <div class="lcars-pip" style="background: var(--salmon);"></div>
+    </div>
+
+    <div class="colophon">
+      <p><em>Shapes of Intelligence</em> by James Wilson</p>
+      <p><a href="index">Original</a> &middot; <a href="pirate.html">Pirate</a> &middot; <a href="fellowship.html">Fellowship</a> &middot; <a href="https://github.com/nop2099/ai-book">GitHub</a></p>
+    </div>
+
+  </div>
+</body>
+</html>

@@ -23,27 +23,79 @@
 
     <item>
       <title>Part 1: The Build</title>
-      <description>Rich says "I want a podcast." Four words. By the end he has an encrypted podcast on his phone and he can explain why it's secure. Seven voices — the octopus (CLI agent), the crab (desktop agent), the parrot (web chat), the error robot, and the stage narrator. 35 minutes. Dry mix. All voices are macOS text-to-speech. The security thread is the spine. The blind taste test is the frame.</description>
-      <enclosure url="https://shapes.exe.xyz/i-want-a-podcast-1.mp3" length="41952044" type="audio/mpeg"/>
-      <guid isPermaLink="false">i-want-a-podcast-1-2026-03-15</guid>
+      <description>Rich says "I want a podcast." Four words. The octopus asks about his life, writes a script, picks a voice, deploys to hosting. 20 minutes.</description>
+      <enclosure url="https://shapes.exe.xyz/i-want-a-podcast-1.mp3" length="23684044" type="audio/mpeg"/>
+      <guid isPermaLink="false">i-want-a-podcast-1-v2-2026-03-15</guid>
       <pubDate>Sat, 15 Mar 2026 06:00:00 +0000</pubDate>
-      <itunes:duration>2100</itunes:duration>
+      <itunes:duration>1182</itunes:duration>
       <itunes:episode>1</itunes:episode>
       <itunes:title>Part 1: The Build</itunes:title>
-      <itunes:summary>Rich says "I want a podcast." The octopus builds it. The parrot watches. The crab nudges permissions. The error voice shows up when things break. By the end: encrypted filenames, password-protected hosting, and a sentence to teach someone else.</itunes:summary>
+      <itunes:summary>Intake, baking in Star Trek, voice sip test, hosting, and the freemium model. Rich has a podcast on his phone. It's not secure yet.</itunes:summary>
       <link>https://shapes.exe.xyz/i-want-a-podcast</link>
     </item>
 
     <item>
-      <title>Part 2: What You Built</title>
-      <description>Rich extends his podcast — Gmail connectors, shared baking spreadsheets with approval gates, scheduling, content redaction, voice cloning, prompt injection through cookies, and a postscript where a senior enterprise architect looks at what Rich built and says "that's a complete system architecture." 35 minutes. The same seven voices. The technology is thirty years old. The ability to assemble it with a conversation is six months old.</description>
-      <enclosure url="https://shapes.exe.xyz/i-want-a-podcast-2.mp3" length="42548684" type="audio/mpeg"/>
-      <guid isPermaLink="false">i-want-a-podcast-2-2026-03-15</guid>
+      <title>Part 2: Make It Secure</title>
+      <description>Four corrections from password to encryption. Error handling, testing, and teaching someone else with one sentence. 16 minutes.</description>
+      <enclosure url="https://shapes.exe.xyz/i-want-a-podcast-2.mp3" length="19462044" type="audio/mpeg"/>
+      <guid isPermaLink="false">i-want-a-podcast-2-v2-2026-03-15</guid>
       <pubDate>Sat, 15 Mar 2026 06:01:00 +0000</pubDate>
-      <itunes:duration>2130</itunes:duration>
+      <itunes:duration>972</itunes:duration>
       <itunes:episode>2</itunes:episode>
-      <itunes:title>Part 2: What You Built</itunes:title>
-      <itunes:summary>Email, calendar, spreadsheets, scheduling, redaction, voice cloning, prompt injection, and what a TOGAF architect sees when he looks at a baking podcast. The parrot got glasses for the cloud. The crab admits she's an octopus in a costume. OpenClaw is an octopus in a harness. Thanks for listening.</itunes:summary>
+      <itunes:title>Part 2: Make It Secure</itunes:title>
+      <itunes:summary>The security thread. Password div, random name, still in source, encrypt the name. Errors, TDD, Whisper, the loaded prompt, and one sentence to teach Mike.</itunes:summary>
+      <link>https://shapes.exe.xyz/i-want-a-podcast</link>
+    </item>
+
+    <item>
+      <title>Part 3: Extend It</title>
+      <description>Gmail, Calendar, Drive connectors. Baking spreadsheet with email approval gates. Scheduling. Content redaction. OpenClaw. 18 minutes.</description>
+      <enclosure url="https://shapes.exe.xyz/i-want-a-podcast-3.mp3" length="20978044" type="audio/mpeg"/>
+      <guid isPermaLink="false">i-want-a-podcast-3-v2-2026-03-15</guid>
+      <pubDate>Sat, 15 Mar 2026 06:02:00 +0000</pubDate>
+      <itunes:duration>1050</itunes:duration>
+      <itunes:episode>3</itunes:episode>
+      <itunes:title>Part 3: Extend It</itunes:title>
+      <itunes:summary>Connectors, the crab's permission dance, prompt injection through cookies, the parrot's read-only cloud glasses, and the crab admitting she's an octopus in a costume.</itunes:summary>
+      <link>https://shapes.exe.xyz/i-want-a-podcast</link>
+    </item>
+
+    <item>
+      <title>Part 4: Extra Credit</title>
+      <description>Video slideshow, multiple voices for your briefing, and cloning your own voice. 5 minutes.</description>
+      <enclosure url="https://shapes.exe.xyz/i-want-a-podcast-4.mp3" length="6167044" type="audio/mpeg"/>
+      <guid isPermaLink="false">i-want-a-podcast-4-2026-03-15</guid>
+      <pubDate>Sat, 15 Mar 2026 06:03:00 +0000</pubDate>
+      <itunes:duration>308</itunes:duration>
+      <itunes:episode>4</itunes:episode>
+      <itunes:title>Part 4: Extra Credit</itunes:title>
+      <itunes:summary>Video, multiple voices, voice cloning. Each one starts the same way — say what you want and let the conversation happen.</itunes:summary>
+      <link>https://shapes.exe.xyz/i-want-a-podcast</link>
+    </item>
+
+    <item>
+      <title>Part 5: How It Was Made</title>
+      <description>The making-of. The blind taste test, the sip test, the pronunciation audition, and the timeline from 2021 to today. 11 minutes.</description>
+      <enclosure url="https://shapes.exe.xyz/i-want-a-podcast-5.mp3" length="13350044" type="audio/mpeg"/>
+      <guid isPermaLink="false">i-want-a-podcast-5-v2-2026-03-15</guid>
+      <pubDate>Sat, 15 Mar 2026 06:04:00 +0000</pubDate>
+      <itunes:duration>666</itunes:duration>
+      <itunes:episode>5</itunes:episode>
+      <itunes:title>Part 5: How It Was Made</itunes:title>
+      <itunes:summary>Six words to a working system. Speed over fidelity. The pronunciation audition page. The crab wall. The untested fix. The fact-check. The technology is thirty years old.</itunes:summary>
+      <link>https://shapes.exe.xyz/i-want-a-podcast</link>
+    </item>
+
+    <item>
+      <title>Part 6: The Architecture</title>
+      <description>What a senior enterprise architect sees when he looks at what Rich built. LOTR references. 5 minutes.</description>
+      <enclosure url="https://shapes.exe.xyz/i-want-a-podcast-6.mp3" length="6021044" type="audio/mpeg"/>
+      <guid isPermaLink="false">i-want-a-podcast-6-2026-03-15</guid>
+      <pubDate>Sat, 15 Mar 2026 06:05:00 +0000</pubDate>
+      <itunes:duration>300</itunes:duration>
+      <itunes:episode>6</itunes:episode>
+      <itunes:title>Part 6: The Architecture</itunes:title>
+      <itunes:summary>Rivendell's archives. The Council of Elrond. Gandalf at the Black Gate. The Ring as technical debt. Rich built a complete system architecture by accident. He just wanted a podcast.</itunes:summary>
       <link>https://shapes.exe.xyz/i-want-a-podcast</link>
     </item>
 

@@ -507,7 +507,7 @@ For character voices (Vic doing impressions, Sam attempting enthusiasm), use inl
 ### Public episodes
 
 - WAV → MP3 at 192k for the site
-- MP3 goes in `reference/site/` alongside the HTML page
+- **MP3s and HTML pages go in `reference/_meta/static/`, NOT `reference/site/`**. The build script wipes `reference/site/` and rebuilds from `_meta/static/` + markdown sources. Anything placed directly in `reference/site/` will be deleted on the next build.
 - Public pages go directly in `reference/site/` (e.g. `i-want-a-podcast.html`)
 - Add to site index (`reference/site/index.html`) with a card in the appropriate section
 - Deploy: `rsync -avz --delete --exclude='rich/' --exclude='alex/' reference/site/ shapes.exe.xyz:/var/www/html/`

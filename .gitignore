@@ -25,3 +25,4 @@ reference/_meta/.venv/
 GEMINI.md
 screen-*.png
 claude-feedback.txt
+audiobook/output/

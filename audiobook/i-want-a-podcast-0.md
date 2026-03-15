@@ -84,7 +84,7 @@ First person. Rich lives it. The octopus builds it. The parrot watches from his 
 How long is it?
 
 [VIC-U]
-Two parts. Part one is the build — thirty-five minutes. Part two is what you built — connectors, spreadsheets, scheduling, and a postscript where a senior enterprise architect looks at what Rich made and says "that's a complete system architecture."
+Six parts. The build. Make it secure. Extend it. Extra credit. How it was made. And an architecture postscript where a senior enterprise architect looks at what Rich made and says "that's a complete system architecture."
 
 [SAM-U]
 Rich built an enterprise architecture?

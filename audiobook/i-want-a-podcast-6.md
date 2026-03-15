@@ -87,9 +87,6 @@ A schedule so it runs without being asked.
 Operations. The system sustains itself on a cadence. The ship flies in formation.
 
 [JAMES]
-And one more thing. Rich won't remember the name of the hosting provider. I barely remember mine. The agent chose it. Rich never compared services. He said "free" and "phone" and the agent solved the problem. That's the point. You don't need to know the parts list to build the architecture. You need to know what you want and push back when it's wrong. The parts find themselves.
-
-[JAMES]
 My uncle was quiet for a minute. Then he said: "That's a complete system architecture. He has a vision statement, a repository, integration patterns, security controls, governance, change management, and operational scheduling. Most teams take months to plan that. Your friend did it in a conversation."
 
 [JAMES]
@@ -102,4 +99,4 @@ Rich didn't study architecture. He didn't read a framework. He said what he want
 You don't need to know the framework to follow the framework. You just need to know what you want and the instinct to push back when something tastes wrong. The framework is what you built. You just didn't know it had a name.
 
 [JAMES]
-Thanks for listening.
+The prompt is the want. The corrections are the learning. The explanation is the proof.

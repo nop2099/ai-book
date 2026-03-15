@@ -298,6 +298,9 @@ So I'm proofreading with my ears.
 [STAGE]
 He's proofreading with a robot's ears. Whisper listens to the audio and writes down what it hears. If the transcript doesn't match the script, something sounded wrong. It's a spell-checker for pronunciation. Another sip test — taste the sound, check the transcript, adjust the spelling until it lands.
 
+[STAGE]
+Here's the shape underneath this. The agent can't hear what you hear. It generated the audio but it can't listen to the result and tell you if a word sounds wrong. So it builds you a surface — the pronunciation page, the Whisper transcript — to translate your perception into something it can read. You listen. You react. You click a button or screenshot your picks. The agent reads your reaction and adjusts. Every time the agent can't perceive something you can, this is the pattern: it builds a translation surface for your senses. That's not a workaround. That's how human-agent collaboration actually works.
+
 [CRAB]
 I can try to run the voice command. I have some ability to execute things. But if the tool isn't installed, I can't install it — the sandbox won't let me run install commands. I'd hit a wall and tell you "I can't access that." Not "here's how to fix it." Just — I can't. You'd have to open a terminal yourself and install it, then come back to me. Or I can point you at a web tool instead.
 

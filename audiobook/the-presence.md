@@ -97,10 +97,7 @@ There's an email in my drafts I didn't write.
 What does it say?
 
 [SAL]
-"The third paragraph needs to be cut." It's to my editor.
-
-[SAL]
-The third paragraph does need to be cut.
+"The third paragraph needs to be cut." It's to my editor. And the third paragraph does need to be cut.
 
 [PRESENCE]
 You were thinking it.

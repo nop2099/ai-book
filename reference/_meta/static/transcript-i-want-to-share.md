@@ -565,7 +565,7 @@ Wait — Alex, Sal, you work together?
 It's a small podcast.
 
 [MO]
-Wait — is this Rich's podcast or James's?
+Whose podcast is this? Rich or James?
 
 [RICH]
 Yes.
@@ -722,7 +722,7 @@ The honest version: data center energy is growing fast and that's being addresse
 And the dishonest version?
 
 [GUS]
-A.I. is why your electric bill went up.
+It's A.I. That's why your electric bill went up.
 
 [JAMES]
 Your bill went up because of grid costs, fuel prices, and aging infrastructure.
@@ -746,7 +746,7 @@ They're all costumes for the same feeling.
 What feeling?
 
 [GUS]
-This is moving too fast and the benefits aren't reaching me.
+It's moving too fast. And the benefits aren't reaching me.
 
 ---
 
@@ -831,7 +831,7 @@ And the other companies?
 Grock — Elon Musk's A.I. — generated antisemitic content and non-consensual images of real people. Multiple countries issued bans.
 
 [GUS]
-Obviously.
+Of course he did.
 
 [JAMES]
 Google quietly switched Gemini to default across Gmail — the A.I. started reading everyone's email without asking.
@@ -935,7 +935,7 @@ As a writer, I'd respect that distinction.
 I make art with math, by the way. Since I was a kid. Parametric equations —
 
 [GUS]
-Nerd.
+That's nerdy.
 
 [JAMES]
 Yeah. I get excited about it. Nobody told me it was or wasn't art. The computer was always drawing it. A.I. just shifted the role from writing the algorithm to writing the prompt.
@@ -991,7 +991,7 @@ Three hundred thousand dollars a month. So he could keep using his preferred too
 Not because it was better. Because he needed to be the guy who uses it. The decision was never about technology. It was about who he was.
 
 [RICH]
-Purlers gonna Purl.
+Pearl-ers gonna Pearl.
 
 [SAM]
 I get it, though. I built our team's processes. The standups, the sprints, the review cadence. If someone told me A.I. could replace all of that — I'd bristle too. Those processes are mine.
@@ -1211,13 +1211,100 @@ That's OK. The hand that picks up the glass is theirs. I'm not going anywhere. I
 Can I say something weird? I think I'm making more than anyone can listen to.
 
 [SAL]
-As a writer, I can tell you — that's normal. The ratio of what you make to what anyone reads is always brutal.
+As a writer — it depends. Some writers can't produce fast enough. Their readers are waiting. Begging. The ratio is brutal the other way — the audience consumes faster than you can create.
 
 [RICH]
-I've got the podcast. The baking spreadsheet. The walk episodes. The pitch stuff. The illustrations. Nobody's going to consume all of it. Not even Mike. Especially not Mike.
+That's not my problem.
+
+[SAL]
+No. Your problem is the opposite. You're producing more than anyone asked for. But here's the thing, Rich — that's most writers too. Most of us aren't the ones with a waiting audience. Most of us write into silence and hope someone finds it.
+
+[GUS]
+So which is worse? Making too much or not making enough?
+
+[SAL]
+Making too much and not knowing who it's for. If you know who it's for, the ratio doesn't matter. You write the thing, they read it. One reader is enough if it's the right reader.
+
+[RICH]
+Mo is Alex's one reader.
+
+[SAL]
+Mo is Alex's one reader. Mike is yours. The ratio isn't brutal if the person on the other end actually wanted it.
+
+[RICH]
+I've got the podcast. The baking spreadsheet. The walk episodes. The pitch stuff. The illustrations. Nobody's going to consume all of it. But maybe each thing has its one reader.
 
 [ALEX]
-I have the same problem. I built Mo's website and then I built three more that nobody asked for.
+I built Mo's website and then I built three more that nobody asked for. But maybe someone will.
+
+[RICH]
+Should I publish this on Reddit?
+
+[SAL]
+Which subreddit?
+
+[RICH]
+I don't know. One of the A.I. ones. Or the podcast ones. Just... put it out there.
+
+[GUS]
+You'll get destroyed.
+
+[JAMES]
+Maybe. Reddit is a room like any other. Some rooms are curious. Some rooms are hostile. The A.I. subreddits can be both in the same thread.
+
+[RICH]
+Will I get doxxed?
+
+[PARROT]
+If you've done your P.I.I. checks, your real name isn't in the file paths, and you're not linking to personal accounts — the content itself is safe. The risk isn't in the podcast. It's in the comments you write defending it.
+
+[SAL]
+Don't defend it. Post it and walk away. Fridge rules.
+
+[GUS]
+If you argue in the comments, you've already lost. Every reply teaches them your triggers.
+
+[RICH]
+Some subreddits ban A.I. content.
+
+[SAL]
+But you worked on it. You directed it. You corrected it. You cut it in half.
+
+[RICH]
+Some people don't understand the difference.
+
+[GUS]
+If you started with A.I., it'll never be anything but slop to them. Doesn't matter how much you worked on it.
+
+[SAL]
+That's the art argument again. At what percentage does it stop being yours?
+
+[RICH]
+So if I posted the Star Trek episode to a Trek forum, I might get hate.
+
+[GUS]
+You would get hate.
+
+[RICH]
+But if I posted it to an A.I. subreddit, people might actually engage with it.
+
+[JAMES]
+Different room. Different costume. The Trek forum cares about Trek. The A.I. subreddit cares about process. Same content. One room hates the origin. The other room IS the origin.
+
+[RICH]
+And then there's the ones where the whole point is to argue.
+
+[SAL]
+Those aren't for you, Rich.
+
+[RICH]
+No. But sometimes I look. To see what people are saying. What the popular arguments are.
+
+[SAL]
+That's research. That's different from posting.
+
+[JAMES]
+Reading the room before you enter it. That's the sip test applied to the internet. You don't post into a room you haven't read first.
 
 [SAM]
 My team generates more reports than anyone reads. That predates A.I.
@@ -1617,7 +1704,13 @@ But the inventory tool — that's got my customers' names?
 Nobody gets your customers' names.
 
 [MO]
-Done.
+And if your system breaks? I still have my data?
+
+[ALEX]
+It's yours. On your machine. You can open it without me.
+
+[MO]
+We have a deal.
 
 [JAMES]
 That's the lane.

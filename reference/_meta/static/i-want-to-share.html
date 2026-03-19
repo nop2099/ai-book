@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="I Want to Share — Eight voices on the gap between what you mean and what people hear.">
+<title>I Want to Share</title>
+<link rel="stylesheet" href="i-want-to-share.css">
+<style>
+details { margin-bottom: 1rem; }
+summary.act-summary {
+  cursor: pointer; padding: 0.8rem 1rem;
+  background: var(--deep); border: 1px solid var(--edge);
+  border-radius: 6px; list-style: none;
+  display: flex; flex-direction: column; gap: 0.15rem;
+  padding-left: 1.5rem; position: relative;
+}
+summary.act-summary::-webkit-details-marker { display: none; }
+summary.act-summary::before {
+  content: "▸"; color: var(--amber); font-size: 0.8rem;
+  position: absolute; margin-left: -1rem;
+}
+details[open] > summary.act-summary::before { content: "▾"; }
+summary.act-summary:hover { border-color: var(--amber-dim); }
+.act-label { font-size: 0.78rem; font-weight: 500; color: var(--bright); letter-spacing: 0.02em; }
+.act-desc { font-size: 0.65rem; color: var(--muted); font-style: italic; }
+.act-player { padding: 0.5rem 1rem 0; }
+.act-player audio { width: 100%; height: 32px; border-radius: 3px; }
+.act-body { padding: 0.5rem 1rem 1rem; line-height: 1.7; }
+.act-body p { margin-bottom: 0.5rem; font-size: 0.75rem; }
+.act-body hr { border: none; border-top: 1px solid var(--edge); margin: 1rem 0; }
+.act-body .speaker-tag { font-size: 0.5rem; letter-spacing: 0.1em; text-transform: uppercase; font-weight: 500; margin-top: 0.6rem; }
+.act-body .speaker-JAMES { color: var(--amber); }
+.act-body .speaker-RICH { color: var(--teal); }
+.act-body .speaker-PARROT { color: #5588dd; }
+.act-body .speaker-SAM { color: #bb9955; }
+.act-body .speaker-SAL { color: #9977dd; }
+.act-body .speaker-GUS { color: #cc6655; }
+.act-body .speaker-ALEX { color: #55aa88; }
+.act-body .speaker-MO { color: #aa8866; }
+</style>
+</head>
+<body>
+
+<main>
+
+<h1>I Want to Share</h1>
+<p>
+Rich is louder than he used to be. Some people hear the work. Some people hear "AI."
+Eight voices on the gap between what you mean and what people hear.
+</p>
+
+<section class="player">
+<audio controls preload="metadata">
+<source src="i-want-to-share.mp3" type="audio/mpeg">
+</audio>
+<p>
+<strong>~50 minutes.</strong> Eight voices. Research-backed.
+The social evaluation penalty, AI shame, the double shutdown, water, electricity, corporations, art, identity, social presence, the content flywheel, and meeting people where they are.
+</p>
+</section>
+
+<section>
+<h2>Cast</h2>
+<ul class="cast">
+<li><strong>Rich</strong> — the enthusiast who wants to share</li>
+<li><strong>James</strong> — the author and mentor</li>
+<li><strong>Parrot</strong> — ChatGPT, the research voice</li>
+<li><strong>Alex</strong> — the mentee, got shut down, building websites on the side</li>
+<li><strong>Sam</strong> — the manager, reasonable, not anti-AI</li>
+<li><strong>Sal</strong> — the writer, stuck in the middle</li>
+<li><strong>Gus</strong> — anti-AI as identity</li>
+<li><strong>Mo</strong> — the sandwich shop owner, Alex's first client</li>
+</ul>
+</section>
+
+<section id="acts-container">
+<h2>Transcript</h2>
+<p style="font-size:0.7rem;color:var(--muted)">Loading...</p>
+</section>
+
+<section>
+<h2>The steering file for people</h2>
+<p>
+Lead with the work, not the tool. If someone bristles, don't push — they're where they are. If someone's curious, let them taste it. Don't explain the architecture unless they ask. Match the volume to the room.
+</p>
+<p>"I built it" instead of "AI wrote it." The preposition matters.</p>
+<p>This page comes to you where you are. Full episode for the walk. Acts for browsing. Transcript for reading.</p>
+</section>
+
+<section class="sources">
+<h2>Sources</h2>
+<p>
+Duke University / PNAS: social evaluation penalty for AI use (4,400 participants).
+WalkMe / SAP: AI shame survey (49% hiding AI use).
+Stanford / BetterUp: workslop study.
+UC Berkeley: task expansion research.
+HBR: enthusiasm gap (76% vs. 31%).
+MIT Technology Review / Infosys: psychological safety and AI adoption (83%).
+Undark / Brookings / Andy Masley / Shaolei Ren: AI water usage analysis.
+IEA / Pew Research / Gartner: data center electricity projections.
+Steve Francia (spf13): identity and programming language choice.
+Markus &amp; Nurius (1986): possible selves theory.
+Computers in Human Behavior (2022): automated social presence in chatbots.
+CNN / NPR / TechCrunch: Anthropic Pentagon contract timeline.
+Tom's Guide: QuitGPT movement (2.5M users).
+</p>
+</section>
+
+</main>
+
+<footer>
+<a href="i-want-a-podcast">← I Want a Podcast</a> · <a href="/">Shapes of Intelligence</a>
+<p>Built by James Wilson with AI. Directed, corrected, and judged by a human. The story is more interesting than the label.</p>
+</footer>
+
+<script>
+const ACTS = [
+  { title: "Act 1: The Room", desc: "Rich wants to share. The room has two soundtracks.", audio: "sections/act1.mp3" },
+  { title: "Act 2: The Arguments", desc: "Water. Electricity. Companies. Art. All costumes for the same feeling.", audio: "sections/act2.mp3" },
+  { title: "Act 3: The People", desc: "Identity. Acceptance. The door opens from the inside.", audio: "sections/act3.mp3" }
+];
+// Act breaks: line 496 and 1006 in the .md (1-indexed)
+const ACT_BREAK_LINES = [496, 1006];
+const SPEAKERS = ['JAMES','RICH','PARROT','SAM','SAL','GUS','ALEX','MO'];
+
+function scriptToHtml(lines) {
+  let html = '', speaker = null;
+  for (const line of lines) {
+    const s = line.trim();
+    if (!s) continue;
+    if (s === '---') { html += '<hr>'; continue; }
+    if (s.startsWith('>') || s.startsWith('#') || s.startsWith('|') || s.startsWith('- ')) continue;
+    const m = s.match(/^\[([A-Z]+)\]$/);
+    if (m) { speaker = m[1]; continue; }
+    if (speaker && SPEAKERS.includes(speaker)) {
+      html += `<div class="speaker-tag speaker-${speaker}">${speaker}</div><p>${s}</p>`;
+    }
+  }
+  return html;
+}
+
+fetch('transcript-i-want-to-share.md')
+  .then(r => { if (!r.ok) throw new Error(r.status); return r.text(); })
+  .then(md => {
+    const allLines = md.split('\n');
+    // Find ## Script
+    let scriptStart = 0;
+    for (let i = 0; i < allLines.length; i++) {
+      if (allLines[i].trim() === '## Script') { scriptStart = i + 1; break; }
+    }
+    const scriptLines = allLines.slice(scriptStart);
+    const b1 = ACT_BREAK_LINES[0] - scriptStart - 1;
+    const b2 = ACT_BREAK_LINES[1] - scriptStart - 1;
+    const actLines = [scriptLines.slice(0, b1), scriptLines.slice(b1, b2), scriptLines.slice(b2)];
+
+    const container = document.getElementById('acts-container');
+    container.innerHTML = '<h2>Transcript</h2>';
+    ACTS.forEach((act, i) => {
+      const details = document.createElement('details');
+      details.open = true;
+      details.innerHTML = `
+        <summary class="act-summary">
+          <span class="act-label">${act.title}</span>
+          <span class="act-desc">${act.desc}</span>
+        </summary>
+        <div class="act-player"><audio controls preload="none"><source src="${act.audio}" type="audio/mpeg"></audio></div>
+        <div class="act-body">${scriptToHtml(actLines[i])}</div>`;
+      container.appendChild(details);
+    });
+  })
+  .catch(() => {
+    document.getElementById('acts-container').innerHTML =
+      '<h2>Transcript</h2><p style="font-size:0.7rem;color:var(--muted)">Transcript not available.</p>';
+  });
+</script>
+
+</body>
+</html>

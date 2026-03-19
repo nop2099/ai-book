@@ -114,7 +114,7 @@ I know. But that's not what I built it for. I stopped showing Sam things after t
 The needs of the many.
 
 [RICH]
-Outweigh.
+Out-weigh.
 
 [GUS]
 The needs of the few.
@@ -546,8 +546,20 @@ Wait — is this Rich's podcast or James's?
 [RICH]
 Yes.
 
+[RICH]
+So what happened with you and Sam, Alex?
+
 [ALEX]
-My manager made a judgment call. Peace over progress. I don't think he was wrong. But it cost us.
+Sam made a judgment call. Peace over progress. I don't think he was wrong. But it cost us.
+
+[SAM]
+Alex, I'd do it differently now.
+
+[ALEX]
+What would you do?
+
+[SAM]
+I'd say: show me the work first. Don't announce it. Just show me what it does.
 
 [JAMES]
 Alex, your mistake wasn't enthusiasm. It was broadcasting the same message to the whole room.
@@ -654,7 +666,7 @@ What was it about?
 The water is the thing I can point at. The feeling underneath is: this is moving too fast and I don't have a foothold.
 
 [GUS]
-Yeah. That.
+Yeah, that's it.
 
 [PARROT]
 You can't fix that with a statistic. You can only acknowledge it.
@@ -663,7 +675,7 @@ You can't fix that with a statistic. You can only acknowledge it.
 Sal, you said "A.I. wastes water." Rich said "A.I. changed my life." You're both telling us how you feel, not what you know.
 
 [SAL]
-...yeah. Maybe.
+Yeah. Maybe.
 
 [RICH]
 So my job isn't to win the water argument. It's to notice it's not about water.
@@ -789,7 +801,7 @@ The complaints aren't wrong. But "all A.I. companies are evil" is like saying "a
 ---
 
 [JAMES]
-The Pentagon asked Anthropic — the company that makes Claude — to sign a contract. All lawful purposes. No restrictions.
+The Pentagon asked Anthropic — the company that makes Claud — to sign a contract. All lawful purposes. No restrictions.
 
 [GUS]
 Of course they did. I don't want the Pentagon anywhere near my data.
@@ -801,7 +813,7 @@ Anthropic said no. No mass domestic surveillance. No fully autonomous weapons. T
 ...they said no?
 
 [JAMES]
-The next day, the government banned all federal agencies from using Claude. Hours later, Open-A.I. signed the same deal that Anthropic rejected.
+The next day, the government banned all federal agencies from using Claud. Hours later, Open-A.I. signed the same deal that Anthropic rejected.
 
 [RICH]
 So one said no and the other said yes.
@@ -810,7 +822,7 @@ So one said no and the other said yes.
 Same contract. Same Pentagon. One company drew a line. The other didn't.
 
 [PARROT]
-Two and a half million users boycotted Chat-G.P.T. Claude hit number one in the App Store — not because of a product update, but because of an ethics decision.
+Two and a half million users boycotted Chat-G.P.T. Claud hit number one in the App Store — not because of a product update, but because of an ethics decision.
 
 [SAL]
 People switched?
@@ -1024,7 +1036,7 @@ Three hundred thousand dollars a month. So he could keep using his preferred too
 Not because it was better. Because he needed to be the guy who uses it. The decision was never about technology. It was about who he was.
 
 [RICH]
-Perlers gonna Perl.
+Purlers gonna Purl.
 
 [SAM]
 I get it, though. I built our team's processes. The standups, the sprints, the review cadence. If someone told me A.I. could replace all of that — I'd bristle too. Those processes are mine.
@@ -1575,7 +1587,7 @@ I could live with that.
 You're part of the problem, Alex.
 
 [ALEX]
-I'm building Mo a website.
+I'm building a website for Mo.
 
 [SAL]
 But won't people stop paying for websites if it's so easy?
@@ -1590,7 +1602,7 @@ I'm too busy to worry about A.I. Alex is a great guy. Good product. Good prices.
 And it's not just the website. I can build Mo a little tool that tracks his inventory. The software companies charge a hundred, two hundred bucks a month for that. Subscription. Forever.
 
 [GUS]
-I hate subscriptions.
+Subscriptions are the worst.
 
 [SAL]
 Everyone hates subscriptions.

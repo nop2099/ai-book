@@ -24,7 +24,7 @@ VOICES = {
     "PARROT": "Karen",
     "SAM":    "Tessa",
     "SAL":    "Moira",
-    "GUS":    "Eddy (English (UK))",
+    "GUS":    "Aman",
     "ALEX":   "Samantha",
     "MO":     "Rocko (English (US))",
     # Act 4 fake masters — reuse main cast voices
@@ -221,4 +221,6 @@ if __name__ == "__main__":
     for i, mp3 in enumerate(act_mp3s, 1):
         shutil.copy2(mp3, PROD_DIR / "sections" / f"act{i}.mp3")
         print(f"  → sections/act{i}.mp3")
+    shutil.copy2(SCRIPT, PROD_DIR / "transcript-i-want-to-share.md")
+    print("  → transcript-i-want-to-share.md")
     print("Done.")

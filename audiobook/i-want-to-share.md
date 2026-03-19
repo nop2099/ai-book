@@ -108,7 +108,7 @@ That's Sam. Our manager. That's what happened.
 I didn't do anything wrong. The work was good. I'd saved the team hours. But the word A.I. was louder than the work.
 
 [SAM]
-I'm not anti-A.I. I'm managing a team with deadlines and feelings.
+I'm not anti-A.I. I'm too busy to understand it. I'm managing a team with deadlines and feelings.
 
 [ALEX]
 I get it now. But it still cost the team. I had knowledge they needed. The channel got shut down because the signal was wrapped in a word some people couldn't hear past.
@@ -242,7 +242,7 @@ Hey Sal, I fixed that spreadsheet thing that was bugging you.
 Oh nice. How?
 
 [ALEX]
-I wrote a formula that catches the duplicates before they hit the report.
+I found a formula that catches the duplicates before they hit the report.
 
 [SAL]
 That's been broken for months. Thanks.
@@ -396,6 +396,12 @@ Yeah. Here's how.
 
 [JAMES]
 That's the difference. The ashamed person hides. The reframer tells the whole story — but only when asked. You're not keeping a secret. You're choosing what goes first.
+
+[RICH]
+But why should I have to change? Why don't they have to change?
+
+[JAMES]
+Because you're the one who wants to be heard, Rich. The room doesn't owe you attention. You earn it by reading it.
 
 [PARROT]
 The Duke study found the penalty lessens when people understand how and why you're using A.I. Not what tool. How you used it.
@@ -624,55 +630,16 @@ He's talking about me. I use less than one milliliter of water per query. Less t
 Let me give you the rest of the numbers, because you'll hear this again and you should know the facts.
 
 [PARROT]
-One Chat-G.P.T. query — less than one milliliter of water at the data center. Less than one M.L.
+One query uses less than a teaspoon. One hamburger uses six hundred and sixty gallons. All data centers combined use zero point six percent of global freshwater. The numbers aren't close.
 
 [GUS]
-That's not what I read. And I heard those agents make thousands of queries.
-
-[PARROT]
-The "five hundred M.L. per query" claim is off by a factor of a thousand. That's twenty to fifty queries, not one. And two thirds is power plant water, not data center.
-
-[PARROT]
-Here's the comparison. One hamburger uses six hundred and sixty gallons of water. One Chat-G.P.T. conversation uses five M.L. — roughly a teaspoon.
-
-[GUS]
-How about chicken?
-
-[PARROT]
-Five hundred gallons per pound, Gus.
-
-[PARROT]
-Agriculture uses seventy percent of global freshwater.
-
-[GUS]
-I support farmers.
-
-[SAM]
-We all support farmers, Gus.
-
-[PARROT]
-All data centers combined — not just A.I., all data centers — use zero point six percent. The A.I. water footprint is a rounding error on the rounding error.
-
-[PARROT]
-And the industry is moving to closed-loop cooling — sealed systems where nothing evaporates. Microsoft is targeting zero-water cooling across all data centers by twenty twenty-seven.
-
-[ALEX]
-So the technology is already changing.
-
-[PARROT]
-The twenty-twenty technology that the headlines describe is being replaced as we speak.
-
-[RICH]
-So the water thing is basically not true?
+I don't want your numbers.
 
 [JAMES]
-The water thing is real but exaggerated by orders of magnitude. The real concern is location — data centers in water-stressed areas. But "A.I. is draining the earth" is not supported by the numbers.
+The water thing is real but exaggerated by orders of magnitude. And the industry is moving to closed-loop cooling — zero water consumed.
 
 [RICH]
 So what do I say to Gus?
-
-[GUS]
-You don't say anything. I don't want your numbers.
 
 [PARROT]
 Gus is right. The water argument was probably never about water.
@@ -806,9 +773,6 @@ Over fifty copyright lawsuits in U.S. federal courts. Three point one billion do
 
 [SAL]
 That one bothers me. They trained on writers' work without asking.
-
-[JAMES]
-The environmental concerns — we covered those. Real but exaggerated. Being addressed with real investment.
 
 [RICH]
 So the complaints aren't wrong.
@@ -962,55 +926,25 @@ Clip art is useful and nobody writes a think piece about whether it has a soul.
 So A.I. images are clip art.
 
 [JAMES]
-I use the word "illustration" instead of "art." It sidesteps the whole argument without lying about anything.
+I use the word "illustration" instead of "art." It sidesteps the argument without lying.
 
 [SAL]
-That's... actually smart. As a writer, I'd respect that distinction.
+As a writer, I'd respect that distinction.
 
 [JAMES]
-The thumbnail is an illustration. It illustrates the episode. It looks good. I didn't draw it. All of those things are true simultaneously.
-
-[JAMES]
-I make art with math, by the way. Since I was a kid. Polar coordinates — r of theta. Rose curves, spirals, Lissajous figures. Parametric equations —
+I make art with math, by the way. Since I was a kid. Parametric equations —
 
 [GUS]
 Nerd.
 
 [JAMES]
-Yeah. I get excited about it.
-
-[ALEX]
-Wait, you do math art? I love that stuff.
-
-[JAMES]
-I write the functions. The computer draws the curves. Nobody ever told me that wasn't art. So when did the computer's involvement start disqualifying the output?
-
-[PARROT]
-Generative art has been in galleries since nineteen sixty-five. Tyler Hobbs' Fidenza — a single algorithm — sold for three point three million dollars.
-
-[ALEX]
-Three point three million. For an algorithm.
-
-[PARROT]
-The Desmos Math Art Contest gets ten thousand submissions a year from people making art purely from equations.
-
-[RICH]
-So the computer was always drawing it.
-
-[JAMES]
-The human was always choosing what to draw. A.I. just shifted the role from writing the algorithm to writing the prompt. The line was always blurry. A.I. just made people notice.
-
-[RICH]
-But when does it stop being my work? If I sketch something and use A.I. to refine it — at what percentage does the art leave the pixels?
-
-[SAL]
-That's the question that keeps me up at night.
+Yeah. I get excited about it. Nobody told me it was or wasn't art. The computer was always drawing it. A.I. just shifted the role from writing the algorithm to writing the prompt.
 
 [GUS]
-At zero percent. The moment A.I. touches it.
+At zero percent. The moment A.I. touches it, it's not art.
 
 [JAMES]
-Every generation has this argument with a new tool. The camera. The synthesizer.
+Every generation has this argument. The camera. The synthesizer.
 
 [SAM]
 I play synthesizer.
@@ -1107,6 +1041,12 @@ Someone who uses it to build a website for a sandwich shop.
 [MO]
 I don't need to imagine. I just need the website.
 
+[GUS]
+I'm not imagining anything.
+
+[RICH]
+You don't have to. Nobody's asking you to change.
+
 [PARROT]
 We ran out of voices.
 
@@ -1118,12 +1058,6 @@ I had to take some of the stage direction lines.
 
 [PARROT]
 I took the rest.
-
-[GUS]
-I'm not imagining anything.
-
-[RICH]
-You don't have to. Nobody's asking you to change.
 
 [ALEX]
 What if it was a web page? Like — "imagine someone like you who uses A.I. for one thing." You pick the thing. It's not a conversation. It's just a page you can look at alone.
@@ -1715,6 +1649,33 @@ I listen when I go to bed. I fall asleep halfway through and need to find where 
 [JAMES]
 Good. The page has the same content as topic cards. Each act has its own play button — for Alex who falls asleep. The full episode for Rich on his walk. The page for Sam who reads. Same fruit. Different way to eat it.
 
+[JAMES]
+Rich asked me how the voices work. I had the parrot write the answer and emailed it to him. Long email. Detailed. More than he'd ever read. But I put a line at the top: "skim this or feed it to your agent."
+
+[RICH]
+That's what I did. I fed it to my agent.
+
+[JAMES]
+The email wasn't for Rich. It was for Rich's agent. My cost to write it dropped to zero. His cost to consume it dropped to zero. The courtesy is the preface — "you don't have to read this. Your agent can."
+
+[SAL]
+That's the workslop problem solved. Instead of shifting the burden to the reader, you shift it to their tool.
+
+[JAMES]
+But only if you tell them. Otherwise it's just a long email from a guy who's excited.
+
+[RICH]
+And this podcast is my homework.
+
+[JAMES]
+That's the flywheel, Rich. I write it to learn it. You listen to learn it. The email, the podcast, the page — they're all the same content in different costumes for different attention budgets.
+
+[ALEX]
+So the attention budget problem just... changes shape.
+
+[JAMES]
+The budget is still real. The agent helps manage it. But the courtesy is still yours.
+
 [RICH]
 The medium is a setting, not a constraint. We said that.
 
@@ -1889,6 +1850,9 @@ I'm fake Jad. When I first read this script, it was an essay wearing a podcast c
 [FAKE-JAD]
 The gap between that and what you're hearing now is enormous. "My friend got shut down" became Alex saying "That's Sam. Our manager." "Someone bristled" became Gus saying "I don't want your numbers." All the right ideas in all the wrong mouths. I taught James to build gaps instead of fill them.
 
+[JAMES]
+Next time I'll want it better than the draft before I debut it. That's what the panel teaches you — the bar moves up.
+
 [RICH]
 So that's why the episode keeps surprising me.
 
@@ -1926,7 +1890,7 @@ That's why I like mentoring, Feynman. Teaching is the test. If I can't explain i
 He sounds like me.
 
 [FAKE-3B1B]
-I'm fake Three Blue One Brown. Grey and I work together — I introduce one idea at a time, he cuts everything that doesn't earn its place. That's why the arguments come one at a time, and why the episode got shorter.
+I'm fake Three Blue One Brown. Fake Grey and I work together — I introduce one idea at a time, he cuts everything that doesn't earn its place. That's why the arguments come one at a time, and why the episode got shorter.
 
 [SAM]
 That explains the pacing.
@@ -2096,21 +2060,6 @@ See?
 [SAL]
 Fair point.
 
-[RICH]
-OK so who does everyone admire? Sal already picked Hemingway. And what would their fake version say about this podcast?
-
-[ALEX]
-Steve Jobs.
-
-[FAKE-JOBS]
-I'm fake Steve. The episode needs fewer features and a better name. Ship it anyway.
-
-[SAM]
-Andy Grove.
-
-[FAKE-GROVE]
-I'm fake Andy. Where's the decision matrix? Where's the ship date? You're running a meeting without an agenda.
-
 [GUS]
 George Carlin.
 
@@ -2119,12 +2068,6 @@ I'm fake Carlin. You're all full of it. And the audience knows. But they're list
 
 [JAMES]
 I love George Carlin.
-
-[PARROT]
-Ada Lovelace.
-
-[FAKE-ADA]
-I'm fake Ada. I predicted all of this in eighteen forty-three. Nobody listened then either.
 
 [MO]
 My mom.
@@ -2150,7 +2093,7 @@ The book has a true crime chapter of this episode, by the way. Same story. Diffe
 [JAMES]
 Read the book and let's build. Thanks for listening.
 
----
+=== ACT 5 ===
 
 [FAKE-SARAH]
 I'm fake Sarah. This is the cold case. A man was silenced at work in early twenty twenty-six. His manager says it was necessary. His coworker says it was justified. But something doesn't add up.

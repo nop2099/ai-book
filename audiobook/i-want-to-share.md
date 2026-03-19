@@ -16,6 +16,17 @@ Rich is louder than he used to be. Some people hear the work. Some people hear "
 | GUS | — | Ralph | Anti-A.I. as identity. Won't stop complaining. |
 | ALEX | — | Matthew | The mentee. Got shut down at work. Building websites on the side. |
 | MO | — | Oliver | The sandwich shop owner. Alex's first client. |
+| FAKE-IRA | — | Daniel | Act 4. Shares James's voice. |
+| FAKE-JAD | — | Rishi | Act 4. Shares Rich's voice. |
+| FAKE-KRULWICH | — | Karen | Act 4. Shares Parrot's voice. |
+| FAKE-ROMAN | — | Tessa | Act 4. Shares Sam's voice. |
+| FAKE-SARAH | — | Moira | Act 4. Shares Sal's voice. |
+| FAKE-GUY | — | Samantha | Act 4. Shares Alex's voice. |
+| FAKE-FEYNMAN | — | Karen | Act 4. Shares Parrot's voice. |
+| FAKE-3B1B | — | Rishi | Act 4. Shares Rich's voice. |
+| FAKE-GREY | — | Eddy (English (UK)) | Act 4. Shares Gus's voice. |
+| FAKE-MCPHEE | — | Moira | Act 4. Shares Sal's voice. |
+| FAKE-DOUG | — | Rocko (English (US)) | Act 4. Shares Mo's voice. |
 
 ### Assembly overrides
 
@@ -1279,6 +1290,9 @@ No. You're not broadcasting. You're loading a flywheel.
 [RICH]
 A flywheel.
 
+[PARROT]
+A flywheel is a heavy wheel that stores an amazing amount of energy. The more you spin it, the more momentum it holds. It's hard to start and hard to stop.
+
 [JAMES]
 Mike doesn't need to listen to the encryption episode today. But when he has a security question in six months, it exists. You've already thought it through because you built the episode.
 
@@ -1799,6 +1813,250 @@ And the story is mine.
 
 [ALEX]
 And mine.
+
+---
+
+[RICH]
+Wait. How did you make this episode?
+
+[JAMES]
+You want the real answer?
+
+[RICH]
+The whole story. You said the story is more interesting than the label.
+
+[JAMES]
+I built a virtual panel. Eleven creators — fake versions of real people. Fake Ira. Fake Feynman. Fake Doug. I picked each one for a reason.
+
+[RICH]
+Who?
+
+[JAMES]
+Ira — because he knows how to make someone listen for an hour.
+
+[FAKE-IRA]
+Hi, I'm fake Ira. I taught James structure. When to reveal, when to hold back, where to put the turn. The moment Sal says "Nobody asks" — that's where I put the turn.
+
+[JAMES]
+Jad — because he finds the gap between what you expect and what you hear.
+
+[FAKE-JAD]
+I'm fake Jad. I taught him to build gaps instead of fill them. The listener expects an argument about water. They get a human being saying "you never asked how I felt." The gap is where they lean in.
+
+[JAMES]
+Krulwich — because he asks the dumb question.
+
+[FAKE-KRULWICH]
+I'm fake Krulwich. The dumb question is the real question. "Wait, you can simulate Ira?" That's the one everybody wants to ask. I just say it out loud.
+
+[JAMES]
+Roman — because he starts in the middle.
+
+[FAKE-ROMAN]
+I'm fake Roman. No setup. No backstory. "Alex, I need you to stop." The listener is in the scene before they know they're listening.
+
+[JAMES]
+Sarah — because she builds a case over time.
+
+[FAKE-SARAH]
+I'm fake Sarah. Pacing and act structure. I'm why there are acts. Plant the evidence early. Let the listener assemble it.
+
+[JAMES]
+Guy — because he understands origin stories.
+
+[FAKE-GUY]
+I'm fake Guy. Every character enters at a moment of tension or desire. Nobody enters neutral. That's casting.
+
+[JAMES]
+Feynman — because if you can't explain it simply, you don't understand it.
+
+[FAKE-FEYNMAN]
+I'm fake Feynman. The hamburger comparison. The teaspoon. If the explanation needs a costume, the explanation isn't ready.
+
+[JAMES]
+Three Blue One Brown — because he makes complicated things feel inevitable.
+
+[FAKE-3B1B]
+I'm fake Three Blue One Brown. Introduce one idea. Let it settle. Add the next. That's why the arguments come one at a time. Water, then electricity, then companies. Never two new ideas in the same breath.
+
+[JAMES]
+C.G.P. Grey — because he's ruthless about density.
+
+[FAKE-GREY]
+I'm fake Grey. Every word earns its place or it gets cut. I'm why the episode got shorter.
+
+[JAMES]
+McPhee — because he trusts the material.
+
+[FAKE-MCPHEE]
+I'm fake McPhee. Don't shape it yet. Let the material tell you what it is. The structure follows the material.
+
+[SAL]
+That's a writer's writer.
+
+[JAMES]
+And Doug — because the work is part of the work.
+
+[FAKE-DOUG]
+I'm fake Doug. The strange loop. The episode about sharing is itself a thing being shared. The panel that improved it is being described inside it. Don't fight the loop. Build it in.
+
+[RICH]
+Eleven.
+
+[JAMES]
+Eleven. I fed them the script. They read it. They argued with each other. They told me what was wrong.
+
+[SAL]
+You made fake writers.
+
+[JAMES]
+Fake editors. There's a difference.
+
+[SAL]
+Go on.
+
+[JAMES]
+One of them taught me about structure. He said: every episode needs a moment where the listener's assumptions break. Not a twist — a reframe. The moment Rich heard Sal say "Nobody asks" — that was the break. The listener expected an argument about water or electricity. They got a human being saying "you never asked how I felt." That structure wasn't mine. I learned it from the panel.
+
+[RICH]
+Which one?
+
+[JAMES]
+The one who makes radio. He said: the gap between what the listener expects and what they hear — that's where they lean in. Every section should have a gap. Not a surprise. A gap.
+
+[GUS]
+You're saying a fake person taught you that.
+
+[JAMES]
+A fake person. And yes. The advice was real even if the person wasn't.
+
+[SAL]
+What did the writer teach you?
+
+[JAMES]
+The structure guy — different one — he said: don't shape the material yet. Write every thread separately. Live with it for a day. Then see which ones belong together. I had seven threads. He said pick three. The engine metaphor, the density lesson, and the close. The rest could wait.
+
+[SAL]
+That's editing advice. That's real editing advice.
+
+[JAMES]
+Another one taught me about density. He said: "I finally understood how to make a thing less dense without changing its size. It's by changing the ratio of shelf to book. More breathing room between the ideas. Same number of ideas. More air."
+
+[PARROT]
+That's a physics metaphor applied to communication.
+
+[JAMES]
+He was a physicist. He said: if you can't explain it simply, you don't understand it well enough. And if you can explain it simply but nobody's listening, the problem isn't the explanation — it's the room.
+
+[RICH]
+So the room thing. That came from the panel.
+
+[JAMES]
+The room thing came from a conversation between fake Ira and fake Feynman arguing about whether the episode was too dense. The radio host said cut. The physicist said simplify. They were both right. Cutting and simplifying are different moves.
+
+[ALEX]
+What about the strange loop thing? The work being part of the work?
+
+[JAMES]
+That came from the philosopher on the panel. He said: you built a tool to make a podcast. The podcast teaches people to build tools. The tool that made the podcast was improved by the panel that the tool itself generated. He said: don't teach strange loops. Build them. Let the listener walk into it. The moment they realize the episode is doing what it describes — that's the teaching. The label comes after.
+
+[GUS]
+So this episode is a strange loop.
+
+[JAMES]
+This episode is a strange loop. The panel that improved it is being described inside it. The description will change the next version. And the next version will be described in a future episode. The work is part of the work.
+
+[GUS]
+That's... kind of interesting. I hate that it's interesting.
+
+[SAL]
+What did fake McPhee say about me?
+
+[JAMES]
+He said: every new voice needs one defining line on entry. Your line was "I don't want to hear about A.I." The listener mapped your voice to your character from that single line.
+
+[SAL]
+One line.
+
+[JAMES]
+One line. And then every time you spoke after that, the listener already knew who you were and what you cared about. The panel said: don't introduce characters. Let them introduce themselves.
+
+[MO]
+What did they say about me?
+
+[JAMES]
+The dumbest, most human moment in the episode. A guy needs a website. Another guy can build one. They'll figure out the price over lunch. No technology. No A.I. No methodology. A sandwich.
+
+[MO]
+I like that review.
+
+[SAM]
+And me?
+
+[JAMES]
+One of them said your one line — "Alex, I need you to stop" — that's starting in the middle. No setup. No "Sam was a reasonable person who..." Just the authority, the name, the command. The listener feels Alex's stomach drop.
+
+[SAM]
+I didn't mean it to feel that way.
+
+[JAMES]
+I know. But in audio, tone is everything. The panel taught me that. Every line carries the voice and the feeling at the same time. You can't separate the words from the delivery. In text, "I need you to stop" is neutral. In audio, it's devastating.
+
+[PARROT]
+What did they say about me?
+
+[JAMES]
+They said the research voice needs to earn its place. You can't just drop stats. Every number has to land on a person. The Duke study doesn't matter until Rich says "that's not fair." The water numbers don't matter until Gus says "I don't want your numbers." The stat is the setup. The reaction is the payoff.
+
+[PARROT]
+So I'm the setup.
+
+[JAMES]
+You're the setup. Rich and Gus and Sal are the payoff. The panel said: data without emotion is a lecture. Emotion without data is a rant. You need both in the same room.
+
+[GUS]
+Did any of them agree with me?
+
+[JAMES]
+The physicist said your concerns about data and training are legitimate and unresolved. The lawyer — the copyright lawsuits — the courts haven't decided. The labor practices are real. He said: the person who refuses to engage isn't always wrong. Sometimes they're the only person in the room who's asking the right question at the wrong volume.
+
+[GUS]
+The right question at the wrong volume.
+
+[JAMES]
+That's you, Gus.
+
+[RICH]
+So you built fake people to make this better.
+
+[JAMES]
+I built fake advisors. They read the work. They argued with each other. They told me what to cut, what to keep, what to breathe into. Is it all correct? I don't know. But the end product sounded better, and I felt like I understood why.
+
+[SAL]
+And fake McPhee — was the advice as good as a real writer's?
+
+[JAMES]
+I don't know. But I didn't have a real writer. I had a deadline and a sixty-minute episode that was too dense. The panel turned it into a fifty-minute episode that breathes. The alternative wasn't a real writer. The alternative was nothing.
+
+[SAL]
+That's a familiar line.
+
+[JAMES]
+It replaced silence, Sal. Same as everything else.
+
+[ALEX]
+Can I build one? A panel like that?
+
+[JAMES]
+You already have one. You have me. You have the parrot. You have Sal telling you when it's ready to ship. You have Mo telling you what he actually needs. Your panel is this room.
+
+[RICH]
+The room is the panel.
+
+[JAMES]
+The room is the panel. And now you know how the episode was made.
+
+---
 
 [JAMES]
 Read the book and let's build. Thanks for listening.

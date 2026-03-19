@@ -27,6 +27,18 @@ VOICES = {
     "GUS":    "Eddy (English (UK))",
     "ALEX":   "Samantha",
     "MO":     "Rocko (English (US))",
+    # Act 4 fake masters — reuse main cast voices
+    "FAKE-IRA":      "Daniel",       # James's voice
+    "FAKE-JAD":      "Rishi",        # Rich's voice
+    "FAKE-KRULWICH": "Karen",        # Parrot's voice
+    "FAKE-ROMAN":    "Tessa",        # Sam's voice
+    "FAKE-SARAH":    "Moira",        # Sal's voice
+    "FAKE-GUY":      "Samantha",     # Alex's voice
+    "FAKE-FEYNMAN":  "Karen",        # Parrot's voice
+    "FAKE-3B1B":     "Rishi",        # Rich's voice
+    "FAKE-GREY":     "Eddy (English (UK))",  # Gus's voice
+    "FAKE-MCPHEE":   "Moira",        # Sal's voice
+    "FAKE-DOUG":     "Rocko (English (US))", # Mo's voice
 }
 
 RATES = {
@@ -37,7 +49,7 @@ GAP_MS = 400
 WORKERS = 8
 
 # Act boundaries (1-indexed line numbers in .md where each act ENDS)
-ACT_BREAK_LINES = [496, 1019]
+ACT_BREAK_LINES = [496, 1019, 1818]
 
 def parse_lines(script_path):
     """Parse script into voice lines with act assignments."""
@@ -60,10 +72,10 @@ def parse_lines(script_path):
         if not s or s.startswith('#') or s.startswith('|') or s.startswith('---') or s.startswith('>') or s.startswith('-'):
             continue
         if speaker and speaker in VOICES:
-            # Determine act (0, 1, 2)
+            # Determine act
             act = 0
-            if i >= ACT_BREAK_LINES[1]: act = 2
-            elif i >= ACT_BREAK_LINES[0]: act = 1
+            for b in ACT_BREAK_LINES:
+                if i >= b: act += 1
             lines.append((speaker, s, act))
     return lines
 
@@ -139,7 +151,8 @@ if __name__ == "__main__":
     print(f"Found {len(lines)} voice lines")
 
     # Count per act
-    act_counts = [0, 0, 0]
+    num_acts = len(ACT_BREAK_LINES) + 1
+    act_counts = [0] * num_acts
     for _, _, act in lines:
         act_counts[act] += 1
     for i, c in enumerate(act_counts):
@@ -159,7 +172,7 @@ if __name__ == "__main__":
 
     # Order files and split by act
     ordered = [results[i] for i in range(1, len(lines) + 1)]
-    act_files = [[], [], []]
+    act_files = [[] for _ in range(num_acts)]
     for i, (_, _, act) in enumerate(lines):
         act_files[act].append(ordered[i])
 
@@ -167,7 +180,7 @@ if __name__ == "__main__":
 
     # Assemble 4 MP3s
     print("\nAssembling...")
-    names = ["iwts-act1", "iwts-act2", "iwts-act3"]
+    names = [f"iwts-act{i+1}" for i in range(num_acts)]
     act_mp3s = []
     for i, name in enumerate(names):
         raw = assemble_mp3(act_files[i], silence, name)
@@ -191,4 +204,5 @@ if __name__ == "__main__":
     shutil.copy2(full, PROD_DIR / "i-want-to-share.mp3")
     for i, mp3 in enumerate(act_mp3s, 1):
         shutil.copy2(mp3, PROD_DIR / "sections" / f"act{i}.mp3")
+        print(f"  → sections/act{i}.mp3")
     print("Done.")

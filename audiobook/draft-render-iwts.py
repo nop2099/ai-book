@@ -15,9 +15,9 @@ VOICES = {
     "PARROT": "Karen",
     "SAM":    "Tessa",
     "SAL":    "Moira",
-    "GUS":    "Aman",
+    "GUS":    "Grandpa (English (US))",
     "ALEX":   "Samantha",
-    "MO":     "Kathy",
+    "MO":     "Rocko (English (US))",
 }
 
 RATES = {

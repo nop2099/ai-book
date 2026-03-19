@@ -1492,7 +1492,7 @@ That's me. I've been building more because I can. And then I want to share it al
 Your productivity became your volume. And your volume became other people's burden. Not because the work is bad. Because the pace is faster than the room can absorb.
 
 [JAMES]
-Same shape as the connector that can't write. That was friction. The friction taught you where the files live. This is the same thing — the room can't absorb your pace. That's friction. And the friction teaches you where the people are.
+The room can't absorb your pace. That's friction. And the friction teaches you where the people are.
 
 ---
 

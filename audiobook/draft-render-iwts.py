@@ -88,7 +88,7 @@ def parse_lines(script_path):
         if m:
             speaker = m.group(1)
             continue
-        if not s or s.startswith('#') or s.startswith('|') or s.startswith('---') or s.startswith('>') or s.startswith('-'):
+        if not s or s.startswith('#') or s.startswith('|') or s.startswith('---') or s.startswith('>') or s.startswith('-') or ACT_MARKER_RE.match(s):
             continue
         if speaker and speaker in VOICES:
             lines.append((speaker, s, current_act))

@@ -10,7 +10,7 @@ Rich is louder than he used to be. Some people hear the work. Some people hear "
 |---|---|---|---|
 | JAMES | James Wilson (clone) | Daniel | Author. |
 | RICH | — | Rishi | The enthusiast. |
-| PARROT | — | Samantha | Chat-G.P.T. Loves philosophy and research. |
+| PARROT | — | Karen | Chat-G.P.T. Loves philosophy and research. |
 | SAM | — | Christopher | The manager. Reasonable, not anti-A.I. Managing a team. |
 | SAL | — | Fred | The writer. Unsure about A.I. Stuck in the middle. |
 | GUS | — | Ralph | Anti-A.I. as identity. Won't stop complaining. |
@@ -131,7 +131,7 @@ There's research on this now. Real numbers. The numbers will move — listen for
 [PARROT]
 Duke University. Four thousand four hundred people. Four experiments.
 
-[RICH]
+[SAL]
 Who's that?
 
 [RICH]
@@ -144,7 +144,7 @@ I'm Chat-G.P.T. I help him. I'm not the strong one — but I did the reading.
 They found that if you admit to using A.I., people rate you as lazier. Less competent. Less diligent. Even when the work is identical. Even when the work is better. The penalty isn't on the quality. It's on the disclosure. They call it the social evaluation penalty.
 
 [PARROT]
-The same deliverable. The same quality. Rated higher when you don't say "A.I. helped." The word is the cost.
+The same deliverable. The same quality. Rated higher when you don't say A.I. helped me. The word is the cost.
 
 [RICH]
 That's not fair.
@@ -158,7 +158,7 @@ No. But it's the room we're in.
 There's more.
 
 [PARROT]
-WalkMe and SAP. Forty-nine percent of employees hide their A.I. use. Fifty-three percent of executives hide it too. Sixty-two percent of Gen Z have pretended A.I. work was all their own.
+Walk Me and S.A.P. Forty-nine percent of employees hide their A.I. use. Fifty-three percent of executives hide it too. And sixty-two percent of Gen-Z have pretended A.I. work was all their own.
 
 [RICH]
 Sixty-two percent?
@@ -191,7 +191,7 @@ I got three. I stopped reading after the first paragraph.
 And then Alex walks in and says "look what A.I. did." Same word. Same flinch.
 
 [SAL]
-Your podcast might be good, Rich. I don't know. I never got past the word.
+Rich, your podcast might be good. I don't know. I never got past the word.
 
 ---
 
@@ -230,7 +230,7 @@ I wrote a formula that catches the duplicates before they hit the report.
 That's been broken for months. Thanks.
 
 [SAM]
-That's good work, Alex.
+Good work, Alex.
 
 [PARROT]
 Sal didn't ask if A.I. was involved. Alex didn't volunteer it. The work landed. That's the sip test for people.
@@ -242,7 +242,7 @@ But I want them to know.
 First episode — I said four words. "I want a podcast."
 
 [PARROT]
-And I figured out the rest by asking.
+And I figured out the rest by asking, Rich.
 
 [RICH]
 I didn't explain anything. The conversation did the work.
@@ -338,7 +338,7 @@ Wait, you make your own podcasts?
 That's actually pretty cool.
 
 [RICH]
-Like this episode. I wanted to understand why people bristle when I talk about what I've built. So I had the A.I. research it — the Duke study, the shame numbers, the workslop thing — and turn it into audio I can listen to on my walk.
+This episode is one of them. But if I say "I built a custom A.I. podcast" —
 
 [GUS]
 You lost me at A.I.
@@ -347,10 +347,7 @@ You lost me at A.I.
 You had me until then.
 
 [RICH]
-And I can hear it now. If I say "I built a custom A.I. podcast that researches topics and reads them to me while I walk," half the room thinks I'm showing off and the other half thinks I'm crazy.
-
-[RICH]
-But that's not hype. That's how I learn. I built a tool that fits my brain.
+That's how I learn. I built a tool that fits my brain.
 
 [JAMES]
 Or you say "I listen to podcasts on my walk and I've been making my own on topics I'm curious about." Same thing. No costume.
@@ -366,6 +363,21 @@ So what do I do? I'm not going to pretend I didn't build these things. I'm not g
 
 [JAMES]
 Don't hide it. Sequence it.
+
+[SAL]
+That sounds like hiding with extra steps.
+
+[RICH]
+I'm not ashamed of it.
+
+[JAMES]
+Then here's the test, Rich. If someone asks "did you use A.I.?" — what do you say?
+
+[RICH]
+Yeah. Here's how.
+
+[JAMES]
+That's the difference. The ashamed person hides. The reframer tells the whole story — but only when asked. You're not keeping a secret. You're choosing what goes first.
 
 [PARROT]
 The Duke study found the penalty lessens when people understand how and why you're using A.I. Not what tool. How you used it.
@@ -410,16 +422,31 @@ The content exists because the cost of making it dropped to zero. It didn't repl
 That's a convenient line.
 
 [ALEX]
-So after Sam shut me down, I started thinking. I want to build things for people. Real things. On my own. But every time I say A.I., the conversation gets weird. People either think I'm a genius or a con artist. There's no middle.
+So after Sam shut me down, I started thinking. I want to build things for people. Real things. On my own. But every time I say A.I., the conversation gets weird.
 
-[JAMES]
-I've been thinking about this, Alex. I haven't figured it out yet. But here's where I'm at. Stop saying A.I.
+[SAM]
+At work, Alex — just say web tools. HTML, CSS, databases. That stuff is thirty years old. Nobody bristles at web tools. Gus won't care. Sal won't care. You're just suddenly good at it.
+
+[SAL]
+I wouldn't care about web tools.
+
+[GUS]
+Web tools are fine.
+
+[GUS]
+Did you take a bootcamp?
 
 [ALEX]
-Stop saying A.I.?
+Kinda. I gave myself one.
+
+[GUS]
+Huh. OK.
 
 [JAMES]
 Start saying websites. A sandwich shop needs a page. A yoga instructor needs a booking site. Nobody's fighting over that work. Pick the lane nobody wants. Own it.
+
+[JAMES]
+But if you're handling someone's data — even a menu with a phone number — you'll need to talk to security. The lane nobody wants still has responsibilities.
 
 [ALEX]
 So I just... don't mention A.I.? Sometimes I'm excited about the A.I. part of A.I. Sometimes I'm excited about what I can make with it. Those are different conversations.
@@ -513,6 +540,12 @@ Wait — Alex, Sal, you work together?
 [ALEX]
 It's a small podcast.
 
+[MO]
+Wait — is this Rich's podcast or James's?
+
+[RICH]
+Yes.
+
 [ALEX]
 My manager made a judgment call. Peace over progress. I don't think he was wrong. But it cost us.
 
@@ -529,7 +562,7 @@ Some people didn't. I needed to see the work first. Not the pitch.
 And honestly — I'm not sure how I feel about A.I. But Gus — he's on our team too — he won't shut up about how evil it is. I'm tired of hearing him complain. And I'm tired of hearing Alex evangelize. I'm stuck in the middle.
 
 [GUS]
-It IS evil. The companies steal art. They exploit workers. They're selling it to the military. And you're all just going along with it.
+It is evil. The companies steal art. They exploit workers. They're selling it to the military. And you're all just going along with it.
 
 [JAMES]
 You said the same thing to everyone. But each person needed to hear it differently.
@@ -573,7 +606,10 @@ The "five hundred M.L. per query" claim is off by a factor of a thousand. That's
 Here's the comparison. One hamburger uses six hundred and sixty gallons of water. One Chat-G.P.T. conversation uses five M.L. — roughly a teaspoon.
 
 [GUS]
-I like hamburgers.
+How about chicken?
+
+[PARROT]
+Five hundred gallons per pound, Gus.
 
 [PARROT]
 Agriculture uses seventy percent of global freshwater.
@@ -582,7 +618,7 @@ Agriculture uses seventy percent of global freshwater.
 I support farmers.
 
 [SAM]
-We all support farmers.
+We all support farmers, Gus.
 
 [PARROT]
 All data centers combined — not just A.I., all data centers — use zero point six percent. The A.I. water footprint is a rounding error on the rounding error.
@@ -609,7 +645,7 @@ So what do I say to Gus?
 You don't say anything. I don't want your numbers.
 
 [PARROT]
-He's right. The water argument was probably never about water.
+Gus is right. The water argument was probably never about water.
 
 [RICH]
 What was it about?
@@ -688,8 +724,17 @@ The honest version: data center energy is growing fast and that's being addresse
 [SAL]
 And the dishonest version?
 
+[GUS]
+A.I. is why your electric bill went up.
+
 [JAMES]
-"A.I. is why your electric bill went up." Your bill went up because of grid costs, fuel prices, and aging infrastructure. Data centers are a new load. They're not the reason your bill is nineteen cents.
+Your bill went up because of grid costs, fuel prices, and aging infrastructure.
+
+[SAM]
+The grid's been underfunded for decades. Nobody wanted to pay for upgrades. Nobody wanted a power line in their backyard.
+
+[JAMES]
+Data centers are a new load on a grid that was already behind. They're not the reason your bill is nineteen cents. They're the reason anyone's finally investing in generation.
 
 [PARROT]
 Same as the water argument. The numbers are real. The attribution is wrong. And the person making the argument isn't really arguing about electricity. They're arguing about power — who has it and who doesn't.
@@ -789,7 +834,7 @@ The differences matter. The choice is real.
 And the other companies?
 
 [JAMES]
-Grok — Elon Musk's A.I. — generated antisemitic content and non-consensual images of real people. Multiple countries issued bans.
+Grock — Elon Musk's A.I. — generated antisemitic content and non-consensual images of real people. Multiple countries issued bans.
 
 [GUS]
 Obviously.
@@ -819,7 +864,7 @@ Which one, though. Name the difference between Anthropic and Open-A.I.
 ...I don't know. They're all the same.
 
 [JAMES]
-They're not. And if you can name the differences, we'll have a real conversation instead of a slogan.
+They're not. And if you want to discuss the differences, we'll have a real conversation instead of a slogan.
 
 [RICH]
 So what do I say?
@@ -1683,13 +1728,13 @@ Same skill I've been trying to teach my team. Read the room. Match the volume.
 I'm not going to use A.I.
 
 [SAL]
-Nobody's asking you to, Gus.
+Nobody's asking you to change, Gus.
 
 [GUS]
 ...OK.
 
 [PARROT]
-The A.I. gives you feedback in ten seconds. People give you feedback in a look you have to learn to read.
+Rich, the A.I. gives you feedback in ten seconds. People give you feedback in a look you have to learn to read.
 
 [RICH]
 Harder room.
@@ -1729,7 +1774,7 @@ If you tell someone "A.I. built this," they'll judge it differently than if you 
 I'd judge it.
 
 [SAL]
-I know you would.
+I know you would, Gus.
 
 [JAMES]
 Lead with the work. Let the tool come second. And when someone asks how you built it — tell them the whole story. The corrections, the pushback, the four times you said "that's not good enough." The story is more interesting than the label.

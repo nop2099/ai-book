@@ -2129,7 +2129,49 @@ And that's the panel. Everyone's got one. You just have to ask.
 [JAMES]
 That's the whole episode. And now you know how it was made.
 
----
+[PARROT]
+The book has a true crime chapter of this episode, by the way. Same story. Different genre. Same peak, different path.
 
 [JAMES]
 Read the book and let's build. Thanks for listening.
+
+---
+
+[FAKE-SARAH]
+I'm fake Sarah. This is the cold case. A man was silenced at work in early twenty twenty-six. His manager says it was necessary. His coworker says it was justified. But something doesn't add up.
+
+[FAKE-SARAH]
+The victim built tools. Automated things. Saved the team hours. Then he said the word. A.I. His manager shut him down. First offense: the word. Second offense: he built something that found wasted time, and his manager asked him to find the lowest performers. He stopped sharing after that. Two shutdowns. One from the word. One from the use.
+
+[FAKE-SARAH]
+The evidence is institutional. Duke University. Four thousand four hundred subjects. If you disclose A.I. use, people rate you as lazier. Even when the work is better. The penalty is on the disclosure. Half the workforce is hiding. The suspect pool is everyone.
+
+[FAKE-SARAH]
+The suspects lined up. The water argument. The electricity argument. The companies. The art. Each one had numbers. Each one had a face. But the detective — a chatbot named Parrot — found that every argument was a costume for the same feeling: this is moving too fast and the benefits aren't reaching me.
+
+[FAKE-SARAH]
+The identity section is where it gets personal. One suspect said "I don't use A.I. I do things the real way." His manager said "he's my best engineer." You can't cross-examine identity. You can only ask someone to imagine a version of themselves that includes the thing they reject. The door opens from the inside.
+
+[FAKE-SARAH]
+The key witness — a writer named Sal — described the sensation of an uninvited presence. "It feels like there's someone in the room. I didn't invite it." Five people confirmed the same feeling from five positions. Then two words. "Nobody asks." The cold case that never got solved.
+
+[FAKE-SARAH]
+The resolution, if you can call it that: a sandwich shop owner who didn't care about any of it. He needed a website. The victim built him one. No A.I. mentioned. No costume. Just a menu, a phone number, and a handshake over lunch. The case closed not with a verdict but with a sandwich.
+
+[FAKE-SARAH]
+And the method: eleven fake advisors in a room that doesn't exist, reviewing a script about sharing, inside an episode about sharing, which is itself a thing being shared. A dead physicist argued about density. A fake Hemingway said there were too many words. A fake Mom asked if anyone had eaten.
+
+[FAKE-SARAH]
+The mountain has many paths and one peak. The peak isn't a point — it's a ridge. And the story is more interesting than the label. This has been the cold case. I'm fake Sarah. Good night.
+
+[FAKE-DOUG]
+James. You added a genre transfer of the episode inside the episode. That's another level of the loop. Stop it.
+
+[JAMES]
+Sorry, Doug.
+
+[FAKE-DOUG]
+No you're not.
+
+[JAMES]
+I never met a meta I didn't like. And I don't mean Zuck. But Zuck is fine too.

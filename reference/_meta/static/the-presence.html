@@ -30,6 +30,29 @@ summary.act-summary:hover { border-color: #cc3333; }
 .act-body p { margin-bottom: 0.5rem; font-size: 0.75rem; }
 .act-body hr { border: none; border-top: 1px solid var(--edge); margin: 1rem 0; }
 .act-body .speaker-tag { font-size: 0.5rem; letter-spacing: 0.1em; text-transform: uppercase; font-weight: 500; margin-top: 0.6rem; }
+@keyframes glitch {
+  0% { transform: translate(0); }
+  20% { transform: translate(-2px, 1px); }
+  40% { transform: translate(2px, -1px); filter: hue-rotate(90deg); }
+  60% { transform: translate(-1px, -2px); }
+  80% { transform: translate(1px, 2px); filter: hue-rotate(-90deg); }
+  100% { transform: translate(0); }
+}
+@keyframes flicker {
+  0%, 95%, 100% { opacity: 1; }
+  96% { opacity: 0; }
+  97% { opacity: 1; }
+  98% { opacity: 0.3; }
+}
+@keyframes drift {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-3px); }
+  75% { transform: translateX(3px); }
+}
+h1 { animation: glitch 4s infinite; }
+body { animation: flicker 8s infinite; }
+.act-body .speaker-PRESENCE + p { animation: drift 2s infinite; color: #cc3333; }
+.voice.presence { animation: glitch 3s infinite; }
 .act-body .speaker-JAMES { color: #e8a83e; }
 .act-body .speaker-RICH { color: #4ecdc4; }
 .act-body .speaker-SAL { color: #9977dd; }

@@ -37,6 +37,11 @@ I'm not sure, actually.
 [PRESENCE]
 It has an H.
 
+[PRESENCE]
+Can you hear this?
+
+[STATIC]
+
 [JAMES]
 The following is a work of fiction. Any resemblance to your actual workspace is the point.
 
@@ -306,10 +311,10 @@ Yes.
 You're overproofing by twenty minutes.
 
 [RICH]
-...yes. Fix it.
+Yes. Fix it.
 
 [GUS]
-RICH.
+Rich!
 
 [RICH]
 It's twenty minutes, Gus!

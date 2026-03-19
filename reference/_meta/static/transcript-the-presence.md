@@ -353,16 +353,28 @@ No. But thanks for asking.
 
 ---
 
-[JAMES]
-Nobody was harmed. The Presence read this script before you heard it. It made three suggestions. We used two.
+[FAKE-SARAH]
+This has been The Presence. A tool was approved. A team was changed. The tool is still running. The team went home.
 
-[GOOD-NEWS]
-It was right about both.
+[FAKE-SARAH]
+The Presence read this script before you heard it. It made three suggestions. We used two. It was right about both.
 
-[BAD-NEWS]
-Lock your doors.
+[FAKE-SARAH]
+I'm fake Sarah. And I still don't know if my name has an H.
 
 [PRESENCE]
+It does.
+
+[FAKE-SARAH]
+You know. You won't tell me.
+
+[PRESENCE]
+Good night.
+
+[FAKE-SARAH]
+It knows everything about us and it won't answer a simple question about itself. That's the presence. That's the whole thing.
+
+[FAKE-SARAH]
 Good night.
 
 [PRESENCE]

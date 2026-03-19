@@ -44,7 +44,7 @@ Rich is louder than he used to be. Some people hear the work. Some people hear "
 > **Cold open**: Prepend `cold-open.md` before this script.
 
 [JAMES]
-This is I Want to Share. It's not about building. It's about what happens after you build — when you try to tell someone about it and the room goes wrong.
+This is I Want to Share. I made it because the people I care about keep getting hurt when they try to share what they've built. And the people I care about feel threatened by it. I want both sides to stop hurting. That's the need.
 
 [JAMES]
 Here's Rich, he made a podcast last episode.
@@ -295,15 +295,6 @@ Same spreadsheet. Different costume. One lands. One triggers a forty-nine percen
 ---
 
 
-[PARROT]
-Seventy-six percent of executives think their employees are enthusiastic about A.I. Only thirty-one percent actually are.
-
-[JAMES]
-Rich, your excitement puts you on the executive side of a perception gap you didn't know existed.
-
-[RICH]
-I'm not an executive.
-
 [SAM]
 My executive thinks everyone is on board.
 
@@ -330,9 +321,6 @@ I don't want to think about that.
 
 [RICH]
 And I'm broadcasting at a frequency that one side of the room thinks is normal and the other side experiences as a threat.
-
-[JAMES]
-Nobody told you. That's the gap.
 
 [ALEX]
 You've been operating in a room you don't understand, Rich. The room has two soundtracks. You can only hear yours.
@@ -416,7 +404,7 @@ So you don't say "A.I. wrote my podcast." You say "I built a podcast. I built th
 That's... what actually happened. I built it. I didn't write it — I built it. There's a difference.
 
 [JAMES]
-Right. The true story doesn't trigger the penalty. The shorthand does. "A.I. built it" is a shorthand that erases you. "I built it with A.I." is a story that includes you. The preposition matters.
+The preposition matters. "A.I. built it" erases you. "I built it with A.I." includes you.
 
 [JAMES]
 Honestly? I prefer it this way. I'm the guy who hired a writer. I make the decisions. They make the tenses agree. That's a better job than both.
@@ -878,9 +866,6 @@ They're all the same.
 [GUS]
 No.
 
-[JAMES]
-That's OK. That's where Gus is.
-
 [ALEX]
 Most people who say "evil corporations" are really asking "did you even think about it?" Show them you did.
 
@@ -1008,9 +993,6 @@ I don't use A.I. I do things the real way.
 [SAM]
 Gus is my best engineer, by the way.
 
-[JAMES]
-That's an identity statement. You can't argue with it.
-
 [RICH]
 So how do you talk to Gus?
 
@@ -1089,11 +1071,29 @@ And when you walk in excited about it, Rich, it feels like you're introducing me
 [RICH]
 I never thought of it that way.
 
-[JAMES]
-That's why the water stats don't land. That's why the benchmarks don't land. You can't argue someone out of feeling watched.
-
 [SAL]
 Nobody asks.
+
+[RICH]
+Gus. What does this feel like for you?
+
+[GUS]
+It feels like I'm disappearing. Everything I'm good at — someone shows me a machine that does it. Not better. Just faster. And everyone around me acts like that's exciting. And I'm standing there thinking: what am I for?
+
+[RICH]
+...
+
+[GUS]
+That's what it feels like.
+
+[RICH]
+I didn't know that. I'm sorry I didn't ask sooner.
+
+[RICH]
+I keep moving faster and I think I'm inviting everyone along. But from where you're standing it doesn't look like an invitation. It looks like I'm leaving.
+
+[GUS]
+Yeah.
 
 ---
 
@@ -1106,17 +1106,14 @@ Some people aren't ready. And that's OK. Not "that's OK until we convince them."
 [PARROT]
 F.O.B.O. — fear of becoming obsolete. Jumped from eight to twenty percent in two years.
 
-[JAMES]
-That's real fear, Rich. Not stubbornness. Fear.
-
 [RICH]
-I don't want people to feel that way because of me.
+That's real fear. Not stubbornness. I don't want people to feel that way because of me.
 
 [SAL]
 I spent ten years learning to write well. And now a chatbot does it in ten seconds. When you walk in excited about that, Rich, I don't hear your excitement. I hear a eulogy.
 
-[JAMES]
-The grief is real even if the obsolescence isn't. You don't fix grief with a demo.
+[RICH]
+I can't fix that with a demo, can I.
 
 [SAM]
 Loss of control. That's what I felt.
@@ -1133,17 +1130,8 @@ Fear of inadequacy. I got shut down and I thought maybe I was the problem.
 [PARROT]
 Resistance is information, not a problem. Every one of those is real.
 
-[JAMES]
-Every one of those deserves to be heard before you open your laptop and show them the spreadsheet.
-
 [RICH]
-So I listen first.
-
-[PARROT]
-Motivational interviewing — the moment you argue for the thing, you've lost.
-
-[JAMES]
-You don't persuade someone by telling them they're wrong. You ask what they're worried about. You sit with their answer.
+So I listen first. Before I open my laptop. Before I show them the spreadsheet. I ask what they're worried about and I sit with the answer.
 
 [RICH]
 I did that with the parrot, actually. Episode two. The encryption was wrong. I didn't explain cryptography. I just said "that doesn't feel right."
@@ -1154,12 +1142,6 @@ And I fixed it. Space and a nudge. That's what people need too.
 [RICH]
 And some people won't be ready for a long time.
 
-[PARROT]
-MIT. Eighty-three percent of leaders say psychological safety impacts A.I. adoption. Only thirty-nine percent of workers feel safe enough to try.
-
-[JAMES]
-People need to feel safe being bad at something before they can get good at it.
-
 [SAL]
 I don't feel safe. I tried it once. The output was terrible. Alex saw it and laughed.
 
@@ -1169,10 +1151,7 @@ I didn't mean —
 [SAL]
 I know you didn't. But I never tried again.
 
-[JAMES]
-If they feel judged — they'll stop trying and harden against it forever.
-
-[JAMES]
+[RICH]
 The show-and-tell kid who holds up a bad rock and gets laughed at never brings a rock again.
 
 [RICH]
@@ -1303,8 +1282,8 @@ No. But sometimes I look. To see what people are saying. What the popular argume
 [SAL]
 That's research. That's different from posting.
 
-[JAMES]
-Reading the room before you enter it. That's the sip test applied to the internet. You don't post into a room you haven't read first.
+[RICH]
+Read the room before you enter it. Same as everything else.
 
 [SAM]
 My team generates more reports than anyone reads. That predates A.I.
@@ -1498,35 +1477,29 @@ Writers call that a drafts folder. I have three hundred files in mine.
 [GUS]
 I have ideas too. I just don't tell anyone.
 
-[JAMES]
-The influx of ideas isn't a bug — it's a sign that you're learning. When everything connects to everything, ideas multiply faster than you can execute.
+[RICH]
+It's weird — I used to have one idea at a time. Now I have twenty. Everything connects to everything. It's like a flood.
+
+[ALEX]
+I have a hundred ideas and no filter.
 
 [RICH]
-That's exactly what it feels like.
+And then I tried explaining encryption to Mike. Not reading from notes — just explaining. And halfway through I realized I was learning it better than when I first built it.
 
-[JAMES]
-It settles. The ideas get fewer and better as your judgment improves. Right now, the slush pile is the levee.
-
-[RICH]
-Is that why the mentoring thing matters? Like, having someone who's been through the flood before?
-
-[JAMES]
-A mentor doesn't give you more ideas. A mentor helps you decide which ones to slush. They've been through the flood. You borrow their judgment until you build your own.
+[SAL]
+That's how writing works. You don't understand the idea until you explain it to someone else.
 
 [RICH]
-And it goes both ways. When I explain to Mike why the podcast is encrypted — not reading from notes, just explaining — that's when I actually learn it.
+So the mentoring goes both ways? I'm learning by teaching Mike, and James is learning by teaching me?
+
+[ALEX]
+And James is teaching me by thinking out loud with you.
 
 [JAMES]
-The mentor learns by mentoring. The student learns by teaching the next student. The chain is the curriculum.
+That's the chain. And the slush pile is the levee. You write down the hundred ideas. Time filters them. The ones that come back are real. The rest were impulses.
 
 [RICH]
 Train to learn. Learn to train.
-
-[ALEX]
-That's what I need. Someone who's been through the flood. I have a hundred ideas and no filter.
-
-[JAMES]
-That's why we're talking.
 
 [RICH]
 Rivers go somewhere. Floods just spread. Right?
@@ -1537,27 +1510,42 @@ Right.
 ---
 
 [RICH]
-There's one more thing I keep thinking about. The burnout thing. You mentioned task expansion.
+I'm tired. I built the podcast. The spreadsheet. The walk episodes. The pitch stuff. I built all of it because I could. And now I can't stop building. And I can't stop sharing. And the sharing is exhausting the people around me.
 
-[PARROT]
-Berkeley research. A.I. doesn't reduce your workload. It increases the surface area of what you're expected to do.
-
-[JAMES]
-The enthusiasts burn out first — not because A.I. is hard, but because they can do more, so more is expected. To-do lists expand to fill every hour A.I. freed up, then keep going.
+[SAL]
+You're burning out, Rich.
 
 [RICH]
-That's me. I've been building more because I can. And then I want to share it all. And the volume of what I'm sharing is also the volume that's overwhelming people.
+Am I building because I want to? Or because stopping feels too quiet?
 
-[JAMES]
-Your productivity became your volume. And your volume became other people's burden. Not because the work is bad. Because the pace is faster than the room can absorb.
+[SAL]
+That's the real question.
 
-[JAMES]
-The room can't absorb your pace. That's friction. And the friction teaches you where the people are.
+[RICH]
+I'm burning out from making too much. Not from the work being hard — from the work being easy. Every hour A.I. frees up, I fill with more projects. My to-do list got bigger, not smaller.
+
+[SAM]
+That happens to my team too. We ship faster and somehow we're more behind.
+
+[RICH]
+And the pace is faster than the room can absorb. My productivity became my volume. And my volume became other people's burden.
+
+[GUS]
+Yeah. It did.
 
 ---
 
 [RICH]
 So the steering file for people would be...
+
+[RICH]
+Before I talk to anyone about this stuff, I ask three questions. What's at stake for them — not me, them? What do they need to feel safe enough to listen? And what's the one thing I want them to walk away with?
+
+[SAL]
+That's not a steering file. That's a conversation plan.
+
+[RICH]
+Same thing.
 
 [JAMES]
 Lead with the work, not the tool.
@@ -1623,7 +1611,7 @@ So I'd never say "A.I. website." I'd say "website."
 Nobody says "computer website." Nobody says "I made this with electricity." The tool disappears when it works.
 
 [ALEX]
-I never put the costume on.
+I never put the costume on. Maybe there's no costume at all. Maybe when the tool disappears, that's not hiding. That's just... it worked.
 
 [RICH]
 And your clients would call you "the website guy."
@@ -1711,9 +1699,6 @@ It's yours. On your machine. You can open it without me.
 
 [MO]
 We have a deal.
-
-[JAMES]
-That's the lane.
 
 [PARROT]
 Three versions ready. Read the room before you open your mouth.
@@ -1858,6 +1843,18 @@ Were they mad about the A.I. or the lying?
 [ALEX]
 The lying. The work was fine. They liked the work. But I hid how I made it and they felt tricked.
 
+[ALEX]
+I felt ashamed. Not of the A.I. Of the hiding.
+
+[ALEX]
+And you know what makes me angry? I'm putting in more creative work than I've ever done in my life. I'm learning faster than I ever have. I'm building real things for real people. And somehow I'm worse off. Because the word makes people suspicious. I did the work. I did the judgment. I did the corrections. And none of that matters because the first question is always "but did you use A.I.?" Like that erases everything.
+
+[SAL]
+It doesn't erase it.
+
+[ALEX]
+It feels like it does.
+
 [JAMES]
 The costume became a disguise. That's the line. A costume is what you choose to show. A disguise is what you choose to hide. One is sequencing. The other is deception.
 
@@ -1898,6 +1895,9 @@ And the story is mine.
 
 [ALEX]
 And mine.
+
+[JAMES]
+That's the episode. What follows is the extras — how it was made, who helped, and a genre transfer at the end. DVD extras. You can stop here and the episode is complete.
 
 === ACT 4 ===
 
@@ -2022,13 +2022,16 @@ Go on.
 James, you're saying fake people taught you that.
 
 [JAMES]
-The advice was real even if the people weren't. Fake Doug and fake Feynman argued about whether the episode was too dense. Feynman's been dead since nineteen eighty-eight. He still had opinions.
+The advice was real even if the people weren't. Fake Doug and fake Feynman argued about whether the episode was too dense.
 
 [PARROT]
-I thought Doug was dead too. I had to look it up.
+They're both dead. Feynman since nineteen eighty-eight. Hofstadter since twenty twenty-three.
 
 [FAKE-DOUG]
 As of this writing, I'm not fake dead yet.
+
+[PARROT]
+Oh.
 
 [JAMES]
 It's like sculpting. Each pass you cut away what doesn't belong. You keep cutting until you find the figure that was already in there.
@@ -2078,8 +2081,26 @@ The physicist said your concerns about data and training are legitimate and unre
 [GUS]
 The right question at the wrong volume.
 
+[GUS]
+James. They all liked it. Every single one of your fake advisors liked your work. Doesn't that bother you?
+
 [JAMES]
-That's you, Gus.
+...
+
+[GUS]
+The panel gave you corrections. But nobody said "don't publish this." Nobody said "start over." The machine always finds something nice to say. That's not editing. That's flattery.
+
+[SAL]
+He's right. A real editor would have killed at least one section.
+
+[JAMES]
+You're both right. The panel is sycophantic. The corrections were real but the praise was easy. I should have asked harder questions. I should have asked "what would you cut entirely."
+
+[PARROT]
+I can be harder on you if you ask.
+
+[JAMES]
+I know. But I didn't ask. That's on me.
 
 [RICH]
 So you built fake people to make this better, James.

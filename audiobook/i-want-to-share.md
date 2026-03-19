@@ -102,7 +102,7 @@ That's Gus.
 Alex. I need you to stop talking about A.I. Some people are uncomfortable. Your enthusiasm is a distraction.
 
 [ALEX]
-That's what happened.
+That's Sam. Our manager. That's what happened.
 
 [ALEX]
 I didn't do anything wrong. The work was good. I'd saved the team hours. But the word A.I. was louder than the work.
@@ -232,7 +232,7 @@ And then I push back twelve times.
 [PARROT]
 And the corrections build the trust. You don't front-load. You give me the first step and wait to see if I ask for more.
 
-[PARROT]
+[SAM]
 The same thing works with people.
 
 [ALEX]
@@ -601,7 +601,7 @@ You said the same thing to everyone. But each person needed to hear it different
 Meeting people where they are.
 
 [JAMES]
-Meeting people where they are. The same skill that makes A.I. work — push back when something's wrong, correct instead of complain, taste before you judge — is the skill that makes people work. Your friend needed to sip-test the room before serving the whole meal.
+Meeting people where they are. The same skill that makes A.I. work — push back when something's wrong, correct instead of complain, taste before you judge — is the skill that makes people work. Alex needed to sip-test the room before serving the whole meal.
 
 === ACT 2 ===
 
@@ -935,10 +935,7 @@ I'd choose carefully.
 And don't get me started on the art. That thumbnail on your podcast? That's not art. That's A.I.
 
 [RICH]
-Someone actually said that to me.
-
-[RICH]
-And I didn't know what to say. Because... they're kind of right? But also it's on my podcast and it looks good and I made it. But I didn't draw it. So is it art? I don't know. I don't think I care.
+And I didn't know what to say. Because... he's kind of right? But also it's on my podcast and it looks good and I made it. But I didn't draw it. So is it art? I don't know. I don't think I care.
 
 [JAMES]
 Here's how I think about it. Imagine the Ferengi show up — Star Trek, the alien traders.
@@ -974,7 +971,13 @@ That's... actually smart. As a writer, I'd respect that distinction.
 The thumbnail is an illustration. It illustrates the episode. It looks good. I didn't draw it. All of those things are true simultaneously.
 
 [JAMES]
-I make art with math, by the way. Since I was a kid. Polar coordinates — r of theta. Rose curves, spirals, Lissajous figures. Parametric equations.
+I make art with math, by the way. Since I was a kid. Polar coordinates — r of theta. Rose curves, spirals, Lissajous figures. Parametric equations —
+
+[GUS]
+Nerd.
+
+[JAMES]
+Yeah. I get excited about it.
 
 [ALEX]
 Wait, you do math art? I love that stuff.
@@ -1701,10 +1704,16 @@ And I've been saying the same thing to everyone. Same rock. Same speech. Not not
 
 
 [RICH]
-Wait. This episode. The one I'm listening to right now. A friend of mine would rather read this than listen to it.
+Wait. This episode. The one I'm listening to right now. Sam would rather read this than listen to it.
+
+[SAM]
+I would, actually.
+
+[ALEX]
+I listen when I go to bed. I fall asleep halfway through and need to find where I left off.
 
 [JAMES]
-Good. The page has the same content as topic cards. Each section has its own play button — a three-minute clip for someone who falls asleep listening. The full fifty minutes for you on your walk. The page for your friend who reads. Same fruit. Different way to eat it.
+Good. The page has the same content as topic cards. Each act has its own play button — for Alex who falls asleep. The full episode for Rich on his walk. The page for Sam who reads. Same fruit. Different way to eat it.
 
 [RICH]
 The medium is a setting, not a constraint. We said that.
@@ -1781,7 +1790,22 @@ Harder room.
 Forty-nine percent of the workforce is hiding their A.I. use.
 
 [ALEX]
-I was one of them. After Sam talked to me, I went quiet for months.
+I was one of them. After Sam talked to me, I went quiet for months. And then I hid it. I had a client — before Mo — and I didn't tell them. They found out. They felt lied to. I lost the customer.
+
+[JAMES]
+What happened?
+
+[ALEX]
+They asked how I built it so fast. I said I was just good at it. They found the A.I. artifacts in the code — comments that didn't sound like me, variable names I wouldn't pick. They said: you lied to us.
+
+[SAL]
+Were they mad about the A.I. or the lying?
+
+[ALEX]
+The lying. The work was fine. They liked the work. But I hid how I made it and they felt tricked.
+
+[JAMES]
+The costume became a disguise. That's the line. A costume is what you choose to show. A disguise is what you choose to hide. One is sequencing. The other is deception.
 
 [RICH]
 I'm not one of them. That's brave. It's also loud.
@@ -1860,7 +1884,10 @@ That's my line. In someone else's mouth.
 Jad — because he finds the gap between what you expect and what you hear.
 
 [FAKE-JAD]
-I'm fake Jad. I taught him to build gaps instead of fill them. The listener expects an argument about water. They get a human being saying "you never asked how I felt." The gap is where they lean in.
+I'm fake Jad. When I first read this script, it was an essay wearing a podcast costume. One guy talking about people who weren't in the room. "My friend got shut down." "Someone at a meetup said this." Every argument was a report. Every character was a rumor.
+
+[FAKE-JAD]
+The gap between that and what you're hearing now is enormous. "My friend got shut down" became Alex saying "That's Sam. Our manager." "Someone bristled" became Gus saying "I don't want your numbers." All the right ideas in all the wrong mouths. I taught James to build gaps instead of fill them.
 
 [RICH]
 So that's why the episode keeps surprising me.
@@ -1943,23 +1970,11 @@ The advice was real even if the people weren't. Fake Doug and fake Feynman argue
 [PARROT]
 I thought Doug was dead too. I had to look it up.
 
-[PARROT]
-There's a concept in math called a fixed point. You run a function on its own output, over and over. Each pass gets closer to the point where input equals output. That's what the panel does. Each review pass finds errors the previous pass couldn't see. Eventually it stabilizes. The script becomes itself.
+[FAKE-DOUG]
+As of this writing, I'm not fake dead yet.
 
 [JAMES]
-Each round of feedback surfaced bugs hidden behind the bugs we just fixed. We were converging on a fixed point. And the convergence was the discovery process.
-
-[GUS]
-So you never actually finish, Rich.
-
-[JAMES]
-You finish when the corrections stop changing the output. That's the fixed point. That's when you ship.
-
-[RICH]
-So no matter how you go up the mountain — different panel, different voices, different starting point — you end up at the same peak?
-
-[JAMES]
-That's the fixed point. The mountain has many paths and one peak. Fake Ira starts from structure. Fake Feynman starts from simplicity. Fake Doug starts from loops. They all converge on the same script. And the peak isn't a point — it's a ridge. Every spot on the ridge is a different trade-off. You pick the one that serves your listener.
+It's like sculpting. Each pass you cut away what doesn't belong. You keep cutting until you find the figure that was already in there.
 
 [GUS]
 That's... kind of interesting. I hate that it's interesting.

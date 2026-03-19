@@ -135,6 +135,7 @@ def assemble_mp3(files, silence_file, name):
     subprocess.run([
         "ffmpeg", "-y", "-f", "concat", "-safe", "0",
         "-i", str(concat_file),
+        "-af", "loudnorm=I=-18:TP=-1.5:LRA=11",
         "-c:a", "libmp3lame", "-q:a", "4",
         str(raw_mp3)
     ], check=True, capture_output=True)

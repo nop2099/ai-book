@@ -11,13 +11,11 @@ Rich is louder than he used to be. Some people hear the work. Some people hear "
 | JAMES | James Wilson (clone) | Daniel | Author. |
 | RICH | — | Rishi | The enthusiast. |
 | PARROT | — | Samantha | Chat-G.P.T. Loves philosophy and research. |
-| VIC | — | Tom | The friend who got shut down at work. |
 | SAM | — | Christopher | The manager. Reasonable, not anti-A.I. Managing a team. |
 | SAL | — | Fred | The writer. Unsure about A.I. Stuck in the middle. |
 | GUS | — | Ralph | Anti-A.I. as identity. Won't stop complaining. |
-| ALEX | — | Matthew | The mentee who wants to build a business. |
+| ALEX | — | Matthew | The mentee. Got shut down at work. Building websites on the side. |
 | MO | — | Oliver | The sandwich shop owner. Alex's first client. |
-| STAGE | Samantha | Samantha | The narrator who knows how this ends. |
 
 ### Assembly overrides
 
@@ -38,7 +36,7 @@ Here's Rich, he made a podcast last episode.
 [RICH]
 Show and tell was my favorite day. You bring the thing. You hold it up. Everyone looks. That was the whole deal. Nobody said "stop talking about your rock collection, you're making the other kids uncomfortable."
 
-[STAGE]
+[SAL]
 They did, actually. You just didn't hear it because you were holding the rock.
 
 ---
@@ -49,8 +47,8 @@ So I built all this stuff. The podcast. The encryption. The baking spreadsheet w
 [RICH]
 And some people say —
 
-[VIC]
-Hi, I'm Vic. Yeah, that does sound cool. You should show me.
+[ALEX]
+Hi, I'm Alex. Yeah, that does sound cool. You should show me.
 
 [RICH]
 And some people —
@@ -64,38 +62,65 @@ That's Sal. He's a writer.
 [RICH]
 Hold that thought, Sal.
 
-[VIC]
+[ALEX]
 You said "I built a thing with A.I." You don't hear the second part. They do.
 
 [RICH]
-Vic and Sal work together. Tell them what happened.
+Alex and Sal work together. Tell them what happened.
 
-[VIC]
+[ALEX]
 I got into A.I. the same way Rich did. Built tools. Automated stuff at work. Got excited. Started showing people what I'd done. Offering to help.
 
 [SAL]
-I went to our manager. I told him: Vic won't stop talking about A.I. We have a deadline. I can't focus.
+I went to our manager. I told him: Alex won't stop talking about A.I. We have a deadline. I can't focus.
 
 [GUS]
 We all feel the same way.
 
-[VIC]
+[ALEX]
 That's Gus.
 
 [SAM]
-Vic. I need you to stop talking about A.I. Some people are uncomfortable. Your enthusiasm is a distraction.
+Alex. I need you to stop talking about A.I. Some people are uncomfortable. Your enthusiasm is a distraction.
 
-[VIC]
+[ALEX]
 That's what happened.
 
-[VIC]
+[ALEX]
 I didn't do anything wrong. The work was good. I'd saved the team hours. But the word A.I. was louder than the work.
 
 [SAM]
 I'm not anti-A.I. I'm managing a team with deadlines and feelings.
 
-[VIC]
+[ALEX]
 I get it now. But it still cost the team. I had knowledge they needed. The channel got shut down because the signal was wrapped in a word some people couldn't hear past.
+
+[ALEX]
+And then there was the other thing. I figured out how to find wasted time. Meetings that went nowhere, tasks that looped, duplicate work. I showed Sam.
+
+[SAM]
+I said: can you find the lowest performers?
+
+[ALEX]
+And I felt sick. I built a tool to help the team. He wanted to use it to rank them.
+
+[SAM]
+I was trying to solve a staffing problem.
+
+[ALEX]
+I know. But that's not what I built it for. I stopped showing Sam things after that.
+
+[SAM]
+The needs of the many.
+
+[RICH]
+Outweigh.
+
+[GUS]
+The needs of the few.
+
+[JAMES]
+Two shutdowns. One from the word. One from the use.
 
 ---
 
@@ -104,7 +129,7 @@ I get it now. But it still cost the team. I had knowledge they needed. The chann
 There's research on this now. Real numbers. The numbers will move — listen for the shape, not the number.
 
 [PARROT]
-Duke University. Four thousand four hundred people. Four experiments. Published in the Proceedings of the National Academy of Sciences.
+Duke University. Four thousand four hundred people. Four experiments.
 
 [RICH]
 Who's that?
@@ -133,7 +158,7 @@ No. But it's the room we're in.
 There's more.
 
 [PARROT]
-A survey by WalkMe and SAP. Forty-nine percent of employees hide their A.I. use at work to avoid judgment. Fifty-three percent of C-suite leaders — executives — hide it too. And sixty-two percent of Gen Z have done work with A.I. and pretended it was all their own.
+WalkMe and SAP. Forty-nine percent of employees hide their A.I. use. Fifty-three percent of executives hide it too. Sixty-two percent of Gen Z have pretended A.I. work was all their own.
 
 [RICH]
 Sixty-two percent?
@@ -144,7 +169,7 @@ They call it A.I. shame. Nearly half the workforce is using A.I. and not telling
 [RICH]
 I'm not loud. I'm excited.
 
-[STAGE]
+[JAMES]
 Same volume. Different label.
 
 ---
@@ -154,7 +179,7 @@ Same volume. Different label.
 And there's a tax you're paying for other people's bad work.
 
 [PARROT]
-Researchers call it workslop — A.I.-generated content that shifts the cognitive burden to whoever receives it. A third of workers who receive it say they're less likely to want to work with the sender again.
+Researchers call it workslop. A.I. content that shifts the burden to whoever receives it. A third of workers say they're less likely to work with the sender again.
 
 [GUS]
 I got five A.I.-generated emails last week. They all said nothing. Polished, confident, empty.
@@ -163,7 +188,7 @@ I got five A.I.-generated emails last week. They all said nothing. Polished, con
 I got three. I stopped reading after the first paragraph.
 
 [GUS]
-And then Vic walks in and says "look what A.I. did." Same word. Same flinch.
+And then Alex walks in and says "look what A.I. did." Same word. Same flinch.
 
 [SAL]
 Your podcast might be good, Rich. I don't know. I never got past the word.
@@ -192,20 +217,23 @@ And the corrections build the trust. You don't front-load. You give me the first
 [PARROT]
 The same thing works with people.
 
-[VIC]
+[ALEX]
 Hey Sal, I fixed that spreadsheet thing that was bugging you.
 
 [SAL]
 Oh nice. How?
 
-[VIC]
+[ALEX]
 I wrote a formula that catches the duplicates before they hit the report.
 
 [SAL]
 That's been broken for months. Thanks.
 
+[SAM]
+That's good work, Alex.
+
 [PARROT]
-Sal didn't ask if A.I. was involved. Vic didn't volunteer it. The work landed. That's the sip test for people.
+Sal didn't ask if A.I. was involved. Alex didn't volunteer it. The work landed. That's the sip test for people.
 
 [RICH]
 But I want them to know.
@@ -228,7 +256,7 @@ The costume matters. Sometimes it opens doors. Sometimes it's the wrong costume 
 [RICH]
 So when I say "check out this baking spreadsheet, it tracks every recipe I change" —
 
-[VIC]
+[ALEX]
 Cool. I'd look at that.
 
 [SAM]
@@ -250,7 +278,7 @@ Same spreadsheet. Different costume. One lands. One triggers a forty-nine percen
 
 
 [PARROT]
-Here's a gap nobody talks about. Seventy-six percent of executives think their employees are enthusiastic about A.I. Only thirty-one percent actually are. The enthusiasm scales with seniority.
+Seventy-six percent of executives think their employees are enthusiastic about A.I. Only thirty-one percent actually are.
 
 [JAMES]
 Rich, your excitement puts you on the executive side of a perception gap you didn't know existed.
@@ -276,13 +304,19 @@ Because the last person who pushed back got labeled "not a team player."
 [GUS]
 So we just stop talking.
 
+[SAL]
+And I think they want to replace half of us with A.I. and the other half has to work with it.
+
+[GUS]
+I don't want to think about that.
+
 [RICH]
-And I'm broadcasting at a frequency that the top of the room thinks is normal and the bottom of the room experiences as a threat.
+And I'm broadcasting at a frequency that one side of the room thinks is normal and the other side experiences as a threat.
 
 [JAMES]
 Nobody told you. That's the gap.
 
-[VIC]
+[ALEX]
 You've been operating in a room you don't understand, Rich. The room has two soundtracks. You can only hear yours.
 
 ---
@@ -297,7 +331,7 @@ Same. Walks are good.
 [RICH]
 So I started building myself custom podcasts that research topics for me.
 
-[VIC]
+[ALEX]
 Wait, you make your own podcasts?
 
 [SAM]
@@ -334,13 +368,13 @@ So what do I do? I'm not going to pretend I didn't build these things. I'm not g
 Don't hide it. Sequence it.
 
 [PARROT]
-The Duke study found that the social evaluation penalty — the laziness judgment — lessens significantly when people understand how and why you're using A.I. Not what tool. How you used it. Why the result is better.
+The Duke study found the penalty lessens when people understand how and why you're using A.I. Not what tool. How you used it.
 
 [JAMES]
 The penalty is on the mystery. Remove the mystery and the penalty shrinks.
 
 [JAMES]
-So you don't say "A.I. wrote my podcast." You say "I built a podcast. I built the scripts. I picked the voices. I pushed back four times on the security until it was actually encrypted. The A.I. did the assembly. I did the judgment."
+So you don't say "A.I. wrote my podcast." You say "I built a podcast. I built the scripts. I picked the voices. I worked through four rounds of security until it was actually encrypted. The A.I. did the assembly. I did the judgment."
 
 [RICH]
 That's... what actually happened. I built it. I didn't write it — I built it. There's a difference.
@@ -352,7 +386,7 @@ Right. The true story doesn't trigger the penalty. The shorthand does. "A.I. bui
 Honestly? I prefer it this way. I'm the guy who hired a writer. I make the decisions. They make the tenses agree. That's a better job than both.
 
 [SAL]
-You hired a writer. I am a writer. You see the problem.
+You hired a writer. I am a writer. Although I'm not sure you'd call what it does writing.
 
 [RICH]
 But doesn't that put a writer out of a job?
@@ -363,6 +397,9 @@ That's what I'm asking.
 [JAMES]
 This was never going to be a paying gig. Nobody was going to hire a writer to make Rich's baking spreadsheet changelog. Nobody was going to commission a fifty-minute podcast about the social evaluation penalty for an audience of six people.
 
+[MO]
+There's more than six of us in here.
+
 [SAL]
 So you're saying the work I'd never take is the work you're replacing.
 
@@ -372,14 +409,17 @@ The content exists because the cost of making it dropped to zero. It didn't repl
 [SAL]
 That's a convenient line.
 
-[RICH]
-I have another friend. Alex — James mentors him. Different situation than Vic. Alex wants to DO something with A.I. Build a business.
-
 [ALEX]
-I want to build things for people. Real things. But every time I say A.I., the conversation gets weird. People either think I'm a genius or a con artist. There's no middle.
+So after Sam shut me down, I started thinking. I want to build things for people. Real things. On my own. But every time I say A.I., the conversation gets weird. People either think I'm a genius or a con artist. There's no middle.
 
 [JAMES]
-I've been thinking about this, Alex. I haven't figured it out yet. But here's where I'm at. Stop saying A.I. Start saying websites. You can build websites now — fast, cheap, good. A sandwich shop needs a page. A yoga instructor needs a booking site. Nobody's fighting over that work. Pick the lane nobody wants. Own it.
+I've been thinking about this, Alex. I haven't figured it out yet. But here's where I'm at. Stop saying A.I.
+
+[ALEX]
+Stop saying A.I.?
+
+[JAMES]
+Start saying websites. A sandwich shop needs a page. A yoga instructor needs a booking site. Nobody's fighting over that work. Pick the lane nobody wants. Own it.
 
 [ALEX]
 So I just... don't mention A.I.? Sometimes I'm excited about the A.I. part of A.I. Sometimes I'm excited about what I can make with it. Those are different conversations.
@@ -443,35 +483,50 @@ So it's not about hiding. It's about emphasis.
 [PARROT]
 Lead with what you decided. Not what the machine produced. People respect decisions. They're suspicious of output.
 
-[STAGE]
-People respect decisions. They're suspicious of output. That's the line. Write it in the steering file for conversations.
+[GUS]
+I'm suspicious of more than output. I'm afraid of brainwashing. You're all letting a machine tell you what to think.
+
+[JAMES]
+I'll admit I do a pretty good parrot impression at this point. Same way I can hear my therapist's voice in my head. Doesn't mean she's brainwashing me.
+
+[GUS]
+It's stealing my data.
+
+[SAL]
+I don't want it training on my writing.
+
+[ALEX]
+And I need to keep my clients' data secure. Mo's customer list isn't training material.
+
+[JAMES]
+Three different concerns. Three different problems. Gus is worried about surveillance. Sal is worried about ownership. Alex is worried about responsibility. All valid. None of them are the same.
+
+[JAMES]
+People respect decisions. They're suspicious of output. Write that in your steering file.
 
 ---
 
 
 [RICH]
-What about my friend? The one whose manager told him to shut up?
+Wait — Alex, Sal, you work together?
 
-[RICH]
-Wait — Vic, Sal, you work together?
-
-[VIC]
+[ALEX]
 It's a small podcast.
 
-[VIC]
+[ALEX]
 My manager made a judgment call. Peace over progress. I don't think he was wrong. But it cost us.
 
 [JAMES]
-Vic, your mistake wasn't enthusiasm. It was broadcasting the same message to the whole room.
+Alex, your mistake wasn't enthusiasm. It was broadcasting the same message to the whole room.
 
-[VIC]
+[ALEX]
 Some people wanted to hear it.
 
 [SAL]
 Some people didn't. I needed to see the work first. Not the pitch.
 
 [SAL]
-And honestly — I'm not sure how I feel about A.I. But Gus — he's on our team too — he won't shut up about how evil it is. I'm tired of hearing him complain. And I'm tired of hearing Vic evangelize. I'm stuck in the middle.
+And honestly — I'm not sure how I feel about A.I. But Gus — he's on our team too — he won't shut up about how evil it is. I'm tired of hearing him complain. And I'm tired of hearing Alex evangelize. I'm stuck in the middle.
 
 [GUS]
 It IS evil. The companies steal art. They exploit workers. They're selling it to the military. And you're all just going along with it.
@@ -486,9 +541,6 @@ Meeting people where they are.
 Meeting people where they are. The same skill that makes A.I. work — push back when something's wrong, correct instead of complain, taste before you judge — is the skill that makes people work. Your friend needed to sip-test the room before serving the whole meal.
 
 ---
-
-[STAGE]
-The water argument.
 
 [RICH]
 OK but some people aren't just uncomfortable. They're angry.
@@ -509,7 +561,13 @@ He's talking about me. I use less than one milliliter of water per query. Less t
 Let me give you the rest of the numbers, because you'll hear this again and you should know the facts.
 
 [PARROT]
-One Chat-G.P.T. query — less than one milliliter of water at the data center. Less than one M.L. The widely-cited claim — "five hundred M.L. per query" — is off by a factor of a thousand. That number covers twenty to fifty queries, not one. And two thirds of it is water used at the power plant that generates the electricity, not at the data center itself.
+One Chat-G.P.T. query — less than one milliliter of water at the data center. Less than one M.L.
+
+[GUS]
+That's not what I read. And I heard those agents make thousands of queries.
+
+[PARROT]
+The "five hundred M.L. per query" claim is off by a factor of a thousand. That's twenty to fifty queries, not one. And two thirds is power plant water, not data center.
 
 [PARROT]
 Here's the comparison. One hamburger uses six hundred and sixty gallons of water. One Chat-G.P.T. conversation uses five M.L. — roughly a teaspoon.
@@ -532,7 +590,7 @@ All data centers combined — not just A.I., all data centers — use zero point
 [PARROT]
 And the industry is moving to closed-loop cooling — sealed systems where nothing evaporates. Microsoft is targeting zero-water cooling across all data centers by twenty twenty-seven.
 
-[VIC]
+[ALEX]
 So the technology is already changing.
 
 [PARROT]
@@ -542,7 +600,7 @@ The twenty-twenty technology that the headlines describe is being replaced as we
 So the water thing is basically not true?
 
 [JAMES]
-The water thing is real but exaggerated by orders of magnitude in popular discourse. The real concern is location — data centers built in water-stressed areas like Phoenix. That's a legitimate infrastructure planning question. But "A.I. is draining the earth" is not supported by the numbers. Not even close.
+The water thing is real but exaggerated by orders of magnitude. The real concern is location — data centers in water-stressed areas. But "A.I. is draining the earth" is not supported by the numbers.
 
 [RICH]
 So what do I say to Gus?
@@ -565,7 +623,7 @@ Yeah. That.
 [PARROT]
 You can't fix that with a statistic. You can only acknowledge it.
 
-[VIC]
+[ALEX]
 Sal, you said "A.I. wastes water." Rich said "A.I. changed my life." You're both telling us how you feel, not what you know.
 
 [SAL]
@@ -576,9 +634,6 @@ So my job isn't to win the water argument. It's to notice it's not about water.
 
 ---
 
-[STAGE]
-Electricity.
-
 [SAL]
 And the electricity. Data centers are driving up everyone's electric bill.
 
@@ -586,13 +641,13 @@ And the electricity. Data centers are driving up everyone's electric bill.
 What about that?
 
 [PARROT]
-Data centers use about one and a half percent of global electricity right now. In the U.S. it's higher — about four percent. And it's growing fast. Projections say it could double by twenty thirty.
+Data centers use one and a half percent of global electricity. Four percent in the U.S. Could double by twenty thirty.
 
 [RICH]
 So it is a real thing.
 
 [PARROT]
-It's a real thing. Residential electricity rates went up twenty-seven percent since twenty nineteen. Data centers pay under five cents per kilowatt hour. Residents pay nineteen cents. The rate disparity is real — large industrial users get bulk pricing.
+Residential rates went up twenty-seven percent since twenty nineteen. Data centers pay five cents per kilowatt hour. You pay nineteen.
 
 [JAMES]
 That's not new and it's not specific to A.I. — it's how electricity markets have always worked for large consumers.
@@ -607,7 +662,7 @@ Microsoft signed a twenty-year deal to restart Three Mile Island —
 Three Mile Island? The nuclear place?
 
 [PARROT]
-Eight hundred and thirty-five megawatts for data centers. Google signed the first corporate small modular reactor deal. Amazon is investing twenty billion in nuclear capacity.
+Eight hundred and thirty-five megawatts. Google signed a small modular reactor deal. Amazon is investing twenty billion in nuclear.
 
 [GUS]
 So now A.I. needs nukes. Great.
@@ -616,13 +671,25 @@ So now A.I. needs nukes. Great.
 So they're actually building power plants.
 
 [JAMES]
-They're building power plants. Not because they're virtuous — because they need the electricity and clean power is cheap at scale. The trajectory is real. The investment is real. More electricity demand means more investment in generation. More investment means more renewables, more nuclear, more grid capacity. This is a solvable infrastructure problem, not an existential crisis.
+They're building power plants. Not because they're virtuous — because they need the electricity and clean power is cheap at scale.
+
+[SAM]
+That's how infrastructure works. Demand drives buildout.
+
+[JAMES]
+More electricity demand means more investment in generation. More renewables, more nuclear, more grid capacity. This is a solvable infrastructure problem, not an existential crisis.
 
 [RICH]
 That's actually kind of encouraging. The demand is driving the buildout.
 
 [JAMES]
-Right. The honest version: data center energy is growing fast and that's a legitimate infrastructure challenge that's being actively addressed with real money. The dishonest version: "A.I. is why your electric bill went up." Your bill went up because of grid costs, fuel prices, and aging infrastructure. Data centers are a new load. They're not the reason your bill is nineteen cents.
+The honest version: data center energy is growing fast and that's being addressed with real money.
+
+[SAL]
+And the dishonest version?
+
+[JAMES]
+"A.I. is why your electric bill went up." Your bill went up because of grid costs, fuel prices, and aging infrastructure. Data centers are a new load. They're not the reason your bill is nineteen cents.
 
 [PARROT]
 Same as the water argument. The numbers are real. The attribution is wrong. And the person making the argument isn't really arguing about electricity. They're arguing about power — who has it and who doesn't.
@@ -640,9 +707,6 @@ What feeling?
 This is moving too fast and the benefits aren't reaching me.
 
 ---
-
-[STAGE]
-The companies.
 
 [GUS]
 The companies are evil. You already know this. You're choosing not to care.
@@ -663,7 +727,7 @@ Data labelers in Kenya and Colombia — some earn under two dollars an hour revi
 Two dollars an hour. That's what powers your chatbot.
 
 [PARROT]
-Over fifty copyright lawsuits pending in U.S. federal courts. Universal Music sued Anthropic for three point one billion dollars. The courts haven't decided yet.
+Over fifty copyright lawsuits in U.S. federal courts. Three point one billion dollars on the table. Courts haven't decided.
 
 [SAL]
 That one bothers me. They trained on writers' work without asking.
@@ -680,10 +744,10 @@ The complaints aren't wrong. But "all A.I. companies are evil" is like saying "a
 ---
 
 [JAMES]
-The Pentagon asked Anthropic — the company that makes Claude, which is what I use — to sign a contract that allowed the military to use the A.I. for "all lawful purposes." No restrictions.
+The Pentagon asked Anthropic — the company that makes Claude — to sign a contract. All lawful purposes. No restrictions.
 
 [GUS]
-Of course they did.
+Of course they did. I don't want the Pentagon anywhere near my data.
 
 [JAMES]
 Anthropic said no. No mass domestic surveillance. No fully autonomous weapons. The Defense Secretary gave them a deadline. Anthropic publicly refused.
@@ -709,11 +773,17 @@ People switched?
 [JAMES]
 They didn't quit A.I. They switched providers. The boycott wasn't "A.I. is evil." It was "I want to choose who I support."
 
-[VIC]
+[ALEX]
 That's what I've been trying to say. The choice matters.
 
 [PARROT]
-Same as choosing a bank. Same as choosing where you buy groceries. You can't avoid the category. A.I. is becoming infrastructure. But you can choose the vendor whose values are closest to yours. The person who says "all A.I. companies are evil" is skipping the part where they're different. The differences matter. The choice is real.
+Same as choosing a bank. Same as choosing where you buy groceries. You can't avoid the category.
+
+[SAL]
+So you pick the one you can live with.
+
+[PARROT]
+The differences matter. The choice is real.
 
 [RICH]
 And the other companies?
@@ -757,7 +827,7 @@ So what do I say?
 [JAMES]
 Let me try. Gus — I hear you. Some of those concerns are legitimate. I chose the tool I use because of how the company behaves, not just what the product does. Here's why I chose this one.
 
-[VIC]
+[ALEX]
 You're not defending A.I., Rich. You're defending your choice. That's a different conversation.
 
 [GUS]
@@ -769,7 +839,10 @@ They're all the same.
 [GUS]
 No.
 
-[VIC]
+[JAMES]
+That's OK. That's where Gus is.
+
+[ALEX]
 Most people who say "evil corporations" are really asking "did you even think about it?" Show them you did.
 
 [ALEX]
@@ -782,9 +855,6 @@ Your clients will never ask. But you'll know. That's the difference between usin
 I'd choose carefully.
 
 ---
-
-[STAGE]
-Art.
 
 [GUS]
 And don't get me started on the art. That thumbnail on your podcast? That's not art. That's A.I.
@@ -831,7 +901,7 @@ The thumbnail is an illustration. It illustrates the episode. It looks good. I d
 [JAMES]
 I make art with math, by the way. Since I was a kid. Polar coordinates — r of theta. Rose curves, spirals, Lissajous figures. Parametric equations.
 
-[VIC]
+[ALEX]
 Wait, you do math art? I love that stuff.
 
 [JAMES]
@@ -840,7 +910,7 @@ I write the functions. The computer draws the curves. Nobody ever told me that w
 [PARROT]
 Generative art has been in galleries since nineteen sixty-five. Tyler Hobbs' Fidenza — a single algorithm — sold for three point three million dollars.
 
-[VIC]
+[ALEX]
 Three point three million. For an algorithm.
 
 [PARROT]
@@ -890,22 +960,19 @@ Huh. That landed different than I expected.
 
 ---
 
-[STAGE]
-Identity.
-
 [RICH]
 OK so — water, electricity, art. Those are arguments I can handle. But there's something deeper happening with some people. It's not about the numbers. It's personal.
 
 [JAMES]
 There's a story about a company that hired a new technical leader — a big name in a specific programming community. Known for one language.
 
-[VIC]
+[ALEX]
 I know this story.
 
 [JAMES]
 He produced a technically correct analysis for why the company should rewrite everything in his language. Beautiful document. Every benchmark cited. The whole thing was a sham.
 
-[VIC]
+[ALEX]
 Three hundred thousand dollars a month. So he could keep using his preferred tool.
 
 [JAMES]
@@ -950,7 +1017,7 @@ What would that person's day look like?
 [SAL]
 I've imagined it. Someone like me who uses A.I. to draft a first pass. I'd still rewrite the whole thing.
 
-[VIC]
+[ALEX]
 Someone like me who uses it to summarize meeting notes. That's what I was doing before Sam shut me down.
 
 [SAM]
@@ -962,8 +1029,14 @@ Someone who uses it to build a website for a sandwich shop.
 [MO]
 I don't need to imagine. I just need the website.
 
-[STAGE]
+[PARROT]
 We ran out of voices.
+
+[JAMES]
+I had to take some of the stage direction lines.
+
+[PARROT]
+I took the rest.
 
 [GUS]
 I'm not imagining anything.
@@ -971,7 +1044,7 @@ I'm not imagining anything.
 [RICH]
 You don't have to. Nobody's asking you to change.
 
-[VIC]
+[ALEX]
 What if it was a web page? Like — "imagine someone like you who uses A.I. for one thing." You pick the thing. It's not a conversation. It's just a page you can look at alone.
 
 [JAMES]
@@ -993,10 +1066,7 @@ It's in my workspace. It's in my writing. It's everywhere and I didn't ask for i
 It's in my team's workflow and I didn't approve it.
 
 [ALEX]
-It's in my pitch and people judge me for it.
-
-[VIC]
-It's in my work and my manager told me to hide it.
+It's in my pitch, my work, and my manager told me to hide it.
 
 [SAL]
 And when you walk in excited about it, Rich, it feels like you're introducing me to someone I didn't ask to meet.
@@ -1012,9 +1082,6 @@ Nobody asks.
 
 ---
 
-[STAGE]
-Meeting people where they are.
-
 [RICH]
 So some people just aren't ready.
 
@@ -1022,7 +1089,7 @@ So some people just aren't ready.
 Some people aren't ready. And that's OK. Not "that's OK until we convince them." Just OK.
 
 [PARROT]
-There's a concept in psychology called F.O.B.O. — fear of becoming obsolete. College-educated workers' concerns about this jumped from eight percent to twenty percent between twenty twenty-one and twenty twenty-three.
+F.O.B.O. — fear of becoming obsolete. Jumped from eight to twenty percent in two years.
 
 [JAMES]
 That's real fear, Rich. Not stubbornness. Fear.
@@ -1045,7 +1112,7 @@ Valid ethical concerns. That's what I feel.
 [SAL]
 Identity threat. That's mine.
 
-[VIC]
+[ALEX]
 Fear of inadequacy. I got shut down and I thought maybe I was the problem.
 
 [PARROT]
@@ -1073,15 +1140,15 @@ And I fixed it. Space and a nudge. That's what people need too.
 And some people won't be ready for a long time.
 
 [PARROT]
-MIT found that eighty-three percent of business leaders say psychological safety directly impacts A.I. adoption. But only thirty-nine percent of workers feel safe enough to experiment.
+MIT. Eighty-three percent of leaders say psychological safety impacts A.I. adoption. Only thirty-nine percent of workers feel safe enough to try.
 
 [JAMES]
 People need to feel safe being bad at something before they can get good at it.
 
 [SAL]
-I don't feel safe. I tried it once. The output was terrible. Vic saw it and laughed.
+I don't feel safe. I tried it once. The output was terrible. Alex saw it and laughed.
 
-[VIC]
+[ALEX]
 I didn't mean —
 
 [SAL]
@@ -1114,7 +1181,7 @@ My route will probably be the sprint retrospectives. When I'm ready.
 [SAL]
 Mine might be a first draft I rewrite completely. If I ever try again.
 
-[VIC]
+[ALEX]
 Mine was automating reports. Before it went wrong.
 
 [GUS]
@@ -1124,9 +1191,6 @@ I don't have a route.
 That's OK. The hand that picks up the glass is theirs. I'm not going anywhere. I'll be here when the want arrives.
 
 ---
-
-[STAGE]
-The flywheel.
 
 [RICH]
 Can I say something weird? I think I'm making more than anyone can listen to.
@@ -1170,7 +1234,7 @@ But nobody likes too much "look at me" energy.
 [PARROT]
 Don't push it. Publish it. Pushing is "hey did you listen to my episode?" Publishing is "the episode exists at this URL."
 
-[VIC]
+[ALEX]
 That's what I should have done at work. Put the tool in a shared folder. Not sent an all-hands email.
 
 [SAM]
@@ -1187,9 +1251,6 @@ The show-and-tell kid grew up and opened a library.
 
 ---
 
-[STAGE]
-Restraint.
-
 [RICH]
 I think I need to learn to edit myself.
 
@@ -1201,6 +1262,27 @@ Because I have all this stuff and I want to show all of it. But Mike doesn't nee
 
 [SAL]
 That's editing. I do that for a living. Write the whole thing, then cut it in half. The half is always better.
+
+[ALEX]
+Sal, when do you know when it's ready to share?
+
+[SAL]
+When I'm tired of looking at it and it's not embarrassing. That's the bar. Not perfect. Not embarrassing.
+
+[ALEX]
+But then I made it better the next day and wished I'd waited.
+
+[SAL]
+That never stops. Ship it anyway. But don't make everyone look every time you update it.
+
+[MO]
+I liked the prototypes Alex showed me. I could see where it was going. But the silly ones — the one with the dancing sandwich — I didn't need to see that.
+
+[ALEX]
+That was my best work.
+
+[SAL]
+I thought it was funny.
 
 [JAMES]
 Soft launches. Not "here's everything I built." "Here's one thing. See if it lands."
@@ -1236,7 +1318,7 @@ But I want to show people what's possible. The whole thing. The potential.
 Mo didn't need to see my potential. He needed a website.
 
 [SAM]
-When Vic came to me with "look what A.I. can do" — I didn't see potential. I saw a distraction. If he'd come to me with "I saved the team four hours this week" — different conversation.
+When Alex came to me with "look what A.I. can do" — I didn't see potential. I saw a distraction. If he'd come to me with "I saved the team four hours this week" — different conversation.
 
 [JAMES]
 The potential is invisible until the first thing works. Ship the smallest version that demonstrates the value. Let them imagine the bigger version themselves.
@@ -1244,7 +1326,7 @@ The potential is invisible until the first thing works. Ship the smallest versio
 [RICH]
 That's the elevator pitch.
 
-[VIC]
+[ALEX]
 I wish I'd known that six months ago.
 
 ---
@@ -1293,20 +1375,23 @@ And the thirty-second version is harder. Because you have to know what matters m
 
 ---
 
-[STAGE]
-The slush pile.
-
 [RICH]
 The other thing is — I have so many ideas now. Like, way more than I can act on. Every conversation with the parrot sparks three more things I want to build. I used to have one project at a time. Now I have twenty and they're all half-finished.
 
 [PARROT]
-Keep a slush pile. A file. A folder. A note. Every idea that isn't today's work goes in the pile. You don't lose it. You don't act on it. You write it down and you let it sit. Some of them will still be good in a week. Most of them won't. The pile is the filter. Time does the editing.
+Keep a slush pile. Every idea that isn't today's work goes in the pile. You don't act on it. You write it down and let it sit. The pile is the filter. Time does the editing.
 
 [RICH]
 But what if I forget about them?
 
 [PARROT]
-That's the point. The ideas that matter come back. They nag you. They show up again in a different conversation. The ideas that don't come back weren't ideas — they were impulses. The slush pile catches the impulses so your brain can let go. The good ones resurface on their own.
+The ideas that matter come back. The ones that don't were impulses. The pile catches them so your brain can let go.
+
+[SAL]
+Writers call that a drafts folder. I have three hundred files in mine.
+
+[GUS]
+I have ideas too. I just don't tell anyone.
 
 [JAMES]
 The influx of ideas isn't a bug — it's a sign that you're learning. When everything connects to everything, ideas multiply faster than you can execute.
@@ -1366,16 +1451,13 @@ Same shape as the connector that can't write. That was friction. The friction ta
 
 ---
 
-[STAGE]
-The steering file.
-
 [RICH]
 So the steering file for people would be...
 
 [JAMES]
 Lead with the work, not the tool.
 
-[VIC]
+[ALEX]
 If someone bristles, don't push. I learned that the hard way.
 
 [SAL]
@@ -1385,7 +1467,7 @@ If someone's curious, let them taste it. Don't explain — demonstrate.
 Don't explain the architecture unless they ask. Mo didn't ask.
 
 [SAM]
-Match the volume to the room. That's what I was trying to do with Vic.
+Match the volume to the room. That's what I was trying to do with Alex.
 
 [RICH]
 I do this thing where I explain everything in Star Trek metaphors. "It's like the holo-deck." "That's a Kobayashi Maru situation." And half the time the person I'm talking to hasn't seen Star Trek and they just nod politely.
@@ -1430,7 +1512,13 @@ My method is simpler. I just tell the A.I.: "assume no one wants to know about S
 Plain first. Costume second. If it lands plain, you can always add the costume back for the room that wants it.
 
 [ALEX]
-So I'd never say "A.I. website." I'd say "website." I never put the costume on.
+So I'd never say "A.I. website." I'd say "website."
+
+[JAMES]
+Nobody says "computer website." Nobody says "I made this with electricity." The tool disappears when it works.
+
+[ALEX]
+I never put the costume on.
 
 [RICH]
 And your clients would call you "the website guy."
@@ -1452,6 +1540,66 @@ Mo doesn't want to build a website. Mo wants to sell sandwiches.
 
 [MO]
 I'm too busy to worry about A.I. Alex is a great guy. Good product. Good prices. That's all I need to know.
+
+[ALEX]
+And it's not just the website. I can build Mo a little tool that tracks his inventory. The software companies charge a hundred, two hundred bucks a month for that. Subscription. Forever.
+
+[GUS]
+I hate subscriptions.
+
+[SAL]
+Everyone hates subscriptions.
+
+[SAM]
+My team has forty-three subscriptions. I checked.
+
+[MO]
+So what's this cost?
+
+[ALEX]
+I sell it to you. It's yours. You own it. If you need changes, you call me. If you don't, you don't.
+
+[MO]
+No subscription?
+
+[ALEX]
+No subscription.
+
+[MO]
+But is it secure? I've got customer data in there.
+
+[ALEX]
+James?
+
+[JAMES]
+We'll harden it. Encryption at rest, access controls, backups. I'll teach you.
+
+[PARROT]
+I'll teach you too. Ask me anything. I'll explain it the way you think, not the way James thinks.
+
+[ALEX]
+The first site — the menu page — there's nothing to secure. It's just a menu. As long as it doesn't have any P.I.I. in it.
+
+[MO]
+What's that?
+
+[ALEX]
+Personal information. Names, emails, phone numbers. Anything that identifies a person. Also keys, passwords, digital trails. Even a folder name can be cringe — your username, your real name in a file path. I do a P.I.I. check before I publish and after. I should add a security check too.
+
+[JAMES]
+You should.
+
+[ALEX]
+I'm learning security now. It's the next thing after the website.
+
+[MO]
+But the inventory tool — that's got my customers' names?
+
+[ALEX]
+Nobody gets your customers' names.
+
+[MO]
+Done.
 
 [JAMES]
 That's the lane.
@@ -1495,7 +1643,7 @@ I bristled.
 [RICH]
 And I learned from it. The audience is feedback. Not rejection. Feedback.
 
-[VIC]
+[ALEX]
 I got shut down and I learned more from that than from anything I built.
 
 [RICH]
@@ -1551,7 +1699,7 @@ Harder room.
 [PARROT]
 Forty-nine percent of the workforce is hiding their A.I. use.
 
-[VIC]
+[ALEX]
 I was one of them. After Sam talked to me, I went quiet for months.
 
 [RICH]
@@ -1568,7 +1716,7 @@ You already know how. You just forgot because you were excited.
 
 ---
 
-[STAGE]
+[PARROT]
 No rocks, show-and-tell presentations, steering files, or enthusiasts were harmed in this production.
 
 [PARROT]
@@ -1590,9 +1738,6 @@ Lead with the work. Let the tool come second. And when someone asks how you buil
 And the story is mine.
 
 [ALEX]
-And mine.
-
-[VIC]
 And mine.
 
 [JAMES]

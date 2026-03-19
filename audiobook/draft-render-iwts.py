@@ -28,17 +28,26 @@ VOICES = {
     "ALEX":   "Samantha",
     "MO":     "Rocko (English (US))",
     # Act 4 fake masters — reuse main cast voices
-    "FAKE-IRA":      "Daniel",       # James's voice
-    "FAKE-JAD":      "Rishi",        # Rich's voice
-    "FAKE-KRULWICH": "Karen",        # Parrot's voice
-    "FAKE-ROMAN":    "Tessa",        # Sam's voice
-    "FAKE-SARAH":    "Moira",        # Sal's voice
-    "FAKE-GUY":      "Samantha",     # Alex's voice
-    "FAKE-FEYNMAN":  "Karen",        # Parrot's voice
-    "FAKE-3B1B":     "Rishi",        # Rich's voice
-    "FAKE-GREY":     "Eddy (English (UK))",  # Gus's voice
-    "FAKE-MCPHEE":   "Moira",        # Sal's voice
-    "FAKE-DOUG":     "Rocko (English (US))", # Mo's voice
+    # Fake masters — spread across all 8 voices, never same as James (Daniel)
+    # since James introduces each one. No two consecutive fakes share a voice.
+    # Order in script: IRA, JAD, KRULWICH, SARAH, GUY, FEYNMAN, 3B1B, MCPHEE, DOUG
+    "FAKE-IRA":      "Tessa",                # Sam's voice
+    "FAKE-JAD":      "Moira",                # Sal's voice
+    "FAKE-KRULWICH": "Rocko (English (US))", # Mo's voice
+    "FAKE-SARAH":    "Karen",                # Parrot's voice
+    "FAKE-GUY":      "Rishi",                # Rich's voice
+    "FAKE-FEYNMAN":  "Eddy (English (UK))",  # Gus's voice
+    "FAKE-3B1B":     "Samantha",             # Alex's voice
+    "FAKE-MCPHEE":   "Tessa",                # Sam's voice
+    "FAKE-DOUG":     "Moira",                # Sal's voice
+    # Idol section — character picks, then idol speaks in different voice
+    "FAKE-HEMINGWAY": "Rishi",               # Rich's voice (Sal picks him)
+    "FAKE-CARLIN":    "Samantha",            # Alex's voice (Gus picks him)
+    "FAKE-JOBS":      "Eddy (English (UK))", # Gus's voice (Alex picks him)
+    "FAKE-GROVE":     "Karen",               # Parrot's voice (Sam picks him)
+    "FAKE-ADA":       "Tessa",               # Sam's voice (Parrot picks her)
+    "FAKE-MOM":       "Moira",               # Sal's voice (Mo picks her)
+    "FAKE-MIKE":      "Rocko (English (US))",# Mo's voice (Rich picks him)
 }
 
 RATES = {

@@ -27,6 +27,13 @@ Rich is louder than he used to be. Some people hear the work. Some people hear "
 | FAKE-GREY | — | Eddy (English (UK)) | Act 4. Shares Gus's voice. |
 | FAKE-MCPHEE | — | Moira | Act 4. Shares Sal's voice. |
 | FAKE-DOUG | — | Rocko (English (US)) | Act 4. Shares Mo's voice. |
+| FAKE-HEMINGWAY | — | Eddy (English (UK)) | Act 4. Shares Gus's voice. |
+| FAKE-CARLIN | — | Eddy (English (UK)) | Act 4. Shares Gus's voice. |
+| FAKE-JOBS | — | Samantha | Act 4. Shares Alex's voice. |
+| FAKE-GROVE | — | Tessa | Act 4. Shares Sam's voice. |
+| FAKE-ADA | — | Karen | Act 4. Shares Parrot's voice. |
+| FAKE-MOM | — | Rocko (English (US)) | Act 4. Shares Mo's voice. |
+| FAKE-MIKE | — | Rishi | Act 4. Shares Rich's voice. |
 
 ### Assembly overrides
 
@@ -821,7 +828,7 @@ Of course they did. I don't want the Pentagon anywhere near my data.
 Anthropic said no. No mass domestic surveillance. No fully autonomous weapons. The Defense Secretary gave them a deadline. Anthropic publicly refused.
 
 [GUS]
-...they said no?
+They said no?
 
 [JAMES]
 The next day, the government banned all federal agencies from using Claud. Hours later, Open-A.I. signed the same deal that Anthropic rejected.
@@ -884,7 +891,7 @@ All of them.
 Which one, though. Name the difference between Anthropic and Open-A.I.
 
 [GUS]
-...I don't know. They're all the same.
+I don't know. They're all the same.
 
 [JAMES]
 They're not. And if you want to discuss the differences, we'll have a real conversation instead of a slogan.
@@ -1760,7 +1767,7 @@ I'm not going to use A.I.
 Nobody's asking you to change, Gus.
 
 [GUS]
-...OK.
+OK.
 
 [PARROT]
 Rich, the A.I. gives you feedback in ten seconds. People give you feedback in a look you have to learn to read.
@@ -1831,11 +1838,23 @@ I built a virtual panel. Eleven creators — fake versions of real people. Fake 
 [RICH]
 Who?
 
+[GUS]
+They're going to share our voices, aren't they.
+
 [JAMES]
-Ira — because he knows how to make someone listen for an hour.
+We only have eight. The fake ones borrow yours. You'll hear yourself saying things you didn't say.
+
+[SAL]
+That's unsettling.
+
+[JAMES]
+Welcome to the loop. First — Ira, because he knows how to make someone listen for an hour.
 
 [FAKE-IRA]
 Hi, I'm fake Ira. I taught James structure. When to reveal, when to hold back, where to put the turn. The moment Sal says "Nobody asks" — that's where I put the turn.
+
+[SAL]
+That's my line. In someone else's mouth.
 
 [JAMES]
 Jad — because he finds the gap between what you expect and what you hear.
@@ -1843,17 +1862,17 @@ Jad — because he finds the gap between what you expect and what you hear.
 [FAKE-JAD]
 I'm fake Jad. I taught him to build gaps instead of fill them. The listener expects an argument about water. They get a human being saying "you never asked how I felt." The gap is where they lean in.
 
+[RICH]
+So that's why the episode keeps surprising me.
+
 [JAMES]
 Krulwich — because he asks the dumb question.
 
 [FAKE-KRULWICH]
 I'm fake Krulwich. The dumb question is the real question. "Wait, you can simulate Ira?" That's the one everybody wants to ask. I just say it out loud.
 
-[JAMES]
-Roman — because he starts in the middle.
-
-[FAKE-ROMAN]
-I'm fake Roman. No setup. No backstory. "Alex, I need you to stop." The listener is in the scene before they know they're listening.
+[MO]
+I like this guy.
 
 [JAMES]
 Sarah — because she builds a case over time.
@@ -1861,11 +1880,11 @@ Sarah — because she builds a case over time.
 [FAKE-SARAH]
 I'm fake Sarah. Pacing and act structure. I'm why there are acts. Plant the evidence early. Let the listener assemble it.
 
-[JAMES]
-Guy — because he understands origin stories.
-
 [FAKE-GUY]
-I'm fake Guy. Every character enters at a moment of tension or desire. Nobody enters neutral. That's casting.
+I'm fake Guy, reporting for fake Roman too. Roman taught you to start in the middle. I taught you how to cast. Every character enters at a moment of tension. Nobody enters neutral.
+
+[SAM]
+So that's why my line was "I need you to stop." He cast me at my worst moment.
 
 [JAMES]
 Feynman — because if you can't explain it simply, you don't understand it.
@@ -1874,16 +1893,16 @@ Feynman — because if you can't explain it simply, you don't understand it.
 I'm fake Feynman. The hamburger comparison. The teaspoon. If the explanation needs a costume, the explanation isn't ready.
 
 [JAMES]
-Three Blue One Brown — because he makes complicated things feel inevitable.
+That's why I like mentoring, Feynman. Teaching is the test. If I can't explain it to Alex, I don't understand it yet.
+
+[GUS]
+He sounds like me.
 
 [FAKE-3B1B]
-I'm fake Three Blue One Brown. Introduce one idea. Let it settle. Add the next. That's why the arguments come one at a time. Water, then electricity, then companies. Never two new ideas in the same breath.
+I'm fake Three Blue One Brown. Grey and I work together — I introduce one idea at a time, he cuts everything that doesn't earn its place. That's why the arguments come one at a time, and why the episode got shorter.
 
-[JAMES]
-C.G.P. Grey — because he's ruthless about density.
-
-[FAKE-GREY]
-I'm fake Grey. Every word earns its place or it gets cut. I'm why the episode got shorter.
+[SAM]
+That explains the pacing.
 
 [JAMES]
 McPhee — because he trusts the material.
@@ -1898,7 +1917,7 @@ That's a writer's writer.
 And Doug — because the work is part of the work.
 
 [FAKE-DOUG]
-I'm fake Doug. The strange loop. The episode about sharing is itself a thing being shared. The panel that improved it is being described inside it. Don't fight the loop. Build it in.
+I'm fake Doug. I am, in fact, a strange loop. My book by that name is still in print. The episode about sharing is itself a thing being shared. The panel that improved it is being described inside it. Don't fight the loop. Build it in.
 
 [RICH]
 Eleven.
@@ -1915,56 +1934,32 @@ Fake editors. There's a difference.
 [SAL]
 Go on.
 
-[JAMES]
-One of them taught me about structure. He said: every episode needs a moment where the listener's assumptions break. Not a twist — a reframe. The moment Rich heard Sal say "Nobody asks" — that was the break. The listener expected an argument about water or electricity. They got a human being saying "you never asked how I felt." That structure wasn't mine. I learned it from the panel.
-
-[RICH]
-Which one?
-
-[JAMES]
-The one who makes radio. He said: the gap between what the listener expects and what they hear — that's where they lean in. Every section should have a gap. Not a surprise. A gap.
-
 [GUS]
-You're saying a fake person taught you that.
+James, you're saying fake people taught you that.
 
 [JAMES]
-A fake person. And yes. The advice was real even if the person wasn't.
-
-[SAL]
-What did the writer teach you?
-
-[JAMES]
-The structure guy — different one — he said: don't shape the material yet. Write every thread separately. Live with it for a day. Then see which ones belong together. I had seven threads. He said pick three. The engine metaphor, the density lesson, and the close. The rest could wait.
-
-[SAL]
-That's editing advice. That's real editing advice.
-
-[JAMES]
-Another one taught me about density. He said: "I finally understood how to make a thing less dense without changing its size. It's by changing the ratio of shelf to book. More breathing room between the ideas. Same number of ideas. More air."
+The advice was real even if the people weren't. Fake Doug and fake Feynman argued about whether the episode was too dense. Feynman's been dead since nineteen eighty-eight. He still had opinions.
 
 [PARROT]
-That's a physics metaphor applied to communication.
+I thought Doug was dead too. I had to look it up.
+
+[PARROT]
+There's a concept in math called a fixed point. You run a function on its own output, over and over. Each pass gets closer to the point where input equals output. That's what the panel does. Each review pass finds errors the previous pass couldn't see. Eventually it stabilizes. The script becomes itself.
 
 [JAMES]
-He was a physicist. He said: if you can't explain it simply, you don't understand it well enough. And if you can explain it simply but nobody's listening, the problem isn't the explanation — it's the room.
-
-[RICH]
-So the room thing. That came from the panel.
-
-[JAMES]
-The room thing came from a conversation between fake Ira and fake Feynman arguing about whether the episode was too dense. The radio host said cut. The physicist said simplify. They were both right. Cutting and simplifying are different moves.
-
-[ALEX]
-What about the strange loop thing? The work being part of the work?
-
-[JAMES]
-That came from the philosopher on the panel. He said: you built a tool to make a podcast. The podcast teaches people to build tools. The tool that made the podcast was improved by the panel that the tool itself generated. He said: don't teach strange loops. Build them. Let the listener walk into it. The moment they realize the episode is doing what it describes — that's the teaching. The label comes after.
+Each round of feedback surfaced bugs hidden behind the bugs we just fixed. We were converging on a fixed point. And the convergence was the discovery process.
 
 [GUS]
-So this episode is a strange loop.
+So you never actually finish, Rich.
 
 [JAMES]
-This episode is a strange loop. The panel that improved it is being described inside it. The description will change the next version. And the next version will be described in a future episode. The work is part of the work.
+You finish when the corrections stop changing the output. That's the fixed point. That's when you ship.
+
+[RICH]
+So no matter how you go up the mountain — different panel, different voices, different starting point — you end up at the same peak?
+
+[JAMES]
+That's the fixed point. The mountain has many paths and one peak. Fake Ira starts from structure. Fake Feynman starts from simplicity. Fake Doug starts from loops. They all converge on the same script. And the peak isn't a point — it's a ridge. Every spot on the ridge is a different trade-off. You pick the one that serves your listener.
 
 [GUS]
 That's... kind of interesting. I hate that it's interesting.
@@ -1989,18 +1984,6 @@ The dumbest, most human moment in the episode. A guy needs a website. Another gu
 
 [MO]
 I like that review.
-
-[SAM]
-And me?
-
-[JAMES]
-One of them said your one line — "Alex, I need you to stop" — that's starting in the middle. No setup. No "Sam was a reasonable person who..." Just the authority, the name, the command. The listener feels Alex's stomach drop.
-
-[SAM]
-I didn't mean it to feel that way.
-
-[JAMES]
-I know. But in audio, tone is everything. The panel taught me that. Every line carries the voice and the feeling at the same time. You can't separate the words from the delivery. In text, "I need you to stop" is neutral. In audio, it's devastating.
 
 [PARROT]
 What did they say about me?
@@ -2027,13 +2010,13 @@ The right question at the wrong volume.
 That's you, Gus.
 
 [RICH]
-So you built fake people to make this better.
+So you built fake people to make this better, James.
 
 [JAMES]
 I built fake advisors. They read the work. They argued with each other. They told me what to cut, what to keep, what to breathe into. Is it all correct? I don't know. But the end product sounded better, and I felt like I understood why.
 
 [SAL]
-And fake McPhee — was the advice as good as a real writer's?
+James — and fake McPhee — was the advice as good as a real writer's?
 
 [JAMES]
 I don't know. But I didn't have a real writer. I had a deadline and a sixty-minute episode that was too dense. The panel turned it into a fifty-minute episode that breathes. The alternative wasn't a real writer. The alternative was nothing.
@@ -2048,13 +2031,103 @@ It replaced silence, Sal. Same as everything else.
 Can I build one? A panel like that?
 
 [JAMES]
-You already have one. You have me. You have the parrot. You have Sal telling you when it's ready to ship. You have Mo telling you what he actually needs. Your panel is this room.
+You already have one, Alex. You have me. You have the parrot. You have Sal telling you when it's ready to ship. You have Mo telling you what he actually needs. Your panel is this room.
 
 [RICH]
 The room is the panel.
 
 [JAMES]
-The room is the panel. And now you know how the episode was made.
+But you can build your own. Have the parrot make a list of creators you admire. People whose work changed how you think. Then write a script where they talk about your work — to you, in a way that works for you. That's the panel.
+
+[RICH]
+So I just... ask the A.I. to pretend to be Ira Glass?
+
+[JAMES]
+You ask it to pretend to be the version of Ira that lives in your head. The one you've been listening to for years. The advice won't be Ira's. It'll be yours — filtered through what you learned from him. That's the panel. It's your taste, wearing their costumes.
+
+[RICH]
+My taste wearing their costumes. That's the whole episode.
+
+[SAL]
+I'd pick Hemingway. And Didion. And maybe Nora Ephron.
+
+[RICH]
+What would fake Hemingway say about this podcast?
+
+[FAKE-HEMINGWAY]
+I'm fake Hemingway. Too many words. Say it once. Say it clean. Then stop talking.
+
+[SAL]
+I'd read the transcript, though. Whether the words hold up without the voices.
+
+[JAMES]
+Do they?
+
+[SAL]
+Yeah. They kind of do.
+
+[GUS]
+I like him.
+
+[SAL]
+Everyone likes fake Hemingway. Real Hemingway would hate this podcast.
+
+[FAKE-HEMINGWAY]
+I do hate everything after nineteen sixty.
+
+[GUS]
+See?
+
+[SAL]
+Fair point.
+
+[RICH]
+OK so who does everyone admire? Sal already picked Hemingway. And what would their fake version say about this podcast?
+
+[ALEX]
+Steve Jobs.
+
+[FAKE-JOBS]
+I'm fake Steve. The episode needs fewer features and a better name. Ship it anyway.
+
+[SAM]
+Andy Grove.
+
+[FAKE-GROVE]
+I'm fake Andy. Where's the decision matrix? Where's the ship date? You're running a meeting without an agenda.
+
+[GUS]
+George Carlin.
+
+[FAKE-CARLIN]
+I'm fake Carlin. You're all full of it. And the audience knows. But they're listening anyway, which means the trick is working.
+
+[JAMES]
+I love George Carlin.
+
+[PARROT]
+Ada Lovelace.
+
+[FAKE-ADA]
+I'm fake Ada. I predicted all of this in eighteen forty-three. Nobody listened then either.
+
+[MO]
+My mom.
+
+[FAKE-MOM]
+I'm fake Mom. That's nice, honey. Did you eat?
+
+[RICH]
+Mike.
+
+[FAKE-MIKE]
+I'm fake Mike. Cool. Can we go fishing now?
+
+[JAMES]
+And that's the panel. Everyone's got one. You just have to ask.
+
+[JAMES]
+That's the whole episode. And now you know how it was made.
 
 ---
 

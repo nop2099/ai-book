@@ -34,7 +34,7 @@ VOICES = {
     "FAKE-IRA":      "Tessa",                # Sam's voice
     "FAKE-JAD":      "Moira",                # Sal's voice
     "FAKE-KRULWICH": "Rocko (English (US))", # Mo's voice
-    "FAKE-SARAH":    "Karen",                # Parrot's voice
+    "FAKE-SARAH":    "Samantha",             # Alex's voice
     "FAKE-GUY":      "Rishi",                # Rich's voice
     "FAKE-FEYNMAN":  "Eddy (English (UK))",  # Gus's voice
     "FAKE-3B1B":     "Samantha",             # Alex's voice
@@ -58,7 +58,8 @@ GAP_MS = 400
 WORKERS = 8
 
 # Act boundaries (1-indexed line numbers in .md where each act ENDS)
-ACT_BREAK_LINES = [496, 1019, 1818]
+# Acts are marked in the script with === ACT N === lines
+ACT_MARKER_RE = re.compile(r'^=== ACT \d+ ===$')
 
 def parse_lines(script_path):
     """Parse script into voice lines with act assignments."""
@@ -70,22 +71,27 @@ def parse_lines(script_path):
             script_start = i + 1
             break
 
+    # Find act markers
+    break_indices = []
+    for i, raw in enumerate(lines_raw[script_start:], start=script_start + 1):
+        if ACT_MARKER_RE.match(raw.strip()):
+            break_indices.append(i)
+
     lines = []
     speaker = None
+    current_act = 0
     for i, raw in enumerate(lines_raw[script_start:], start=script_start + 1):
         s = raw.strip()
-        m = re.match(r'^\[([A-Z]+)\]$', s)
+        while current_act < len(break_indices) and i >= break_indices[current_act]:
+            current_act += 1
+        m = re.match(r'^\[([A-Z][\w-]*)\]$', s)
         if m:
             speaker = m.group(1)
             continue
         if not s or s.startswith('#') or s.startswith('|') or s.startswith('---') or s.startswith('>') or s.startswith('-'):
             continue
         if speaker and speaker in VOICES:
-            # Determine act
-            act = 0
-            for b in ACT_BREAK_LINES:
-                if i >= b: act += 1
-            lines.append((speaker, s, act))
+            lines.append((speaker, s, current_act))
     return lines
 
 def render_line(idx, speaker, text):
@@ -160,7 +166,7 @@ if __name__ == "__main__":
     print(f"Found {len(lines)} voice lines")
 
     # Count per act
-    num_acts = len(ACT_BREAK_LINES) + 1
+    num_acts = max(act for _, _, act in lines) + 1 if lines else 1
     act_counts = [0] * num_acts
     for _, _, act in lines:
         act_counts[act] += 1

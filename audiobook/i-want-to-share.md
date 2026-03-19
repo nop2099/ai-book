@@ -603,7 +603,7 @@ Meeting people where they are.
 [JAMES]
 Meeting people where they are. The same skill that makes A.I. work — push back when something's wrong, correct instead of complain, taste before you judge — is the skill that makes people work. Your friend needed to sip-test the room before serving the whole meal.
 
----
+=== ACT 2 ===
 
 [RICH]
 OK but some people aren't just uncomfortable. They're angry.
@@ -1033,7 +1033,7 @@ I'd respect that more than a lecture.
 [RICH]
 Huh. That landed different than I expected.
 
----
+=== ACT 3 ===
 
 [RICH]
 OK so — water, electricity, art. Those are arguments I can handle. But there's something deeper happening with some people. It's not about the numbers. It's personal.
@@ -1821,7 +1821,7 @@ And the story is mine.
 [ALEX]
 And mine.
 
----
+=== ACT 4 ===
 
 [RICH]
 Wait. How did you make this episode?

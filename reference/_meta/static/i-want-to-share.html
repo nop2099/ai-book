@@ -38,6 +38,7 @@ summary.act-summary:hover { border-color: var(--amber-dim); }
 .act-body .speaker-GUS { color: #cc6655; }
 .act-body .speaker-ALEX { color: #55aa88; }
 .act-body .speaker-MO { color: #aa8866; }
+.act-body .speaker-FAKE { color: #cc88aa; font-style: italic; }
 </style>
 </head>
 <body>
@@ -121,8 +122,9 @@ const ACTS = [
   { title: "Act 3: The People", desc: "Identity. Acceptance. The door opens from the inside.", audio: "sections/act3.mp3" },
   { title: "Act 4: How It Was Made", desc: "The virtual panel. Eleven simulated creators. The strange loop.", audio: "sections/act4.mp3" }
 ];
-const ACT_BREAK_LINES = [496, 1019, 1818];
-const SPEAKERS = ['JAMES','RICH','PARROT','SAM','SAL','GUS','ALEX','MO'];
+// Acts are marked in the script with === ACT N === lines
+const ACT_MARKER = /^=== ACT \d+ ===$/;
+const MAIN_SPEAKERS = ['JAMES','RICH','PARROT','SAM','SAL','GUS','ALEX','MO'];
 
 function scriptToHtml(lines) {
   let html = '', speaker = null;
@@ -131,10 +133,11 @@ function scriptToHtml(lines) {
     if (!s) continue;
     if (s === '---') { html += '<hr>'; continue; }
     if (s.startsWith('>') || s.startsWith('#') || s.startsWith('|') || s.startsWith('- ')) continue;
-    const m = s.match(/^\[([A-Z]+)\]$/);
+    const m = s.match(/^\[([A-Z][\w-]*)\]$/);
     if (m) { speaker = m[1]; continue; }
-    if (speaker && SPEAKERS.includes(speaker)) {
-      html += `<div class="speaker-tag speaker-${speaker}">${speaker}</div><p>${s}</p>`;
+    if (speaker) {
+      const cls = MAIN_SPEAKERS.includes(speaker) ? speaker : speaker.startsWith('FAKE-') ? 'FAKE' : speaker;
+      html += `<div class="speaker-tag speaker-${cls}">${speaker}</div><p>${s}</p>`;
     }
   }
   return html;
@@ -144,15 +147,20 @@ fetch('transcript-i-want-to-share.md')
   .then(r => { if (!r.ok) throw new Error(r.status); return r.text(); })
   .then(md => {
     const allLines = md.split('\n');
-    // Find ## Script
     let scriptStart = 0;
     for (let i = 0; i < allLines.length; i++) {
       if (allLines[i].trim() === '## Script') { scriptStart = i + 1; break; }
     }
     const scriptLines = allLines.slice(scriptStart);
-    const b1 = ACT_BREAK_LINES[0] - scriptStart - 1;
-    const b2 = ACT_BREAK_LINES[1] - scriptStart - 1;
-    const actLines = [scriptLines.slice(0, b1), scriptLines.slice(b1, b2), scriptLines.slice(b2)];
+    // Find act breaks by === ACT N === markers
+    const breaks = [];
+    for (let i = 0; i < scriptLines.length; i++) {
+      if (ACT_MARKER.test(scriptLines[i].trim())) breaks.push(i);
+    }
+    const actLines = [];
+    let prev = 0;
+    for (const b of breaks) { actLines.push(scriptLines.slice(prev, b)); prev = b; }
+    actLines.push(scriptLines.slice(prev));
 
     const container = document.getElementById('acts-container');
     container.innerHTML = '<h2>Transcript</h2>';

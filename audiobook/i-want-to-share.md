@@ -1089,6 +1089,9 @@ I don't need to imagine. I just need the website.
 [PARROT]
 We ran out of voices.
 
+[GUS]
+Why did I get the worst one?
+
 [JAMES]
 I had to take some of the stage direction lines.
 

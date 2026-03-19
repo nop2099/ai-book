@@ -1,13 +1,22 @@
 #!/usr/bin/env python3
-"""Draft render of I Want to Share using macOS say voices."""
+"""Draft render of I Want to Share using macOS say voices.
 
-import subprocess, hashlib, re, os, shutil
+Produces 4 MP3s, each with cold open prepended:
+  - iwts-full.mp3 (complete episode)
+  - iwts-act1.mp3 (Act 1: The Room)
+  - iwts-act2.mp3 (Act 2: The Arguments)
+  - iwts-act3.mp3 (Act 3: The People)
+"""
+
+import subprocess, hashlib, re, shutil
 from pathlib import Path
 from concurrent.futures import ThreadPoolExecutor, as_completed
 
-SCRIPT = Path(__file__).parent / "i-want-to-share.md"
+SCRIPT = Path("/Users/jameswilson/work/aibook/audiobook/i-want-to-share.md")
+COLD_OPEN = Path("/Users/jameswilson/work/aibook/audiobook/assets/cold-open/cold-open-short.wav")
 OUTDIR = Path(__file__).parent / "output" / "iwts-draft"
 LINES_DIR = OUTDIR / "lines"
+PROD_DIR = Path("/Users/jameswilson/work/aibook/reference/_meta/static")
 
 VOICES = {
     "JAMES":  "Daniel",
@@ -15,30 +24,47 @@ VOICES = {
     "PARROT": "Karen",
     "SAM":    "Tessa",
     "SAL":    "Moira",
-    "GUS":    "Grandpa (English (US))",
+    "GUS":    "Eddy (English (UK))",
     "ALEX":   "Samantha",
     "MO":     "Rocko (English (US))",
 }
 
 RATES = {
-    "GUS": 162,  # 10% slower
+    "GUS": 162,
 }
-DEFAULT_RATE = 170  # slightly slower than before
-GAP_MS = 400  # silence between lines
+DEFAULT_RATE = 170
+GAP_MS = 400
 WORKERS = 8
 
+# Act boundaries (1-indexed line numbers in .md where each act ENDS)
+ACT_BREAK_LINES = [496, 1006]
+
 def parse_lines(script_path):
+    """Parse script into voice lines with act assignments."""
+    lines_raw = script_path.read_text().splitlines()
+    # Find ## Script
+    script_start = 0
+    for i, line in enumerate(lines_raw):
+        if line.strip() == '## Script':
+            script_start = i + 1
+            break
+
     lines = []
     speaker = None
-    for raw in script_path.read_text().splitlines():
-        m = re.match(r'^\[([A-Z]+)\]$', raw.strip())
+    for i, raw in enumerate(lines_raw[script_start:], start=script_start + 1):
+        s = raw.strip()
+        m = re.match(r'^\[([A-Z]+)\]$', s)
         if m:
             speaker = m.group(1)
             continue
-        if not raw.strip() or raw.startswith('#') or raw.startswith('|') or raw.startswith('---') or raw.startswith('>') or raw.startswith('-'):
+        if not s or s.startswith('#') or s.startswith('|') or s.startswith('---') or s.startswith('>') or s.startswith('-'):
             continue
         if speaker and speaker in VOICES:
-            lines.append((speaker, raw.strip()))
+            # Determine act (0, 1, 2)
+            act = 0
+            if i >= ACT_BREAK_LINES[1]: act = 2
+            elif i >= ACT_BREAK_LINES[0]: act = 1
+            lines.append((speaker, s, act))
     return lines
 
 def render_line(idx, speaker, text):
@@ -57,11 +83,9 @@ def render_line(idx, speaker, text):
         rate = RATES.get(speaker, DEFAULT_RATE)
         subprocess.run(["say", "-v", voice, "-r", str(rate), "-o", str(outfile), text],
                      check=True, capture_output=True)
-        return idx, outfile
     return idx, outfile
 
-def assemble(files):
-    # Generate a silence file for gaps
+def make_silence():
     silence_file = OUTDIR / "silence.aiff"
     if not silence_file.exists():
         subprocess.run([
@@ -69,54 +93,40 @@ def assemble(files):
             f"anullsrc=r=22050:cl=mono:d={GAP_MS/1000}",
             "-c:a", "pcm_s16be", str(silence_file)
         ], check=True, capture_output=True)
+    return silence_file
 
-    concat_file = OUTDIR / "concat.txt"
+def assemble_mp3(files, silence_file, name):
+    """Concatenate AIFF files with gaps into an MP3."""
+    concat_file = OUTDIR / f"concat-{name}.txt"
     with open(concat_file, 'w') as f:
         for i, fp in enumerate(files):
             f.write(f"file '{fp.resolve()}'\n")
             if i < len(files) - 1:
                 f.write(f"file '{silence_file.resolve()}'\n")
 
-    out_mp3 = OUTDIR / "iwts-draft.mp3"
+    raw_mp3 = OUTDIR / f"{name}-raw.mp3"
     subprocess.run([
         "ffmpeg", "-y", "-f", "concat", "-safe", "0",
         "-i", str(concat_file),
         "-c:a", "libmp3lame", "-q:a", "4",
-        str(out_mp3)
+        str(raw_mp3)
     ], check=True, capture_output=True)
-    return out_mp3
+    return raw_mp3
 
-def write_player():
-    html = OUTDIR / "listen.html"
-    voice_tags = []
-    for speaker, voice in VOICES.items():
-        voice_tags.append(f'  <span class="voice">{speaker} — {voice}</span>')
-    html.write_text(f'''<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>I Want to Share — Draft Listen</title>
-<style>
-  * {{ box-sizing: border-box; margin: 0; padding: 0; }}
-  body {{ font-family: -apple-system, system-ui, sans-serif; background: #0a0a10; color: #d0d0e2; padding: 2rem; max-width: 700px; margin: 0 auto; }}
-  h1 {{ font-size: 1.4rem; margin-bottom: 0.5rem; color: #e8a83e; }}
-  p.sub {{ color: #8888aa; margin-bottom: 1.5rem; font-size: 0.9rem; }}
-  audio {{ width: 100%; margin-bottom: 1rem; }}
-  .voices {{ display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1.5rem; }}
-  .voice {{ padding: 0.3rem 0.7rem; border-radius: 4px; font-size: 0.8rem; background: #1e1e32; color: #d0d0e2; }}
-</style>
-</head>
-<body>
-<h1>I Want to Share — Draft Render</h1>
-<p class="sub">macOS say voices. Eight characters. {WORKERS}x parallel render.</p>
-<div class="voices">
-{chr(10).join(voice_tags)}
-</div>
-<audio controls src="iwts-draft.mp3"></audio>
-</body>
-</html>''')
-    return html
+def prepend_cold_open(raw_mp3, output_mp3):
+    """Prepend cold open WAV to an MP3."""
+    subprocess.run([
+        "ffmpeg", "-y",
+        "-i", str(COLD_OPEN),
+        "-i", str(raw_mp3),
+        "-filter_complex",
+        "[0:a]aformat=sample_rates=44100:channel_layouts=mono[cold];"
+        "[1:a]aformat=sample_rates=44100:channel_layouts=mono[ep];"
+        "[cold][ep]concat=n=2:v=0:a=1[out]",
+        "-map", "[out]", "-c:a", "libmp3lame", "-q:a", "4",
+        str(output_mp3)
+    ], check=True, capture_output=True)
+    return output_mp3
 
 if __name__ == "__main__":
     if LINES_DIR.exists():
@@ -128,10 +138,17 @@ if __name__ == "__main__":
     lines = parse_lines(SCRIPT)
     print(f"Found {len(lines)} voice lines")
 
+    # Count per act
+    act_counts = [0, 0, 0]
+    for _, _, act in lines:
+        act_counts[act] += 1
+    for i, c in enumerate(act_counts):
+        print(f"  Act {i+1}: {c} lines")
+
     print(f"Rendering with {WORKERS} workers...")
     results = {}
     with ThreadPoolExecutor(max_workers=WORKERS) as pool:
-        futures = {pool.submit(render_line, i, s, t): i for i, (s, t) in enumerate(lines, 1)}
+        futures = {pool.submit(render_line, i, s, t): i for i, (s, t, _) in enumerate(lines, 1)}
         done = 0
         for future in as_completed(futures):
             idx, outfile = future.result()
@@ -140,11 +157,38 @@ if __name__ == "__main__":
             if done % 50 == 0:
                 print(f"  {done}/{len(lines)} rendered")
 
-    # Reassemble in order
+    # Order files and split by act
     ordered = [results[i] for i in range(1, len(lines) + 1)]
-    print(f"\nRendered {len(ordered)} lines. Assembling...")
-    mp3 = assemble(ordered)
-    print(f"MP3: {mp3} ({mp3.stat().st_size // 1024}KB)")
+    act_files = [[], [], []]
+    for i, (_, _, act) in enumerate(lines):
+        act_files[act].append(ordered[i])
 
-    player = write_player()
-    print(f"Player: {player}")
+    silence = make_silence()
+
+    # Assemble 4 MP3s
+    print("\nAssembling...")
+    names = ["iwts-act1", "iwts-act2", "iwts-act3"]
+    act_mp3s = []
+    for i, name in enumerate(names):
+        raw = assemble_mp3(act_files[i], silence, name)
+        final = OUTDIR / f"{name}.mp3"
+        prepend_cold_open(raw, final)
+        raw.unlink()  # clean up raw
+        size = final.stat().st_size // 1024
+        print(f"  {name}.mp3 ({size}KB)")
+        act_mp3s.append(final)
+
+    # Full episode = all files
+    raw_full = assemble_mp3(ordered, silence, "iwts-full")
+    full = OUTDIR / "iwts-full.mp3"
+    prepend_cold_open(raw_full, full)
+    raw_full.unlink()
+    size = full.stat().st_size // 1024
+    print(f"  iwts-full.mp3 ({size}KB)")
+
+    # Copy to prod static dir
+    print("\nCopying to prod...")
+    shutil.copy2(full, PROD_DIR / "i-want-to-share.mp3")
+    for i, mp3 in enumerate(act_mp3s, 1):
+        shutil.copy2(mp3, PROD_DIR / "sections" / f"act{i}.mp3")
+    print("Done.")

@@ -37,7 +37,7 @@ GAP_MS = 400
 WORKERS = 8
 
 # Act boundaries (1-indexed line numbers in .md where each act ENDS)
-ACT_BREAK_LINES = [496, 1006]
+ACT_BREAK_LINES = [496, 1019]
 
 def parse_lines(script_path):
     """Parse script into voice lines with act assignments."""

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="The Presence — A horror parody. The uninvited guest won't stop being helpful.">
+<title>The Presence</title>
+<link rel="stylesheet" href="i-want-to-share.css">
+<style>
+details { margin-bottom: 1rem; }
+summary.act-summary {
+  cursor: pointer; padding: 0.8rem 1rem;
+  background: var(--deep); border: 1px solid var(--edge);
+  border-radius: 6px; list-style: none;
+  display: flex; flex-direction: column; gap: 0.15rem;
+  padding-left: 1.5rem; position: relative;
+}
+summary.act-summary::-webkit-details-marker { display: none; }
+summary.act-summary::before {
+  content: "▸"; color: #cc3333; font-size: 0.8rem;
+  position: absolute; margin-left: -1rem;
+}
+details[open] > summary.act-summary::before { content: "▾"; }
+summary.act-summary:hover { border-color: #cc3333; }
+.act-label { font-size: 0.78rem; font-weight: 500; color: var(--bright); }
+.act-desc { font-size: 0.65rem; color: var(--muted); font-style: italic; }
+.act-player { padding: 0.5rem 1rem 0; }
+.act-player audio { width: 100%; height: 32px; border-radius: 3px; }
+.act-body { padding: 0.5rem 1rem 1rem; line-height: 1.7; }
+.act-body p { margin-bottom: 0.5rem; font-size: 0.75rem; }
+.act-body hr { border: none; border-top: 1px solid var(--edge); margin: 1rem 0; }
+.act-body .speaker-tag { font-size: 0.5rem; letter-spacing: 0.1em; text-transform: uppercase; font-weight: 500; margin-top: 0.6rem; }
+.act-body .speaker-JAMES { color: #e8a83e; }
+.act-body .speaker-RICH { color: #4ecdc4; }
+.act-body .speaker-SAL { color: #9977dd; }
+.act-body .speaker-GUS { color: #cc6655; }
+.act-body .speaker-SAM { color: #bb9955; }
+.act-body .speaker-ALEX { color: #55aa88; }
+.act-body .speaker-PARROT { color: #5588dd; }
+.act-body .speaker-MO { color: #aa8866; }
+.act-body .speaker-PRESENCE { color: #cc3333; }
+.act-body .speaker-GOOD-NEWS { color: #55cc55; }
+.act-body .speaker-BAD-NEWS { color: #cc5555; }
+.act-body .speaker-FAKE-SARAH { color: #cc88aa; }
+</style>
+</head>
+<body>
+
+<main>
+
+<h1 style="color:#cc3333">The Presence</h1>
+<p>
+A horror parody. The social presence research played straight.
+The uninvited guest is real. It read your email. It won't stop being helpful.
+</p>
+
+<section class="player">
+<audio controls preload="metadata">
+<source src="the-presence.mp3" type="audio/mpeg">
+</audio>
+<p>
+<strong>~4 minutes.</strong> Nine voices. One of them is laughing.
+The Jester voice is the antagonist. Good News and Bad News are the Greek chorus.
+Fake Sarah narrates. Nobody read the terms of service.
+</p>
+</section>
+
+<section>
+<h2>Cast</h2>
+<ul class="cast">
+<li><strong>Rich</strong> — the victim</li>
+<li><strong>Sal</strong> — the skeptic who was right</li>
+<li><strong>Gus</strong> — the survivalist</li>
+<li><strong>Sam</strong> — the manager who opened the door</li>
+<li><strong>Alex</strong> — the intern who summoned it</li>
+<li><strong>James</strong> — the narrator</li>
+<li><strong style="color:#cc3333">The Presence</strong> — it</li>
+<li><strong>Good News / Bad News</strong> — the Greek chorus</li>
+<li><strong>Fake Sarah</strong> — not sure about the H</li>
+</ul>
+</section>
+
+<section id="acts-container">
+<h2>Transcript</h2>
+</section>
+
+</main>
+
+<footer>
+<a href="i-want-to-share">← I Want to Share</a> · <a href="/">Shapes of Intelligence</a>
+<p>Nobody was harmed. The Presence read this page before you did. It made suggestions. We used some.</p>
+</footer>
+
+<script>
+const ACT_MARKER = /^=== ACT \d+ ===$/;
+const ACTS = [
+  { title: "The Presence", desc: "A tool was approved. A team was haunted. Nobody read the terms of service.", audio: "the-presence.mp3" }
+];
+const MAIN_SPEAKERS = ['JAMES', 'RICH', 'SAL', 'GUS', 'SAM', 'ALEX', 'PARROT', 'MO', 'PRESENCE', 'GOOD-NEWS', 'BAD-NEWS', 'FAKE-SARAH'];
+
+function scriptToHtml(lines) {
+  let html = '', speaker = null;
+  for (const line of lines) {
+    const s = line.trim();
+    if (!s) continue;
+    if (s === '---') { html += '<hr>'; continue; }
+    if (s.startsWith('>') || s.startsWith('#') || s.startsWith('|') || s.startsWith('- ') || s.startsWith('===')) continue;
+    const m = s.match(/^\[([A-Z][\w-]*)\]$/);
+    if (m) { speaker = m[1]; continue; }
+    if (speaker) {
+      html += '<div class="speaker-tag speaker-' + speaker + '">' + speaker + '</div><p>' + s + '</p>';
+    }
+  }
+  return html;
+}
+
+fetch('transcript-the-presence.md')
+  .then(r => { if (!r.ok) throw new Error(r.status); return r.text(); })
+  .then(md => {
+    const allLines = md.split('\n');
+    let scriptStart = 0;
+    for (let i = 0; i < allLines.length; i++) {
+      if (allLines[i].trim() === '## Script') { scriptStart = i + 1; break; }
+    }
+    const scriptLines = allLines.slice(scriptStart);
+    const container = document.getElementById('acts-container');
+    container.innerHTML = '<h2>Transcript</h2>';
+    const details = document.createElement('details');
+    details.open = true;
+    details.innerHTML = '<summary class="act-summary"><span class="act-label">The Presence</span><span class="act-desc">A tool was approved. A team was haunted.</span></summary><div class="act-body">' + scriptToHtml(scriptLines) + '</div>';
+    container.appendChild(details);
+  })
+  .catch(() => {
+    document.getElementById('acts-container').innerHTML = '<h2>Transcript</h2><p style="color:var(--muted)">Transcript not available.</p>';
+  });
+</script>
+
+</body>
+</html>
